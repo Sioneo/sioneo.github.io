@@ -1,0 +1,103 @@
+:root {
+    --bgColor: #f1f1f1;
+    --boxBgColor: rgba(150, 150, 150, 0.12);
+    --textColor: black;
+    --headTextColor: white;
+    --aColor: darkgreen;
+    --hColor: darkblue;
+    --hrColor: #b3b3b3;
+    --monoColor: rgba(40, 40, 40, 0.75);
+}
+
+body {
+    background-color: var(--bgColor, white);
+    color: var(--textcolor, black);
+    margin: 0;
+    padding: 0;
+    font-family: Avenir, sans-serif;
+}
+
+h1 {
+    color: var(--hColor, darkblue);
+    margin: 2px;
+    padding: 0px;
+}
+
+h2 {
+    color: var(--hColor, darkblue);
+    margin: 4px;
+    padding: 0px;
+}
+
+h3 {
+    color: var(--hColor, darkblue);
+    margin: 5px;
+    padding: 0px;
+}
+
+h4 {
+    color: var(--hColor, darkblue);
+    margin: 6px;
+    padding: 0px;
+}
+
+h5 {
+    color: var(--hColor, darkblue);
+    margin: 7px;
+    padding: 0px;
+}
+
+p {
+    color: var(--textColor, black);
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    color: var(--aColor, darkgreen);
+    margin: 0px;
+    padding: 0px;
+}
+
+pre {
+    color: var(--textColor, black);
+    font-family: Ubuntu Mono, monospace, Menlo, Courier, sans-serif;
+    margin: 0.2em;
+    padding: 0;
+}
+
+hr {
+    background: var(--hrColor, #b3b3b3);
+    border: 0;
+    height: 1px;
+    padding: 0px;
+    margin: 1em 0px;
+}
+
+.main {
+    margin: 1em 0px 1em 0px;
+    padding: 0px 20px 0px 20px;
+}
+
+.box {
+    background-color: var(--boxBgColor, #e6e6e6);
+    margin: 0.5em 0px 0.5em 0px;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.headbox {
+    background-color: var(--hColor, darkblue);
+    margin: 0;
+    padding: 0;
+}
+
+.headtext {
+    color: var(--headTextColor, white);
+    margin: 0;
+    padding: 0.3em 0px 0.3em 1.3em;
+}
+
+.mono {
+    color: var(--monoColor, #6a6a6a);
+    font-family: Ubuntu Mono, monospace, Menlo, Courier, sans-serif;
+}
