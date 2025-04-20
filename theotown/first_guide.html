@@ -145,8 +145,12 @@
 <h4>建筑部分</h4>
 <div class="box"><b>animation</b>&emsp;建筑部分新增的animation用于使用我们上面创建好的夜景动画，需要注意的是，这里动画的id要与动画创建部分的id（也就是动画的id）相同<br><br>
 有些时候夜景动画可能会有错位的情况，这时候我们需要在animation中用到x和y来对动画的位置进行调整：
-<div class="box"><span class="mono">"animation": [{"id": "$night_id", "x": 3, "y": 6}]</span></div>
+<div class="box"><span class="mono">"animation": [{"id": "$night_id", "x": 3, "y": -6}]</span></div>
+在这里，我们将夜景动画向右移动3个像素，向上移动6个像素。也就是说，如果想把动画往右移动，就加x，往左就减x，往上移动就减y，往下就加y
 </div>
+<br>夜景的基本代码到这里就结束了，你还可以<a href="">点击这里</a>了解动画的扩展内容
+</p>
+<hr>
 
 </p>
 <hr>
