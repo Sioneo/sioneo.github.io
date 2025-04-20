@@ -89,15 +89,28 @@ hr {
     background-color: var(--hColor, darkblue);
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .headtext {
     color: var(--headTextColor, white);
     margin: 0;
-    padding: 0.3em 0px 0.3em 1.3em;
+    padding: 0.3em 0px 0.3em 1.0em;
 }
 
 .mono {
     color: var(--monoColor, #6a6a6a);
     font-family: Ubuntu Mono, monospace, Menlo, Courier, sans-serif;
+}
+
+.backbutton {
+    color: var(--headTextColor, white);
+    margin: 0.3em 0.3em 0.3em 0.6em;
+    text-decoration: none;
+}
+
+.backbutton::before {
+    content: "<< ";
+    color: var(--headTextColor, white);
+    align-items: center;
 }
