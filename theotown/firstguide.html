@@ -63,7 +63,7 @@
 
     <p>这就是最基本的代码，你可以直接复制并修改相关参数后直接使用，下面将会逐行解释代码作用和JSON属性：</p>
 
-    <div class="box"><b>id</b>&emsp;id为每一个草稿（draft）（<a href="">点此</a>了解草稿）提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</div>
+    <div class="box"><b>id</b>&emsp;id为每一个草稿（draft）（<a href="draft.html">点此</a>了解草稿）提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</div>
     <div class="box"><b>type</b>&emsp;type定义了草稿的类型，例如这里的residential是住宅类型，下面夜景中用到的animation是动画类型。在制作插件时，应根据实际选择不同的类型，以下提供一些常用的类型：</div>
 
     <div class="box" style="display: flex;">
@@ -93,11 +93,11 @@
     </div>
 
     <div class="box"><b>title和text</b>&emsp;顾名思义，插件的标题和描述</div>
-    <div class="box"><b>frames</b>&emsp;frames为插件提供贴图，你可以<a href="">点击这里</a>查看frames的扩展内容，这里的image.png是图片的文件名，如果你的图片文件名叫abcd.png就填入abcd.png，如果在保存图片文件时绘图软件没有要求你输入后缀.png，那么在这里输入你设定的文件名+.png即可</div>
+    <div class="box"><b>frames</b>&emsp;frames为插件提供贴图，你可以<a href="frames.html">点击这里</a>查看frames的扩展内容，这里的image.png是图片的文件名，如果你的图片文件名叫abcd.png就填入abcd.png，如果在保存图片文件时绘图软件没有要求你输入后缀.png，那么在这里输入你设定的文件名+.png即可</div>
     <div class="box"><b>draw ground</b>&emsp;在默认状态下，游戏会将一个建筑的底下绘制成水域，将draw ground设置为true的作用就是让其绘制为原本的陆地而非水域，这个属性通常都是设置为true，如果你对前面所说的不太理解，你也可以将true改为false来对比看看效果</div>
     <div class="box"><b>people</b>&emsp;people设定建筑容纳的人口/工人</div>
     <div class="box"><b>width和height</b>&emsp;定义了建筑的占地大小，这里为1×1<br>※通常情况下，建筑的占地都需要是一个正方形，即width和height相同</div>
-    <p>以上就是基础的JSON属性，你还可以<a href="">点击此处</a>了解更多属性</p>
+    <p>以上就是基础的JSON属性，你还可以<a href="jsontags.html">点击此处</a>了解更多属性</p>
     <hr>
 
     <h3>夜景</h3>
@@ -137,11 +137,11 @@
     <div class="box"><b>light switching</b>&emsp;若light switching为true则夜景会有开/关灯的操作，若为false那动画（夜景）全天都会发光（亮灯）</div>
 
     <h4>建筑部分</h4>
-    <div class="box"><b>animation</b>&emsp;建筑部分新增的animation用于使用我们上面创建好的夜景动画，需要注意的是，这里动画的id要与动画创建部分的id（也就是动画的id）相同</div>
+    <div class="box"><b>animation</b>&emsp;建筑部分新增的animation用于使用我们上面创建好的夜景动画，需要注意的是，这里动画的id要与动画创建部分的id（也就是动画的id）相同
     <p>有些时候夜景动画可能会有错位的情况，这时候我们需要在animation中用到x和y来对动画的位置进行调整：</p>
     <div class="box"><span class="mono">"animation": [{"id": "$night_id", "x": 3, "y": -6}]</span></div>
-    <p>在这里，我们将夜景动画向右移动3个像素，向上移动6个像素。也就是说，如果想把动画往右移动，就加x，往左就减x，往上移动就减y，往下就加y</p>
-    <p>夜景的基本代码到这里就结束了，你还可以<a href="">点击这里</a>了解动画的扩展内容</p>
+    <p>在这里，我们将夜景动画向右移动3个像素，向上移动6个像素。也就是说，如果想把动画往右移动，就加x，往左就减x，往上移动就减y，往下就加y</p></div>
+    <p>夜景的基本代码到这里就结束了，你还可以<a href="animation.html">点击这里</a>了解动画的扩展内容</p>
     <hr>
 
     <h3>小贴士</h3>
