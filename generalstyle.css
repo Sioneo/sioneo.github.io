@@ -57,6 +57,7 @@ a {
     color: var(--aColor, darkgreen);
     margin: 0px;
     padding: 0px;
+    text-decoration: none;
 }
 
 pre {
