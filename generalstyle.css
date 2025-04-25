@@ -1,10 +1,10 @@
 :root {
-    --bgColor: #f1f1f1;
+    --bgColor: #eaeef2;
     --boxBgColor: rgba(150, 150, 150, 0.12);
     --textColor: black;
     --headTextColor: white;
-    --aColor: darkgreen;
-    --hColor: darkblue;
+    --aColor: #0048ab;
+    --hColor: #0048ab;
     --hrColor: #b3b3b3;
     --monoColor: rgba(40, 40, 40, 0.75);
 }
@@ -88,6 +88,10 @@ hr {
     background-color: var(--boxBgColor, #e6e6e6);
     margin: 0.5em 0px 0.5em 0px;
     padding: 0.5em 1em 0.5em 1em;
+}
+
+.main .box {
+  border-radius: 10px;
 }
 
 .headbox {
