@@ -1,13 +1,15 @@
-document.addEventListener('click', (e) => {
-  if (e.target.classList.contains('toggle-btn')) {
-    const button = e.target;
-    const box = button.closest('.box');
-    const hiddenBox = box.nextElementSibling;
+document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('toggle-btn')) {
+      const button = e.target;
+      const box = button.closest('.box');
+      const hiddenBox = box.querySelector('.hiddenbox');
 
-    if (hiddenBox.classList.contains('hiddenbox')) {
-      const isHidden = hiddenBox.style.display === 'none';
-      hiddenBox.style.display = isHidden ? 'block' : 'none';
-      button.textContent = isHidden ? '−' : '+';
+      if (hiddenBox) {
+        const isHidden = window.getComputedStyle(hiddenBox).display === 'none';
+        hiddenBox.style.display = isHidden ? 'block' : 'none';
+        button.textContent = isHidden ? '−' : '+';
+      }
     }
-  }
+  });
 });
