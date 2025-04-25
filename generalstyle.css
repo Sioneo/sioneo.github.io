@@ -128,3 +128,42 @@ hr {
     color: var(--headTextColor, white);
     align-items: center;
 }
+
+.bilibilibox {
+    background-color: #fe3572;
+    margin: 0.5em 0.2em 0.5em 0.2em;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 10px;
+    color: white;
+    display: inline-block;
+}
+
+.bilibilibox a {
+    color: white;
+}
+
+.githubbox {
+    background-color: var(--textColor, black);
+    margin: 0.5em 0.2em 0.5em 0.2em;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 10px;
+    color: var(--headTextColor, white);
+    display: inline-block;
+}
+
+.githubbox a {
+    color: var(--headTextColor, white);
+}
+
+.forumbox {
+    background-color: var(--hColor, black);
+    margin: 0.5em 0.2em 0.5em 0.2em;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 10px;
+    color: var(--headTextColor, white);
+    display: inline-block;
+}
+
+.forumbox a {
+    color: var(--headTextColor, white);
+}
