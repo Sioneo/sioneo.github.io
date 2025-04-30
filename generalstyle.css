@@ -120,6 +120,14 @@ button {
   border-radius: 10px;
 }
 
+.hiddenbox { /* Spoiler中使用 */
+    background-color: var(--boxBgColor, #e6e6e6);
+    margin: 0.5em 0px 0.5em 0px;
+    padding: 0.5em 1em 0.5em 1em;
+    border-radius: 10px;
+    display: none;
+}
+
 .headbox {
     background-color: var(--hColor, darkblue);
     margin: 0;
