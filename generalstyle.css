@@ -23,6 +23,20 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Nove";
+    src: url("font/novecentomedium.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Nove";
+    src: url("font/novecentobold.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
 body {
     background-color: var(--bgColor, white);
     color: var(--textcolor, black);
