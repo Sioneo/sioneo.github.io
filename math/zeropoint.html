@@ -98,14 +98,20 @@
             <!-- 右侧参数输入区 -->
             <div style="flex: 1; display: column">
                 <!-- 精度参数输入 -->
-                <div style="display: flex;" class="box">
-                    <p><b>ε</b></p>&emsp;
-                    <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '00'">00</a>
-                    <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '000'">000</a>
-                      <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '00000'">00000</a>
-                    <p style="font-family: serif; flex: 1" id="epsilonInput"></p>
-            <button style="background-color: red; color: white;" onClick="document.getElementById('epsilonInput').innerHTML = '';"><b>AC</b></button>
-                    <button onClick="input = document.getElementById('epsilonInput'); inputTargetDisplay.innerHTML = 'epsilon'">切换</a>
+                <div style="display: flex; justify-content: space-between;" class="box">
+                     <div style="display: flex;">
+                        <p><b>ε</b></p>&emsp;
+                        <p style="font-family: serif; flex: 1" id="epsilonInput"></p>
+                     </div>
+                    
+                     <div style="display: flex">
+                        <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '00'">00</a>
+                        <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '000'">000</a>
+                        <button onClick="document.getElementById('epsilonInput').innerHTML = document.getElementById('epsilonInput').innerHTML + '00000'">00000</a>                    
+                        <button style="background-color: red; color: white;" onClick="document.getElementById('epsilonInput').innerHTML = '';"><b>AC</b></button>
+                        <button onClick="input = document.getElementById('epsilonInput'); inputTargetDisplay.innerHTML = 'epsilon'">切换</button>
+                     </div>
+                    
                 </div>
                 <!-- 区间下限输入 -->
                 <div style="display: flex;" class="box">
