@@ -36,6 +36,7 @@
         <h1>函数零点计算器</h1>
         <hr>
         <p>在此输入要计算的函数解析式：（请先阅读<b><a href="tutorial.html" target="_blank"><u>输入方法</u></a></b>）</p>
+        <p>若结果范围较大，可尝试提高精度或调整区间(a&b)</p>
         <h4>请勿省略乘号</h4>
         
         <!-- 函数输入区域 -->
@@ -147,9 +148,16 @@
 
 <!-- 输入缓冲区，即realInputContent和fakeInputContent，realInputContent用于记录要如输入给JavaScript直接运行的函数，例如x²->x**2，而fakeInputCotent用于在输入对象不是main，即是精度epsilon，a，b的时候将JavaScript中的realContent转向其，以不影响realInputContent的内容 -->
 
-    <!-- 调试功能区域 -->
+    <!--调试功能区域 -->
     <div class="box">
-        <button onClick="if (debug != true){document.getElementById('debugBox').style.display = 'block'; debug = true}else{document.getElementById('debugBox').style.display = 'none'; debug = false}">Debug</button>
+        <div style="display: flex; justify-content: space-between;">
+            <div style="display: flex">
+                <p>Made by <a href="https://b23.tv/063fUnL" target="_blank">Sioneo</a></p>
+            </div>
+            <div style="display: flex;">
+                <button onClick="if (debug != true){document.getElementById('debugBox').style.display = 'block'; debug = true}else{document.getElementById('debugBox').style.display = 'none'; debug = false}">Debug</button>
+            </div>
+        </div>
 
         <div id="debugBox" style="display: none" class="box">
             <span><b>Input Target: </b></span><span id="inputTarget"></span><br>
@@ -305,7 +313,8 @@
             if (f(a)*f(b) >= 0) {
                 result = "找不到零点";
             }
-            else {                    
+            else { 
+                let fc0 = false;                   
                 while(Math.abs(a-b) >= epsilon && counter <= maxLoop){
                     let c = (a+b) / 2;
                     process = process + "[(" + counter + ") a = " + a + " b = " + b + " c = " + c;
@@ -320,6 +329,7 @@
                         }
                         else if (f(c) == 0){
                             a = c;
+                            fc0 = true;
                             process = process + " ,f(a)*f(c) >= 0, f(c) == 0, a = c = " + c + "[BREAK]]";
                             break;
                         }
@@ -336,7 +346,12 @@
                     result = "while循环次数超限(1000次)";
                 }
                 else{
+                  if (fc0 != true){
+                    result = a + " ~ " + b;
+                  }
+                  else {
                     result = a;
+                  }
                 }
             }
 
