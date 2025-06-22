@@ -18,9 +18,23 @@
 
 @font-face {
     font-family: "DIN";
+    src: url("font/DIN-RegularItalic.otf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "DIN";
     src: url("font/DIN-Bold.otf");
     font-weight: bold;
     font-style: normal;
+}
+
+@font-face {
+    font-family: "DIN";
+    src: url("font/DIN-BoldItalic.otf");
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
