@@ -11,14 +11,14 @@
 
 @font-face {
     font-family: "DIN";
-    src: url("font/dinregular.otf");
+    src: url("font/DIN-Regular.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "DIN";
-    src: url("font/dinbold.ttf");
+    src: url("font/DIN-Bold.otf");
     font-weight: bold;
     font-style: normal;
 }
