@@ -10,14 +10,14 @@
 }
 
 @font-face {
-    font-family: "Ark";
+    font-family: "DIN";
     src: url("font/dinregular.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Ark";
+    font-family: "DIN";
     src: url("font/dinbold.ttf");
     font-weight: bold;
     font-style: normal;
@@ -42,7 +42,7 @@ body {
     color: var(--textcolor, black);
     margin: 0;
     padding: 0;
-    font-family: Ark, Avenir, sans-serif;
+    font-family: DIN, Avenir, sans-serif;
 }
 
 h1 {
