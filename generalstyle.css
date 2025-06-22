@@ -11,14 +11,14 @@
 
 @font-face {
     font-family: "Ark";
-    src: url("font/bender.otf");
+    src: url("font/dinregular.otf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: "Ark";
-    src: url("font/benderbold.otf");
+    src: url("font/dinbold.ttf");
     font-weight: bold;
     font-style: normal;
 }
@@ -108,6 +108,13 @@ hr {
     margin: 1em 0px;
 }
 
+em {
+    font-style: normal;
+    color: var(--hColor, darkblue);
+    font-weight: bold;
+    font-size: 108%;
+}
+
 button {
     border: none;
     background-color: var(--boxBgColor, #e6e6e6);
@@ -132,6 +139,27 @@ button {
 
 .main .box {
   border-radius: 10px;
+}
+
+
+.noPaddingBox {
+    background-color: var(--boxBgColor, #e6e6e6);
+    margin: 0.5em 0px 0.5em 0px;
+    padding: 0em;
+}
+
+.main .noPaddingBox {
+    border-radius: 10px;
+}
+
+.noPaddingBoxTitle {
+    padding: 0.5em 0.5em;
+    border-radius: 10px 10px 0px 0px;
+    background-color: var(--hColor, darkblue);
+}
+
+.noPaddingBoxTitle * {
+    color: var(--headTextColor, white);
 }
 
 .hiddenbox { /* Spoiler中使用 */
@@ -172,7 +200,7 @@ button {
 }
 
 .backbutton::before {
-    content: "<< ";
+    content: "<";
     color: var(--headTextColor, white);
     align-items: center;
 }
