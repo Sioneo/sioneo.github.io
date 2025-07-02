@@ -99,7 +99,8 @@ a {
     color: var(--aColor, darkgreen);
     margin: 0px;
     padding: 0px;
-    text-decoration: none;
+    text-decoration: underline;
+    text-underline-offset: 3px;
 }
 
 pre {
