@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>下载</title>
+<title>下载西奥小镇</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../generalstyle.css">
 </head>
@@ -19,7 +19,7 @@
         <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
     </div>
     <div style="display: inline-block; margin-left: 10px;">
-        <a id="downloadLink" href="#" style="display: none">下载最新版本安装包</a>
+        <a id="downloadLink" target="_blank" href="#" style="display: none">下载最新版本安装包</a>
     </div>
     <p>旧版本安装包：</p>
     <div id="oldVersions"></div><br>
@@ -32,7 +32,7 @@
     <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">https://store.steampowered.com/widget/1084020/</a>
 </div>
 
-<div class="box">最后一次更新: 2025/07/02 22:29</div>
+<div class="box">最后一次更新: 2025/07/02 22:31</div>
 
 <script>
 const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
@@ -87,7 +87,7 @@ function updateOldVersions() {
     const oldVersions = versionData.slice(1); // 取除最新版本外的所有版本
     oldVersions.forEach((version, index) => {
       const link = document.createElement("a");
-      link.href = `github.moeyy.xyz/${version.browser_download_url}`;
+      link.href = `https://github.moeyy.xyz/${version.browser_download_url}`;
       link.textContent = version.name;
       link.target = "_blank";
       link.style.marginRight = "10px"; // 添加一些间距
