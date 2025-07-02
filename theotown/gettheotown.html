@@ -32,7 +32,7 @@
     <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">https://store.steampowered.com/widget/1084020/</a>
 </div>
 
-<div class="box">最后一次更新: 2025/07/02 22:21</div>
+<div class="box">最后一次更新: 2025/07/02 22:29</div>
 
 <script>
 const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
@@ -65,7 +65,7 @@ fetch(apiUrl)
 function updateLatestVersion() {
   if (versionData && versionData.length > 0) {
     let latestVersionName = versionData[0].name;
-    let latestVersionUrl = `github.moeyy.xyz/${versionData[0].browser_download_url}`;
+    let latestVersionUrl = `https://github.moeyy.xyz/${versionData[0].browser_download_url}`;
 
     // 更新版本号
     document.getElementById("latestVersion").innerHTML = latestVersionName.toString();
