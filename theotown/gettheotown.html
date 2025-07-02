@@ -25,9 +25,7 @@ function fetchData() {
         browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
       }));
       
-      // 更新页面内容
-      updateLatestVersion();
-      updateOldVersions();
+      
     })
     .catch(error => {
       console.error("获取数据失败:", error);
@@ -117,18 +115,22 @@ window.onload = fetchData;
     </div>
 
     <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/07/02):</p>
-    <p>1.12.23: <a href="https://gh.llkk.cc/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk">下载链接</a></p>
+    <p>1.12.23: <a href="https://gh.llkk.cc/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk">// 更新页面内容
+      updateLatestVersion();
+      updateOldVersions();</a></p>
 
     <hr>
     <p><em>iOS</em>&emsp;<a href="https://itunes.apple.com/us/app/theotown/id1459639864">点击这里</a>或AppStore登录外区账号搜索TheoTown</p>
     <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">点击这里</a></p>
     
     <script>
-    
+        // 更新页面内容
+      updateLatestVersion();
+      updateOldVersions(); 
     </script>
 </div>
 
-<div class="box">最后一次更新: 2025/07/03 00:27</div>
+<div class="box">最后一次更新: 2025/07/03 00:28</div>
 
 </body>
 </html>
