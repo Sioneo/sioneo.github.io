@@ -51,7 +51,7 @@ function updateLatestVersion() {
     document.getElementById("downloadLink").href = latestVersionUrl;
     document.getElementById("downloadLink").style.display = "inline-block"; // 确保链接可见
   } else {
-    document.getElementById("latestVersion").innerHTML = "加载失败(2)";
+    document.getElementById("latestVersion").innerHTML = "...";
     document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
   }
 }
@@ -80,7 +80,7 @@ function updateOldVersions() {
       }
     });
   } else {
-    oldVersionsContainer.innerHTML = "暂无旧版本信息(2)";
+    oldVersionsContainer.innerHTML = "暂无旧版本信息";
   }
 }
 
@@ -131,7 +131,7 @@ window.onload = fetchData;
     </script>
 </div>
 
-<div class="box">最后一次更新: 2025/07/03 00:35</div>
+<div class="box">最后一次更新: 2025/07/03 00:50</div>
 
 </body>
 </html>
