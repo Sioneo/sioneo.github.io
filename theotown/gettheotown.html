@@ -4,63 +4,38 @@
 <title>下载西奥小镇</title>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="../generalstyle.css">
-</head>
-
-<body>
-
-<div style="display: flex;" class="headbox">
-    <h3 class="headtext">下载西奥小镇</h3>
-</div>
-
-<div class="main">
-
-    <div style="display: inline-block;">
-        <p style="display: inline-block;">目前西奥小镇最新的发行版是</p>
-        <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
-    </div>
-    <div style="display: inline-block; margin-left: 10px;">
-        <a id="downloadLink" target="_blank" href="#" style="display: none">下载最新版本安装包</a>
-    </div>
-    <p>旧版本安装包：</p>
-    <div id="oldVersions"></div><br>
-
-    <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/07/02):</p>
-    <p>1.12.23: <a href="https://github.akams.cn/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk">https://github.akams.cn/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk</a></p>
-
-    <hr>
-    <p><em>iOS</em>&emsp;<a href="https://itunes.apple.com/us/app/theotown/id1459639864">点击这里</a>或AppStore登录外区账号搜索TheoTown</p>
-    <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">https://store.steampowered.com/widget/1084020/</a>
-</div>
-
-<div class="box">最后一次更新: 2025/07/02 22:36</div>
-
 <script>
+let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
 const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
-const downloadSite = "https://github.akams.cn/"
 let versionData;
 
 // 使用 fetch 获取数据
-fetch(apiUrl)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(releases => {
-    // 处理数据，提取 name 和 browser_download_url
-    versionData = releases.map(release => ({
-      name: release.name,
-      browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
-    }));
-    
-    // 更新页面内容
-    updateLatestVersion();
-    updateOldVersions();
-  })
-  .catch(error => {
-    console.error("获取数据失败:", error);
-  });
+function fetchData() {
+  fetch(apiUrl)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(releases => {
+      // 处理数据，提取 name 和 browser_download_url
+      versionData = releases.map(release => ({
+        name: release.name,
+        browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
+      }));
+      
+      // 更新页面内容
+      updateLatestVersion();
+      updateOldVersions();
+    })
+    .catch(error => {
+      console.error("获取数据失败:", error);
+      document.getElementById("latestVersion").innerHTML = "加载失败，请检查网络连接";
+      document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
+      document.getElementById("oldVersions").innerHTML = "暂无旧版本信息";
+    });
+}
 
 // 更新页面显示最新版本
 function updateLatestVersion() {
@@ -86,6 +61,7 @@ function updateOldVersions() {
   if (versionData && versionData.length > 1) {
     // 取出除最新版本外的所有旧版本
     const oldVersions = versionData.slice(1); // 取除最新版本外的所有版本
+    oldVersionsContainer.innerHTML = ""; // 清空旧版本容器
     oldVersions.forEach((version, index) => {
       const link = document.createElement("a");
       link.href = `${downloadSite}${version.browser_download_url}`;
@@ -106,6 +82,53 @@ function updateOldVersions() {
     oldVersionsContainer.innerHTML = "暂无旧版本信息";
   }
 }
+
+// 初始化数据
+window.onload = fetchData;
 </script>
+</head>
+
+<body>
+
+<div style="display: flex;" class="headbox">
+    <h3 class="headtext">下载西奥小镇</h3>
+</div>
+
+<div class="main">
+
+    <div style="display: inline-block;">
+        <p style="display: inline-block;">目前西奥小镇最新的发行版是</p>
+        <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
+    </div>
+    <div style="display: inline-block; margin-left: 10px;">
+        <a id="downloadLink" target="_blank" href="#" style="display: none">下载最新版本安装包</a>
+    </div>
+    <p>旧版本安装包：</p>
+    <div id="oldVersions"></div><br>
+
+    <div class="box">
+        <p>切换代下站(如果下载速度慢可以尝试切换)</p>
+        <button onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
+        <button onClick="downloadSite = 'https://github.cmsz.dpdns.org/'; updateLatestVersion(); updateOldVersions();">github.cmsz.dpdns.org</button>
+        <button onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
+        <button onClick="downloadSite = 'https://github.moeyy.xyz/'; updateLatestVersion(); updateOldVersions();">github.moeyy.xyz</button>
+        <button onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
+        <button onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
+    </div>
+
+    <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/07/02):</p>
+    <p>1.12.23: <a href="https://gh.llkk.cc/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk">下载链接</a></p>
+
+    <hr>
+    <p><em>iOS</em>&emsp;<a href="https://itunes.apple.com/us/app/theotown/id1459639864">点击这里</a>或AppStore登录外区账号搜索TheoTown</p>
+    <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">点击这里</a></p>
+    
+    <script>
+    
+    </script>
+</div>
+
+<div class="box">最后一次更新: 2025/07/03 00:27</div>
+
 </body>
 </html>
