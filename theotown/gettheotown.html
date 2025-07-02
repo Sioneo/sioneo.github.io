@@ -25,6 +25,9 @@ function fetchData() {
         browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
       }));
       
+    // 更新页面内容
+      updateLatestVersion();
+      updateOldVersions(); 
       
     })
     .catch(error => {
