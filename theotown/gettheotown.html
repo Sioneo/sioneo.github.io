@@ -67,7 +67,7 @@ function updateOldVersions() {
       const link = document.createElement("a");
       link.href = `${downloadSite}${version.browser_download_url}`;
       link.textContent = version.name;
-      link.target = "_blank";
+      link.target = "_self";
       link.style.marginRight = "10px"; // 添加一些间距
       oldVersionsContainer.appendChild(link);
 
@@ -102,7 +102,7 @@ window.onload = fetchData;
         <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
     </div>
     <div style="display: inline-block; margin-left: 10px;">
-        <a id="downloadLink" target="_blank" href="#" style="display: none">下载最新版本安装包</a>
+        <a id="downloadLink" target="_self" href="#" style="display: none">下载最新版本安装包</a>
     </div>
     <p>旧版本安装包：</p>
     <div id="oldVersions"></div><br>
