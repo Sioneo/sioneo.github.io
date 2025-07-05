@@ -10,8 +10,9 @@
       background-color: black;
       font-family: Menlo, monospace, Courier, sans-serif;
     }
-    
-    #generateButton{
+
+
+    button {
       background-color: black;
       border: solid 1px white;
       color: white;
@@ -20,6 +21,15 @@
       font-size: 15px;
       font-family: Menlo, monospace, Courier, sans-serif;
     }
+
+    button:active {
+      color: black;
+      background-color: white;
+    }
+
+    #result {
+      font-weight: normal;
+    }
   </style>
 </head>
 
@@ -27,7 +37,8 @@
   <center>
     <h2>UUID Generator</h2>
     <h3 id="result"><br></h3>
-    <button id="generateButton" onclick="document.getElementById('result').innerHTML = crypto.randomUUID()">Generate</button>
+    <button onclick="document.getElementById('result').innerHTML = crypto.randomUUID()">Generate</button>
+    <button onclick="navigator.clipboard.writeText(document.getElementById('result').innerHTML)">Copy</button>
   </center>
 </body>
 
