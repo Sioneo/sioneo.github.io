@@ -192,6 +192,15 @@ dialog .controls {
 
 .noPaddingBoxTitle * {
     color: var(--headTextColor, white);
+    margin: 0px auto;
+    padding: 0px auto;
+}
+
+.noPaddingBoxText {
+    border: 1.5px solid var(--hColor, darkblue);
+    border-radius: 0px 0px 10px 10px;
+    margin: 0px;
+    padding: 0.2em;
 }
 
 .hiddenbox { /* Spoiler中使用 */
