@@ -1,0 +1,17 @@
+#newsTitle:after {
+  content: "";
+  color: var(--headTextColor, white);
+  align-items: center;
+}
+
+#newsContent:after {
+  content: "啥都木有";
+  color: var(--textColor, black);
+  align-items: center;
+}
+
+#version:after {
+  content: "1.0.0";
+  color: var(--textColor, black);
+  align-items: center;
+}
