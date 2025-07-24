@@ -1,10 +1,10 @@
 :root {
-    --bgColor: #eaeef2;
-    --boxBgColor: rgba(150, 150, 150, 0.12);
+    --bgColor: rgba(237, 242, 242, 1);
+    --boxBgColor: rgba(170, 170, 170, 0.12);
     --textColor: black;
     --headTextColor: white;
-    --aColor: #0048ab;
-    --hColor: #0048ab;
+    --aColor: #009ca7;
+    --hColor: #009ca7;
     --hrColor: #b3b3b3;
     --monoColor: rgba(40, 40, 40, 0.75);
 }
@@ -138,7 +138,24 @@ button {
     padding: 0.2em 0.4em;
     border-radius: 10px;
     font-size: 16px;
-    font-family: DIN, sans-serif;
+    font-family: DIN, Avenir, sans-serif;
+}
+
+dialog {
+    border: 2.5px solid var(--hColor, darkblue);
+    border-radius: 10px;
+    width: 75vw;
+}
+  
+dialog::backdrop {
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    background-color: rgba(180, 180, 180,0.4);
+    animation: fadeIn 0.3s ease;
+}
+
+dialog .controls {
+    text-align: right;
 }
 
 .main {
