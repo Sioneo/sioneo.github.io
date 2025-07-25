@@ -186,7 +186,8 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var type = this.elements["type"].value;
   var title = this.elements["title"].value;
   var text = this.elements["text"].value;
-  var size = this.elements["size"].value;
+  var size = parseInt(this.elements["size"].value);
+  var people = parseInt(this.elements["people"].value);
   var frameFileName = this.elements["frame"].value;
   var drawGround = this.elements["drawGround"].value === "true"; // 转换为布尔值
   var night = this.elements["nightSwitch"].value === "true"; // 转换为布尔值
@@ -206,7 +207,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     var nightData = {
       id: nightId,
       type: "animation",
-      frame: [{ bmp: nightFrameFileName }],
+      frames: [{ bmp: nightFrameFileName }],
       light: true,
       "light switching": true
     };
@@ -221,7 +222,8 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     text: text,
     width: size,
     height: size,
-    frame: [{ bmp: frameFileName }],
+    people: people,
+    frames: [{ bmp: frameFileName }],
     "draw ground": drawGround
   };
 
