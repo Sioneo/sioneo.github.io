@@ -1,167 +1,238 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
     <link rel="stylesheet" type="text/css" href="information.css">
     <title>插件制作工具</title>
     <script src="../../javascript/changeDisplayStyle.js"></script>
-    <style>
-      input {
-         width: 26em; 
-         border: 1.5px solid var(--hColor, darkblue);
-         background-color: var(--headTextColor, white);
-         margin: auto 1em;
-         font-size: 13px;
-         font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
-      }
-      select {
-         width: 27em; 
-         border: 1.5px solid var(--hColor, darkblue);
-         background-color: var(--headTextColor, white);
-         margin: auto 1em;
-         font-size: 13px;
-         font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
-         color: var(--textColor, black);
-      }
-      label {
-         display: inline-block;
-         width: 6em;
-         text-align: right;
-      }
-    </style>
-</head>
-<body>
+  </head>
+  <body>
 
-<div style="display: flex; justify-content: space-between;" class="headbox">
-  <div style="display: flex">
-    <a class="backbutton" href="../../"></a>
-    <h3 class="headtext">插件制作工具</h3>
-  </div>
+    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
 
-<dialog id="nightModeDialog">
-<h3>提示</h3>
-<p>功能开发中（</p>
-<br>
-<div class="controls">
-<button onClick="document.getElementById('nightModeDialog').close();"><p>关闭对话框</p></button>
-</div>
-</dialog>
+    <div style="display: flex; justify-content: space-between;" class="headbox">
+      <div style="display: flex">
+        <a class="backbutton" href="../"></a>
+        <h3 class="headtext">插件制作工具</h3>
+      </div>
 
-<div>
-<button onClick="document.getElementById('nightModeDialog').showModal(); changeDisplayStyle();";  style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">折叠右侧边栏</button>
-<button id="changeDisplayStyleButton" onClick="document.getElementById('nightModeDialog').showModal(); changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
-</div>
-
-</div>
-
-<div style="display: flex;">
-
-<div style="width: 82%">
-<div class="main">
-
-    <div class="noPaddingBox">
-        <div class="noPaddingBoxTitle">
-        <h3 id="newsTitle" style="display: inline-block;">NEWS&emsp;</h3>
+      <dialog id="inDevDialog">
+        <h3>提示</h3>
+        <p>功能开发中（</p>
+        <br>
+        <div class="controls">
+          <button onClick="document.getElementById('inDevDialog').close();">
+            <p>关闭对话框</p>
+          </button>
         </div>
-    <div class="noPaddingBoxText">
-      <p id="newsContent"></p>
+      </dialog>
+
+      <dialog id="copySucceedDialog">
+         <h3>成功～</h3>
+         <p>JSON代码已复制到剪贴板～</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('copySucceedDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+
+
+      <div>
+        <button onClick="document.getElementById('inDevDialog').showModal();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">折叠右侧边栏</button>
+        <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+      </div>
     </div>
+
+    <div style="display: flex;">
+      <div style="width: 82%">
+        <div class="main">
+          <div class="noPaddingBox">
+            <div class="noPaddingBoxTitle">
+              <h3 id="newsTitle" style="display: inline-block;">NEWS&emsp;</h3>
+            </div>
+            <div class="noPaddingBoxText">
+              <p id="newsContent"></p>
+            </div>
+          </div>
+          <hr>
+
+          <div style="display: flex; justify-content: space-between">
+            <div>
+              <h2 style="display: inline-block;">普通建筑</h2>
+              <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
+            </div>
+          </div>
+
+          <form id="pluginForm">
+            <label for="id"><em>*ID</em></label>
+            <input type="text" name="id" id="id" required>
+            <p style="display: inline-block;">*默认值为自动生成的<a target="_blank" href="https://baike.baidu.com/item/uuid/5921266">UUID</a></p>
+
+      <dialog id="dollarCharDialog">
+        <h3>关于$符号</h3>
+        <p>$符号通常被用于在id前，但这并不是一个强制性的要求，不过出于兼容性的考虑，在这里生成的JSON代码中的id会自动添加$符号</p>
+        <br>
+        <div class="controls">
+          <button type="button" onClick="document.getElementById('dollarCharDialog').close();">
+            <p>关闭对话框</p>
+          </button>
+        </div>
+      </dialog>
+
+            <button onClick="document.getElementById('dollarCharDialog').showModal();" type="button">关于$符号</button>
+            <script>
+              // 页面加载时生成UUID并设置到输入框
+              document.addEventListener('DOMContentLoaded', function() {
+                const idInput = document.getElementById('id');
+                // 检查是否已经有值（防止表单重新加载时覆盖）
+                if (!idInput.value) {
+                  idInput.value = "$" + crypto.randomUUID();
+                }
+              });
+            </script>
+
+            <br>
+            <label for="type"><em>*类型</em></label>
+            <select id="type" name="type" required>
+              <option value="" selected disabled>选择一个类型</option>
+              <option value="residential">住宅(residential)</option>
+              <option value="commercial">商业(commercial)</option>
+              <option value="industial">工业(industial)</option>
+              <option value="decoration">装饰(decoration)</option>
+              <!-- <option>公园(park)</option>
+              <option>体育(sport)</option>
+              <option>宗教(religion)</option>
+              <option>公共(public)</option>
+              <option>教育(education)</option>
+              <option>供水(water)</option>
+              <option>供电(energy)</option>
+              <option>奖励(award)</option>
+              <option>警察(police)</option>
+              <option>医疗(medic)</option> -->
+            </select>
+
+            <br>
+            <label for="title">标题(title)</label>
+            <input type="text" name="title" id="title">
+            <br>
+            <label for="text">描述(text)</label>
+            <input type="text" name="text" id="text">
+            <br>
+            <label for="size"><em>*建筑大小</em></label>
+            <input type="number" min="1" max="100" name="size" id="size" required>
+            <br>
+            <label for="frame"><em>*贴图名</em></label>
+            <input type="text" name="frame" id="frame" required><span>记得带后缀(.png)</span>
+            <br>
+            <label for="people">居民/工人</label>
+            <input type="number" name="people" id="people">
+
+            <div class="box">
+              <button type="button" class="toggle-btn">+</button>&emsp;<span>高级选项</span>
+              <div class="hiddenbox">
+                <label for="drawGround">绘制地面</label>
+                <input type="text" value="true" name="drawGround" id="drawGround">
+              </div>
+            </div>
+            
+            <hr>
+            <h3>夜景</h3>
+            <label for="nightSwitch">启用夜景</label>
+            <select name="nightSwitch" id="nightSwitch">
+              <option value="false">关</option>
+              <option value="true">开</option>
+            </select>
+            <br>
+            <label for="nightId"><em>*ID</em></label>
+            <input type="text" name="nightId" id="nightId">
+            <p style="display: inline-block;">
+            <label for="frame"><em>*夜景贴图名</em></label>
+            <input type="text" name="nightFrame" id="nightFrame"><span>记得带后缀(.png)</span>
+
+            <hr>
+
+            <div class="noPaddingBox">
+              <div class="noPaddingBoxTitle" style="display: flex; justify-content: space-between;">
+                <h3 style="margin: 0;">JSON</h3>
+
+                <div class="controls">
+                  <button style="font-size: 14px; background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
+                  <button onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerHTML); document.getElementById('copySucceedDialog').showModal();" style="font-size: 14px;"type="button">复制</button>
+                </div>
+              </div>
+              
+              <div class="noPaddingBoxText">
+                <pre id="jsonOutput">啥也木有</pre>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="box" style="margin: 0; height: fit-content; width: 18%">
+        <h3>MORE</h3>
+        <a href="manifest.html">插件清单工具</a>
+        <hr>
+        <p id="version">工具版本&nbsp;</p>
+      </div>
     </div>
-    <hr>
 
-<h3 style="display: inline-block;">普通建筑</h3>
-<p style="display: inline-block;">标<em>*</em>号的为必填/必选项</hp>
+    <script src="../../javascript/spoiler.js"></script>
 
-<form id="pluginForm">
+    <script>
+document.getElementById("pluginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // 阻止表单默认提交行为
 
-<label for="id"><em>*ID</em></label>
-<input type="text" name="id" id="id" required>
-<p style="display: inline-block;">*默认值为自动生成的<a target="_blank" href="https://baike.baidu.com/item/uuid/5921266">UUID</a></p>
-<button type="button">关于$符号</button>
-<script>
-// 页面加载时生成UUID并设置到输入框
-document.addEventListener('DOMContentLoaded', function() {
-    const idInput = document.getElementById('id');
-    // 检查是否已经有值（防止表单重新加载时覆盖）
-    if (!idInput.value) {
-        idInput.value = "$" + crypto.randomUUID();
-    }
+  // 获取表单数据
+  var id = this.elements["id"].value;
+  var type = this.elements["type"].value;
+  var title = this.elements["title"].value;
+  var text = this.elements["text"].value;
+  var size = this.elements["size"].value;
+  var frameFileName = this.elements["frame"].value;
+  var people = this.elements["people"].value;
+  var drawGround = this.elements["drawGround"].value === "true"; // 转换为布尔值
+  var night = this.elements["nightSwitch"].value === "true"; // 转换为布尔值
+  if (night == true){
+    var nightId = this.elements["nightId"].value;
+    var nightFrameFileName = this.elements["nightFrame"].value;
+  }
+
+  // 构建 JSON 数据
+  var building = {
+    id: id,
+    type: type,
+    title: title,
+    text: text,
+    width: size,
+    height: size,
+    frame: [{ bmp: frameFileName }],
+    people: people,
+    "draw ground": drawGround
+  };
+
+  var result = [building];
+
+  if (night) {
+    var nightData = {
+      id: nightId,
+      frame: [{ bmp: nightFrameFileName }]
+      type: animation,
+      light: true,
+      light switching: true
+    };
+    result.push(nightData);
+  }
+
+  // 将 JSON 数据转换为字符串
+  var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
+
+  // 更新页面上的输出区域
+  document.getElementById("jsonOutput").innerText = jsonString;
 });
-</script>
 
 
-<br>
-<label for="type"><em>*类型</em></label>
-<select id="type" name="type" required>
-  <option value="" selected disabled>选择一个类型</option>
-  <option>住宅(residential)</option>
-  <option>商业(commercial)</option>
-  <option>工业(industial)</option>
-  <option>装饰(decoration)</option>
-  <option>公园(park)</option>
-  <option>体育(sport)</option>
-  <option>宗教(religion)</option>
-  <option>公共(public)</option>
-  <option>教育(education)</option>
-  <option>供水(water)</option>
-  <option>供电(energy)</option>
-  <option>奖励(award)</option>
-  <option>警察(police)</option>
-  <option>医疗(medic)</option>
-</select>
-
-<br>
-<label for="title">标题(title)</label>
-<input type="text" name="title" id="title">
-<br>
-<label for="text">描述(text)</label>
-<input type="text" name="text" id="text">
-<br>
-<label for="size"><em>*建筑大小</em></label>
-<input type="number" min="1" max="100" name="size" id="size" required>
-<button type="button">这是什么?</button>
-<br>
-<label for="frame"><em>*贴图名</em></label>
-<input type="text" name="frame" id="frame" required><span>记得带后缀(.png)</span>
-
-<div class="box"><button type="button" class="toggle-btn">+</button>&emsp;<span>高级选项</span>
-  <div class="hiddenbox">
-
-<label for="drawGround">绘制地面</label>
-<input type="text" value="true" name="drawGround" id="drawGround">
-
-
-  </div>
-</div>
-
-<hr>
-
-<div style="display: flex; justify-content: space-between;" class="box">
-<h3>JSON</h3>
-
-<div>
-<button style="background-color: #00b339; color: white;" type="submit">验证并生成JSON代码</button>
-<button type="button">下载JSON文件</button>
-<button type="button">复制</button>
-</div>
-
-</div>
-
-
-</form>
-
-</div>
-</div>
-
-<div class="box" style="margin: 0; height: fit-content; width: 18%">
-<h3>MORE</h3>
-<p id="version">工具版本&nbsp;</p>
-</div>
-
-</div>
-
-<script src="../../javascript/spoiler.js"></script>
-
-</body>
+    </script>
+  </body>
 </html>
