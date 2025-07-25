@@ -23,9 +23,7 @@
         <p>功能开发中（</p>
         <br>
         <div class="controls">
-          <button onClick="document.getElementById('inDevDialog').close();">
-            <p>关闭对话框</p>
-          </button>
+          <button onClick="document.getElementById('inDevDialog').close();">关闭对话框</button>
         </div>
       </dialog>
 
@@ -74,8 +72,7 @@
         <p>$符号通常被用于在id前，但这并不是一个强制性的要求，不过出于兼容性的考虑，在这里生成的JSON代码中的id会自动添加$符号</p>
         <br>
         <div class="controls">
-          <button type="button" onClick="document.getElementById('dollarCharDialog').close();">
-            <p>关闭对话框</p>
+          <button type="button" onClick="document.getElementById('dollarCharDialog').close();">关闭对话框
           </button>
         </div>
       </dialog>
@@ -208,7 +205,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   if (night) {
     var nightData = {
       id: nightId,
-      type: animation,
+      type: "animation",
       frame: [{ bmp: nightFrameFileName }],
       light: true,
       "light switching": true
