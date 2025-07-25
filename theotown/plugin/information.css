@@ -11,7 +11,7 @@
 }
 
 #version:after {
-  content: "1.0.0";
+  content: "1.0.1";
   color: var(--textColor, black);
   align-items: center;
 }
