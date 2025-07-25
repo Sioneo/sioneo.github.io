@@ -208,7 +208,10 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   if (night) {
     var nightData = {
       id: nightId,
-      frame: [{ bmp: nightFrameFileName }]
+      type: animation,
+      frame: [{ bmp: nightFrameFileName }],
+      light: true,
+      "light switching": true
     };
     result.push(nightData);
   }
@@ -227,7 +230,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
 
   // 如果启用了夜景，在建筑数据中添加动画字段
   if (night) {
-    building.animation = nightId;
+    building.animation = [{ id: nightId }];
   }
 
   result.push(building);
