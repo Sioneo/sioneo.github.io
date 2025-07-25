@@ -157,8 +157,8 @@
                 <h3 style="margin: 0;">JSON</h3>
 
                 <div class="controls">
-                  <button style="font-size: 14px; background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
-                  <button onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerHTML); document.getElementById('copySucceedDialog').showModal();" style="font-size: 14px;"type="button">复制</button>
+                  <button style="background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
+                  <button onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerHTML); document.getElementById('copySucceedDialog').showModal();" type="button">复制</button>
                 </div>
               </div>
               
@@ -184,6 +184,9 @@
 document.getElementById("pluginForm").addEventListener("submit", function(event) {
   event.preventDefault(); // 阻止表单默认提交行为
 
+document.getElementById("pluginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // 阻止表单默认提交行为
+
   // 获取表单数据
   var id = this.elements["id"].value;
   var type = this.elements["type"].value;
@@ -191,15 +194,29 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var text = this.elements["text"].value;
   var size = this.elements["size"].value;
   var frameFileName = this.elements["frame"].value;
-  var people = this.elements["people"].value;
   var drawGround = this.elements["drawGround"].value === "true"; // 转换为布尔值
   var night = this.elements["nightSwitch"].value === "true"; // 转换为布尔值
-  if (night == true){
-    var nightId = this.elements["nightId"].value;
-    var nightFrameFileName = this.elements["nightFrame"].value;
+  var nightId = "";
+  var nightFrameFileName = "";
+
+  if (night) {
+    nightId = this.elements["nightId"].value;
+    nightFrameFileName = this.elements["nightFrame"].value;
   }
 
   // 构建 JSON 数据
+  var result = [];
+
+  // 如果启用了夜景，先添加夜景数据
+  if (night) {
+    var nightData = {
+      id: nightId,
+      frame: [{ bmp: nightFrameFileName }]
+    };
+    result.push(nightData);
+  }
+
+  // 构建建筑数据
   var building = {
     id: id,
     type: type,
@@ -208,22 +225,15 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     width: size,
     height: size,
     frame: [{ bmp: frameFileName }],
-    people: people,
     "draw ground": drawGround
   };
 
-  var result = [building];
-
+  // 如果启用了夜景，在建筑数据中添加动画字段
   if (night) {
-    var nightData = {
-      id: nightId,
-      frame: [{ bmp: nightFrameFileName }]
-      type: animation,
-      light: true,
-      light switching: true
-    };
-    result.push(nightData);
+    building.animation = nightId;
   }
+
+  result.push(building);
 
   // 将 JSON 数据转换为字符串
   var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
@@ -231,8 +241,6 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   // 更新页面上的输出区域
   document.getElementById("jsonOutput").innerText = jsonString;
 });
-
-
     </script>
   </body>
 </html>
