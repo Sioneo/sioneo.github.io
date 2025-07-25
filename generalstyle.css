@@ -226,12 +226,11 @@ span {
     background-color: var(--headBoxColor, darkblue);
 }
 
-.noPaddingBoxTitle .controls {{
+.noPaddingBoxTitle .controls {
     font-size: 14px;
     padding: 0;
     margin: 0;
 } 
-}
 
 .noPaddingBoxTitle * {
     color: var(--headTextColor, white);
