@@ -2,6 +2,7 @@
     --bgColor: rgba(237, 242, 242, 1);
     --boxBgColor: rgba(170, 170, 170, 0.12);
     --textColor: black;
+    --headBoxColor: #009ca7;
     --headTextColor: white;
     --aColor: #009ca7;
     --hColor: #009ca7;
@@ -158,9 +159,41 @@ dialog .controls {
     text-align: right;
 }
 
+input {
+    width: 26em; 
+    border: 1.5px solid var(--hColor, darkblue);
+    background-color: var(--bgColor, white);
+    color: var(--textColor, black);
+    margin: 0.1em 1em;
+    font-size: 13px;
+    font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
+}
+
+select {
+    width: 27em; 
+    border: 1.5px solid var(--hColor, darkblue);
+    background-color: var(--bgColor, white);
+    color: var(--textColor, black);
+    margin: 0.1em 1em;
+    font-size: 13px;
+    font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
+    color: var(--textColor, black);
+}
+
+label {
+    display: inline-block;
+    width: 6em;
+    text-align: right;
+    color: var(--textColor, black);
+}
+
+span {
+    color: var(--textColor, black);
+}
+
 .main {
-    margin: 1em 0px 1em 0px;
-    padding: 0px 20px 0px 20px;
+    margin: 1em 2.2em;
+    padding: 0 20px;
 }
 
 .box {
@@ -187,7 +220,7 @@ dialog .controls {
 .noPaddingBoxTitle {
     padding: 0.5em 0.5em;
     border-radius: 10px 10px 0px 0px;
-    background-color: var(--hColor, darkblue);
+    background-color: var(--headBoxColor, darkblue);
 }
 
 .noPaddingBoxTitle * {
@@ -197,7 +230,7 @@ dialog .controls {
 }
 
 .noPaddingBoxText {
-    border: 1.5px solid var(--hColor, darkblue);
+    border: 1.5px solid var(--headBoxColor, darkblue);
     border-radius: 0px 0px 10px 10px;
     margin: 0px;
     padding: 0.2em;
@@ -212,7 +245,7 @@ dialog .controls {
 }
 
 .headbox {
-    background-color: var(--hColor, darkblue);
+    background-color: var(--headBoxColor, darkblue);
     margin: 0;
     padding: 0;
     align-items: center;
@@ -273,7 +306,7 @@ dialog .controls {
 }
 
 .forumbox {
-    background-color: var(--hColor, black);
+    background-color: var(--headBoxColor, black);
     margin: 0.5em 0.2em 0.5em 0.2em;
     padding: 0.5em 1em 0.5em 1em;
     border-radius: 10px;
