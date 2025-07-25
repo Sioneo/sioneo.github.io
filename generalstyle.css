@@ -146,6 +146,8 @@ dialog {
     border: 2.5px solid var(--hColor, darkblue);
     border-radius: 10px;
     width: 75vw;
+    background-color: var(--bgColor);
+    color: var(--textColor, black);
 }
   
 dialog::backdrop {
