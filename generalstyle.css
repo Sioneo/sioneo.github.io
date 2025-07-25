@@ -153,7 +153,7 @@ dialog {
 dialog::backdrop {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    background-color: rgba(180, 180, 180,0.4);
+    background-color: var(--boxBgColor);
     animation: fadeIn 0.3s ease;
 }
 
