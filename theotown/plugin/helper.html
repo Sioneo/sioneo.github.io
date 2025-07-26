@@ -124,6 +124,7 @@
             <br>
             <label for="people">居民/工人</label>
             <input type="number" min="0" name="people" id="people">
+            <br>
             <label for="level"><em>*建筑等级</em></label>
             <input type="number" min="1" max"3" name="people" id="people" required>
 
@@ -225,7 +226,8 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     width: size,
     height: size,
     frames: [{ bmp: frameFileName }],
-    "draw ground": drawGround
+    "draw ground": drawGround,
+    level: level
   };
 
   // 如果启用了夜景，在建筑数据中添加动画字段
