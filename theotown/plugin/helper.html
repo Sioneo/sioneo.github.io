@@ -96,8 +96,8 @@
               <option value="residential">住宅(residential)</option>
               <option value="commercial">商业(commercial)</option>
               <option value="industial">工业(industial)</option>
-              <option value="decoration">装饰(decoration)</option>
-              <!-- <option>公园(park)</option>
+              <!-- <option value="decoration">装饰(decoration)</option>
+              <option>公园(park)</option>
               <option>体育(sport)</option>
               <option>宗教(religion)</option>
               <option>公共(public)</option>
@@ -123,7 +123,9 @@
             <input type="text" name="frame" id="frame" required><span>记得带后缀(.png)</span>
             <br>
             <label for="people">居民/工人</label>
-            <input type="number" name="people" id="people">
+            <input type="number" min="0" name="people" id="people">
+            <label for="level"><em>*建筑等级</em></label>
+            <input type="number" min="1" max"3" name="people" id="people" required>
 
             <div class="box">
               <button type="button" class="toggle-btn">+</button>&emsp;<span>高级选项</span>
@@ -144,7 +146,7 @@
             <label for="nightId"><em>*ID</em></label>
             <input type="text" name="nightId" id="nightId">
             <p style="display: inline-block;">
-            <label for="frame"><em>*夜景贴图名</em></label>
+            <label for="nightFrame"><em>*夜景贴图名</em></label>
             <input type="text" name="nightFrame" id="nightFrame"><span>记得带后缀(.png)</span>
 
             <hr>
@@ -170,7 +172,7 @@
       <div class="box" style="margin: 0; height: fit-content; width: 18%">
         <h3>MORE</h3>
         <a target="_blank" href="manifest.html">插件清单工具</a>
-        <a target="_blank" href="building.html">建筑-扩展</a>
+        <br><a target="_blank" href="building.html">建筑-扩展</a>
         <hr>
         <p id="version">工具版本&nbsp;</p>
       </div>
@@ -189,6 +191,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var text = this.elements["text"].value;
   var size = parseInt(this.elements["size"].value);
   var people = parseInt(this.elements["people"].value);
+  var level = parseInt(this.elements["level"].value);
   var frameFileName = this.elements["frame"].value;
   var drawGround = this.elements["drawGround"].value === "true"; // 转换为布尔值
   var night = this.elements["nightSwitch"].value === "true"; // 转换为布尔值
