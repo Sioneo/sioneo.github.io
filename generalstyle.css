@@ -169,7 +169,7 @@ input {
     border: 1.5px solid var(--hColor, darkblue);
     background-color: var(--bgColor, white);
     color: var(--textColor, black);
-    margin: 0.1em 1em;
+    margin: 0.2em 1em;
     font-size: 13px;
     font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
 }
@@ -179,7 +179,7 @@ select {
     border: 1.5px solid var(--hColor, darkblue);
     background-color: var(--bgColor, white);
     color: var(--textColor, black);
-    margin: 0.1em 1em;
+    margin: 0.2em 1em;
     font-size: 13px;
     font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
     color: var(--textColor, black);
@@ -210,7 +210,6 @@ span {
 .main .box {
   border-radius: 10px;
 }
-
 
 .noPaddingBox {
     background-color: var(--boxBgColor, #e6e6e6);
