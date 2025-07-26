@@ -259,7 +259,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   if (night && nightId != "" && nightFrameFileName != "") {building.animation = [{ id: nightId }]}
   if (title != "") {building.title = title}
   if (text != "") {building.text = text}
-  if (people != "" && people != NaN) {building.people = people}
+  if (this.elements["people"].value != "") {building.people = people}
 
   result.push(building);
 
