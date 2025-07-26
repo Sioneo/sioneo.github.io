@@ -95,7 +95,7 @@
               <option value="" selected disabled>选择一个类型</option>
               <option value="residential">住宅(residential)</option>
               <option value="commercial">商业(commercial)</option>
-              <option value="industial">工业(industial)</option>
+              <option value="industrial">工业(industrial)</option>
               <!-- <option value="decoration">装饰(decoration)</option>
               <option>公园(park)</option>
               <option>体育(sport)</option>
@@ -146,7 +146,7 @@
             <br>
             <label for="nightId"><em>*ID</em></label>
             <input type="text" name="nightId" id="nightId">
-            <p style="display: inline-block;">
+            <br>
             <label for="nightFrame"><em>*夜景贴图名</em></label>
             <input type="text" name="nightFrame" id="nightFrame"><span>记得带后缀(.png)</span>
 
@@ -180,6 +180,15 @@
     </div>
 
     <script src="../../javascript/spoiler.js"></script>
+    
+    <dialog id="inputErrorDialog">
+        <h3>提示</h3>
+        <p id="errorInfo"></p>
+        <br>
+        <div class="controls">
+          <button onClick="document.getElementById('inputErrorDialog').close();">关闭对话框</button>
+        </div>
+    </dialog>
 
     <script>
 document.getElementById("pluginForm").addEventListener("submit", function(event) {
@@ -203,19 +212,36 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     nightId = this.elements["nightId"].value;
     nightFrameFileName = this.elements["nightFrame"].value;
   }
+  
+  // 自动添加$
+  if (!id.startsWith("$")) {
+    id = "$" + id;
+    this.elements["id"].value = id;
+  }
+  if (!nightId.startsWith("$") && night == true) {
+    nightId = "$" + nightId;
+    this.elements["nightId"].value = nightId;
+  }
 
   // 构建 JSON 数据
   var result = [];
 
   // 如果启用了夜景，先添加夜景数据
-  if (night) {
-    var nightData = {
+  if (night) {  
+    if (nightId != "" && nightFrameFileName != "") {
+      var nightData = {
       id: nightId,
       type: "animation",
       frames: [{ bmp: nightFrameFileName }],
       light: true,
       "light switching": true
-    };
+      }
+    }
+    else {
+      document.getElementById("inputErrorDialog").showModal();
+      document.getElementById("errorInfo").innerText = "夜景动画id或贴图名不应为空";
+    }
+    
     result.push(nightData);
   }
 
