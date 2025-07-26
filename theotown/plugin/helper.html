@@ -257,9 +257,9 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
 
   // 如果启用了夜景，在建筑数据中添加动画字段
   if (night && nightId != "" && nightFrameFileName != "") {building.animation = [{ id: nightId }]}
-  if (title != null) {building.title = title}
-  if (text != null) {building.text = text}
-  if (people != null) {building.people = people}
+  if (title != "") {building.title = title}
+  if (text != "") {building.text = text}
+  if (people != "") {building.people = people}
 
   result.push(building);
 
