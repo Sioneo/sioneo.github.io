@@ -58,7 +58,7 @@ body {
     color: var(--textcolor, black);
     margin: 0;
     padding: 0;
-    font-family: Hiragino Maru Gothic ProN, sans-serif;
+    font-family: 圆体-简, 苹方-简, sans-serif;
 }
 
 h1 {
@@ -140,7 +140,7 @@ button {
     padding: 0.2em 0.4em;
     border-radius: 10px;
     font-size: 16px;
-    font-family: sans-serif;
+    font-family: 圆体-简, 苹方-简, sans-serif;
 }
 
 dialog {
