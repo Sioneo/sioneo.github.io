@@ -218,10 +218,6 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     id = "$" + id;
     this.elements["id"].value = id;
   }
-  if (!nightId.startsWith("$") && night == true) {
-    nightId = "$" + nightId;
-    this.elements["nightId"].value = nightId;
-  }
 
   // 构建 JSON 数据
   var result = [];
@@ -229,6 +225,10 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   // 如果启用了夜景，先添加夜景数据
   if (night) {  
     if (nightId != "" && nightFrameFileName != "") {
+      if (!nightId.startsWith("$") && night == true) {
+        nightId = "$" + nightId;
+        this.elements["nightId"].value = nightId;
+      }
       var nightData = {
       id: nightId,
       type: "animation",
