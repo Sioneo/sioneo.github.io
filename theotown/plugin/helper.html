@@ -236,13 +236,12 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
       light: true,
       "light switching": true
       }
+      result.push(nightData);
     }
     else {
       document.getElementById("inputErrorDialog").showModal();
       document.getElementById("errorInfo").innerText = "夜景动画id或贴图名不应为空";
     }
-    
-    result.push(nightData);
   }
 
   // 构建建筑数据
