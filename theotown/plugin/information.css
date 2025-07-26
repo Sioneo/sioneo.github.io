@@ -5,13 +5,13 @@
 }
 
 #newsContent:after {
-  content: "啥都木有";
+  content: "Version 1.0.3: 修复了一点问题";
   color: var(--textColor, black);
   align-items: center;
 }
 
 #version:after {
-  content: "1.0.2";
+  content: "1.0.3";
   color: var(--textColor, black);
   align-items: center;
 }
