@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <link rel="stylesheet" type="text/css" href="information.css">
+    <title>插件制作工具-插件清单</title>
+    <script src="../../javascript/changeDisplayStyle.js"></script>
+  </head>
+  <body>
+
+    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
+    
+     <dialog id="inDevDialog">
+        <h3>提示</h3>
+        <p>功能开发中（</p>
+        <div class="controls">
+          <button onClick="document.getElementById('inDevDialog').close();">关闭对话框</button>
+        </div>
+      </dialog>
+ 
+     <dialog id="copySucceedDialog">
+         <h3>成功～</h3>
+         <p>JSON代码已复制到剪贴板～</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('copySucceedDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+    <dialog id="idDollarDialog">
+         <h3>提示</h3>
+         <p>自动在id前添加了$符号</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('idDollarDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+     <dialog id="versionFormatDialog">
+         <h3>版本输入格式</h3>
+         <p>去除版本号的点输入即可, 例如: 1.12.23 > 11223</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('versionFormatDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+     <dialog id="jsonInfoDialog">
+         <h3>JSON属性介绍</h3>
+         <p><em>URL</em>&emsp;可以提供插件下载的网站的链接</p>
+         <p><em>category</em>&emsp;这里与建筑插件中的category不同，这里是控制插件是否在列表中显示</p>
+         <p><em>multiplayer</em>&emsp;控制插件是否可以在在线模式中使用</p>
+         <p><em>once</em>&emsp;若启用once，则该草稿（插件）只会被游戏加载一次，可以避免插件重复导致报错的问题</p>
+         <p><em>permanent</em>&emsp;控制插件是否被计数为一个外部插件</p>
+         <p><em>platform</em>&emsp;插件可以使用的平台</p>
+        
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('jsonInfoDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+     <dialog id="inputErrorDialog">
+        <h3>提示</h3>
+        <p id="errorInfo"></p>
+        <br>
+        <div class="controls">
+          <button onClick="document.getElementById('inputErrorDialog').close();">关闭对话框</button>
+        </div>
+     </dialog>
+
+    <div style="display: flex; justify-content: space-between;" class="headbox">
+      <div style="display: flex">
+        <a class="backbutton" href="../"></a>
+        <h3 class="headtext">插件制作工具-插件清单</h3>
+      </div>
+    
+      <div>
+        <button onClick="document.getElementById('inDevDialog').showModal();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">折叠右侧边栏</button>
+        <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+      </div>
+    </div>
+
+    <div style="display: flex;">
+      <div style="width: 82%">
+        <div class="main">
+
+          <div style="display: flex; justify-content: space-between">
+            <div>
+              <h2 style="display: inline-block;">插件清单工具</h2>
+              <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
+            </div>
+            <button style="height: fit-height" onClick="document.getElementById('jsonInfoDialog').showModal()">这是什么?</button>
+          </div>
+
+          <form id="pluginForm">
+            <label for="id"><em>*ID</em></label>
+            <input type="text" name="id" id="id" required>
+            <script>
+              // 页面加载时生成UUID并设置到输入框
+              document.addEventListener('DOMContentLoaded', function() {
+                const idInput = document.getElementById('id');
+                // 检查是否已经有值（防止表单重新加载时覆盖）
+                if (!idInput.value) {
+                  idInput.value = "$" + crypto.randomUUID();
+                }
+              });
+            </script>
+
+            <br>
+            <label for="title"><em>*标题(title)</em></label>
+            <input type="text" name="title" id="title" required>
+            <br>
+            <label for="text">描述(text)</label>
+            <input type="text" name="text" id="text">
+            <br>
+            <label for="version">插件版本</label>
+            <input type="number" name="version" id="version">
+            <br>
+            <label for="thumbnail">插件预览图</label>
+            <input type="text" name="thumbnail" id="thumbnail"><span>记得带后缀(.png)</span>
+            <br>
+            <label for="url">URL</label>
+            <input type="text" min="0" name="url" id="url">
+            <br>
+            <label for="author">插件作者</label>
+            <input type="text" name="author" id="author">
+            <br>
+            <label for="minVersion">最小游戏版本</label>
+            <input type="number" name="minVersion" id="minVersion">
+            <button onClick="document.getElementById('versionFormatDialog').showModal()">输入格式</button>
+            <br>
+            <label for="category">category</label>
+            <select id="category" name="category">
+                <option value="">不选</option>
+                <option value="true">开</option>
+                <option value="false">关</option>
+            </select>
+            <br>
+            <label for="multiplayer">multiplayer</label>
+            <select id="multiplayer" name="multiplayer">
+                <option value="">不选</option>
+                <option value="true">开</option>
+                <option value="false">关</option>
+            </select>
+            <br>
+            <label for="once">once</label>
+            <select id="once" name="once">
+                <option value="">不选</option>
+                <option value="true">开</option>
+                <option value="false">关</option>
+            </select>
+            <br>
+            <label for="permanent">permanent</label>
+            <select id="permanent" name="permanent">
+                <option value="">不选</option>
+                <option value="true">开</option>
+                <option value="false">关</option>
+            </select>
+            <br>
+            <label for="platform">平台</label>
+            <select id="platform" name="platform" multiple>
+                <option value="Android">Android</option>
+                <option value="iOS">iOS</option>
+                <option value="desktop">桌面端</option>
+            </select>
+            
+            <hr>
+
+            <div class="noPaddingBox">
+              <div class="noPaddingBoxTitle" style="display: flex; justify-content: space-between;">
+                <h3 style="margin: 0;">JSON</h3>
+
+                <div class="controls">
+                  <button style="background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
+                  <button onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText); document.getElementById('copySucceedDialog').showModal();" type="button">复制</button>
+                </div>
+              </div>
+              
+              <div class="noPaddingBoxText">
+                <pre id="jsonOutput">啥也木有</pre>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="box" style="margin: 0; height: fit-content; width: 18%">
+        <h3>MORE</h3>
+        <a target="_blank" href="helper.html">基础建筑</a>
+        <br><a target="_blank" href="building.html">建筑-扩展</a>
+        <hr>
+        <p id="version">工具版本&nbsp;</p>
+      </div>
+    </div>
+
+    <script src="../../javascript/spoiler.js"></script>
+    
+    
+    <script>
+document.getElementById("pluginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // 阻止表单默认提交行为
+
+  // 获取表单数据
+  var id = this.elements["id"].value;
+  var title = this.elements["title"].value;
+
+  var version = parseInt(this.elements["version"].value);
+  var thumbnail = this.elements["thumbnail"].value;
+  var url = this.elements["url"].value;
+  var author = this.elements["author"].value;
+  var minVersion = parseInt(this.elements["minVersion"].value);
+  var category = this.elements["category"].value === "true"; // 转换为布尔值
+  var multiplayer = this.elements["multiplayer"].value === "true"; // 转换为布尔值
+  var once = this.elements["once"].value === "true";
+  var permanent = this.elements["permanent"].value === "true";
+  var platformOptions = this.elements["platform"].options;
+  var platforms = []; // 存储选中的平台值
+  for (var i = 0; i < platformOptions.length; i++) {
+    if (platformOptions[i].selected) {
+      platforms.push(platformOptions[i].value);
+    }
+  }
+  
+  // 自动添加$
+  if (!id.startsWith("$")) {
+    id = "$" + id;
+    this.elements["id"].value = id;
+    document.getElementById('idDollarDialog').showModal();
+  }
+
+  // 构建 JSON 数据
+  var result = [];
+
+  var manifest = {
+    id: id,
+    title: title
+  };
+
+  if (this.elements["version"].value != "") {manifest.version = version}
+  if (thumbnail != "") {manifest.thumbnail = thumbnail}
+  if (url != "") {manifest.url = url}
+  if (author != "") {manifest.author = author}
+  if (this.elements["minVersion"].value != "") {manifest["min version"] = minVersion}
+  if (this.elements["category"].value != "") {manifest.category = category}
+  if (this.elements["multiplayer"].value != "") {manifest.multiplayer = multiplayer}
+  if (this.elements["once"].value != "") {manifest.once = once}
+  if (this.elements["permanent"].value != "") {manifest.permanent = permanent}
+  if (platforms.length > 0) {manifest.platforms = platforms}
+
+  result.push(manifest);
+
+  // 将 JSON 数据转换为字符串
+  var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
+
+  // 更新页面上的输出区域
+  document.getElementById("jsonOutput").innerText = jsonString;
+});
+    </script>
+  </body>
+</html>
