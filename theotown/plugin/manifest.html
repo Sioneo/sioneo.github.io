@@ -248,7 +248,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   if (this.elements["permanent"].value != "") {manifest.permanent = permanent}
   if (platforms.length > 0) {manifest.platforms = platforms}
 
-  result.push(manifest);
+  result = manifest;
 
   // 将 JSON 数据转换为字符串
   var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
