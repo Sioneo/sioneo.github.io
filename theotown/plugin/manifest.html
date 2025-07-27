@@ -88,7 +88,7 @@
               <h2 style="display: inline-block;">插件清单工具</h2>
               <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
             </div>
-            <button style="height: fit-content;" onClick="document.getElementById('jsonInfoDialog').showModal()">这是什么?</button>
+            <button style="height: fit-content;" onClick="document.getElementById('jsonInfoDialog').showModal()">属性介绍</button>
           </div>
 
           <form id="pluginForm">
@@ -229,7 +229,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   }
 
   // 构建 JSON 数据
-  var result = [];
+  var result;
 
   var manifest = {
     id: id,
