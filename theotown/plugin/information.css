@@ -5,13 +5,13 @@
 }
 
 #newsContent:after {
-  content: "Version 1.0.3: 修复了一点问题";
+  content: "Version 1.1.0: 添加了创建插件清单的工具";
   color: var(--textColor, black);
   align-items: center;
 }
 
 #version:after {
-  content: "1.0.3";
+  content: "1.1.0";
   color: var(--textColor, black);
   align-items: center;
 }
