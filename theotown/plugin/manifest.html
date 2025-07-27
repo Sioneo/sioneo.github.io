@@ -88,7 +88,7 @@
               <h2 style="display: inline-block;">插件清单工具</h2>
               <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
             </div>
-            <button style="height: fit-height" onClick="document.getElementById('jsonInfoDialog').showModal()">这是什么?</button>
+            <button style="height: fit-content;" onClick="document.getElementById('jsonInfoDialog').showModal()">这是什么?</button>
           </div>
 
           <form id="pluginForm">
@@ -203,6 +203,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var id = this.elements["id"].value;
   var title = this.elements["title"].value;
 
+  var text = this.elements["text"].value;
   var version = parseInt(this.elements["version"].value);
   var thumbnail = this.elements["thumbnail"].value;
   var url = this.elements["url"].value;
@@ -235,6 +236,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     title: title
   };
 
+  if (text != "") {manifest.text = text}
   if (this.elements["version"].value != "") {manifest.version = version}
   if (thumbnail != "") {manifest.thumbnail = thumbnail}
   if (url != "") {manifest.url = url}
