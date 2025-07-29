@@ -265,6 +265,11 @@ span {
     align-items: center;
 }
 
+.headbox a {
+    text-decoration: none;
+    color: var(--headTextColor, white);
+}
+
 .headtext {
     color: var(--headTextColor, white);
     margin: 0;
