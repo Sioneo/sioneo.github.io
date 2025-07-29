@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <script src="../../javascript/changeDisplayStyle.js"></script>
+    <title>插件制作工具</title>
+    <style>
+      .main a {
+        text-decoration: none;
+        display: block;
+        background-color: var(--boxBgColor);
+        color: var(--textColor);
+        margin: 0.5em auto;
+        padding: 0.8em 1em;
+        border-radius: 10px;
+      }
+    </style>
+</head>
+<body>
+
+<div style="display: flex; justify-content: space-between;", class="headbox">
+    <h3 class="headtext">插件制作工具</h3>
+    <div>
+      <a href="contact.html">问题反馈</a>
+      <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+    </div>
+</div>
+
+<div class="main">
+  <h3>在这里可以跳转到各工具的页面</h3>
+  <a href="helper.html"><em>基础建筑</em>&emsp;基础简单的住商工(RCI)建筑</a>
+  <a href="manifest.html"><em>插件清单</em>&emsp;创建plugin.manifest文件</a>
+  <a href="building.html"><em>建筑-扩展</em>&emsp;开发中</a>
+  <a href="category.html"><em>分类</em>&emsp;创建一个分类</a>
+</div>
+
+<br>
+<div style="margin: 0;" class="box"><p id="toolVersionInfo">工具版本&nbsp;</p></div>
+<script src="generalinfo.js"></script>
+</body>
+</html>
