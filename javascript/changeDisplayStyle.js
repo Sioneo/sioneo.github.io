@@ -1,3 +1,5 @@
+const button = document.getElementById("changeDisplayStyleButton"); //获取按钮
+
 // Cookie 操作工具函数
 function getCookie(name) {
   const cookies = document.cookie.split(';');
@@ -25,8 +27,6 @@ function changeDisplayStyle() {
     currentStyle = isSystemDark ? "night" : "day";
     setCookie("theme_style", currentStyle);
   }
-
-  const button = document.getElementById("changeDisplayStyleButton");
   const root = document.documentElement;
 
   if (currentStyle === "night") {
@@ -56,10 +56,17 @@ function changeDisplayStyle() {
   }
 }
 
-// 初始化时检测系统主题并设置样式
-document.addEventListener('DOMContentLoaded', function() {
+var currentMode;
+// 初始化检测，自动设置日间/夜间模式
+if (button.innerText == "夜间模式") {
+  currentMode = "day";
+} else {
+  currentMode = "night";
+}
+
+if (currentMode != getCookie("theme_style")) {
   changeDisplayStyle();
-});
+}
 
 // 监听系统主题变化（可选：如果用户切换系统主题，自动更新页面）
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
