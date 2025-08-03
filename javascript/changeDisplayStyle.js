@@ -20,13 +20,6 @@ function setCookie(name, value, days = 365) {
 function changeDisplayStyle() {
   // 读取当前模式，如果没有设置则根据系统主题初始化
   let currentStyle = getCookie("theme_style");
-  
-  // 如果未手动设置过，则检测系统主题
-  if (currentStyle == null) {
-    const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    currentStyle = isSystemDark ? "night" : "day";
-    setCookie("theme_style", currentStyle);
-  }
   const root = document.documentElement;
 
   if (currentStyle === "day") {
