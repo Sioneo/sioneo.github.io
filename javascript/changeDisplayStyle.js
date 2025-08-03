@@ -58,7 +58,7 @@ if (currentCssValue == "rgba(237, 242, 242, 1)") {
   currentMode = "night";
 }
 
-if (currentMode != getCookie("theme_style")) {
+if (currentMode != getCookie("theme_style") && getCookie("theme_style") != null) {
   changeDisplayStyle();
 }
 
