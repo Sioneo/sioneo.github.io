@@ -22,7 +22,7 @@ function changeDisplayStyle() {
   var button = document.getElementById("changeDisplayStyleButton"); //获取按钮
   let currentStyle = getCookie("theme_style");
   
-  if (currentStyle === "day") {
+  if (currentStyle === "day" || currentStyle == null) {
     // 当前是日间模式，切换到夜间模式
     button.textContent = "日间模式";
     setCookie("theme_style", "night");
