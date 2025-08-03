@@ -1,4 +1,4 @@
-const button = document.getElementById("changeDisplayStyleButton"); //获取按钮
+var button = document.getElementById("changeDisplayStyleButton"); //获取按钮
 
 // Cookie 操作工具函数
 function getCookie(name) {
@@ -19,6 +19,7 @@ function setCookie(name, value, days = 365) {
 // 主题切换主函数
 function changeDisplayStyle() {
   // 读取当前模式，如果没有设置则根据系统主题初始化
+  var button = document.getElementById("changeDisplayStyleButton"); //获取按钮
   let currentStyle = getCookie("theme_style");
   const root = document.documentElement;
 
