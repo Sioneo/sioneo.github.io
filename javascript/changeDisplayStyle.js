@@ -29,10 +29,10 @@ function changeDisplayStyle() {
   }
   const root = document.documentElement;
 
-  if (currentStyle === "night") {
-    // 当前是夜间模式，切换到日间模式
+  if (currentStyle === "day") {
+    // 当前是日间模式，切换到夜间模式
     button.textContent = "日间模式";
-    setCookie("theme_style", "day");
+    setCookie("theme_style", "night");
 
     // 日间模式样式
     root.style.setProperty('--bgColor', 'rgba(237, 242, 242, 1)');
@@ -42,9 +42,9 @@ function changeDisplayStyle() {
     root.style.setProperty('--headTextColor', 'white');
     root.style.setProperty('--hrColor', '#b3b3b3');
   } else {
-    // 当前是日间模式，切换到夜间模式
+    // 当前是夜间模式，切换到日间模式
     button.textContent = "夜间模式";
-    setCookie("theme_style", "night");
+    setCookie("theme_style", "day");
 
     // 夜间模式样式
     root.style.setProperty('--bgColor', 'rgba(20, 20, 20, 1)');
@@ -56,7 +56,7 @@ function changeDisplayStyle() {
   }
 }
 
-var currentMode;
+var currentButtonMode; // 根据按钮文本检测是否与cookie记录相同
 // 初始化检测，自动设置日间/夜间模式
 if (button.innerText == "夜间模式") {
   currentMode = "day";
