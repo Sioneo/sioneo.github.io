@@ -1,7 +1,7 @@
 // 内容
-const version = "1.1.3";
+const version = "1.1.4";
 const title = "";
-const news = "Version 1.1.3: 进行了一些修改";
+const news = "Version 1.1.4: 进行了一些修改";
 
 var versionInfo = document.getElementById("versionInfo");
 var newsTitle = document.getElementById("newsTitle");
