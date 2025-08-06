@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
-    <link rel="stylesheet" type="text/css" href="information.css">
     <title>插件制作工具</title>
     <script src="../../javascript/changeDisplayStyle.js"></script>
   </head>
@@ -14,18 +13,9 @@
 
     <div style="display: flex; justify-content: space-between;" class="headbox">
       <div style="display: flex">
-        <a class="backbutton" href="../"></a>
+        <a class="backbutton" href="index.html"></a>
         <h3 class="headtext">插件制作工具</h3>
       </div>
-
-      <dialog id="inDevDialog">
-        <h3>提示</h3>
-        <p>功能开发中（</p>
-        <br>
-        <div class="controls">
-          <button onClick="document.getElementById('inDevDialog').close();">关闭对话框</button>
-        </div>
-      </dialog>
 
       <dialog id="copySucceedDialog">
          <h3>成功～</h3>
@@ -37,7 +27,6 @@
 
 
       <div>
-        <button onClick="document.getElementById('inDevDialog').showModal();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">折叠右侧边栏</button>
         <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
       </div>
     </div>
@@ -45,15 +34,6 @@
     <div style="display: flex;">
       <div style="width: 82%">
         <div class="main">
-          <div class="noPaddingBox">
-            <div class="noPaddingBoxTitle">
-              <h3 id="newsTitle" style="display: inline-block;">NEWS&emsp;</h3>
-            </div>
-            <div class="noPaddingBoxText">
-              <p id="newsContent"></p>
-            </div>
-          </div>
-          <hr>
 
           <div style="display: flex; justify-content: space-between">
             <div>
@@ -96,17 +76,6 @@
               <option value="residential">住宅(residential)</option>
               <option value="commercial">商业(commercial)</option>
               <option value="industrial">工业(industrial)</option>
-              <!-- <option value="decoration">装饰(decoration)</option>
-              <option>公园(park)</option>
-              <option>体育(sport)</option>
-              <option>宗教(religion)</option>
-              <option>公共(public)</option>
-              <option>教育(education)</option>
-              <option>供水(water)</option>
-              <option>供电(energy)</option>
-              <option>奖励(award)</option>
-              <option>警察(police)</option>
-              <option>医疗(medic)</option> -->
             </select>
 
             <br>
@@ -119,20 +88,34 @@
             <label for="size"><em>*建筑大小</em></label>
             <input type="number" min="1" max="100" name="size" id="size" required>
             <br>
+            <label for="level"><em>*建筑等级</em></label>
+            <input type="number" min="1" max="3" name="level" id="level" required>
+            <br>
             <label for="frame"><em>*贴图名</em></label>
             <input type="text" name="frame" id="frame" required><span>记得带后缀(.png)</span>
             <br>
             <label for="people">居民/工人</label>
             <input type="number" min="0" name="people" id="people">
-            <br>
-            <label for="level"><em>*建筑等级</em></label>
-            <input type="number" min="1" max="3" name="level" id="level" required>
+             <br>
+             <label for="category">分类</label>
+             <input type="text" name="category" id="category">
 
             <div class="box">
               <button type="button" class="toggle-btn">+</button>&emsp;<span>高级选项</span>
               <div class="hiddenbox">
-                <label for="drawGround">绘制地面</label>
-                <input type="text" value="true" name="drawGround" id="drawGround">
+               <label for="drawGround">绘制地面</label>
+                <select name="once" id="drawGround">
+                  <option value="true" selected>开</option>
+                  <option value="false">关</option>
+                  <option value="">不选</option>
+                 </select>
+                <br>
+                <label for="once">once</label>
+                <select name="once" id="once">
+                  <option value="true" selected>开</option>
+                  <option value="false">关</option>
+                  <option value="">不选</option>
+                 </select>
               </div>
             </div>
             
@@ -175,7 +158,7 @@
         <a target="_blank" href="manifest.html">插件清单工具</a>
         <br><a target="_blank" href="building.html">建筑-扩展</a>
         <hr>
-        <p id="version">工具版本&nbsp;</p>
+        <p>工具版本&nbsp;<span id="versionInfo"></span></p>
       </div>
     </div>
 
@@ -203,8 +186,10 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var people = parseInt(this.elements["people"].value);
   var level = parseInt(this.elements["level"].value);
   var frameFileName = this.elements["frame"].value;
-  var drawGround = this.elements["drawGround"].value === "true"; // 转换为布尔值
-  var night = this.elements["nightSwitch"].value === "true"; // 转换为布尔值
+  var category = this.elements["category"].value;
+  var drawGround = this.elements["drawGround"].value === "true" ? true : false; // 转换为布尔值
+  var once = this.elements["once"].value === "true" ? true : false; // 转换为布尔值
+  var night = this.elements["nightSwitch"].value === "true" ? true : false; // 转换为布尔值
   var nightId = "";
   var nightFrameFileName = "";
 
@@ -257,9 +242,21 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
 
   // 如果启用了夜景，在建筑数据中添加动画字段
   if (night && nightId != "" && nightFrameFileName != "") {building.animation = [{ id: nightId }]}
+  // 一些可选内容
   if (title != "") {building.title = title}
   if (text != "") {building.text = text}
   if (this.elements["people"].value != "") {building.people = people}
+  if (this.elements["category"].value != "") {building.category = category}
+  if (this.elements["once"].value != ""){
+    building.once = once
+  } else {
+    building.once = true
+  }
+  if (this.elements["drawGround"].value != ""){
+    building["draw ground"] = drawGround
+  } else {
+    building["draw ground"] = true
+  }
 
   result.push(building);
 
@@ -270,5 +267,6 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   document.getElementById("jsonOutput").innerText = jsonString;
 });
     </script>
+    <script src="generalinfo.js"></script>
   </body>
 </html>
