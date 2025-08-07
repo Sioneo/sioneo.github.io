@@ -1,7 +1,7 @@
 // 内容
-const version = "1.1.4";
+const version = "1.2.0";
 const title = "";
-const news = "Version 1.1.4: 进行了一些修改";
+const news = "Version 1.2.0: <br>1.做了一个索引页<br>2.增加了分类的JSON生成器<br>3.增加了基础建筑那里的分类选项<br>下次再见～";
 
 var versionInfo = document.getElementById("versionInfo");
 var newsTitle = document.getElementById("newsTitle");
@@ -9,8 +9,8 @@ var newsInfo = document.getElementById("newsInfo");
 
 versionInfo.innerText = version;
 if (newsTitle != null) {
-    newsTitle.innerText = title;
+    newsTitle.innerHTML = title;
 }
 if (newsInfo != null) {
-    newsInfo.innerText = news;
+    newsInfo.innerHTML = news;
 }

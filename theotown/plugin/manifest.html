@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
-    <link rel="stylesheet" type="text/css" href="information.css">
     <title>插件制作工具-插件清单</title>
     <script src="../../javascript/changeDisplayStyle.js"></script>
   </head>
@@ -11,14 +10,6 @@
 
     <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
     <script>document.getElementById("jsWarning").style.display = "none";</script>
-    
-     <dialog id="inDevDialog">
-        <h3>提示</h3>
-        <p>功能开发中（</p>
-        <div class="controls">
-          <button onClick="document.getElementById('inDevDialog').close();">关闭对话框</button>
-        </div>
-      </dialog>
  
      <dialog id="copySucceedDialog">
          <h3>成功～</h3>
@@ -28,7 +19,7 @@
          </div>
      </dialog>
     
-    <dialog id="idDollarDialog">
+     <dialog id="idDollarDialog">
          <h3>提示</h3>
          <p>自动在id前添加了$符号</p>
          <div class="controls">
@@ -69,12 +60,11 @@
 
     <div style="display: flex; justify-content: space-between;" class="headbox">
       <div style="display: flex">
-        <a class="backbutton" href="../"></a>
+        <a class="backbutton" href="index.html"></a>
         <h3 class="headtext">插件制作工具-插件清单</h3>
       </div>
     
       <div>
-        <button onClick="document.getElementById('inDevDialog').showModal();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">折叠右侧边栏</button>
         <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
       </div>
     </div>
@@ -188,7 +178,7 @@
         <a target="_blank" href="helper.html">基础建筑</a>
         <br><a target="_blank" href="building.html">建筑-扩展</a>
         <hr>
-        <p id="version">工具版本&nbsp;</p>
+        <p>工具版本&nbsp;<span id="versionInfo"></span></p>
       </div>
     </div>
 
@@ -257,5 +247,6 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   document.getElementById("jsonOutput").innerText = jsonString;
 });
     </script>
+    <script src="generalinfo.js"></script>
   </body>
 </html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <title>插件制作工具-分类</title>
+    <script src="../../javascript/changeDisplayStyle.js"></script>
+  </head>
+  <body>
+
+    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
+ 
+     <dialog id="copySucceedDialog">
+         <h3>成功～</h3>
+         <p>JSON代码已复制到剪贴板～</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('copySucceedDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+     <dialog id="idDollarDialog">
+         <h3>提示</h3>
+         <p>自动在id前添加了$符号</p>
+         <div class="controls">
+           <button type="button" onClick="document.getElementById('idDollarDialog').close()">关闭对话框</button>
+         </div>
+     </dialog>
+    
+     <dialog id="inputErrorDialog">
+        <h3>提示</h3>
+        <p id="errorInfo"></p>
+        <br>
+        <div class="controls">
+          <button onClick="document.getElementById('inputErrorDialog').close();">关闭对话框</button>
+        </div>
+     </dialog>
+
+    <div style="display: flex; justify-content: space-between;" class="headbox">
+      <div style="display: flex">
+        <a class="backbutton" href="index.html"></a>
+        <h3 class="headtext">插件制作工具-分类</h3>
+      </div>
+    
+      <div>
+        <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+      </div>
+    </div>
+
+    <div style="display: flex;">
+      <div style="width: 82%">
+        <div class="main">
+
+          <div style="display: flex; justify-content: space-between">
+            <div>
+              <h2 style="display: inline-block;">分类工具</h2>
+              <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
+            </div>
+          </div>
+
+          <form id="pluginForm">
+            <label for="id"><em>*ID</em></label>
+            <input type="text" name="id" id="id" required>
+            <script>
+              // 页面加载时生成UUID并设置到输入框
+              document.addEventListener('DOMContentLoaded', function() {
+                const idInput = document.getElementById('id');
+                // 检查是否已经有值（防止表单重新加载时覆盖）
+                if (!idInput.value) {
+                  idInput.value = "$" + crypto.randomUUID();
+                }
+              });
+            </script>
+
+            <br>
+            <label for="title">标题(title)</label>
+            <input type="text" name="title" id="title">
+            <br>
+            <label for="text">描述(text)</label>
+            <input type="text" name="text" id="text">
+            <br>
+            <label for="frames">分类预览图</label>
+            <input type="text" value="" name="frames" id="frames">
+            <br>
+            <label for="category">分类</label>
+            <input type="text" value="" name="category" id="category">
+            <br>
+            <div class="box">
+              <button type="button" class="toggle-btn">+</button>&emsp;<span>高级选项</span>
+              <div class="hiddenbox">
+                <label for="ordinal">ordinal</label>
+                <input type="number" value="" name="ordinal" id="ordinal">
+                <br>
+                <label for="once">once</label>
+                <select name="once" id="once">
+                  <option value="true" selected>开</opiton>
+                  <option value="false">关</opiton>
+                  <option value="">不选</opiton>
+                </select>
+              </div>
+            </div>
+            
+            <hr>
+
+            <div class="noPaddingBox">
+              <div class="noPaddingBoxTitle" style="display: flex; justify-content: space-between;">
+                <h3 style="margin: 0;">JSON</h3>
+
+                <div class="controls">
+                  <button style="background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
+                  <button onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText); document.getElementById('copySucceedDialog').showModal();" type="button">复制</button>
+                </div>
+              </div>
+              
+              <div class="noPaddingBoxText">
+                <pre id="jsonOutput">啥也木有</pre>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="box" style="margin: 0; height: fit-content; width: 18%">
+        <h3>MORE</h3>
+        <a target="_blank" href="helper.html">基础建筑</a>
+        <br><a target="_blank" href="manifest.html">插件清单</a>
+        <br><a target="_blank" href="building.html">建筑-扩展</a>
+        <hr>
+        <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+      </div>
+    </div>
+
+    <script src="../../javascript/spoiler.js"></script>
+    
+    
+    <script>
+document.getElementById("pluginForm").addEventListener("submit", function(event) {
+  event.preventDefault(); // 阻止表单默认提交行为
+
+  // 获取表单数据
+  var id = this.elements["id"].value;
+  var title = this.elements["title"].value;
+  var text = this.elements["text"].value;
+  var category = this.elements["category"].value;
+  var frameFileName = this.elements["frames"].value;
+  var ordinal = parseInt(this.elements["ordinal"].value);
+  var once = this.elements["once"].value === "true" ? true: false;
+  
+  // 自动添加$
+  if (!id.startsWith("$")) {
+    id = "$" + id;
+    this.elements["id"].value = id;
+    document.getElementById('idDollarDialog').showModal();
+  }
+
+  // 构建 JSON 数据
+  var result;
+
+  var code = {
+    id: id,
+    type: "category"
+  };
+
+  if (title != "") {code.title = title}
+  if (text != "") {code.text = text}
+  if (category != "") {code.category = category}
+  if (frameFileName != "") {code.frames = [{bmp: frameFileName}]}
+  if (ordinal) {code.ordinal = ordinal}
+  if (this.elements["once"].value != "") {code.once = once}
+
+  result = code;
+
+  // 将 JSON 数据转换为字符串
+  var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
+
+  // 更新页面上的输出区域
+  document.getElementById("jsonOutput").innerText = jsonString;
+});
+    </script>
+    <script src="generalinfo.js"></script>
+  </body>
+</html>
