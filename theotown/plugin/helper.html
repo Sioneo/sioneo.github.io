@@ -110,12 +110,12 @@
                   <option value="">不选</option>
                  </select>
                 <br>
-                <label for="once">once</label>
-                <select name="once" id="once">
+                <label for="loadOnce">once</label>
+                <select name="loadOnce" id="loadOnce">
                   <option value="true" selected>开</option>
                   <option value="false">关</option>
                   <option value="">不选</option>
-                 </select>
+                </select>
               </div>
             </div>
             
@@ -188,7 +188,7 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   var frameFileName = this.elements["frame"].value;
   var category = this.elements["category"].value;
   var drawGround = this.elements["drawGround"].value === "true" ? true : false; // 转换为布尔值
-  var once = this.elements["once"].value === "true" ? true : false; // 转换为布尔值
+  var loadOnce = this.elements["loadOnce"].value === "true" ? true : false; // 转换为布尔值
   var night = this.elements["nightSwitch"].value === "true" ? true : false; // 转换为布尔值
   var nightId = "";
   var nightFrameFileName = "";
@@ -236,7 +236,6 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
     width: size,
     height: size,
     frames: [{ bmp: frameFileName }],
-    "draw ground": drawGround,
     level: level
   };
 
@@ -247,16 +246,8 @@ document.getElementById("pluginForm").addEventListener("submit", function(event)
   if (text != "") {building.text = text}
   if (this.elements["people"].value != "") {building.people = people}
   if (this.elements["category"].value != "") {building.category = category}
-  if (this.elements["once"].value != ""){
-    building.once = once
-  } else {
-    building.once = true
-  }
-  if (this.elements["drawGround"].value != ""){
-    building["draw ground"] = drawGround
-  } else {
-    building["draw ground"] = true
-  }
+  if (this.elements["loadOnce"].value != "") {building.once = loadOnce}
+  if (this.elements["drawGround"].value != "") {building["draw ground"] = drawGround}
 
   result.push(building);
 
