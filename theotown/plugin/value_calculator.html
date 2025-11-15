@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <title>插件制作工具-数值计算器</title>
+    <script src="../../javascript/changeDisplayStyle.js"></script>
+
+    <!-- 引入 MathJax -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+</head>
+
+<body>
+
+    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
+
+    <div style="display: flex; justify-content: space-between;" class="headbox">
+        <div style="display: flex">
+            <a class="backbutton" href="index.html"></a>
+            <h3 class="headtext">插件制作工具-数值计算器</h3>
+        </div>
+
+
+        <div>
+            <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
+                style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+        </div>
+    </div>
+
+    <div style="display: flex;">
+        <div style="width: 82%">
+            <div class="main">
+
+                <h2>供水/供电</h2>
+                <p>该项的函数解析式为<span class="mono">$f(x)=min(10000*S, min(20x, 10^6))$</span></p>
+
+            </div>
+        </div>
+
+        <div class="box" style="margin: 0; height: fit-content; width: 18%">
+            <h3>MORE</h3>
+            <a target="_blank" href="manifest.html">插件清单工具</a>
+            <br><a target="_blank" href="building.html">建筑-扩展</a>
+            <br><a target="_blank" href="category.html">分类工具</a>
+            <hr>
+            <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+        </div>
+    </div>
+    <script src="generalinfo.js"></script>
+</body>
+
+</html>
