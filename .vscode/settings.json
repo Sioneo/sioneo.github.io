@@ -1,0 +1,8 @@
+{
+    "editor.fontSize": 16,
+    "editor.fontFamily": "'Sarasa Fixed SC', Consolas, 'Courier New', monospace",
+    "html.preview.markEditorSelection": false,
+    "html.trace": "off",
+    "html.trace.server": "off",
+    "html.validate.scripts": false
+}
