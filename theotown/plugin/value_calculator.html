@@ -3,13 +3,41 @@
 
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <base href="https://onionpedia.kozow.com/">
+    <link rel="stylesheet" type="text/css" href="generalstyle.css">
     <title>插件制作工具-数值计算器</title>
     <script src="../../javascript/changeDisplayStyle.js"></script>
 
     <!-- 引入 MathJax -->
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <script>
+        function calculate(id) {
+            document.getElementById(id).addEventListener("submit", function(event){
+                event.preventDefault();
+
+                var monthlyPrice = this.elements["monthlyPrice"].value;
+                var size = this.elements["size"].value;
+                var result;
+
+                switch(id) {
+                    case "powerWater": 
+                        result = Math.min((10**4)*size, Math.min(20*monthlyPrice, 10**6));
+                        break;
+                    case "influence":
+                        result = (10*Math.min(monthlyPrice, 10**6))/size;
+                        break;
+                    default:
+                        result = "ERROR";
+                        break    
+                }
+
+                const output = document.getElementById(id + "Output");
+                output.innerText = result;
+            })
+        }
+    </script>
 </head>
 
 <body>
@@ -22,8 +50,6 @@
             <a class="backbutton" href="index.html"></a>
             <h3 class="headtext">插件制作工具-数值计算器</h3>
         </div>
-
-
         <div>
             <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
                 style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
@@ -35,7 +61,37 @@
             <div class="main">
 
                 <h2>供水/供电</h2>
-                <p>该项的函数解析式为 \( f(x)=min(10000*S, min(20x, 10^6)) \)></p>
+                <p>该项的函数解析式为 \( f(x)=min(10000×S, min(20x, 10^6)) \)</p>
+                <p>S: 面积（长×宽）；x：每月费用</p>
+                <div class="box">
+                    <form id="powerWater">
+                        <label for="monthlyPrice"><em>每月费用</em></label>
+                        <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" value="在此输入每月费用" required><br>
+                        <label for="size"><em>建筑大小</em></label>
+                        <input type="number" id="powerWaterSizeInput" name="size" value="在此输入建筑大小" required>
+                        <div><button onClick="calculate('powerWater');" type="submit">计算</button>
+                            <span><em>结果</em></span>&emsp;<span id="powerWaterOutput"></span>
+                        </div>
+                    </form>
+                </div>
+
+                <hr>
+              
+
+                <h2>影响</h2>
+                <p>该项的函数解析式为\[ f(x)=\frac{10×min(x, 10^6)}{S} \]</p>
+                <p>S: 面积（长×宽）；x：每月费用</p>
+                <div class="box">
+                    <form id="influence">
+                        <label for="monthlyPrice"><em>每月费用</em></label>
+                        <input id="powerWaterMonthlyPriceInput" name="monthlyPrice" value="在此输入每月费用" required><br>
+                        <label for="size"><em>建筑大小</em></label>
+                        <input id="powerWaterSizeInput" name="size" value="在此输入建筑大小" required>
+                        <div><button onClick="calculate('influence');" type="submit">计算</button>
+                            <span><em>结果</em></span>&emsp;<span id="influenceOutput"></span>
+                        </div>
+                    </form>
+                </div>
 
             </div>
         </div>
