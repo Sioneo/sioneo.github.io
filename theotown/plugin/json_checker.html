@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <title>插件制作工具-数值计算器</title>
+    <script src="../../javascript/changeDisplayStyle.js"></script>
+
+    <script>
+        function calculate(id) {
+            document.getElementById(id).addEventListener("submit", function(event){
+                event.preventDefault();
+
+                var monthlyPrice = this.elements["monthlyPrice"].value;
+                var size = this.elements["size"].value;
+                var result;
+
+                switch(id) {
+                    case "powerWater": 
+                        result = Math.min((10**4)*size, Math.min(20*monthlyPrice, 10**6));
+                        break;
+                    case "influence":
+                        result = (10*Math.min(monthlyPrice, 10**6))/size;
+                        break;
+                    default:
+                        result = "ERROR";
+                        break    
+                }
+
+                const output = document.getElementById(id + "Output");
+                output.innerText = result;
+            })
+        }
+    </script>
+</head>
+
+<body>
+
+    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
+
+    <div style="display: flex; justify-content: space-between;" class="headbox">
+        <div style="display: flex">
+            <a class="backbutton" href="index.html"></a>
+            <h3 class="headtext">插件制作工具-JSON检查器</h3>
+        </div>
+        <div>
+            <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
+                style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+        </div>
+    </div>
+
+    <div style="display: flex;">
+        <div style="width: 82%">
+            <div class="main">
+
+
+            </div>
+        </div>
+
+        <div class="box" style="margin: 0; height: fit-content; width: 18%">
+            <h3>MORE</h3>
+            <a target="_blank" href="manifest.html">插件清单工具</a>
+            <br><a target="_blank" href="building.html">建筑-扩展</a>
+            <br><a target="_blank" href="category.html">分类工具</a>
+            <br><a target="_blank" href="value_calculator.html">数值计算器</a>
+            <hr>
+            <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+        </div>
+    </div>
+    <script src="generalinfo.js"></script>
+</body>
+
+</html>

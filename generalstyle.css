@@ -278,7 +278,7 @@ span {
 
 .mono {
     color: var(--monoColor, #6a6a6a);
-    font-family: Ubuntu Mono, monospace, Menlo, Courier, sans-serif;
+    font-family: Ubuntu Mono, Consola, monospace, Menlo, Courier, sans-serif;
     display: inline-block;  /* 保持行内特性 */
     max-width: 100%;       /* 不超过父容器宽度 */
     overflow-x: auto;      /* 横向滚动 */

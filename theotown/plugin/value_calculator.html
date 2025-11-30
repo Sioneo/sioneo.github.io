@@ -2,110 +2,110 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
-    <base href="https://onionpedia.kozow.com/">
-    <link rel="stylesheet" type="text/css" href="generalstyle.css">
-    <title>插件制作工具-数值计算器</title>
-    <script src="javascript/changeDisplayStyle.js"></script>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+  <title>插件制作工具-数值计算器</title>
+  <script src="../../javascript/changeDisplayStyle.js"></script>
 
-    <!-- 引入 MathJax -->
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <!-- 引入 MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-    <script>
-        function calculate(id) {
-            document.getElementById(id).addEventListener("submit", function(event){
-                event.preventDefault();
+  <script>
+    function calculate(id) {
+      document.getElementById(id).addEventListener("submit", function (event) {
+        event.preventDefault();
 
-                var monthlyPrice = this.elements["monthlyPrice"].value;
-                var size = this.elements["size"].value;
-                var result;
+        var monthlyPrice = this.elements["monthlyPrice"].value;
+        var size = this.elements["size"].value;
+        var result;
 
-                switch(id) {
-                    case "powerWater": 
-                        result = Math.min((10**4)*size, Math.min(20*monthlyPrice, 10**6));
-                        break;
-                    case "influence":
-                        result = (10*Math.min(monthlyPrice, 10**6))/size;
-                        break;
-                    default:
-                        result = "ERROR";
-                        break    
-                }
-
-                const output = document.getElementById(id + "Output");
-                output.innerText = result;
-            })
+        switch (id) {
+          case "powerWater":
+            result = Math.min((10 ** 4) * size, Math.min(20 * monthlyPrice, 10 ** 6));
+            break;
+          case "influence":
+            result = (10 * Math.min(monthlyPrice, 10 ** 6)) / size;
+            break;
+          default:
+            result = "ERROR";
+            break
         }
-    </script>
+
+        const output = document.getElementById(id + "Output");
+        output.innerText = result;
+      })
+    }
+  </script>
 </head>
 
 <body>
 
-    <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
-    <script>document.getElementById("jsWarning").style.display = "none";</script>
+  <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
+  <script>document.getElementById("jsWarning").style.display = "none";</script>
 
-    <div style="display: flex; justify-content: space-between;" class="headbox">
-        <div style="display: flex">
-            <a class="backbutton" href="theotown/plugin/index.html"></a>
-            <h3 class="headtext">插件制作工具-数值计算器</h3>
-        </div>
-        <div>
-            <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
-                style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
-        </div>
+  <div style="display: flex; justify-content: space-between;" class="headbox">
+    <div style="display: flex">
+      <a class="backbutton" href="index.html"></a>
+      <h3 class="headtext">插件制作工具-数值计算器</h3>
     </div>
+    <div>
+      <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
+        style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
+    </div>
+  </div>
 
-    <div style="display: flex;">
-        <div style="width: 82%">
-            <div class="main">
+  <div style="display: flex;">
+    <div style="width: 82%">
+      <div class="main">
 
-                <h2>供水/供电</h2>
-                <p>该项的函数解析式为 \( f(x)=min(10000×S, min(20x, 10^6)) \)</p>
-                <p>S: 面积（长×宽）；x：每月费用</p>
-                <div class="box">
-                    <form id="powerWater">
-                        <label for="monthlyPrice"><em>每月费用</em></label>
-                        <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
-                        <label for="size"><em>建筑大小</em></label>
-                        <input type="number" id="powerWaterSizeInput" name="size" required>
-                        <div><button onClick="calculate('powerWater');" type="submit">计算</button>
-                            <span><em>结果</em></span>&emsp;<span id="powerWaterOutput"></span>
-                        </div>
-                    </form>
-                </div>
-
-                <hr>
-              
-
-                <h2>影响</h2>
-                <p>该项的函数解析式为\[ f(x)=\frac{10×min(x, 10^6)}{S} \]</p>
-                <p>S: 面积（长×宽）；x：每月费用</p>
-                <div class="box">
-                    <form id="influence">
-                        <label for="monthlyPrice"><em>每月费用</em></label>
-                        <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
-                        <label for="size"><em>建筑大小</em></label>
-                        <input type="number" id="powerWaterSizeInput" name="size" required>
-                        <div><button onClick="calculate('influence');" type="submit">计算</button>
-                            <span><em>结果</em></span>&emsp;<span id="influenceOutput"></span>
-                        </div>
-                    </form>
-                </div>
-
+        <h2>供水/供电</h2>
+        <p>该项的函数解析式为 \( f(x)=min(10000×S, min(20x, 10^6)) \)</p>
+        <p>S: 面积（长×宽）；x：每月费用</p>
+        <div class="box">
+          <form id="powerWater">
+            <label for="monthlyPrice"><em>每月费用</em></label>
+            <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
+            <label for="size"><em>建筑大小</em></label>
+            <input type="number" id="powerWaterSizeInput" name="size" required>
+            <div><button onClick="calculate('powerWater');" type="submit">计算</button>
+              <span><em>结果</em></span>&emsp;<span id="powerWaterOutput"></span>
             </div>
+          </form>
         </div>
 
-        <div class="box" style="margin: 0; height: fit-content; width: 18%">
-            <h3>MORE</h3>
-            <a target="_blank" href="theotown/plugin/manifest.html">插件清单工具</a>
-            <br><a target="_blank" href="theotown/plugin/building.html">建筑-扩展</a>
-            <br><a target="_blank" href="theotown/plugin/category.html">分类工具</a>
-            <hr>
-            <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+        <hr>
+
+
+        <h2>影响</h2>
+        <p>该项的函数解析式为\[ f(x)=\frac{10×min(x, 10^6)}{S} \]</p>
+        <p>S: 面积（长×宽）；x：每月费用</p>
+        <div class="box">
+          <form id="influence">
+            <label for="monthlyPrice"><em>每月费用</em></label>
+            <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
+            <label for="size"><em>建筑大小</em></label>
+            <input type="number" id="powerWaterSizeInput" name="size" required>
+            <div><button onClick="calculate('influence');" type="submit">计算</button>
+              <span><em>结果</em></span>&emsp;<span id="influenceOutput"></span>
+            </div>
+          </form>
         </div>
+
+      </div>
     </div>
-    <script src="theotown/plugin/generalinfo.js"></script>
+
+    <div class="box" style="margin: 0; height: fit-content; width: 18%">
+      <h3>MORE</h3>
+      <a target="_blank" href="manifest.html">插件清单工具</a>
+      <br><a target="_blank" href="building.html">建筑-扩展</a>
+      <br><a target="_blank" href="category.html">分类工具</a>
+      <br><a target="_blank" href="json_checker.html">JSON检查器</a>
+      <hr>
+      <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+    </div>
+  </div>
+  <script src="generalinfo.js"></script>
 </body>
 
 </html>

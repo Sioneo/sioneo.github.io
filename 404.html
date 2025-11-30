@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="https://onionpedia.kozow.com/generalstyle.css">
-    <title>(ﾟДﾟ≡ﾟдﾟ)!?</title>
+  <meta charset="UTF-8">
+  <title>(ﾟДﾟ≡ﾟдﾟ)!?</title>
 </head>
+
 <body>
-    <div class="main">
+  <div style="display: none;" id="main" class="main">
     <p style="font-size: 70px; color: var(--hColor, darkblue);">404</p>
     <hr>
     <p id="url"></p>
     <p>Page Not Found - 页面不存在丨这可能是因为URL输入错误或页面尚未准备好</p>
     <script>
-        var currentURL = window.location.href;
-        document.getElementById("url").innerHTML = currentURL;
+      var currentURL = window.location.href;
+      document.getElementById("url").innerHTML = currentURL;
+
+      // 加载CSS
+      new Promise((resolve, reject) => {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = "https://sioneo.github.io/generalstyle.css";
+
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => {
+          controller.abort();
+          link.remove();
+          resolve();
+        }, 5000)
+
+        link.onload = () => {
+          clearTimeout(timeoutId);
+          reject();
+        }
+
+        link.onerror = () => {
+          clearTimeout(timeoutId);
+          reject()
+        }
+
+        document.head.appendChild(link);
+        document.getElementById("main").style.display = "block";
+      })
+      
     </script>
-    </div>
+  </div>
 </body>
+
 </html>
