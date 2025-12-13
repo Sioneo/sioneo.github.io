@@ -1,0 +1,15 @@
+[
+    {
+        "id": "$Hello_world",
+        "type": "residential",
+        "width": 2,
+        "height": 2,
+        "frames": [
+            {"bmp": "abc.png"},
+            {"bmp": "def.png"}
+        ],
+        "draw ground": false,
+        "influence park": 10,
+        "monthly price": 5
+    }
+]

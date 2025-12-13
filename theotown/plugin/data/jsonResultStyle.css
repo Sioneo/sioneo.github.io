@@ -1,0 +1,45 @@
+.jsonResultTitle {
+    background-color: rgb(235, 235, 235);
+    color: black;
+    marign: 0;
+    padding: 0.1em;
+}
+
+.jsonResultKeyTitle {
+    background-color: rgb(183, 208, 255);
+    color: black;
+    marign: 0;
+    padding: 0.1em;
+}
+
+.jsonResultFailure {
+    background-color: rgb(255, 149, 149);
+    color: rgb(41, 0, 0);
+    border-left: 10px solid rgb(183, 208, 255);
+    margin: 0;
+    padding: 0.1em;
+}
+
+.jsonResultWarning {
+    background-color: rgb(163, 0, 0);
+    color: rgb(255, 255, 255);
+    border-left: 10px solid rgb(183, 208, 255);
+    margin: 0;
+    padding: 0.1em;
+}
+
+.jsonResultNotification {
+    background-color: rgb(255, 187, 0);
+    color: black;
+    border-left: 10px solid rgb(183, 208, 255);
+    margin: 0;
+    padding: 0.1em;
+}
+
+.jsonResultPass {
+    background-color: rgb(0, 129, 0);
+    color: rgb(255, 255, 255);
+    border-left: 10px solid rgb(183, 208, 255);
+    margin: 0;
+    padding: 0.1em;
+}

@@ -36,7 +36,7 @@
     src: url("font/DIN-BoldItalic.otf");
     font-weight: bold;
     font-style: italic;
-} 
+}
 
 /*
 @font-face {
@@ -105,15 +105,36 @@ a {
     text-underline-offset: 3px;
 }
 
+a:hover {
+    font-weight: bold;
+}
+
+.linkButton {
+    text-decoration: none;
+    display: block;
+    background-color: var(--boxBgColor);
+    color: var(--textColor);
+    margin: 0.5em auto;
+    padding: 0.8em 1em;
+    border-radius: 10px;
+}
+
+linkButton:hover {
+    font-weight: bold;
+}
+
 pre {
     color: var(--textColor, black);
-    font-family: Ubuntu Mono, monospace, Menlo, Courier, sans-serif;
-    margin: 0.2em;
+    font-family: Ubuntu Mono, Menlo, Consolas, 'Sarasa Fixed SC', monospace, Courier, DIN, sans-serif;
     padding: 0;
-    display: inline-block;  /* 保持行内特性 */
-    max-width: 100%;       /* 不超过父容器宽度 */
-    overflow-x: auto;      /* 横向滚动 */
-    vertical-align: middle; /* 垂直对齐方式 */
+    display: inline-block;
+    /* 保持行内特性 */
+    max-width: 100%;
+    /* 不超过父容器宽度 */
+    overflow-x: auto;
+    /* 横向滚动 */
+    vertical-align: middle;
+    /* 垂直对齐方式 */
     white-space: pre;
 }
 
@@ -143,6 +164,21 @@ button {
     font-family: DIN, sans-serif;
 }
 
+button:hover {
+    color: var(--headTextColor, white);
+    background-color: var(--hColor, darkblue);
+}
+
+button.attractiveButton {
+    padding: 0.5em 0.5em;
+    color: var(--headTextColor, white);
+    background-color: var(--hColor, darkblue);
+}
+
+button.attractiveButton:hover {
+    font-weight: bold;
+}
+
 dialog {
     border: 2.5px solid var(--hColor, darkblue);
     border-radius: 10px;
@@ -150,7 +186,7 @@ dialog {
     background-color: var(--bgColor);
     color: var(--textColor, black);
 }
-  
+
 dialog::backdrop {
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -165,24 +201,27 @@ dialog .controls {
 }
 
 input {
-    width: 26em; 
+    width: 26em;
     border: 1.5px solid var(--hColor, darkblue);
     background-color: var(--bgColor, white);
     color: var(--textColor, black);
     margin: 0.2em 1em;
     font-size: 13px;
-    font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
+    font-family: Ubuntu Mono, Menlo, Consolas, 'Sarasa Fixed SC', monospace, Courier, DIN, sans-serif;
+    border-radius: 10px;
 }
 
+
 select {
-    width: 27em; 
+    width: 27em;
     border: 1.5px solid var(--hColor, darkblue);
     background-color: var(--bgColor, white);
     color: var(--textColor, black);
     margin: 0.2em 1em;
     font-size: 13px;
-    font-family: Ubuntu Mono, Menlo, monospace, Courier, DIN, sans-serif;
+    font-family: Ubuntu Mono, Menlo, Consolas, 'Sarasa Fixed SC', monospace, Courier, DIN, sans-serif;
     color: var(--textColor, black);
+    border-radius: 10px;
 }
 
 label {
@@ -208,7 +247,7 @@ span {
 }
 
 .main .box {
-  border-radius: 10px;
+    border-radius: 10px;
 }
 
 .noPaddingBox {
@@ -250,7 +289,8 @@ span {
     padding: 0.2em;
 }
 
-.hiddenbox { /* Spoiler中使用 */
+.hiddenbox {
+    /* Spoiler中使用 */
     background-color: var(--boxBgColor, #e6e6e6);
     margin: 0.5em 0px 0.5em 0px;
     padding: 0.5em 1em 0.5em 1em;
@@ -278,11 +318,15 @@ span {
 
 .mono {
     color: var(--monoColor, #6a6a6a);
-    font-family: Ubuntu Mono, Consola, monospace, Menlo, Courier, sans-serif;
-    display: inline-block;  /* 保持行内特性 */
-    max-width: 100%;       /* 不超过父容器宽度 */
-    overflow-x: auto;      /* 横向滚动 */
-    vertical-align: middle; /* 垂直对齐方式 */
+    font-family: Ubuntu Mono, Menlo, Consolas, 'Sarasa Fixed SC', monospace, Courier, DIN, sans-serif;
+    display: inline-block;
+    /* 保持行内特性 */
+    max-width: 100%;
+    /* 不超过父容器宽度 */
+    overflow-x: auto;
+    /* 横向滚动 */
+    vertical-align: middle;
+    /* 垂直对齐方式 */
     white-space: pre;
 }
 
@@ -335,4 +379,26 @@ span {
 
 .forumbox a {
     color: var(--headTextColor, white);
+}
+
+.fileDragZone {
+    border: 2px dashed var(--hrColor, #6a6a6a);
+    padding: 3em 5em;
+    display: inline-block;
+    border-radius: 10px;
+    margin: 0.5em 0;
+}
+
+.dragZoneInfoDefault {
+    font-weight: bold;
+    color: var(--hrColor, #6a6a6a);
+    font-size: 20px;
+}
+
+.dragZoneInfoActive {
+    color: var(--hColor, darkblue);
+}
+
+.dragZoneInfoError {
+    color: rgb(207, 5, 5);
 }

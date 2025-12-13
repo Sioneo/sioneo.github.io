@@ -4,38 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
-    <title>插件制作工具-数值计算器</title>
+    <link rel="stylesheet" type="text/css" href="data/jsonResultStyle.css">
+    <title>插件制作工具-JSON检查器</title>
     <script src="../../javascript/changeDisplayStyle.js"></script>
-
-    <script>
-        function calculate(id) {
-            document.getElementById(id).addEventListener("submit", function(event){
-                event.preventDefault();
-
-                var monthlyPrice = this.elements["monthlyPrice"].value;
-                var size = this.elements["size"].value;
-                var result;
-
-                switch(id) {
-                    case "powerWater": 
-                        result = Math.min((10**4)*size, Math.min(20*monthlyPrice, 10**6));
-                        break;
-                    case "influence":
-                        result = (10*Math.min(monthlyPrice, 10**6))/size;
-                        break;
-                    default:
-                        result = "ERROR";
-                        break    
-                }
-
-                const output = document.getElementById(id + "Output");
-                output.innerText = result;
-            })
-        }
-    </script>
+    <script src="../../javascript/fileDrag.js"></script>
+    <script src="data/checkerData_RCI.js"></script>
 </head>
 
 <body>
+    <dialog id="copySucceedDialog">
+        <h3>成功～</h3>
+        <p>结果已复制到剪贴板～</p>
+        <div class="controls">
+            <button type="button" onClick="document.getElementById('copySucceedDialog').close()">关闭对话框</button>
+        </div>
+    </dialog>
+
 
     <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
     <script>document.getElementById("jsWarning").style.display = "none";</script>
@@ -54,8 +38,33 @@
     <div style="display: flex;">
         <div style="width: 82%">
             <div class="main">
+                <p>通过这个工具，你可以检查你为插件编写的JSON是否有效</p>
+                <div id="fileDragZone" class="fileDragZone">
+                    <p id="dragZoneInfo" class="dragZoneInfoDefault">点击或拖拽文件到此处~</p>
+                    <input type="file" id="fileInput" hidden>
+                    <br>
+                    <script>newDragZone("fileDragZone", "dragZoneInfo", "fileInput");</script>
+                </div>
+                <br>
+                <button class="attractiveButton" id="fileConfirmButton">确定选择并检查</button>&emsp;&emsp;<a
+                    href="json_checker_text.html">想要直接粘贴？点击此处</a>
+                <hr>
 
+                <div class="noPaddingBox">
+                    <div class="noPaddingBoxTitle" style="display: flex; justify-content: space-between;">
+                        <h3 style="margin: 0;">检查结果</h3>
 
+                        <div class="controls">
+                            <button
+                                onClick="navigator.clipboard.writeText(document.getElementById('checkResult').innerText); document.getElementById('copySucceedDialog').showModal();"
+                                type="button">复制</button>
+                        </div>
+                    </div>
+
+                    <div class="noPaddingBoxText">
+                        <pre id="checkResult">啥也木有</pre>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -70,6 +79,47 @@
         </div>
     </div>
     <script src="generalinfo.js"></script>
+    <script src="jsonChecker.js"></script>
+    <script src="resultVisualizer.js"></script>
+    <script>
+        function processFile(file, callback) {
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const json = event.target.result;
+
+                try {
+                    const result = JSON.parse(json);
+                    callback(result);
+                } catch (error) {
+                    alert(error.message);
+                    callback(false);
+                }
+            }
+
+            reader.onerror = function (event) {
+                callback(false);
+            }
+
+            reader.readAsText(file);
+        }
+
+        document.getElementById("fileConfirmButton").addEventListener("click", function () {
+            const checkResult = document.getElementById("checkResult");
+            checkResult.innerText = "正在解析……";
+            processFile(droppedFile, function (data) {
+                if (data === false) {
+                    checkResult.innerText = "文件解析错误，请检查JSON文件是否有语法错误，然后再试一次(1)";
+                } else if (data) {
+                    checkResult.innerHTML = `读取成功，正在检查……<br>文件内容预览：<br>${JSON.stringify(data, null, 2)}<hr>Checker Data: <br>${JSON.stringify(checkerDataRCI, null, 2)}`;
+                    let result = checkJSON(data, checkerDataRCI);
+                    checkResult.innerHTML = `${visualize(result)}`;
+                } else {
+                    checkResult.innerText = "文件解析错误，请再试一次(2)";
+                }
+            });
+        })
+    </script>
 </body>
 
 </html>
