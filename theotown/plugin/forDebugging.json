@@ -8,7 +8,7 @@
             {"bmp": "abc.png"},
             {"bmp": "def.png"}
         ],
-        "draw ground": false,
+        "draw ground": true,
         "influence park": 10,
         "monthly price": 5
     }

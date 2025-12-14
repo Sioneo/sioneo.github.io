@@ -43,10 +43,7 @@
                     <p id="dragZoneInfo" class="dragZoneInfoDefault">点击或拖拽文件到此处~</p>
                     <input type="file" id="fileInput" hidden>
                     <br>
-                    <script>
-                        const fileTypes = ["application/json"];
-                        newDragZone("fileDragZone", "dragZoneInfo", "fileInput", fileTypes);
-                    </script>
+                    <script>newDragZone("fileDragZone", "dragZoneInfo", "fileInput");</script>
                 </div>
                 <br>
                 <button class="attractiveButton" id="fileConfirmButton">确定选择并检查</button>&emsp;&emsp;<a

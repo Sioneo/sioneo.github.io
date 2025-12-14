@@ -161,7 +161,7 @@ function checkJSON(targetData, checkerData) {
 
                 // 当键为id时检查是否包含$符号
                 if (requirement[i].key == "id") {
-                    if (json[requirement[i].key].slice(1) != "$") {
+                    if (json[requirement[i].key].startsWith("$") != true) {
                         thisValueResult.push({ "type": "Notification", "message": `id前未发现$符号（建议添加）` });
                     }
                 }
