@@ -1,10 +1,11 @@
 // 内容
-const version = "1.3.0";
+const version = "1.3.1";
 const title = "";
 const news = `<em>Version 1.2.0:</em> <br>1.做了一个索引页<br>2.增加了分类的JSON生成器<br>3.增加了基础建筑那里的分类选项<br>下次再见～<br>
-<em>Version 1.2.1:</em> 修复了一个错误<br>
-<em>Version 1.2.2:</em>做了一个数值计算器
-<em>Version 1.3.0:</em>做了一个动画开发工具`;
+<em>Version 1.2.1:</em> 修复了一个错误；<br>
+<em>Version 1.2.2:</em>做了一个数值计算器；<br>
+<em>Version 1.3.0:</em>做了一个动画开发工具；<br>
+<em>Version 1.3.1:</em>弄了一点小修改;`;
 
 var versionInfo = document.getElementById("versionInfo");
 var newsTitle = document.getElementById("newsTitle");
