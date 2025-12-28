@@ -58,7 +58,7 @@ body {
     color: var(--textcolor, black);
     margin: 0;
     padding: 0;
-    font-family: DIN, sans-serif;
+    font-family: "Google Sans Flex", DIN, sans-serif;
 }
 
 h1 {

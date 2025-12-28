@@ -1,144 +1,170 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<title>下载西奥小镇</title>
-<meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="../generalstyle.css">
-<script>
-let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
-const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
-let versionData;
+  <title>下载西奥小镇</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="../css/ls.css">
+  <link rel="stylesheet" type="text/css" href="../css/all.min.css">
+  <script>
+    let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
+    const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
+    let versionData;
 
-// 使用 fetch 获取数据
-function fetchData() {
-  fetch(apiUrl)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    // 使用 fetch 获取数据
+    function fetchData() {
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(releases => {
+          // 处理数据，提取 name 和 browser_download_url
+          versionData = releases.map(release => ({
+            name: release.name,
+            browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
+          }));
+
+          // 更新页面内容
+          updateLatestVersion();
+          updateOldVersions();
+
+        })
+        .catch(error => {
+          console.error("获取数据失败:", error);
+          document.getElementById("latestVersion").innerHTML = "加载失败(1)";
+          document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
+          document.getElementById("oldVersions").innerHTML = "暂无旧版本信息(1)";
+        });
+    }
+
+    // 更新页面显示最新版本
+    function updateLatestVersion() {
+      if (versionData && versionData.length > 0) {
+        let latestVersionName = versionData[0].name;
+        let latestVersionUrl = `${downloadSite}${versionData[0].browser_download_url}`;
+
+        // 更新版本号
+        document.getElementById("latestVersion").innerHTML = latestVersionName.toString();
+
+        // 更新下载链接
+        document.getElementById("downloadLink").href = latestVersionUrl;
+        document.getElementById("downloadLink").style.display = "inline-block"; // 确保链接可见
+      } else {
+        document.getElementById("latestVersion").innerHTML = "...";
+        document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
       }
-      return response.json();
-    })
-    .then(releases => {
-      // 处理数据，提取 name 和 browser_download_url
-      versionData = releases.map(release => ({
-        name: release.name,
-        browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
-      }));
-      
-    // 更新页面内容
-      updateLatestVersion();
-      updateOldVersions(); 
-      
-    })
-    .catch(error => {
-      console.error("获取数据失败:", error);
-      document.getElementById("latestVersion").innerHTML = "加载失败(1)";
-      document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
-      document.getElementById("oldVersions").innerHTML = "暂无旧版本信息(1)";
-    });
-}
+    }
 
-// 更新页面显示最新版本
-function updateLatestVersion() {
-  if (versionData && versionData.length > 0) {
-    let latestVersionName = versionData[0].name;
-    let latestVersionUrl = `${downloadSite}${versionData[0].browser_download_url}`;
+    // 更新页面显示旧版本
+    function updateOldVersions() {
+      const oldVersionsContainer = document.getElementById("oldVersions");
+      if (versionData && versionData.length > 1) {
+        // 取出除最新版本外的所有旧版本
+        const oldVersions = versionData.slice(1); // 取除最新版本外的所有版本
+        oldVersionsContainer.innerHTML = ""; // 清空旧版本容器
+        oldVersions.forEach((version, index) => {
+          const link = document.createElement("a");
+          link.href = `${downloadSite}${version.browser_download_url}`;
+          link.textContent = version.name;
+          link.target = "_self";
+          link.style.marginRight = "10px"; // 添加一些间距
+          oldVersionsContainer.appendChild(link);
 
-    // 更新版本号
-    document.getElementById("latestVersion").innerHTML = latestVersionName.toString();
-
-    // 更新下载链接
-    document.getElementById("downloadLink").href = latestVersionUrl;
-    document.getElementById("downloadLink").style.display = "inline-block"; // 确保链接可见
-  } else {
-    document.getElementById("latestVersion").innerHTML = "...";
-    document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
-  }
-}
-
-// 更新页面显示旧版本
-function updateOldVersions() {
-  const oldVersionsContainer = document.getElementById("oldVersions");
-  if (versionData && versionData.length > 1) {
-    // 取出除最新版本外的所有旧版本
-    const oldVersions = versionData.slice(1); // 取除最新版本外的所有版本
-    oldVersionsContainer.innerHTML = ""; // 清空旧版本容器
-    oldVersions.forEach((version, index) => {
-      const link = document.createElement("a");
-      link.href = `${downloadSite}${version.browser_download_url}`;
-      link.textContent = version.name;
-      link.target = "_self";
-      link.style.marginRight = "10px"; // 添加一些间距
-      oldVersionsContainer.appendChild(link);
-
-      // 如果需要，可以在这里添加分隔符
-      if (index < oldVersions.length - 1) {
-        const separator = document.createElement("span");
-        separator.textContent = "";
-        separator.style.margin = "0 5px"; // 添加分隔符的间距
-        oldVersionsContainer.appendChild(separator);
+          // 如果需要，可以在这里添加分隔符
+          if (index < oldVersions.length - 1) {
+            const separator = document.createElement("span");
+            separator.textContent = "";
+            separator.style.margin = "0 5px"; // 添加分隔符的间距
+            oldVersionsContainer.appendChild(separator);
+          }
+        });
+      } else {
+        oldVersionsContainer.innerHTML = "暂无旧版本信息";
       }
-    });
-  } else {
-    oldVersionsContainer.innerHTML = "暂无旧版本信息";
-  }
-}
+    }
 
-// 初始化数据
-window.onload = fetchData;
-</script>
+    // 初始化数据
+    window.onload = fetchData;
+  </script>
 </head>
 
 <body>
 
-<div style="display: flex;" class="headbox">
-    <h3 class="headtext">下载西奥小镇</h3>
-</div>
+  <div style="display: flex;" class="header">
+    <div class="header-title"><a class="header-item-button back" href="index.html">
+        <i class="fa fa-arrow-left fa-lg"></i>
+      </a>
+      <h4 class="header-title">下载西奥小镇</h4>
+    </div>
+  </div>
 
-<div class="main">
+  <div class="main">
     <h3>下载GitHub上的官方安装包</h3>
     <div style="display: inline-block;">
-        <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p>
-        <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
+      <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p>
+      <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
     </div>
     <div style="display: inline-block; margin-left: 10px;">
-        <a id="downloadLink" target="_self" href="#" style="display: none">下载最新版本安装包</a>
+      <a id="downloadLink" target="_self" href="#" style="display: none">下载最新版本安装包</a>
     </div>
     <p>旧版本安装包：</p>
     <div id="oldVersions"></div><br>
 
-    <div class="box">
-        <p>切换代下站(如果下载速度慢可以尝试切换)</p>
-        <button onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
-        <button onClick="downloadSite = 'https://github-proxy.memory-echoes.cn/'; updateLatestVersion(); updateOldVersions();">github-proxy.memory-echoes.cn</button>
-        <button onClick="downloadSite = 'https://github-proxy.teach-english.tech/'; updateLatestVersion(); updateOldVersions();">github-proxy.teach-english.tech</button>
-        <button onClick="downloadSite = 'https://gh.wsmdn.dpdns.org/'; updateLatestVersion(); updateOldVersions();">gh.wsmdn.dpdns.org</button>
-        <button onClick="downloadSite = 'https://github.tbedu.top/'; updateLatestVersion(); updateOldVersions();">github.tbedu.top</button>
+    <div class="callout normal">
+      <h5>切换代下站(如果下载速度慢可以尝试切换)</h5>
+      <button class="button-small"
+        onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://github-proxy.memory-echoes.cn/'; updateLatestVersion(); updateOldVersions();">github-proxy.memory-echoes.cn</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://github-proxy.teach-english.tech/'; updateLatestVersion(); updateOldVersions();">github-proxy.teach-english.tech</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://gh.wsmdn.dpdns.org/'; updateLatestVersion(); updateOldVersions();">gh.wsmdn.dpdns.org</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://github.tbedu.top/'; updateLatestVersion(); updateOldVersions();">github.tbedu.top</button>
 
 
-        <button onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
-        <button onClick="downloadSite = 'https://gh.catmak.name/'; updateLatestVersion(); updateOldVersions();">gh.catmak.name</button>
-        <button onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
-        <button onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://gh.catmak.name/'; updateLatestVersion(); updateOldVersions();">gh.catmak.name</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
+      <button class="button-small"
+        onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
     </div>
 
-    <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/11/29):</p>
-    <p>1.12.23: <a href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk</a></p>
+    <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a
+        href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/12/28):</p>
+    <p>1.12.41: <a
+        href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk</a>
+    </p>
 
     <hr>
-    <div class="box"><p><em>iOS</em>&emsp;<a href="https://itunes.apple.com/us/app/theotown/id1459639864">点击这里</a>或AppStore登录外区账号搜索TheoTown</p></div>
+    <div class="box">
+      <h4>iOS</h4>
+      <a href="https://itunes.apple.com/us/app/theotown/id1459639864" target="_blank">点击这里</a>或AppStore登录外区账号搜索TheoTown</p>
+    </div>
+    <hr>
+    <h4>PC端</h4>
     <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
-      <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">点击这里</a></p>
+      <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/" target="_blank">点击这里</a></p>
     </iframe>
-    
+
     <script>
-        // 更新页面内容
+      // 更新页面内容
       updateLatestVersion();
       updateOldVersions(); 
     </script>
-</div>
+  </div>
 
-<div class="box"><p>最后一次更新: 2025/07/03 11:56</p></div>
+  <div class="footer">
+    <p>最后一次更新：2025/12/28</p>
+  </div>
 
 </body>
+
 </html>
