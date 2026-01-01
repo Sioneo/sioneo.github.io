@@ -13,11 +13,28 @@
     --color-link-active-background: rgb(255, 208, 0);
     --color-callout-caution: rgb(255, 153, 0);
     --color-callout-warning: rgb(192, 0, 0);
+    --color-green: green;
+    --color-grey: rgb(71, 71, 71);
+    --color-pink: rgb(255, 120, 142);
 }
 
 @font-face {
     font-family: "Google Sans Flex";
     src: url("../font/GoogleSansFlex.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bilibili Icon";
+    src: url("../font/Bilibili_Icons_by_Jiuru.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Web Icon";
+    src: url("../font/JR_icons.ttf");
     font-weight: normal;
     font-style: normal;
 }
@@ -30,6 +47,12 @@ body {
     font-size: 18px;
 }
 
+/* JavaScript 未启用警告 */
+.javascript-disable-warning {
+    color: white;
+    background-color: red;
+}
+
 .main {
     margin: 20px 170px;
     padding: 0;
@@ -40,7 +63,7 @@ h1 {
     padding: 0;
     margin: 15px 4px;
     font-weight: normal;
-    font-size: 38px;
+    font-size: 36px;
 }
 
 h1 b {
@@ -136,6 +159,11 @@ a {
     font-size: 18px;
 }
 
+a.outbound::before {
+    content: "B";
+    font-family: "Web Icon";
+}
+
 a:hover {
     font-weight: bold;
     text-decoration-thickness: 1.5px;
@@ -146,12 +174,36 @@ a:active {
     color: var(--color-link-active);
 }
 
+/* 图标 */
+i.w {
+    font-style: normal;
+    font-family: "Web Icon";
+    margin: 5px;
+    padding: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+i.b {
+    font-style: normal;
+    font-family: "Bilibili Icon";
+    margin: 5px;
+    padding: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
 hr {
     background: var(--color-hr, #b3b3b3);
     border: 0;
     height: 1px;
     padding: 0px;
     margin: 1em 0px;
+}
+
+.hr-short {
+    width: 50%;
+    color: var(--color-theme);
 }
 
 em {
@@ -167,8 +219,8 @@ em {
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
     padding: 5px 170px;
-    height: 50px;
-    max-height: 50px;
+    height: 45px;
+    max-height: 45px;
 
     display: flex;
     align-items: center;
@@ -214,10 +266,18 @@ em {
     border-bottom: 2px solid var(--color-contrast-text);
 }
 
-.header h1, .header h2, .header h3, .header h4, .header h5, .header h6, .header p, .header a {
+.header h1,
+.header h2,
+.header h3,
+.header h4,
+.header h5,
+.header h6,
+.header p,
+.header a {
     color: var(--color-contrast-text);
 }
 
+/* 脚注 */
 .footer {
     border-top: 5px solid var(--color-theme);
     background-color: var(--color-box-background);
@@ -225,24 +285,58 @@ em {
     padding: 10px 170px;
 }
 
+.footer-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.footer-about {
+    align-items: flex-end;
+}
+
+.footer-about a {
+    color: var(--color-grey);
+}
+
+/* Github Page 标识 */
+.github-page-note {
+    color: var(--color-text);
+    font-size: 30px;
+    text-decoration: none;
+}
+
+.github-page-note:hover {
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.github-page-note:active {
+    font-weight: normal;
+}
+
 /* 按钮 */
+button {
+    font-family: "Google Sans Flex";
+}
+
 /* 按钮基础样式 */
-.button-big, .button-small {
+.button-big,
+.button-small {
     border-radius: var(--style-border-radius);
     background-color: var(--color-contrast-text);
     color: var(--color-text);
     border: 1px solid var(--color-text);
     cursor: pointer;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 /* 大按钮 */
 .button-big {
-    min-width: 100px;
+    min-width: 80px;
     box-shadow: 0 3px 0 0 var(--color-text);
-    font-size: 18px;
-    padding: 10px 15px;
-    margin: 5px;
+    font-size: 17px;
+    padding: 8px 13px;
+    margin: 4px;
 }
 
 .button-big:hover {
@@ -272,6 +366,29 @@ em {
     box-shadow: 0 1px 0 0 var(--color-text);
 }
 
+button .flat {
+    border: none;
+    font-size: 17px;
+    min-width: 80px;
+    padding: 8px 13px;
+    margin: 4px;
+    color: var(--color-text);
+    background-color: var(--color-box-background);
+}
+
+.button-full-green {
+    color: var(--color-contrast-text);
+    background-color: var(--color-green);
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+    font-size: 17px;
+    min-width: 80px;
+    padding: 8px 13px;
+    margin: 4px;
+}
+
+
 /* 提示线 */
 .callout.normal {
     margin: 20px auto;
@@ -297,4 +414,29 @@ em {
     margin: 20px auto;
     border-left: 5px solid var(--color-hr);
     padding-left: 20px;
+    --color-theme: var(--color-grey);
+}
+
+.callout.pink {
+    margin: 20px auto;
+    border-left: 5px solid var(--color-pink);
+    padding-left: 20px;
+    --color-theme: var(--color-pink);
+}
+
+
+/* 列表 */
+ul {
+    margin: 10px 50px;
+    padding: 0;
+}
+
+ol {
+    margin: 10px 50px;
+    padding: 0;
+}
+
+li {
+    margin: 5px;
+    padding: 0;
 }

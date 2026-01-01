@@ -5,7 +5,6 @@
   <title>下载西奥小镇</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="../css/ls.css">
-  <link rel="stylesheet" type="text/css" href="../css/all.min.css">
   <script>
     let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
     const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
@@ -36,7 +35,7 @@
           console.error("获取数据失败:", error);
           document.getElementById("latestVersion").innerHTML = "加载失败(1)";
           document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
-          document.getElementById("oldVersions").innerHTML = "暂无旧版本信息(1)";
+          document.getElementById("oldVersions").innerHTML = "加载失败(1)";
         });
     }
 
@@ -82,7 +81,7 @@
           }
         });
       } else {
-        oldVersionsContainer.innerHTML = "暂无旧版本信息";
+        oldVersionsContainer.innerHTML = "...";
       }
     }
 
@@ -95,26 +94,31 @@
 
   <div style="display: flex;" class="header">
     <div class="header-title"><a class="header-item-button back" href="index.html">
-        <i class="fa fa-arrow-left fa-lg"></i>
+        <i class="w">5</i>
       </a>
       <h4 class="header-title">下载西奥小镇</h4>
     </div>
   </div>
 
   <div class="main">
-    <h3>下载GitHub上的官方安装包</h3>
-    <div style="display: inline-block;">
-      <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p>
-      <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
-    </div>
+    <h3><b>Android</b></h3>
+    <p>在<a target="_blank"
+        href="https://play.google.com/store/apps/details?id=info.flowersoft.theotown.theotown&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-">Google
+        Play</a>上下载</p><br><br>
+    <h4>下载<i class="w">Q</i>GitHub上的官方安装包</h4>
+
+    <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p><br>
+    <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
     <div style="display: inline-block; margin-left: 10px;">
-      <a id="downloadLink" target="_self" href="#" style="display: none">下载最新版本安装包</a>
+      <a id="downloadLink" target="_self" href="#" class="button-full-green flat" style="display: none"><i
+          style="font-size: 19px;" class="w">y</i>下载最新版本安装包</a>
     </div>
+    <br>
     <p>旧版本安装包：</p>
     <div id="oldVersions"></div><br>
 
     <div class="callout normal">
-      <h5>切换代下站(如果下载速度慢可以尝试切换)</h5>
+      <h6>切换代下站(如果下载速度慢可以尝试切换)</h6>
       <button class="button-small"
         onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
       <button class="button-small"
@@ -139,17 +143,18 @@
 
     <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a
         href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/12/28):</p>
-    <p>1.12.41: <a
-        href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.23/android-playstore-release.apk</a>
+    <p>1.12.41: <a class="outbound"
+        href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk</a>
     </p>
 
     <hr>
     <div class="box">
-      <h4>iOS</h4>
-      <a href="https://itunes.apple.com/us/app/theotown/id1459639864" target="_blank">点击这里</a>或AppStore登录外区账号搜索TheoTown</p>
+      <h3><b>iOS</b></h3>
+      <a href="https://itunes.apple.com/us/app/theotown/id1459639864" target="_blank">点击这里</a>或AppStore登录外区账号搜索TheoTown
+      </p>
     </div>
     <hr>
-    <h4>PC端</h4>
+    <h3><b>电脑端</b></h3>
     <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
       <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/" target="_blank">点击这里</a></p>
     </iframe>
@@ -162,7 +167,16 @@
   </div>
 
   <div class="footer">
-    <p>最后一次更新：2025/12/28</p>
+    <p>最后一次更新：2026/1/1</p>
+    <br>
+    <div class="footer-box">
+      <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+          target="_blank" class="github-page-note"><i class="w">Q</i>Github Pages</a>搭建</p>
+      <div class="footer-about">
+        <a href="onionpedia.html" target="_blank">关于本站</a>
+        <a href="me.html" target="_blank">关于我</a>
+      </div>
+    </div>
   </div>
 
 </body>
