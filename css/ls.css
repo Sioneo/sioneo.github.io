@@ -1,5 +1,6 @@
 :root {
     --style-border-radius: 0px;
+    --style-side-padding: 170px;
 
     --color-background: rgb(248, 248, 248);
     --color-theme: rgb(29, 112, 184);
@@ -19,8 +20,8 @@
 }
 
 @font-face {
-    font-family: "Google Sans Flex";
-    src: url("../font/GoogleSansFlex.ttf");
+    font-family: "Cabin";
+    src: url("../font/Cabin-Regular-Modified.ttf");
     font-weight: normal;
     font-style: normal;
 }
@@ -39,8 +40,15 @@
     font-style: normal;
 }
 
+/* 根据不同设备调整css */
+@media (max-width: 768px) {
+    :root {
+        --style-side-padding: 10px;
+    }
+}
+
 body {
-    font-family: "Google Sans Flex", sans-serif;
+    font-family: "Cabin", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
@@ -54,7 +62,7 @@ body {
 }
 
 .main {
-    margin: 20px 170px;
+    margin: 20px var(--style-side-padding);
     padding: 0;
 }
 
@@ -218,7 +226,7 @@ em {
     margin: 0;
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
-    padding: 5px 170px;
+    padding: 5px var(--style-side-padding);
     height: 45px;
     max-height: 45px;
 
@@ -282,7 +290,7 @@ em {
     border-top: 5px solid var(--color-theme);
     background-color: var(--color-box-background);
     margin: 40px 0 0 0;
-    padding: 10px 170px;
+    padding: 10px var(--style-side-padding);
 }
 
 .footer-box {
@@ -317,7 +325,7 @@ em {
 
 /* 按钮 */
 button {
-    font-family: "Google Sans Flex";
+    font-family: "Cabin";
 }
 
 /* 按钮基础样式 */

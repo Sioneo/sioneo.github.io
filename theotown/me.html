@@ -5,6 +5,46 @@
     <title>关于我</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/ls.css">
+
+    <style>
+        /* 移动端 */
+        @media (max-width: 768px) {
+            .main {
+                display: grid;
+                grid-template-columns: 1fr 4fr;
+                grid-template-rows: auto auto;
+                grid-template-areas:
+                    "profile profile"
+                    "blog blog"
+                ;
+                gap: 20px;
+            }
+
+        }
+
+        /* 桌面端 */
+        @media (min-width: 769px) {
+            .main {
+                display: grid;
+                grid-template-columns: 1fr 4fr;
+                grid-template-rows: auto auto;
+                grid-template-areas:
+                    "profile blog"
+                    "profile blog"
+                ;
+                gap: 75px;
+            }
+        }
+
+        .profile {
+            grid-area: profile;
+        }
+
+        .blog {
+            grid-area: blog;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -24,9 +64,9 @@
         </div>
     </div>
 
-    <div class="main" style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: space-between;">
-        <div style="flex-wrap: wrap; width: 18%;">
-            <img src="avatar.png" style="height: auto; width: 100%;">
+    <div class="main"">
+        <div class="profile">
+            <img src="media/avatar.webp" style="height: auto; width: 100%;">
             <h2 style="margin: 3px; padding: 0;">九如喵</h2>
             <h6 style="margin: 3px; padding: 0;"><i class="b">i</i><span
                     style="color: var(--color-grey);">JiuruMeow</span></h6>
@@ -37,9 +77,10 @@
             <p style="margin: 4px 4px; padding: 0"><i class="b">W</i>07/28</p>
             <p style="margin: 4px 4px; padding: 0"><i class="w">U</i>广东 江门</p>
             <p style="margin: 4px 4px; padding: 0"><i class="b">v</i>某第一中学（</p>
-            <p style="margin: 4px 5px; padding: 0"><i style="font-size: medium;" class="w">T</i>lindotheotown@outlook.com</p>
+            <p style="margin: 4px 5px; padding: 0"><i style="font-size: medium;"
+                    class="w">T</i>lindotheotown@outlook.com</p>
         </div>
-        <div style="width: 74%">
+        <div class="blog">
             <div class="callout pink">
                 <h3>测试</h3>
             </div>
@@ -53,8 +94,8 @@
             <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
                     target="_blank" class="github-page-note"><i class="w">Q</i>Github Pages</a>搭建</p>
             <div class="footer-about">
+                <a href="media/avatar-high-quality.png" target="_blank">查看头像</a>
                 <a href="onionpedia.html" target="_blank">关于本站</a>
-                <a href="me.html" target="_blank">关于我</a>
             </div>
         </div>
     </div>
