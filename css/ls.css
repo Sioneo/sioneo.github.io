@@ -494,10 +494,16 @@ dialog::backdrop {
 dialog .header {
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
-    padding: 3px;
+    padding: 0;
     font-size: 24px;
     display: flex;
     justify-content: space-between;
+}
+
+dialog .header .header-title {
+    padding: 4px;
+    margin: 0;
+    font-size: 22px;
 }
 
 dialog .header-controls button {
