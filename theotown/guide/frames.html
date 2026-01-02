@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>帧 - 西奥小镇插件制作指南</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <script src="../../javascript/dialogService.js"></script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <i class="b">~</i><a style="color: white;" href="https://onionpedia.kozow.com/javascript.html"
+            target="_blank">帮助</a>
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;">
+        <div class="header-title"><a class="header-item-button back" href="../index.html">
+                <i class="w">5</i>
+            </a>
+            <h4 class="header-title">帧</h4>
+        </div>
+    </header>
+
+    <main>
+        <p>帧（frames）用于为建筑、动画等提供贴图，其基础用法是：<code>"frames": [{"bmp": "image.png"}]</code>，其中
+            <code>image.png</code>填写的是贴图的文件名
+        </p>
+        <br>
+        <h3>多个动画</h3>
+        <p>你可以为一个建筑草稿提供多个帧，这可以让建筑可以旋转或切换不同贴图</p>
+        <br>
+        <h4>可旋转建筑（旋转感知）</h4>
+        <p>通过为建筑提供4个帧并启用旋转感知可以让建筑可以旋转：</p>
+        <div class="callout modest background">
+            <h6>JSON</h6>
+            <pre>[{
+    // 其它代码
+    "frames": [
+        {
+            "bmp": "image1.png"
+        },
+        {
+            "bmp": "image2.png"
+        },
+        {
+            "bmp": "image3.png"
+        },
+        {
+            "bmp": "image4.png"
+        }
+    ],
+    "rotation aware": true
+}]</pre>
+        </div>
+        <p>四个帧按照顺时针的顺序排列，你也可以通过设置帧的参数来简化代码（这需要4个方向的建筑宽度相等），<code>"w": 99</code>代表截取的宽度为99，<code>"count": 4</code>代表以99为宽度截取4次贴图：</p>
+        <div class="callout modest background">
+            <h6>JSON</h6>
+            <pre>[{
+    // 其它代码
+    "frames": [
+        {
+            "bmp": "image1.png",
+            "w": 99, // 这里是每一个帧的宽度
+            "count": 4
+        }
+    ],
+    "rotation aware": true
+}]</pre>
+        </div>
+        <p>假如这里的<code>rotation aware</code>设置为<code>false</code>，也就是只提供4个贴图，那建筑就可以有4个贴图并可以切换（就像游戏自带的小型花园一样）</p>
+
+        <br>
+        <h4>动画</h4>
+        <p>动画使用frames与建筑用法基本相同，也是<code>"frames": [{"bmp":
+                "image.png"}]</code>，但由于动画显示机制，动画的帧需要对显示位置进行调整，详见<a href="animation.html" target="_blank">动画</a>相关内容
+            <br>同样地，动画也可以旋转，用法与上面相同，不过如果<code>rotation aware</code>设置为<code>false</code>，那就会变成可以自动切换的动画，动画会在提供的几个帧中轮流切换
+        </p>
+
+        <br>
+        <hr>
+        <h3>贴图截取和移动</h3>
+        <h4>贴图截取</h4>
+        <p>你可以为帧设置一些参数，以截取贴图，参数有：</p>
+        <ul>
+            <li><b>x</b>&emsp;设置截取的起点的x坐标</li>
+            <li><b>y</b>&emsp;设置截取的起点的y坐标</li>
+            <li><b>w</b>&emsp;设置截取的宽度</li>
+            <li><b>h</b>&emsp;设置截取的高度</li>
+            <li><b>count</b>&emsp;设置截取的次数，默认为1次</li>
+        </ul>
+        <p>例如，下面的代码表示以（0, 0）为起点，向右截取16像素，向下截取6像素，即截取16×6的贴图</p>
+        <br><button onclick="document.getElementById('framesCutDemoDialog').showModal();"
+            class="button-big">查看图解</button>
+
+        <!-- 动画截取图解对话框 -->
+        <dialog style="max-width: 60vw;" id="framesCutDemoDialog">
+            <div class="header">
+                <span>图解</span>
+                <div class="header-controls">
+                    <button onclick="document.getElementById('framesCutDemoDialog').close()"><i class="b"
+                            style="font-size: 24px;">k</i></button>
+                </div>
+            </div>
+            <div class="body">
+                <img src="media/frames-cut.webp" style="max-width: 100%;">
+            </div>
+            <div class="controls">
+                <a href="media/frames-cut.webp" target="_blank" class="button-small">查看大图</a>
+                <button onclick="document.getElementById('framesCutDemoDialog').close();"
+                    class="button-small">关闭</button>
+            </div>
+        </dialog>
+        <script>
+            addDragServiceForDialog({
+                dialogID: "framesCutDemoDialog"
+            })
+        </script>
+        
+
+        <div class="callout modest background">
+            <h6>JSON</h6>
+            <pre>"frames": [
+    {
+        "bmp": "image.png",
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 6
+    }
+]</pre>
+        </div>
+
+        <br>
+        <h4>贴图移动</h4>
+        <p>你可以利用下面的参数来移动贴图：</p>
+        <ul>
+            <li><b>handle x</b>&emsp;在X轴上移动贴图（左加右减）</li>
+            <li><b>handle y</b>&emsp;在Y轴上移动贴图（上加下减）</li>
+        </ul>
+        <p>例如，下面的代码就是将贴图向左移动6像素，向上移动2像素：</p>
+        <div class="callout modest background">
+            <h6>JSON</h6>
+            <pre>"frames": [
+    {
+        "bmp": "image.png",
+        "handle x": 6,
+        "handle y": 2
+    }
+]</pre>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>最后一次更新：<span id="updateTime"></span></p>
+        <script src="../generalInfoService.js"></script>
+        <br>
+        <div class="footer-box">
+            <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+                    target="_blank" class="github-page-note"><i class="w">Q</i>Github Pages</a>搭建</p>
+            <div class="footer-about">
+                <a href="../onionpedia.html" target="_blank">关于本站</a>
+                <a href="../me.html" target="_blank">关于我</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
     <title>关于我</title>
@@ -57,14 +57,14 @@
         </script>
     </p>
 
-    <div style="display: flex;" class="header">
+    <header style="display: flex;">
         <div class="header-title">
             </a>
             <h4 class="header-title">关于我</h4>
         </div>
-    </div>
+    </header>
 
-    <div class="main"">
+    <main>
         <div class="profile">
             <img src="media/avatar.webp" style="height: auto; width: 100%;">
             <h2 style="margin: 3px; padding: 0;">九如喵</h2>
@@ -99,10 +99,11 @@
                 <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" target="_blank" style="flex: 1; color: var(--color-theme); text-decoration: none;"><i class="w">6</i></a>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div class="footer">
-        <p>最后一次更新：2026/1/1</p>
+    <footer>
+        <p>最后一次更新：<span id="updateTime"></span></p>
+        <script src="generalInfoService.js"></script>
         <br>
         <div class="footer-box">
             <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
@@ -112,7 +113,7 @@
                 <a href="onionpedia.html" target="_blank">关于本站</a>
             </div>
         </div>
-    </div>
+    </footer>
 
 </body>
 

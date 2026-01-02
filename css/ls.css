@@ -8,7 +8,7 @@
     --color-hr: #b3b3b3;
     --color-text: black;
     --color-contrast-text: white;
-    --color-monospace: rgba(40, 40, 40, 0.75);
+    --color-mono-background: rgba(230, 230, 230, 0.85);
     --color-box-background: rgba(170, 170, 170, 0.12);
     --color-link: rgb(0, 107, 201);
     --color-link-active: black;
@@ -54,7 +54,7 @@ body {
     background-color: red;
 }
 
-.main {
+main {
     margin: 20px var(--style-side-padding);
     padding: 0;
 }
@@ -175,6 +175,15 @@ a:active {
     color: var(--color-link-active);
 }
 
+/* 伪装成按钮的超链接 */
+a.button-big, a.button-small{
+    text-decoration: none;
+}
+
+a.button-big:hover, a.button-small:hover {
+    font-weight: normal
+}
+
 /* 图标 */
 i.w {
     font-style: normal;
@@ -202,11 +211,6 @@ hr {
     margin: 1em 0px;
 }
 
-.hr-short {
-    width: 50%;
-    color: var(--color-theme);
-}
-
 em {
     font-style: normal;
     color: var(--color-text);
@@ -215,7 +219,7 @@ em {
     padding: 3px;
 }
 
-.header {
+header {
     margin: 0;
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
@@ -265,19 +269,19 @@ em {
     border-bottom: 2px solid var(--color-contrast-text);
 }
 
-.header h1,
-.header h2,
-.header h3,
-.header h4,
-.header h5,
-.header h6,
-.header p,
-.header a {
+header h1,
+header h2,
+header h3,
+header h4,
+header h5,
+header h6,
+header p,
+header a {
     color: var(--color-contrast-text);
 }
 
 /* 脚注 */
-.footer {
+footer {
     border-top: 5px solid var(--color-theme);
     background-color: var(--color-box-background);
     margin: 40px 0 0 0;
@@ -334,7 +338,7 @@ button {
     min-width: 80px;
     box-shadow: 0 3px 0 0 var(--color-text);
     font-size: 17px;
-    padding: 8px 13px;
+    padding: 5px 13px;
     margin: 4px;
 }
 
@@ -392,7 +396,7 @@ button .flat {
 .callout.normal {
     margin: 20px auto;
     border-left: 5px solid var(--color-theme);
-    padding-left: 20px;
+    padding: 2px 20px;
 }
 
 .callout.caution {
@@ -400,7 +404,7 @@ button .flat {
     border-left: 5px solid var(--color-theme);
     --color-theme: rgb(255, 153, 0);
     --color-theme-shallow: rgb(255, 195, 106);
-    padding-left: 20px;
+    padding: 2px 20px;
 }
 
 .callout.warning {
@@ -408,13 +412,13 @@ button .flat {
     border-left: 5px solid var(--color-theme);
     --color-theme: rgb(192, 0, 0);
     --color-theme-shallow: rgb(255, 106, 106);
-    padding-left: 20px;
+    padding: 2px 20px;
 }
 
 .callout.modest {
     margin: 20px auto;
     border-left: 5px solid var(--color-theme);
-    padding-left: 20px;
+    padding: 2px 20px;
     --color-theme: var(--color-grey);
     --color-theme-shallow: rgb(209, 209, 209);
 }
@@ -422,7 +426,7 @@ button .flat {
 .callout.pink {
     margin: 20px auto;
     border-left: 5px solid var(--color-theme);
-    padding-left: 20px;
+    padding: 2px 20px;
     --color-theme: var(--color-pink);
     --color-theme-shallow: rgb(255, 224, 224);
 }
@@ -448,13 +452,85 @@ li {
     padding: 0;
 }
 
+/* 等宽字体 */
+pre {
+    font-family: "Consolas", "Menlo", "Droid Sans Mono", monospace, sans-serif;
+    font-size: 18px;
+    background-color: var(--color-mono-background);
+}
+
+code {
+    font-family: "Consolas", "Menlo", "Droid Sans Mono", monospace, sans-serif;
+    font-size: 16px;
+    background-color: var(--color-mono-background);
+    margin: auto 5px;
+    padding: 3px;
+}
+
+/* 对话框 */
+dialog {
+    min-width: 300px;
+    min-height: 200px;
+    max-width: 80%;
+    max-height: 80%;
+    border: 1px solid var(--color-grey);
+    padding: 0;
+    box-shadow: 0 4px 20px var(--color-grey);
+
+    display: none;
+    resize: both;
+    position: fixed;
+}
+
+dialog[open] {
+    display: flex;
+    flex-direction: column;
+}
+
+dialog::backdrop {
+    background: transparent;
+}
+
+dialog .header {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+    padding: 3px;
+    font-size: 24px;
+    display: flex;
+    justify-content: space-between;
+}
+
+dialog .header-controls button {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+    border: none;
+    height: 100%;
+}
+
+dialog .header-controls button:hover {
+    color: var(--color-theme);
+    background-color: var(--color-contrast-text);
+}
+
+dialog .body {
+    margin-bottom: auto;
+}
+
+dialog .controls {
+    background-color: var(--color-box-background);
+    padding: 3px 13px 3px 3px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
 /* 根据不同设备调整css */
 @media only screen and (max-width: 960px) {
     :root {
         --style-side-padding: 10px;
     }
 
-    .header {
+    header {
         height: auto;
         max-height: none;
         flex-wrap: wrap;
@@ -462,7 +538,7 @@ li {
 }
 
 @media (min-width: 961px) {
-    .header {
+    header {
         height: 45px;
         max-height: 45px;
     }
