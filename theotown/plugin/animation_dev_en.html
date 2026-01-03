@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Animation Dev Tool</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript is disabled&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;"">
+        <div class=" header-title">
+        <h4 class="header-title">Animation Dev Tool</h4>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="callout normal">
+            <h4>Import Your Files</h4>
+            <span>Building</span>&emsp;<input accept="image/png" id="buildingFileInput" type="file">&emsp;&emsp;
+            <span>Animation</span>&emsp;<input accept="image/png" id="animationFileInput" type="file" multiple>
+
+            <hr>
+            <h4>Set Parameters</h4>
+            <span>Building Width</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
+            <span>Building Height</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
+            <button id="doneButton" class="button-full-green normal"><i class="w">I</i>Done</button>
+        </div>
+
+        <div class="callout modest">
+            <h6>Animation List</h6>
+            <pre id="animationList"></pre>
+        </div>
+
+        <pre id="hint" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Welcome!</pre>
+        <pre id="originInfo" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Origin: </pre>
+        <canvas style="background-color: black; color:white;" id="mainCanvas">
+            ERROR
+        </canvas>
+
+        <div class="callout normal">
+            <p>
+                方向键：移动动画；<br>
+                Shift+方向键：快速移动动画;<br>
+                Ctrl+方向键：移动坐标原点；<br>
+                Ctrl+Shift+方向键：快速移动坐标原点；<br>
+                Ctrl+R：刷新；<br>
+                Ctrl+E：重置坐标原点;<br>
+                Ctrl+Q：重置动画;<br>
+                Ctrl+数字键: 切换动画;
+              </p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Updated at <span id="updateTime"></span></p>
+        <script src="../generalInfoService.js"></script>
+        <br>
+        <div class="footer-box">
+            <p>The website is based on<a
+                    href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a></p>
+            <div class="footer-about">
+                <a href="https://github.com/Sioneo/" target="_blank">View My GitHub Profile</a>
+                <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" target="_blank">View My
+                    TheoTown Forum Profile</a>
+                <!-- <a href="onionpedia.html" target="_blank">关于本站</a>
+                <a href="me.html" target="_blank">关于我</a> -->
+            </div>
+        </div>
+    </footer>
+
+    <script>var animationIndex = 0;</script>
+    <script src="animationDevTool/infoService.js"></script>
+    <script src="animationDevTool/processer.js"></script>
+    <script src="animationDevTool/keyboardService.js"></script>
+</body>
+
+</html>

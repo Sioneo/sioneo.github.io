@@ -389,6 +389,11 @@ button .flat {
     min-width: 80px;
     padding: 8px 13px;
     margin: 4px;
+    cursor: pointer;
+}
+
+.button-full-green.normal {
+    font-weight: normal;
 }
 
 
@@ -528,6 +533,25 @@ dialog .controls {
     display: flex;
     justify-content: flex-end;
     gap: 5px;
+}
+
+/* 各种导入 */
+input {
+    background-color: var(--color-box-background);
+    border: none;
+    font-size: 16px;
+    border: 1px solid var(--color-grey);
+    font-family: "Cabin", sans-serif;
+}
+
+input:hover {
+    border: 1px solid var(--color-theme);
+    background-color: var(--color-theme-shallow);
+}
+
+input:active {
+    border: 1px solid var(--color-theme);
+    background-color: var(--color-theme-shallow);
 }
 
 /* 根据不同设备调整css */
