@@ -7,22 +7,22 @@ document.addEventListener("keydown", (event) => {
                 case "ArrowUp":
                     origin.y -= 10;
                     refreshCanvas();
-                    hint("坐标原点: 向上10像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_UP} ${Strings.PIXELS_10}`);
                     break;
                 case "ArrowDown":
                     origin.y += 10;
                     refreshCanvas();
-                    hint("坐标原点: 向下10像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_DOWN} ${Strings.PIXELS_10}`);
                     break;
                 case "ArrowLeft":
                     origin.x -= 10;
                     refreshCanvas();
-                    hint("坐标原点: 向左10像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_LEFT} ${Strings.PIXELS_10}`);
                     break;
                 case "ArrowRight":
                     origin.x += 10;
                     refreshCanvas();
-                    hint("坐标原点: 向右10像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXELS_10}`);
                     break;
                 default:
                     break;
@@ -33,36 +33,36 @@ document.addEventListener("keydown", (event) => {
                 case "ArrowUp":
                     origin.y -= 1;
                     refreshCanvas();
-                    hint("坐标原点: 向上1像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_UP} ${Strings.PIXEL_1}`);
                     break;
                 case "ArrowDown":
                     origin.y += 1;
                     refreshCanvas();
-                    hint("坐标原点: 向下1像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_DOWN} ${Strings.PIXEL_1}`);
                     break;
                 case "ArrowLeft":
                     origin.x -= 1;
                     refreshCanvas();
-                    hint("坐标原点: 向左1像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_LEFT} ${Strings.PIXEL_1}`);
                     break;
                 case "ArrowRight":
                     origin.x += 1;
                     refreshCanvas();
-                    hint("坐标原点: 向右1像素");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXEL_1}`);
                     break;
                 case "e":
                     origin = { x: 200, y: 600 };
                     refreshCanvas();
-                    hint("坐标原点: 重置");
+                    hint(`${Strings.ORIGIN_STR}: ${Strings.RESET_STR}`);
                     break;
                 case "q":
                     animationData[animationIndex] = { x: 0, y: 0 };
                     refreshCanvas();
-                    hint("动画: 重置");
+                    hint(`${Strings.ANIMATION_STR}(${animationIndex}): ${Strings.RESET_STR}`);
                     break;
                 case "r":
                     refreshCanvas();
-                    hint("刷新");
+                    hint(`${Strings.REFRESH_STR}`);
                     break;
                 case "0":
                 case "1":
@@ -74,8 +74,12 @@ document.addEventListener("keydown", (event) => {
                 case "7":
                 case "8":
                 case "9":
-                    animationIndex = parseInt(event.key);
-                    hint(`Animation: ${animationIndex}`);
+                    if (parseInt(event.key) < animationData.length) {
+                        animationIndex = parseInt(event.key);
+                        hint(`${Strings.ANIMATION_STR}: ${animationIndex}`);
+                    } else {
+                        hint(`${Strings.ERROR_NO_ANIMATION}`);
+                    }
                     refreshCanvas();
                     break;
                 default:
@@ -89,25 +93,25 @@ document.addEventListener("keydown", (event) => {
                 animationData[animationIndex].y -= 10;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向上10像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_UP} ${Strings.PIXELS_10}`);
                 break;
             case "ArrowDown":
                 animationData[animationIndex].y += 10;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向下10像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_DOWN} ${Strings.PIXELS_10}`);
                 break;
             case "ArrowLeft":
                 animationData[animationIndex].x -= 10;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向左10像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_LEFT} ${Strings.PIXELS_10}`);
                 break;
             case "ArrowRight":
                 animationData[animationIndex].x += 10;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向右10像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXELS_10}`);
                 break;
             default:
                 break;
@@ -119,25 +123,25 @@ document.addEventListener("keydown", (event) => {
                 animationData[animationIndex].y -= 1;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向上1像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_UP} ${Strings.PIXEL_1}`);
                 break;
             case "ArrowDown":
                 animationData[animationIndex].y += 1;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向下1像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_DOWN} ${Strings.PIXEL_1}`);
                 break;
             case "ArrowLeft":
                 animationData[animationIndex].x -= 1;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向左1像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_LEFT} ${Strings.PIXEL_1}`);
                 break;
             case "ArrowRight":
                 animationData[animationIndex].x += 1;
                 event.preventDefault();
                 refreshCanvas();
-                hint("动画: 向右1像素");
+                hint(`${Strings.ANIMATION_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXEL_1}`);
                 break;
             default:
                 break;

@@ -5,6 +5,9 @@
     <title>Animation Dev Tool</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <link rel="stylesheet" type="text/css" href="animationDevTool/mobileUiStyle.css">
+    <script src="animationDevTool/translation.js"></script>
+    <script>var Strings = Translations.EN;</script>
 </head>
 
 <body>
@@ -38,6 +41,7 @@
             <h6>Animation List</h6>
             <pre id="animationList"></pre>
         </div>
+        <p>Please press Ctrl+R to refresh the canvas after importing.</p>
 
         <pre id="hint" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Welcome!</pre>
         <pre id="originInfo" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Origin: </pre>
@@ -47,14 +51,14 @@
 
         <div class="callout normal">
             <p>
-                方向键：移动动画；<br>
-                Shift+方向键：快速移动动画;<br>
-                Ctrl+方向键：移动坐标原点；<br>
-                Ctrl+Shift+方向键：快速移动坐标原点；<br>
-                Ctrl+R：刷新；<br>
-                Ctrl+E：重置坐标原点;<br>
-                Ctrl+Q：重置动画;<br>
-                Ctrl+数字键: 切换动画;
+                Arrow Key: Move an Animation<br>
+                Shift+Arrow Key: Move an Animation Rapidly;<br>
+                Ctrl+Arrow Key: Move the Origin of the Axis;<br>
+                Ctrl+Shift+Arrow Key: Move the Origin of the Axis Rapidly;<br>
+                Ctrl+R: Refresh the Canvas<br>
+                Ctrl+E: Reset the Origin of the Axis;<br>
+                Ctrl+Q: Reset an Animation<br>
+                Ctrl+Number: Switch an Animation;
               </p>
         </div>
 
@@ -78,10 +82,23 @@
         </div>
     </footer>
 
+    <!-- UI区域 -->
+    <button id="uiButtonQ" class="ui-button" style="right: 20px; bottom: 260px;">Q</button>
+    <button id="uiButtonE" class="ui-button" style="right: 20px; bottom: 200px;">E</button>
+    <button id="uiButtonR" class="ui-button" style="right: 20px; bottom: 140px;">R</button>
+    <button id="uiButtonShift" class="ui-button" style="right: 20px; bottom: 80px;">Shift</button>
+    <button id="uiButtonCtrl" class="ui-button" style="right: 20px; bottom: 20px;">Ctrl</button>
+
+    <button id="uiButtonArrowUp" class="ui-button" style="left: 130px; bottom: 200px;"><i class="w">7</i></button>
+    <button id="uiButtonArrowLeft" class="ui-button" style="left: 70px; bottom: 140px;"><i class="w">5</i></button>
+    <button id="uiButtonArrowRight" class="ui-button" style="left: 190px; bottom: 140px;"><i class="w">6</i></button>
+    <button id="uiButtonArrowDown" class="ui-button" style="left: 130px; bottom: 80px;"><i class="w">4</i></button>
+
     <script>var animationIndex = 0;</script>
     <script src="animationDevTool/infoService.js"></script>
     <script src="animationDevTool/processer.js"></script>
     <script src="animationDevTool/keyboardService.js"></script>
+    <script src="animationDevTool/mobileUiService.js"></script>
 </body>
 
 </html>

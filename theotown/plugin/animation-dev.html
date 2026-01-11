@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Animation Dev Tool</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <script src="animationDevTool/translation.js"></script>
+    <script>var Strings = Translations.ZH;</script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <i class="b">~</i><a style="color: white;" href="https://www.azureneko.top/javascript.html"
+            target="_blank">帮助</a>
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;">
+        <div class="header-title">
+        <a class="header-item-button back" href="index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">动画开发工具</h4>
+
+        </div>
+        <div class="header-item" style="display: flex;">
+            <a class="header-item-button" target="_blank" href="animation-dev-mobile.html">移动端</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="callout normal">
+            <h4>导入文件</h4>
+            <span>建筑图片</span>&emsp;<input accept="image/png" id="buildingFileInput" type="file">&emsp;&emsp;
+            <span>动画图片</span>&emsp;<input accept="image/png" id="animationFileInput" type="file" multiple>
+
+            <hr>
+            <h4>设置参数</h4>
+            <span>建筑宽度</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
+            <span>建筑高度</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
+            <button id="doneButton" class="button-full-green normal"><i class="w">I</i>完成</button>
+        </div>
+
+        <div class="callout modest">
+            <h6>动画列表</h6>
+            <pre id="animationList"></pre>
+        </div>
+        <p>导入后请按Ctrl+R刷新一下</p>
+
+        <pre id="hint"
+            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">欢迎使用动画开发工具</pre>
+        <pre id="originInfo"
+            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">坐标原点: </pre>
+        <canvas style="background-color: black; color:white;" id="mainCanvas">
+            ERROR
+        </canvas>
+
+        <div class="callout normal">
+            <p>
+                方向键: 移动动画;<br>
+                Shift+方向键: 快速移动动画;<br>
+                Ctrl+方向键: 移动坐标原点;<br>
+                Ctrl+Shift+方向键: 快速移动坐标原点;<br>
+                Ctrl+R: 刷新;<br>
+                Ctrl+E: 重置坐标原点;<br>
+                Ctrl+Q: 重置动画;<br>
+                Ctrl+数字键: 切换动画;
+            </p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>最后一次更新：<span id="updateTime"></span></p>
+        <p>工具版本&nbsp;<span id="versionInfo"></span></p>
+        <script src="generalinfo.js"></script>
+        <script src="../generalInfoService.js"></script>
+        <div class="footer-box">
+            <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a>搭建</p>
+            <div class="footer-about">
+                <a href="../onionpedia.html" target="_blank">关于本站</a>
+                <a href="../me.html" target="_blank">关于我</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>var animationIndex = 0;</script>
+    <script src="animationDevTool/infoService.js"></script>
+    <script src="animationDevTool/processer.js"></script>
+    <script src="animationDevTool/keyboardService.js"></script>
+</body>
+
+</html>

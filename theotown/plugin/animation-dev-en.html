@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Animation Dev Tool</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <script src="animationDevTool/translation.js"></script>
+    <script>var Strings = Translations.EN;</script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript is disabled&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;"">
+        <div class=" header-title">
+        <h4 class="header-title">Animation Dev Tool</h4>
+        </div>
+        <div class="header-item" style="display: flex;">
+            <a class="header-item-button" target="_blank" href="animation-dev-en-mobile.html">Mobile</a>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="callout normal">
+            <h4>Import Your Files</h4>
+            <span>Building</span>&emsp;<input accept="image/png" id="buildingFileInput" type="file">&emsp;&emsp;
+            <span>Animation</span>&emsp;<input accept="image/png" id="animationFileInput" type="file" multiple>
+
+            <hr>
+            <h4>Set Parameters</h4>
+            <span>Building Width</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
+            <span>Building Height</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
+            <button id="doneButton" class="button-full-green normal"><i class="w">I</i>Done</button>
+        </div>
+
+        <div class="callout modest">
+            <h6>Animation List</h6>
+            <pre id="animationList"></pre>
+        </div>
+        <p>Please press Ctrl+R to refresh the canvas after importing.</p>
+
+        <pre id="hint" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Welcome!</pre>
+        <pre id="originInfo" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">Origin: </pre>
+        <canvas style="background-color: black; color:white;" id="mainCanvas">
+            ERROR
+        </canvas>
+
+        <div class="callout normal">
+            <p>
+                Arrow Key: Move an Animation<br>
+                Shift+Arrow Key: Move an Animation Rapidly;<br>
+                Ctrl+Arrow Key: Move the Origin of the Axis;<br>
+                Ctrl+Shift+Arrow Key: Move the Origin of the Axis Rapidly;<br>
+                Ctrl+R: Refresh the Canvas<br>
+                Ctrl+E: Reset the Origin of the Axis;<br>
+                Ctrl+Q: Reset an Animation<br>
+                Ctrl+Number: Switch an Animation;
+              </p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Updated at <span id="updateTime"></span></p>
+        <script src="../generalInfoService.js"></script>
+        <br>
+        <div class="footer-box">
+            <p>The website is based on<a
+                    href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a></p>
+            <div class="footer-about">
+                <a href="https://github.com/Sioneo/" target="_blank">View My GitHub Profile</a>
+                <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" target="_blank">View My
+                    TheoTown Forum Profile</a>
+                <!-- <a href="onionpedia.html" target="_blank">关于本站</a>
+                <a href="me.html" target="_blank">关于我</a> -->
+            </div>
+        </div>
+    </footer>
+
+    <script>var animationIndex = 0;</script>
+    <script src="animationDevTool/infoService.js"></script>
+    <script src="animationDevTool/processer.js"></script>
+    <script src="animationDevTool/keyboardService.js"></script>
+</body>
+
+</html>

@@ -46,7 +46,7 @@ function getData(target) {
                 return result;
 
             } else {
-                alert("Please set the width and height of the building");
+                alert(Strings.ERROR_NO_BUILDING_SIZE);
             }
             break;
         default:
@@ -83,7 +83,7 @@ function loadImage(imageInput, type, callback) {
             }
         }
         image.onerror = function () {
-            alert("Sorry, an error occured during loading image, please try again")
+            alert(Strings.ERROR_IMAGE_LOAD_FAILED);
         }
         image.src = e.target.result;
     }
@@ -163,7 +163,7 @@ document.getElementById("doneButton").addEventListener("click", function () {
                     // Load animation list information
                     let animationListInfo = "";
                     for (let j = 0; j < animationData.length; j++) {
-                        let result = `Animation(${j}): ${animationData[j].name}, x: ${animationData[j].x}, y: ${animationData[j].y}, handle x: ${-animationData[j].x}, handle y: ${-animationData[j].y}<br>`
+                        let result = `<button class="button-small" onclick="animationIndex = ${j}; hint(\`${Strings.ANIMATION_STR}: ${j}\`);">${Strings.BUTTON_SWITCH_ANIMATION}</button>&emsp;Animation(${j}): ${animationData[j].name}, x: ${animationData[j].x}, y: ${animationData[j].y}, handle x: ${-animationData[j].x}, handle y: ${-animationData[j].y}<br>`
                         animationListInfo += result;
                     }
                     document.getElementById("animationList").innerHTML = animationListInfo;
@@ -173,6 +173,6 @@ document.getElementById("doneButton").addEventListener("click", function () {
             });
         }
     } else {
-        alert("No file was imported!")
+        alert(Strings.ERROR_NO_FILE_IMPORTED)
     }
 })

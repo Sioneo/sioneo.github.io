@@ -1,0 +1,30 @@
+.ui-button {
+    background-color: rgba(200, 200, 200, 0.65);
+    color: black;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: 28px;
+    margin: 10px;
+    position: fixed;
+    user-select: none;
+    cursor: pointer;
+    z-index: 1000;
+    
+    border: none;
+}
+
+.ui-button:hover {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+}
+
+.ui-button:active {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+}
+
+.ui-button.active {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+}

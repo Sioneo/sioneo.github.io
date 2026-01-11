@@ -3,107 +3,13 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
   <title>插件制作工具-动画开发工具</title>
-  <script src="../../javascript/changeDisplayStyle.js"></script>
-  <script src="../../javascript/fileDrag.js"></script>
+  <meta http-equiv="refresh" content="0;url=animation-dev.html"
 
 </head>
 
 <body>
-
-  <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
-  <script>document.getElementById("jsWarning").style.display = "none";</script>
-
-  <div style="display: flex; justify-content: space-between;" class="headbox">
-    <div style="display: flex">
-      <a class="backbutton" href="index.html"></a>
-      <h3 class="headtext">插件制作工具-动画开发工具</h3>
-    </div>
-
-    <div>
-      <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
-        style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
-    </div>
-  </div>
-
-  <div style="display: flex;">
-    <div style="width: 82%">
-      <div id="mainContainer" class="main">
-        <div style="display: flex; justify-content: space-between;">
-          <div style="display: blcok; width: 48%">
-            <p>在下方导入建筑图片</p>
-            <div id="fileDragZoneBuilding" class="fileDragZone">
-              <p id="dragZoneInfoBuilding" class="dragZoneInfoDefault">点击或拖拽文件到此处~</p>
-              <input type="file" id="fileInputBuilding" hidden>
-              <br>
-              <script>
-                let fileTypes = ["image/png"];
-                newDragZone("fileDragZoneBuilding", "dragZoneInfoBuilding", "fileInputBuilding", fileTypes);
-              </script>
-            </div>
-
-            <p>在下方导入动画图片</p>
-            <div id="fileDragZoneAnimation" class="fileDragZone">
-              <p id="dragZoneInfoAnimation" class="dragZoneInfoDefault">点击或拖拽文件到此处~</p>
-              <input type="file" id="fileInputAnimation" hidden>
-              <br>
-              <script>
-                newDragZone("fileDragZoneAnimation", "dragZoneInfoAnimation", "fileInputAnimation", fileTypes);
-              </script>
-            </div>
-          </div>
-
-          <div style="display: block; width: 48%">
-            <h3>操控面板</h3>
-            <span>底座宽度</span><input type="number" id="templeteWidth"><br>
-            <span>底座高度</span><input type="number" id="templeteHeight">
-          </div>
-        </div>
-
-
-        <br>
-        <button class="attractiveButton" id="fileConfirmButton">确定选择</button>
-        <p>确定后请按Ctrl+R刷新一下</p>
-        <br><br>
-
-        <p id="hint" class="mono" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">欢迎使用动画开发工具</p>
-        <p id="originInfo" class="mono" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">坐标原点: </p>
-        <p id="animationPosInfo" class="mono" style="padding: 0; margin: 0; width: 100%; background-color: black; color: white">动画坐标: </p>
-        <br>
-        <canvas style="background-color: black; color:white;" id="mainCanvas">
-          加载出错
-        </canvas>
-
-        <p>（原理）</p>
-        <img style="max-width: 100%;" src="animationDevTool/tech.png" alt="原理说明">
-      </div>
-    </div>
-
-    <div class="box" style="margin: 0; height: fit-content; width: 18%">
-      <h3>MORE</h3>
-      <div id="sideBar"></div>
-      <hr>
-      <p>工具版本&nbsp;<span id="versionInfo"></span></p>
-      <hr>
-      <p>
-        方向键：移动动画；<br>
-        Shift+方向键：快速移动动画;<br>
-        Ctrl+方向键：移动坐标原点；<br>
-        Ctrl+Shift+方向键：快速移动坐标原点；<br>
-        Ctrl+R：刷新；<br>
-        Ctrl+E：重置坐标原点;<br>
-        Ctrl+Q：重置动画;
-      </p>
-    </div>
-  </div>
-
-  <script src="../../javascript/spoiler.js"></script>
-  <script src="generalinfo.js"></script>
-  <script src="sideBar.js"></script>
-  <script src="animationDevTool/info.js"></script>
-  <script src="animationDevTool/loadImage.js"></script>
-  <script src="animationDevTool/keyboard.js"></script>
+    <p>加载中<br><a href="animation-dev.html">点击此处</a>若页面未能自动跳转</p>
 </body>
 
 </html>
