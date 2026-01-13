@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/ls.css">
+    <script src="proverbs.js"></script>
+    <script src="tips.js"></script>
+    <script>
+        const dateData = [
+            { "name": "高考", "time": { "year": 2028, "month": 6, "day": 7, "hour": 0, "minute": 0, "second": 0 } },
+            { "name": "期末考试", "time": { "year": 2026, "month": 1, "day": 10, "hour": 0, "minute": 0, "second": 0 } },
+            { "name": "江门调研考", "time": { "year": 2026, "month": 1, "day": 30, "hour": 0, "minute": 0, "second": 0 } }
+        ]
+        var scheduleIndex = 2;
+
+        // 一些计算时间的函数
+        function timestampToObject(timestamp) {
+            const date = new Date(timestamp);
+
+            return {
+                "year": date.getFullYear(),
+                "month": date.getMonth() + 1, // 月份从0开始，所以要+1
+                "day": date.getDate(),
+                "hour": date.getHours(),
+                "minute": date.getMinutes(),
+                "second": date.getSeconds()
+            };
+        }
+
+        function objectToTimestamp(timeObj) {
+            const { year, month, day, hour, minute, second } = timeObj;
+
+            // 创建Date对象，注意月份要-1（因为JavaScript月份从0开始）
+            const date = new Date(year, month - 1, day, hour, minute, second);
+
+            return date.getTime();
+        }
+
+        function millisecondsToDetailedTimeObject(milliseconds) {
+            if (milliseconds < 0) {
+                milliseconds = 0;
+            }
+            const ms = Math.abs(milliseconds);
+            const date = new Date(ms);
+
+            // 从1970年开始计算年份差异
+            const year = date.getUTCFullYear() - 1970;
+            const month = date.getUTCMonth();
+            const day = date.getUTCDate() - 1; // -1 因为从1日开始
+
+            const seconds = Math.floor(ms / 1000);
+            const minutes = Math.floor(seconds / 60);
+            const hours = Math.floor(minutes / 60);
+            let days = Math.floor(hours / 24);
+            if (milliseconds > 0) {
+                days += 1; // 增加一天以符合计数习惯
+            }
+
+            return {
+                year: year,
+                month: month,
+                day: day,
+                hour: hours % 24,
+                minute: minutes % 60,
+                second: seconds % 60,
+                totalDays: days
+            };
+        }
+       
+    </script>
+    <style>
+        #title {
+            padding: 0;
+            margin: 5px;
+        }
+
+        #dayCountdown {
+            font-size: 60px;
+            margin: 5px auto;
+            padding: 5px;
+        }
+
+        #time {
+            margin: 5px auto;
+            padding: 2px auto;
+        }
+    </style>
+    <title>Countdown</title>
+</head>
+
+<body>
+    <main>
+
+        <h3 id="title">距离XXX还有XXX天</h3>
+        <h1 id="dayCountdown" style="display: inline-block;">999</h1>
+        <h3 style="font-size: 30px; display: inline-block;">天</h3>
+        <p id="time">hello</p>
+        <div class="callout modest schedule-buttons">
+            <h5>选择一个倒计时</h5>
+            <button class="button-big schedule-button" onclick="changeSchedule(0)">高考</button>
+            <button class="button-big schedule-button" onclick="changeSchedule(1)">期末考试</button>
+            <button class="button-big schedule-button" onclick="changeSchedule(2)">江门调研考</button>
+        </div>
+        <hr>
+        <h4 id="proverb">blabla</h4>
+        <div class="callout normal">
+            <b>Tip</b>&emsp;<span id="tip">blabla</span>
+        </div>
+
+
+    </main>
+    <footer>
+     
+        <div class="footer-box">
+            <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
+                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a>搭建</p>
+           
+    </footer>
+
+
+    <script>
+        var schedule = {
+            "title": dateData[scheduleIndex].name,
+            "targetTime": objectToTimestamp(dateData[scheduleIndex].time),
+            "timeRemaining": {}
+        };
+
+        function updateTime() {
+            var currentTime = Date.now();
+            let targetTime = objectToTimestamp(dateData[scheduleIndex].time)
+            let timeRemaining = millisecondsToDetailedTimeObject(targetTime - currentTime);
+
+            schedule.timeRemaining = timeRemaining;
+        }
+        updateTime()
+        // 每秒更新一次
+        setInterval(updateTime, 1000);
+
+        const titleDispalyer = document.getElementById("title");
+        const dayCountdownDisplayer = document.getElementById("dayCountdown");
+        const exactTimeDisplayer = document.getElementById("time");
+
+        function updateDisplay() {
+            titleDispalyer.innerText = `距离${schedule.title}还有`;
+            dayCountdownDisplayer.innerText = `${schedule.timeRemaining.totalDays}`;
+            exactTimeDisplayer.innerText = `${schedule.timeRemaining.year}年${schedule.timeRemaining.month}月${schedule.timeRemaining.day}天${schedule.timeRemaining.hour}小时${schedule.timeRemaining.minute}分钟${schedule.timeRemaining.second}秒`;
+        }
+        updateDisplay();
+        setInterval(updateDisplay, 1000);
+
+        // 添加的切换scheduleIndex函数
+        function changeSchedule(index) {
+            scheduleIndex = index;
+            schedule.title = dateData[scheduleIndex].name;
+            schedule.targetTime = objectToTimestamp(dateData[scheduleIndex].time);
+
+            // 更新按钮状态
+            const buttons = document.querySelectorAll('.schedule-button');
+            buttons.forEach((button, i) => {
+                if (i === index) {
+                    button.classList.add('active');
+                } else {
+                    button.classList.remove('active');
+                }
+            });
+
+            // 立即更新显示
+            updateTime();
+            updateDisplay();
+        }
+
+        //  显示名言名句和tip
+        document.getElementById("proverb").innerText = proverbs[Math.floor(Math.random() * proverbs.length)];
+        document.getElementById("tip").innerText = tips[Math.floor(Math.random() * tips.length)];
+    </script>
+
+</body>
+
+</html>
