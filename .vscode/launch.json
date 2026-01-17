@@ -1,26 +1,30 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "调试当前 HTML 文件",
-            "type": "msedge",
-            "request": "launch", 
-            "file": "${file}",
-            "webRoot": "${workspaceFolder}"
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Dev Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^Server started on port (\\d+)$"
         },
-        {
-            "name": "调试本地服务器",
-            "type": "msedge",
-            "request": "launch",
-            "url": "http://localhost:5500",
-            "webRoot": "${workspaceFolder}"
-        },
-        {
-            "name": "附加到 Edge 浏览器",
-            "type": "msedge", 
-            "request": "attach",
-            "port": 9222,
-            "webRoot": "${workspaceFolder}"
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Starting development server",
+          "endsPattern": "Server started on port \\d+"
         }
-    ]
+      }
+    },
+    {
+      "label": "Build Project",
+      "type": "shell",
+      "command": "npm run build",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
 }
