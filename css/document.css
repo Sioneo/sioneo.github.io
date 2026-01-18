@@ -280,6 +280,33 @@ header a {
     color: var(--color-contrast-text);
 }
 
+nav.bar {
+    border-bottom: 1px solid var(--color-theme);
+    padding: 0 var(--style-side-padding);
+}
+
+nav.bar button {
+    border: none;
+    background-color: transparent;
+    color: var(--color-text);
+    font-size: 20px;
+    margin: auto 5px;
+}
+
+nav.bar button:hover {
+    background-color: var(--color-theme-shallow);
+}
+
+nav.bar button:active {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+}
+
+nav.bar button.active {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
+}
+
 /* 脚注 */
 footer {
     border-top: 5px solid var(--color-theme);

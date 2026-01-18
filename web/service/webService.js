@@ -17,7 +17,7 @@ function getDeviceType() {
 
 if (getDeviceType() == "desktop") {
 
-} else if (getDeviceType == "tablet") {
+} else if (getDeviceType() == "tablet") {
     document.documentElement.style.setProperty("--style-side-padding", "50px");
 } else {
     document.documentElement.style.setProperty("--style-side-padding", "10px");
@@ -29,5 +29,11 @@ const Web = {
         const updateTimePara = document.getElementById("webInfoUpdateTime");
         let updateTime = new Date(document.lastModified);
         updateTimePara.innerText = updateTime.toLocaleString();
+    },
+
+    // 下载服务
+    newDownload: function(title, sources) {
+        const url = `../web/service/download-page.html?title=${encodeURIComponent(title)}&sources=${encodeURIComponent(JSON.stringify(sources))}`
+        window.open(url, "_blank");
     }
 }
