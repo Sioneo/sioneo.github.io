@@ -4,7 +4,7 @@
 <head>
     <title>Animation Dev Tool</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <link rel="stylesheet" type="text/css" href="../../css/document.css">
     <script src="animationDevTool/translation.js"></script>
     <script>var Strings = Translations.EN;</script>
 </head>
@@ -37,6 +37,12 @@
             <span>Building Width</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
             <span>Building Height</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
             <button id="doneButton" class="button-full-green normal"><i class="w">I</i>Done</button>
+            <p><button class="button-small" id="zoomInButton0.5"><i class="w">F F</i></button>
+                <button class="button-small" id="zoomInButton0.1"><i class="w">F</i></button>
+                <button class="button-small" id="zoomOutButton0.1"><i class="w">G</i></button>
+                <button class="button-small" id="zoomOutButton0.5"><i class="w">G G</i></button>
+                Animation Zoom Factor: <span id="zoomFactor">default</span>  
+            </p>
         </div>
 
         <div class="callout modest">
@@ -60,7 +66,11 @@
                 Ctrl+R: Refresh the Canvas<br>
                 Ctrl+E: Reset the Origin of the Axis;<br>
                 Ctrl+Q: Reset an Animation<br>
-                Ctrl+Number: Switch an Animation;
+                Ctrl+Number: Switch an Animation;<br>
+                Ctrl+PLusKey: Scale animation up by 10%;<br>
+                Crtl:MinusKey: Scale animation down by 10%:<br>
+                Ctrl+Shift+PLusKey: Scale animation up by 50%;<br>
+                Crtl+Shift:MinusKey: Scale animation down by 50%:
               </p>
         </div>
 

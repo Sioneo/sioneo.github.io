@@ -19,7 +19,10 @@ var Translations = {
         MOVE_RIGHT: "Move Right",
 
         PIXELS_10: "10 Pixels",
-        PIXEL_1: "1 Pixel"
+        PIXEL_1: "1 Pixel",
+
+        ZOOM_IN: "Zoom in",
+        ZOOM_OUT: "Zoom out"
     },
     ZH: {
         WEB_TITLE: "动画开发工具",
@@ -41,6 +44,9 @@ var Translations = {
         MOVE_RIGHT: "向右移动",
 
         PIXELS_10: "10像素",
-        PIXEL_1: "1像素"
+        PIXEL_1: "1像素",
+
+        ZOOM_IN: "放大",
+        ZOOM_OUT: "缩小"
     }
 }

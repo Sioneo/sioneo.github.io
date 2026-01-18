@@ -4,14 +4,20 @@
 <head>
     <title>动画开发工具</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/ls.css">
+    <link rel="stylesheet" type="text/css" href="../../css/document.css">
     <link rel="stylesheet" type="text/css" href="animationDevTool/mobileUiStyle.css">
+    <script src="../../web/service/webService.js"></script>
     <script src="animationDevTool/translation.js"></script>
     <script>var Strings = Translations.ZH;</script>
 
     <style>
         :root {
             --style-side-padding: 20px;
+        }
+
+        html,
+        body {
+            touch-action: manipulation;
         }
     </style>
 </head>
@@ -28,9 +34,9 @@
 
     <header style="display: flex;"">
         <div class=" header-title">
-            <a class="header-item-button back" href="index.html">
-                <i class="w">5</i>
-            </a>
+        <a class="header-item-button back" href="index.html">
+            <i class="w">5</i>
+        </a>
         <h4 class="header-title">动画开发工具-移动端</h4>
         </div>
     </header>
@@ -46,12 +52,19 @@
             <span>建筑宽度</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
             <span>建筑高度</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
             <button id="doneButton" class="button-full-green normal"><i class="w">I</i>完成</button>
+            <p><button class="button-small" id="zoomInButton0.5"><i class="w">F F</i></button>
+                <button class="button-small" id="zoomInButton0.1"><i class="w">F</i></button>
+                <button class="button-small" id="zoomOutButton0.1"><i class="w">G</i></button>
+                <button class="button-small" id="zoomOutButton0.5"><i class="w">G G</i></button>
+                动画缩放比例：<span id="zoomFactor">default</span>
+            </p>
         </div>
 
         <div class="callout modest">
             <h6>动画列表</h6>
             <pre id="animationList"></pre>
         </div>
+
         <p>导入后请按Ctrl+R刷新一下</p>
 
         <pre id="hint"
@@ -71,26 +84,18 @@
                 Ctrl+R: 刷新;<br>
                 Ctrl+E: 重置坐标原点;<br>
                 Ctrl+Q: 重置动画;<br>
-                Ctrl+数字键: 切换动画;
+                Ctrl+数字键: 切换动画;<br>
+                Ctrl+I: 放大动画0.1倍;<br>
+                Crtl+O: 缩小动画0.1倍;<br>
+                Ctrl+Shift+I: 放大动画0.5倍;<br>
+                Crtl+Shift+O: 缩小动画0.5倍;
             </p>
         </div>
 
     </main>
 
-    <footer>
-        <p>最后一次更新：<span id="updateTime"></span></p>
-        <p>工具版本&nbsp;<span id="versionInfo"></span></p>
-        <script src="generalinfo.js"></script>
-        <script src="../generalInfoService.js"></script>
-        <div class="footer-box">
-            <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
-                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a>搭建</p>
-            <div class="footer-about">
-                <a href="../onionpedia.html" target="_blank">关于本站</a>
-                <a href="../me.html" target="_blank">关于我</a>
-            </div>
-        </div>
-    </footer>
+    <script src="../../web/footer/theotown-footer.js"></script>
+    <theotown-footer></theotown-footer>
 
 
     <!-- UI区域 -->

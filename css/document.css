@@ -305,7 +305,7 @@ footer {
 /* Github Page 标识 */
 .github-page-note {
     color: var(--color-text);
-    font-size: 30px;
+    font-size: 25px;
     text-decoration: none;
 }
 

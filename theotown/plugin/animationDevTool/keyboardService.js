@@ -24,6 +24,12 @@ document.addEventListener("keydown", (event) => {
                     refreshCanvas();
                     hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXELS_10}`);
                     break;
+                case "+":
+                    adjustAnimationZoomFactor(0.5);
+                    break;
+                case "_":
+                    adjustAnimationZoomFactor(-0.5);
+                    break
                 default:
                     break;
             }
@@ -82,6 +88,12 @@ document.addEventListener("keydown", (event) => {
                     }
                     refreshCanvas();
                     break;
+                case "=":
+                    adjustAnimationZoomFactor(0.1);
+                    break;
+                case "-":
+                    adjustAnimationZoomFactor(-0.1);
+                    break
                 default:
                     break;
             }

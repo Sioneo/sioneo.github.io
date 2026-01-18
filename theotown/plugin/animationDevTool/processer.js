@@ -8,7 +8,22 @@ var loadedImageData = {
     building: [],
     animation: []
 }
+let animationZoomFactor = 1;
+const zoomFactorDisplayer = document.getElementById("zoomFactor");
 
+function adjustAnimationZoomFactor(factor) {
+    if (animationZoomFactor + factor > 0) {
+        animationZoomFactor += factor;
+        animationZoomFactor = parseFloat(animationZoomFactor.toFixed(1));
+        refreshCanvas();
+        zoomFactorDisplayer.innerText = animationZoomFactor;
+        if (factor > 0) {
+            hint(`${Strings.ZOOM_IN} ${factor}`)
+        } else {
+            hint(`${Strings.ZOOM_OUT} ${Math.abs(factor)}`)
+        }
+    }
+}
 // A function that returns the distance between the origin to the edge
 function getOriginToEdge() {
     return {
@@ -112,6 +127,15 @@ function draw() {
     ctx.stroke();
 
 
+    // 禁用所有平滑处理
+    ctx.imageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;  // Firefox
+    ctx.webkitImageSmoothingEnabled = false; // Safari
+    ctx.msImageSmoothingEnabled = false;   // IE
+
+    ctx.scale(animationZoomFactor, animationZoomFactor);
+
+
     // Draw building
     if (loadedImageData.building[0]) {
         ctx.drawImage(loadedImageData.building[0],
@@ -175,4 +199,22 @@ document.getElementById("doneButton").addEventListener("click", function () {
     } else {
         alert(Strings.ERROR_NO_FILE_IMPORTED)
     }
+})
+
+// Zoom button
+zoomFactorDisplayer.innerText = parseFloat(animationZoomFactor);
+document.getElementById("zoomInButton0.5").addEventListener("click", function () {
+    adjustAnimationZoomFactor(0.5);
+})
+
+document.getElementById("zoomInButton0.1").addEventListener("click", function () {
+    adjustAnimationZoomFactor(0.1);
+})
+
+document.getElementById("zoomOutButton0.1").addEventListener("click", function () {
+    adjustAnimationZoomFactor(-0.1);
+})
+
+document.getElementById("zoomOutButton0.5").addEventListener("click", function () {
+    adjustAnimationZoomFactor(-0.5);
 })
