@@ -16,7 +16,7 @@
 
 .ui-button:hover {
     background-color: var(--color-theme-shallow);
-    color: var(--color-contrast-text);
+    color: var(--color-text);
 }
 
 .ui-button:active {
