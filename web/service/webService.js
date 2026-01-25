@@ -1,3 +1,5 @@
+//!!!!!!!使用新的web-service.js
+
 // 判断是否在移动端
 function getDeviceType() {
     const userAgent = navigator.userAgent;

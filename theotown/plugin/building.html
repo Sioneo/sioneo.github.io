@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>标题</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/document.css">
+    <script src="../../web/footer/theotown-footer.js">
+    </script>
+    <script src="../../web/service/web-service.js"></script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;"">
+        <div class=" header-title">
+        <a class="header-item-button back" href="index.html">
+            <i class="w">5</i>
+        </a>
+        <h4>建筑-扩展</h4>
+        </div>
+        <nav>
+            <a href="animation-dev.html">动画开发工具</a>
+        </nav>
+    </header>
+
+    <nav class="bar">
+        <button class="active" id="nav-button-rci">住商工(RCI)</button>
+        <button id="nav-button-service">服务类</button>
+    </nav>
+
+    <main>
+        <section class="active multiple-page" id="section-content-rci">
+            <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
+                <h5>基础数据</h5>
+            </div>
+            <section id="rci-basic-data-content" class="spoiler-content active">
+                <form style="display: flex; justify-content: space-between;">
+                    <div>
+                        <p>ID</p><input type="text">
+                    </div>
+                    <div>
+                        <p>ID</p><input type="text">
+                    </div>
+                </form>
+            </section>
+        </section>
+        <section class="multiple-page" id="section-content-service">
+            <h4>基础数据</h4>
+
+        </section>
+    </main>
+
+    <script>
+        Web.addElementToBar("nav-button-rci", "section-content-rci");
+        Web.addElementToBar("nav-button-service", "section-content-service");
+
+        Web.addSpoiler("rci-basic-data-button", "rci-basic-data-content");
+    </script>
+    <script src="building-js/processor.js"></script>
+
+    <theotown-footer></theotown-footer>
+
+</body>
+
+</html>

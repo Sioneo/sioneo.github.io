@@ -7,6 +7,7 @@
     --color-theme-shallow: rgb(186, 217, 245);
     --color-hr: #b3b3b3;
     --color-text: black;
+    --color-white: white;
     --color-contrast-text: white;
     --color-mono-background: rgba(230, 230, 230, 0.85);
     --color-box-background: rgba(170, 170, 170, 0.12);
@@ -59,88 +60,39 @@ main {
     padding: 0;
 }
 
-h1 {
+/* 基础标题样式 */
+h1, h2, h3, h4, h5, h6 {
     color: var(--color-theme);
     padding: 0;
     margin: 15px 4px;
     font-weight: normal;
-    font-size: 36px;
 }
 
-h1 b {
+/* 各级标题字体大小 */
+h1 { font-size: 36px; }
+h2 { font-size: 33px; }
+h3 { font-size: 29px; }
+h4 { font-size: 26px; }
+h5 { font-size: 23px; }
+h6 { font-size: 20px; }
+
+/* 标题内粗体元素样式 */
+h1 b, h2 b, h3 b, h4 b, h5 b, h6 b {
     color: var(--color-theme);
     padding: 0;
     font-weight: bold;
 }
 
-h2 {
-    color: var(--color-theme);
-    padding: 0;
-    margin: 15px 4px;
-    font-weight: normal;
-    font-size: 33px;
+/* 新增的黑色主题类 */
+.black,
+h1.black, h2.black, h3.black, h4.black, h5.black, h6.black {
+    color: var(--color-text) !important;
 }
 
-h2 b {
-    color: var(--color-theme);
-    padding: 0;
-    font-weight: bold;
-}
-
-h3 {
-    color: var(--color-theme);
-    padding: 0;
-    margin: 15px 4px;
-    font-weight: normal;
-    font-size: 29px;
-}
-
-h3 b {
-    color: var(--color-theme);
-    padding: 0;
-    font-weight: bold;
-}
-
-h4 {
-    color: var(--color-theme);
-    padding: 0;
-    margin: 15px 4px;
-    font-weight: normal;
-    font-size: 26px;
-}
-
-h4 b {
-    color: var(--color-theme);
-    padding: 0;
-    font-weight: bold;
-}
-
-h5 {
-    color: var(--color-theme);
-    padding: 0;
-    margin: 15px 4px;
-    font-weight: normal;
-    font-size: 23px;
-}
-
-h5 b {
-    color: var(--color-theme);
-    padding: 0;
-    font-weight: bold;
-}
-
-h6 {
-    color: var(--color-theme);
-    padding: 0;
-    margin: 15px 4px;
-    font-weight: normal;
-    font-size: 20px;
-}
-
-h6 b {
-    color: var(--color-theme);
-    padding: 0;
-    font-weight: bold;
+/* 黑色主题下的粗体元素 */
+.black b,
+h1.black b, h2.black b, h3.black b, h4.black b, h5.black b, h6.black b {
+    color: var(--color-text) !important;
 }
 
 p {
@@ -176,11 +128,13 @@ a:active {
 }
 
 /* 伪装成按钮的超链接 */
-a.button-big, a.button-small{
+a.button-big,
+a.button-small {
     text-decoration: none;
 }
 
-a.button-big:hover, a.button-small:hover {
+a.button-big:hover,
+a.button-small:hover {
     font-weight: normal
 }
 
@@ -237,6 +191,7 @@ header {
     height: 100%;
 }
 
+/* 以下class已弃用，使用<nav>替代header-item */
 .header-item {
     display: flex;
     align-items: center;
@@ -269,6 +224,40 @@ header {
     border-bottom: 2px solid var(--color-contrast-text);
 }
 
+/* 以上class已弃用，使用<nav>替代header-item */
+
+header nav {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+}
+
+header nav button, header nav a {
+    font-weight: normal;
+    text-decoration: none;
+    padding: 0 7px;
+    margin: 0 10px;
+    border-bottom: 3px solid transparent;
+    transition: transform 0.1s ease, border-bottom 0.1s ease;
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+header nav button:hover, header nav a:hover {
+    font-weight: normal;
+    border-bottom: 3px solid var(--color-contrast-text);
+    transition: transform 0.1s ease, border-bottom 0.1s ease;
+}
+
+header nav button:active, header nav a:active {
+    background-color: var(--color-contrast-text);
+    color: var(--color-theme);
+    font-weight: normal;
+    border-bottom: 2px solid var(--color-contrast-text);
+}
+
 header h1,
 header h2,
 header h3,
@@ -281,7 +270,7 @@ header a {
 }
 
 nav.bar {
-    border-bottom: 1px solid var(--color-theme);
+    border-bottom: 2px solid var(--color-theme);
     padding: 0 var(--style-side-padding);
 }
 
@@ -305,6 +294,17 @@ nav.bar button:active {
 nav.bar button.active {
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
+}
+
+section.multiple-page {
+    display: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+section.multiple-page.active {
+    display: block;
 }
 
 /* 脚注 */
@@ -425,40 +425,30 @@ button .flat {
 
 
 /* 提示线 */
-.callout.normal {
+.callout {
     margin: 20px auto;
     border-left: 5px solid var(--color-theme);
     padding: 2px 20px;
 }
 
+
 .callout.caution {
-    margin: 20px auto;
-    border-left: 5px solid var(--color-theme);
     --color-theme: rgb(255, 153, 0);
     --color-theme-shallow: rgb(255, 195, 106);
-    padding: 2px 20px;
+
 }
 
 .callout.warning {
-    margin: 20px auto;
-    border-left: 5px solid var(--color-theme);
     --color-theme: rgb(192, 0, 0);
     --color-theme-shallow: rgb(255, 106, 106);
-    padding: 2px 20px;
 }
 
 .callout.modest {
-    margin: 20px auto;
-    border-left: 5px solid var(--color-theme);
-    padding: 2px 20px;
     --color-theme: var(--color-grey);
     --color-theme-shallow: rgb(209, 209, 209);
 }
 
 .callout.pink {
-    margin: 20px auto;
-    border-left: 5px solid var(--color-theme);
-    padding: 2px 20px;
     --color-theme: var(--color-pink);
     --color-theme-shallow: rgb(255, 224, 224);
 }
@@ -579,6 +569,57 @@ input:hover {
 input:active {
     border: 1px solid var(--color-theme);
     background-color: var(--color-theme-shallow);
+}
+
+section {
+    background-color: var(--color-contrast-text);
+    margin: 20px 0;
+    padding: 10px;
+    color: var(--color-text);
+}
+
+/* Spoiler */
+div.spoiler-header {
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-hr);
+}
+
+div.spoiler-header * {
+    display: inline-block;
+    padding: 0;
+    margin: 3px;
+    font-size: 23px;
+    color: var(--color-text);
+}
+
+div.spoiler-header button {
+    border: none;
+    background-color: transparent;
+}
+
+div.spoiler-header button:hover {
+    background-color: var(--color-theme-shallow);
+}
+
+section.spoiler-content {
+    max-height: 0;
+    opacity: 0;
+    background-color: transparent;
+    margin: 0; /* 初始时设为0，避免影响布局 */
+    padding: 20px;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+    transform: translateY(-10px); /* 初始位置稍微向上 */
+}
+
+section.spoiler-content.active {
+    max-height: 500px; /* 设置一个足够大的值 */
+    opacity: 1;
+    margin: 10px; /* 恢复原始margin值 */
+    padding: 0; /* 保持原padding */
+    overflow: visible; /* 显示内容 */
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin 0.3s ease-in-out;
+    transform: translateY(0); /* 恢复到正常位置 */
 }
 
 /* 根据不同设备调整css */
