@@ -1,30 +1,3 @@
-// 判断是否在移动端
-function getDeviceType() {
-    const userAgent = navigator.userAgent;
-    const isAndroid = /Android/i.test(userAgent);
-    const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
-    const isWindowsPhone = /Windows Phone/i.test(userAgent);
-
-    if (isAndroid || isIOS || isWindowsPhone) {
-        if (/(tablet|ipad|playbook|silk)|(android(?!.*mobile))/i.test(userAgent)) {
-            return 'tablet';
-        }
-        return 'mobile';
-    }
-
-    return 'desktop';
-}
-
-// 获取设备类型并设置样式
-const deviceType = getDeviceType();
-if (deviceType === "desktop") {
-    // 桌面端逻辑
-} else if (deviceType === "tablet") {
-    document.documentElement.style.setProperty("--style-side-padding", "50px");
-} else {
-    document.documentElement.style.setProperty("--style-side-padding", "10px");
-}
-
 // 用于存放数据
 var webData = {
     navBar: { buttons: [], contents: [] }
@@ -43,11 +16,11 @@ const Web = {
     },
 
     // nav bar相关服务
-    addElementToBar: function(buttonId, contentId) {
+    addElementToBar: function (buttonId, contentId) {
         // 检查元素是否存在
         const button = document.getElementById(buttonId);
         const content = document.getElementById(contentId);
-        
+
         if (!button || !content) {
             console.error(`Button or content element not found. Button ID:  $ {buttonId}, Content ID:  $ {contentId}`);
             return;
@@ -56,11 +29,11 @@ const Web = {
         webData.navBar.buttons.push(buttonId);
         webData.navBar.contents.push(contentId);
 
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             for (let i = 0; i < webData.navBar.buttons.length; i++) {
                 const btn = document.getElementById(webData.navBar.buttons[i]);
                 const cnt = document.getElementById(webData.navBar.contents[i]);
-                
+
                 if (btn && cnt) {
                     btn.classList.remove("active");
                     cnt.classList.remove("active");
@@ -71,11 +44,11 @@ const Web = {
         });
     },
 
-    addSpoiler: function(buttonId, contentId) {
+    addSpoiler: function (buttonId, contentId) {
         const button = document.getElementById(buttonId);
         const content = document.getElementById(contentId);
 
-        button.addEventListener("click", function() {
+        button.addEventListener("click", function () {
             if (button.classList.contains("active")) {
                 button.classList.remove("active");
                 content.classList.remove("active");
@@ -86,5 +59,39 @@ const Web = {
                 button.innerHTML = `<i class="b">k</i>`;
             }
         })
+    },
+
+    // 判断是否在移动端
+    getDeviceType: function () {
+        const userAgent = navigator.userAgent;
+        const isAndroid = /Android/i.test(userAgent);
+        const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+        const isTablet = /iPad|Tablet|PlayBook|Silk/i.test(userAgent); // 修正拼写
+
+        let platform, device;
+
+        if (isAndroid) {
+            platform = "Android";
+            device = isTablet ? "tablet" : "phone";
+        } else if (isIOS) {
+            platform = "iOS";
+            device = /iPad/.test(userAgent) ? "tablet" : "phone";
+        } else {
+            platform = "desktop";
+            device = "desktop";
+        }
+
+        return [device, platform];
     }
 };
+
+// 获取设备类型并设置样式
+Web.deviceType = Web.getDeviceType()[0]
+Web.devicePlatform = Web.getDeviceType()[1];
+if (Web.deviceType === "desktop") {
+    // 桌面端逻辑
+} else if (Web.deviceType === "tablet") {
+    document.documentElement.style.setProperty("--style-side-padding", "60px");
+} else {
+    document.documentElement.style.setProperty("--style-side-padding", "30px");
+}

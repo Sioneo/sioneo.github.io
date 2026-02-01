@@ -5,7 +5,7 @@
   <title>下载西奥小镇</title>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="../css/document.css">
-  <script src="../web/service/webService.js"></script>
+  <script src="../web/service/web-service.js"></script>
   <script>
     let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
     const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
@@ -102,63 +102,75 @@
   </header>
 
   <main>
-    <h3><b>Android</b></h3>
-    <p>在<a target="_blank"
-        href="https://play.google.com/store/apps/details?id=info.flowersoft.theotown.theotown&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-">Google
-        Play</a>上下载</p><br><br>
-    <h4>下载<i class="w">Q</i>GitHub上的官方安装包</h4>
-
-    <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p><br>
-    <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
-    <div style="display: inline-block; margin-left: 10px;">
-      <a id="downloadLink" target="_self" href="#" class="button-full-green flat" style="display: none"><i
-          style="font-size: 19px;" class="w">y</i>下载最新版本安装包</a>
+    <div class="spoiler-header"><button class="" id="android-button"><i class="b">a</i></button>
+      <h5>安卓</h5>
     </div>
-    <br>
-    <p>旧版本安装包：</p>
-    <div id="oldVersions"></div><br>
+    <section class="spoiler-content " id="android-content">
+      <p>在<a target="_blank"
+          href="https://play.google.com/store/apps/details?id=info.flowersoft.theotown.theotown&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-">Google
+          Play</a>上下载</p>
+      <p>在<a target="_blank" href="https://gitee.com/sioneo/theo-town-game-download">Gitee</a>上下载(国内代码托管网站，连接较稳定，但安装包是手动上传，可能有延后)</p><br><br>
 
-    <div class="callout normal">
-      <h6>切换代下站(如果下载速度慢可以尝试切换)</h6>
-      <button class="button-small"
-        onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://github-proxy.memory-echoes.cn/'; updateLatestVersion(); updateOldVersions();">github-proxy.memory-echoes.cn</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://github-proxy.teach-english.tech/'; updateLatestVersion(); updateOldVersions();">github-proxy.teach-english.tech</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://gh.wsmdn.dpdns.org/'; updateLatestVersion(); updateOldVersions();">gh.wsmdn.dpdns.org</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://github.tbedu.top/'; updateLatestVersion(); updateOldVersions();">github.tbedu.top</button>
+      <h4>下载<i class="w">Q</i>GitHub上的官方安装包</h4>
+
+      <p style="display: inline-block;">目前西奥小镇在GitHub上最新的发行版是</p><br>
+      <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
+      <div style="display: inline-block; margin-left: 10px;">
+        <a id="downloadLink" target="_self" href="#" class="button-full-green flat" style="display: none"><i
+            style="font-size: 19px;" class="w">y</i>下载最新版本安装包</a>
+      </div>
+      <br>
+      <p>旧版本安装包：</p>
+      <div id="oldVersions"></div><br>
+
+      <div class="callout normal">
+        <h6>切换代下站(如果下载速度慢可以尝试切换)</h6>
+        <button class="button-small"
+          onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://github-proxy.memory-echoes.cn/'; updateLatestVersion(); updateOldVersions();">github-proxy.memory-echoes.cn</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://github-proxy.teach-english.tech/'; updateLatestVersion(); updateOldVersions();">github-proxy.teach-english.tech</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://gh.wsmdn.dpdns.org/'; updateLatestVersion(); updateOldVersions();">gh.wsmdn.dpdns.org</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://github.tbedu.top/'; updateLatestVersion(); updateOldVersions();">github.tbedu.top</button>
 
 
-      <button class="button-small"
-        onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://gh.catmak.name/'; updateLatestVersion(); updateOldVersions();">gh.catmak.name</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
-      <button class="button-small"
-        onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
-    </div>
+        <button class="button-small"
+          onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://gh.catmak.name/'; updateLatestVersion(); updateOldVersions();">gh.catmak.name</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
+        <button class="button-small"
+          onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
+      </div>
 
-    <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a
-        href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)<br>(更新日期：2025/12/28):</p>
-    <p>1.12.41: <a class="outbound"
-        href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.41/android-playstore-release.apk</a>
-    </p>
-
-    <hr>
-    <div class="box">
-      <h3><b>iOS</b></h3>
-      <a href="https://itunes.apple.com/us/app/theotown/id1459639864" target="_blank">点击这里</a>或AppStore登录外区账号搜索TheoTown
+      <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)(手动更新):</p>
+      <p>1.12.50: <a class="outbound"
+          href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.50/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.50/android-playstore-release.apk</a>
       </p>
+    </section>
+
+    <div class="spoiler-header"><button class="" id="ios-button"><i class="b">a</i></button>
+      <h5>iOS</h5>
     </div>
-    <hr>
-    <h3><b>电脑端</b></h3>
-    <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
-      <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/" target="_blank">点击这里</a></p>
-    </iframe>
+    <section class="spoiler-content " id="ios-content">
+      <p>
+        <a href="https://itunes.apple.com/us/app/theotown/id1459639864"
+          target="_blank">点击这里</a>或AppStore登录外区账号搜索TheoTown
+      </p>
+    </section>
+
+    <div class="spoiler-header"><button class="" id="pc-button"><i class="b">a</i></button>
+      <h5>电脑端</h5>
+    </div>
+    <section class="spoiler-content " id="pc-content">
+      <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
+        <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/" target="_blank">点击这里</a></p>
+      </iframe>
+    </section>
 
     <script>
       // 更新页面内容
@@ -169,6 +181,19 @@
 
   <script src="../web/footer/theotown-footer.js"></script>
   <theotown-footer></theotown-footer>
+  <script>
+    Web.addSpoiler("android-button", "android-content");
+    Web.addSpoiler("ios-button", "ios-content");
+    Web.addSpoiler("pc-button", "pc-content");
+
+    if (Web.devicePlatform == "Android") {
+      document.getElementById("android-button").click();
+    } else if (Web.devicePlatform == "iOS") {
+      document.getElementById("ios-button").click();
+    } else {
+      document.getElementById("pc-button").click();
+    }
+  </script>
 
 
 </body>
