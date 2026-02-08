@@ -15,6 +15,9 @@
     --color-link-active: black;
     --color-link-active-background: rgb(255, 208, 0);
     --color-green: green;
+    --color-green-shallow: rgb(186, 255, 186);
+    --color-red: rgb(209, 0, 0);
+    --color-red-shallow: rgb(255, 196, 196);
     --color-grey: rgb(71, 71, 71);
     --color-pink: rgb(255, 120, 142);
 }

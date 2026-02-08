@@ -6,6 +6,45 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/document.css">
     <script src="../../web/service/web-service.js"></script>
+    <style>
+        .tag-green {
+            background-color: var(--color-green-shallow);
+            margin: 5px 10px;
+            padding: 3px 7px;
+            font-size: 12px;
+            color: var(--color-green);
+            cursor: default;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .tag-green::after {
+            content: "绿色"
+        }
+
+        .tag-green:hover::after {
+            content: "绿色标签：这是一个用户可以自己解决的问题"
+        }
+
+        .tag-red {
+            background-color: var(--color-red-shallow);
+            margin: 5px 10px;
+            padding: 3px 7px;
+            font-size: 12px;
+            color: var(--color-red);
+            cursor: default;
+            vertical-align: middle;
+            display: inline-block;
+        }
+
+        .tag-red::after {
+            content: "红色"
+        }
+
+        .tag-red:hover::after {
+            content: "红色标签：这是一个需要插件制作者解决的问题"
+        }
+    </style>
 </head>
 
 <body>
@@ -25,9 +64,50 @@
     </header>
 
     <main>
-        <p>下面列出一些常见的插件报错以及解决方法。</p>
+        <p>下面列出一些常见的插件报错以及解决方法。需要注意的是，几乎所有插件报错（Plugin Error）都可以通过禁用插件来解决，但这只能算得上是一个临时解决方案，这里介绍的都是从根本上解决的方案。</p>
         <ol>
-            <li><b></b></li>
+            <li><b>插件重复类错误</b><span class="tag-green"></span>
+                <br>
+                <code>XXX is alrealy in use. Use another id or add "override": true to your plugin.</code><span><br>或</span><code>A manifest id of XXX was defined before in XXX; ensure that you have no duplicates.</code>
+                <br>
+                <p>出现这两个错误说明plugins文件夹中存在重复的插件，依照报错插件的文件路径将其删除即可。</p>
+            </li>
+            <li><b>草稿缺少ID</b><span class="tag-red"></span>
+                <br>
+                <code>Item may not be null!</code>
+                <br>
+                <p>出现这个错误说明有一个草稿缺少ID</p>
+            </li>
+            <li><b>草稿缺少类型</b><span class="tag-red"></span>
+                <br>
+                <code>May not find a loader for type not defined</code>
+                <br>
+                <p>出现这个错误说明有一个草稿缺少类型（type），或类型填写错误</p>
+            </li>
+            <li><b>草稿缺少底座宽度</b><span class="tag-red"></span>
+                <br>
+                <code>When loading XXX: Building width x height must be > 0 but got 0 x X</code>
+                <br>
+                <p>出现这个错误说明有一个草稿缺少底座宽度（width）</p>
+            </li>
+            <li><b>草稿缺少底座高度</b><span class="tag-red"></span>
+                <br>
+                <code>When loading XXX: Building width x height must be > 0 but got X x 0</code>
+                <br>
+                <p>出现这个错误说明有一个草稿缺少底座高度（height）</p>
+            </li>
+            <li><b>草稿缺少帧</b><span class="tag-red"></span>
+                <br>
+                <code>When loading XXX: No frames have been provided.</code>
+                <br>
+                <p>出现这个错误说明有一个草稿缺少<a target="_blank" href="frames.html">帧（frames）</a></p>
+            </li>
+            <li><b>语法错误类</b><span class="tag-red"></span>
+                <br>
+                <code>info.flowersoft.theotown.util.json.JSONException: ...</code>
+                <br>
+                <p>如果你的报错信息以这个开头，那么说明你的JSON代码可能存在语法错误，你可以使用一些JSON语法检查器或者使用AI帮你解决语法问题。</p>
+            </li>
         </ol>
     </main>
 
