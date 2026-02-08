@@ -541,13 +541,13 @@ li {
 
 /* 等宽字体 */
 pre {
-    font-family: "Consolas", "Menlo", "Droid Sans Mono", monospace, sans-serif;
+    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
     font-size: 18px;
     background-color: var(--color-mono-background);
 }
 
 code {
-    font-family: "Consolas", "Menlo", "Droid Sans Mono", monospace, sans-serif;
+    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
     font-size: 16px;
     background-color: var(--color-mono-background);
     margin: auto 5px;
