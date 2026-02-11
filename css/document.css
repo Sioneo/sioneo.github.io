@@ -639,6 +639,11 @@ input:active {
     background-color: var(--color-theme-shallow);
 }
 
+input.tool-input {
+    display: flex;
+    width: max-content;
+}
+
 section {
     margin: 20px 0;
     padding: 10px;
