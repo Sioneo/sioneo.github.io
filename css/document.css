@@ -360,11 +360,6 @@ nav.bar button:active {
     color: var(--color-contrast-text);
 }
 
-nav.bar button.active {
-    background-color: var(--color-theme);
-    color: var(--color-contrast-text);
-}
-
 section.multiple-page {
     display: none;
     margin: 0;
@@ -639,10 +634,49 @@ input:active {
     background-color: var(--color-theme-shallow);
 }
 
-input.tool-input {
-    display: flex;
-    width: max-content;
+input.tool-input, select.tool-input {
+    display: inline-block;
+    margin: 10px 10px;
+    width: 40vw;
+    height: 30px;
 }
+
+select {
+    background-color: var(--color-box-background);
+    border: none;
+    font-size: 16px;
+    border: 1px solid var(--color-grey);
+    font-family: "Cabin", sans-serif;
+}
+
+select:hover {
+    border: 1px solid var(--color-theme);
+    background-color: var(--color-theme-shallow);
+}
+
+select:active {
+    border: 1px solid var(--color-theme);
+    background-color: var(--color-theme-shallow);
+}
+
+select.tool-input {
+    display: inline-block;
+    margin-left: 10px;
+    width: 40vw;
+}
+
+form label {
+    width: 10vw;
+    display: inline-block;
+    text-align: right;
+    margin: 5px auto;
+    padding: 3px auto;
+}
+
+form label:hover {
+    font-weight: bold;
+}
+
 
 section {
     margin: 20px 0;

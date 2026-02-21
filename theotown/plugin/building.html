@@ -2,12 +2,14 @@
 <html>
 
 <head>
-    <title>标题</title>
+    <title>插件开发工具</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/document.css">
     <script src="../../web/footer/theotown-footer.js">
     </script>
     <script src="../../web/service/web-service.js"></script>
+    <script src="../../web/service/js-zip.js"></script>
+    <script src="building-js/general-service.js"></script>
 </head>
 
 <body>
@@ -26,44 +28,225 @@
         <h4>建筑-扩展</h4>
         </div>
         <nav>
-            <a href="animation-dev.html">动画开发工具</a>
+            <a target="_blank" href="animation-dev.html">动画开发工具</a>
         </nav>
     </header>
 
     <nav class="bar">
-        <button class="active" id="nav-button-rci">住商工(RCI)</button>
-        <button id="nav-button-service">服务类</button>
+        <button class="active" id="nav-button-rci">主程序</button>
     </nav>
 
     <main>
-        <section class="active multiple-page" id="section-content-rci">
-            <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
-                <h5>基础数据</h5>
+        <section class="active multiple-page" id="section-content-rci"></section>
+        <form>
+            <label for="project-name-input">项目名</label>
+            <input name="project-name" id="project-name-input" class="tool-input" type="text">
+            <button type="button" class="button-small"
+                onclick="document.getElementById('project-name-input').value = null;">清空</button>
+
+        </form>
+
+        <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
+            <h5>基础数据</h5>
+        </div>
+        <section id="rci-basic-data-content" class="spoiler-content active">
+            <form id="rci-basic-data-form">
+                <label for="id-input"><em>ID*</em></label><input id="rci-id-input" class="tool-input" type="text"
+                    name="id" required><button class="button-small"
+                    onclick="document.getElementById('rci-id-input').value = randomId('building')"
+                    type="button">随机ID</button><br>
+                <label for="type-input"><em>类型*</em></label><select id="type-input" class="tool-input" id="type"
+                    required>
+                    <option value="" selected disabled>无</option>
+                    <option value="residential">住宅</option>
+                    <option value="commercial">商业</option>
+                    <option value="industrial">工业</option>
+                </select><br>
+                <label for="level-input"><em>等级*</em></label><select id="level-input" name="level" class="tool-input">
+                    <option value="" selected>无</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select><br>
+                <label for="width-input"><em>建筑宽度*</em></label><input id="width-input" type="number" min="1"
+                    name="width" max="16" class="tool-input" required><br>
+                <label for="height-input"><em>建筑高度*</em></label><input id="height-input" type="number" min="1"
+                    name="height" max="16" class="tool-input" required><br>
+                <label for="title-input">标题</label><input id="title-input" type="text" class="tool-input"
+                    name="title"><br>
+                <label for="desc-input">描述</label><input id="desc-input" type="text" class="tool-input" name="text"><br>
+                <label for="people-input">人口</label><input id="people-input" type="number" min="0" name="people"
+                    class="tool-input"><br>
+            </form>
+        </section>
+
+        <div class="spoiler-header"><button class="active" id="rci-frames-data-button"><i class="b">k</i></button>
+
+            <h5>帧（frames）</h5>
+        </div>
+        <section id="rci-frames-data-content" class="spoiler-content active">
+            <button id="frames-add-button" class="button-big">添加一个帧</button>
+            <div id="rci-frames-showcase">
+                <h6>帧</h6>
+            </div><br>
+        </section>
+
+        <div class="spoiler-header"><button class="active" id="rci-animation-data-button"><i class="b">k</i></button>
+            <h5>动画</h5>
+        </div>
+        <section id="rci-animation-data-content" class="spoiler-content active">
+            <button id="animation-add-button" class="button-big">添加一个动画</button>
+            <h6>动画</h6>
+            <div id="rci-animation-showcase">
+
+            </div><br>
+        </section>
+
+        <div class="spoiler-header"><button class="" id="rci-advanced-data-button"><i class="b">a</i></button>
+            <h5>高级选项</h5>
+        </div>
+        <section id="rci-advanced-data-content" class="spoiler-content">
+            <form id="rci-advanced-data-form">
+                <label for="draw-ground-input">draw ground</label><input type="checkbox" value="true" class="tool-input"
+                    id="draw-ground-input" name="draw ground" checked><br>
+                <label for="water-input">耗水量</label><input type="number" min="0" id="water-input" class="tool-input"
+                    name="water"><br>
+                <label for="power-input">耗电量</label><input type="number" min="0" id="power-input" class="tool-input"
+                    name="power"><br>
+            </form>
+        </section>
+
+        <br><br>
+        <section class="callout normal background">
+            <div style="display: flex; justify-content: space-between;">
+                <h6>结果</h6>
+                <div>
+                    <button type="button" id="main-submit-button" class="button-full-green"><i
+                            class="w">I</i>完成</button>
+                    <button type="button" id="new-package-button" class="button-full-green"><i
+                            class="w">y</i>打包成zip压缩包并下载</button>
+                </div>
             </div>
-            <section id="rci-basic-data-content" class="spoiler-content active">
-                <form style="display: flex; justify-content: space-between;">
-                    <div>
-                        <p>ID</p><input class="tool-input" type="text">
-                    </div>
-                    <div>
-                        <p>ID</p><input type="text">
-                    </div>
-                </form>
-            </section>
+            <pre id="json-output">啥也没有</pre>
+        </section>
+
+
         </section>
         <section class="multiple-page" id="section-content-service">
-            <h4>基础数据</h4>
-
+            <p>开发中</p>
         </section>
     </main>
 
     <script>
-        Web.addElementToBar("nav-button-rci", "section-content-rci");
-        Web.addElementToBar("nav-button-service", "section-content-service");
+        Web.addElementToBar("nav-button-rci", "section-content-rci", "RCI", true);
 
         Web.addSpoiler("rci-basic-data-button", "rci-basic-data-content");
+        Web.addSpoiler("rci-frames-data-button", "rci-frames-data-content");
+        Web.addSpoiler("rci-animation-data-button", "rci-animation-data-content");
+        Web.addSpoiler("rci-advanced-data-button", "rci-advanced-data-content");
     </script>
+
+    <!-- 一些对话框 -->
+    <!-- 添加一个帧 -->
+    <dialog style="max-width: 60vw;" id="add-new-frames-dialog">
+        <div class="header">
+            <span class="header-title">添加一个帧</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-frames-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-frames-form">
+                <label for="frames-image-input">贴图</label><input name="image-input" id="frames-image-input" type="file"
+                    accept="image/png" class="tool-input" required><br>
+                <label for="frames-handle-x-input">handle x</label><input name="handle x" id="frames-handle-x-input"
+                    type="number" class="tool-input"><br>
+                <label for="frames-handle-y-input">handle y</label><input name="handle y" id="frames-handle-y-input"
+                    type="number" class="tool-input">
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('add-new-frames-dialog').close();" class="button-small">关闭</button>
+            <button id="new-frames-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 添加动画 -->
+    <dialog style="max-width: 60vw;" id="add-new-animation-dialog">
+        <div class="header">
+            <span class="header-title">添加一个动画</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-animation-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-animation-form">
+                <label for="id-input">ID</label><input class="tool-input" name="id" id="animation-id-input"
+                    required><br>
+                <label for="night-input">启用夜景</label><input type="checkbox" class="tool-input"
+                    id="animation-night-input" name="night">
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('animation-id-input').value = randomId('animation')"
+                class="button-small">随机ID</button>
+            <button onclick="document.getElementById('add-new-animation-dialog').close();"
+                class="button-small">关闭</button>
+            <button id="new-animation-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 为动画添加帧 -->
+    <dialog style="max-width: 60vw;" id="add-new-animation-frame-dialog">
+        <div class="header">
+            <span class="header-title">添加一个帧</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-animation-frame-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-animation-frame-form">
+                <label for="animation-image-input">贴图</label><input class="tool-input" name="image"
+                    id="animation-frame-image-input" type="file" accept="image/png" required multiple><br>
+                <label for="x-input">handle x</label><input name="handle-x" id="animation-frame-x-input"
+                    class="tool-input" type="number"><br>
+                <label for="y-input">handle y</label><input name="handle-y" id="animation-frame-y-input"
+                    class="tool-input" type="number"><br>
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('add-new-animation-frame-dialog').close();"
+                class="button-small">关闭</button>
+            <button id="new-animation-frame-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 插件清单文件 -->
+    <dialog style="max-width: 60vw;" id="plugin-manifest-dialog">
+        <div class="header">
+            <span class="header-title">添加一个帧</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('plugin-manifest-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('plugin-manifest-dialog').close();"
+                class="button-small">关闭</button>
+            <button type="button" id="plugin-manifest-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <script src="building-js/checker.js"></script>
+    <script src="building-js/monitor.js"></script>
     <script src="building-js/processor.js"></script>
+    <script src="building-js/packer.js"></script>
 
     <theotown-footer></theotown-footer>
 
