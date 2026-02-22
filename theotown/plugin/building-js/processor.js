@@ -1,13 +1,11 @@
 // 储存最后输出的json数据
 let jsonData = {
-    rci: { json: {}, resource: [] },
-    service: { json: {}, resource: [] }
+    rci: { json: {}, resource: [] }
 }
 
 // 暂存帧和动画导入时的json数据
 let imageData = {
-    rci: { frames: {}, animation: {} },
-    service: { frames: {}, animation: {} }
+    rci: { frames: {}, animation: {} }
 }
 
 /**

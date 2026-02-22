@@ -97,6 +97,10 @@ const Web = {
         }
 
         return [device, platform];
+    },
+
+    hasNonAscii: function (str) {
+        return /[^\x00-\x7F]/.test(str);
     }
 };
 

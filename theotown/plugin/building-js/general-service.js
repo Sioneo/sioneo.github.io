@@ -9,7 +9,18 @@ var generalData = {
     pluginManifestDialog: {
         hasAddedListenerToSubmitButton: false
     },
-    projectName: null
+    projectName: null,
+    currentMode: null // rci或者服务类service
+}
+
+// 记录了不同类型的不可用属性
+var typeValueData = {
+    rci: [
+        "monthly price"
+    ],
+    service: [
+
+    ]
 }
 
 // 随机ID服务
