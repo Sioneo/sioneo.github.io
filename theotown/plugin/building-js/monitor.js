@@ -38,12 +38,21 @@ document.getElementById("type-input").addEventListener("input", function (event)
             break;
         case "education": // 小学教育
             peopleInput.name = "provide aspect education low";
+            generalData.currentMode = "service";
+            levelSelect.required = false;
+            levelSelect.options[0].disabled = false;
             break;
         case "$education": // 高等教育
             peopleInput.name = "provide aspect education high";
+            generalData.currentMode = "service";
+            levelSelect.required = false;
+            levelSelect.options[0].disabled = false;
             break;
         case "medic":
             peopleInput.name = "provide aspect health care";
+            generalData.currentMode = "service";
+            levelSelect.required = false;
+            levelSelect.options[0].disabled = false;
             break;
         default:
             generalData.currentMode = "service";
