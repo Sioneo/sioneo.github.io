@@ -32,8 +32,9 @@
         </nav>
     </header>
 
-    <nav class="bar">
-        <button class="active" id="nav-button-rci">主程序</button>
+    <nav class="bar" style="min-height: 30px; align-items: center; display: flex; justify-content: space-between;">
+        <span class="active" id="nav-button-rci">开发阶段</span>
+        <span>问题反馈：到频道或者各大QQ群(见最底下脚注)找<em>九如今天吃什么</em>(@我就行)</span>
     </nav>
 
     <main>
@@ -46,123 +47,154 @@
         </form>
         <p id="project-name-non-ascii-note" style="color: var(--color-red);"></p>
 
-        <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
-            <h5>基础数据</h5>
-        </div>
-        <section id="rci-basic-data-content" class="spoiler-content active">
-            <form id="rci-basic-data-form">
-                <label for="id-input"><em>ID*</em></label><input id="rci-id-input" class="tool-input" type="text"
-                    name="id" required><button class="button-small"
-                    onclick="document.getElementById('rci-id-input').value = randomId('building')"
-                    type="button">随机ID</button><br>
-                <label for="type-input"><em>类型*</em></label><select id="type-input" class="tool-input" name="type"
-                    required>
-                    <option value="" selected disabled>无</option>
-                    <option value="residential">🏠 住宅</option>
-                    <option value="commercial">🏢 商业</option>
-                    <option value="industrial">🏭 工业</option>
-                    <option value="farm">🌾 农场</option>
-                    <option value="harbor ind">⚓ 港口工业</option>
-                    <option value="park">🌳 公园</option>
-                    <option value="sport">⚽ 体育</option>
-                    <option value="public">🏛️ 公共</option>
-                    <option value="religion">⛪ 宗教</option>
-                    <option value="award">🏆 奖励</option>
-                    <option value="energy">⚡ 供电</option>
-                    <option value="water">💧 供水</option>
-                    <option value="medic">🚑 医疗</option>
-                    <option value="police">🚔 警察</option>
-                    <option value="swat">🚓 特警</option>
-                    <option value="fire brigade">🚒 消防</option>
-                    <option value="education">📚 教育</option>
-                    <option value="decoration">🎨 装饰</option>
-                    <option value="bus depot" disabled>公交车站（不支持）</option>
-                </select><br>
-                <label for="level-input"><em>等级*</em></label><select id="level-input" name="level" class="tool-input">
-                    <option value="" selected>无</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                </select><br>
-                <label for="width-input"><em>建筑宽度*</em></label><input id="width-input" type="number" min="1"
-                    name="width" max="16" class="tool-input" required><br>
-                <label for="height-input"><em>建筑高度*</em></label><input id="height-input" type="number" min="1"
-                    name="height" max="16" class="tool-input" required><br>
-                <label for="title-input">标题</label><input id="title-input" type="text" class="tool-input"
-                    name="title"><br>
-                <label for="desc-input">描述</label><input id="desc-input" type="text" class="tool-input" name="text"><br>
-                <label for="people-input">人口</label><input id="people-input" type="number" min="0" name="people"
-                    class="tool-input"><br>
-            </form>
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
+                <h5>基础数据</h5>
+            </div>
+            <div id="rci-basic-data-content" class="spoiler-content active">
+                <form id="rci-basic-data-form">
+                    <label for="id-input"><em>ID*</em></label><input id="rci-id-input" class="tool-input" type="text"
+                        name="id" required><button class="button-small"
+                        onclick="document.getElementById('rci-id-input').value = randomId('building')"
+                        type="button">随机ID</button><br>
+                    <label for="type-input"><em>类型*</em></label><select id="type-input" class="tool-input" name="type"
+                        required>
+                        <option value="" selected disabled>无</option>
+                        <option value="residential">🏠 住宅</option>
+                        <option value="commercial">🏢 商业</option>
+                        <option value="industrial">🏭 工业</option>
+                        <option value="farm">🌾 农场</option>
+                        <option value="harbor ind">⚓ 港口工业</option>
+                        <option value="park">🌳 公园</option>
+                        <option value="sport">⚽ 体育</option>
+                        <option value="public">🏛️ 公共</option>
+                        <option value="religion">⛪ 宗教</option>
+                        <option value="award">🏆 奖励</option>
+                        <option value="energy">⚡ 供电</option>
+                        <option value="water">💧 供水</option>
+                        <option value="medic">🚑 医疗</option>
+                        <option value="police">🚔 警察</option>
+                        <option value="swat">🚓 特警</option>
+                        <option value="fire brigade">🚒 消防</option>
+                        <option value="education">📚 小学教育</option>
+                        <option value="$education">📖 高等教育</option> <!-- 用$符号区分两个教育 -->
+                        <option value="decoration">🎨 装饰</option>
+                        <option value="bus depot" disabled>公交车站（不支持）</option>
+                    </select><br>
+                    <label for="level-input"><em>等级*</em></label><select id="level-input" name="level"
+                        class="tool-input">
+                        <option value="" selected>无</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select><br>
+                    <label for="width-input"><em>建筑宽度*</em></label><input id="width-input" type="number" min="1"
+                        name="width" max="16" class="tool-input" required><br>
+                    <label for="height-input"><em>建筑高度*</em></label><input id="height-input" type="number" min="1"
+                        name="height" max="16" class="tool-input" required><br>
+                    <label for="title-input">标题</label><input id="title-input" type="text" class="tool-input"
+                        name="title"><br>
+                    <label for="desc-input">描述</label><input id="desc-input" type="text" class="tool-input"
+                        name="text"><br>
+                    <label for="people-input">人口/容量</label><input id="people-input" type="number" min="0" name="people"
+                        class="tool-input"><br>
+                    <label for="price-input">价格</label><input id="price-input" type="number" min="0" name="price"
+                        class="tool-input"><br>
+                </form>
+            </div>
         </section>
 
-        <div class="spoiler-header"><button class="active" id="rci-frames-data-button"><i class="b">k</i></button>
 
-            <h5>帧（frames）</h5>
-        </div>
-        <section id="rci-frames-data-content" class="spoiler-content active">
-            <button id="frames-add-button" class="button-big">添加一个帧</button>
-            <div id="rci-frames-showcase">
-                <h6>帧</h6>
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-frames-data-button"><i class="b">k</i></button>
+                <h5>帧（frames）</h5>
+            </div>
+            <div id="rci-frames-data-content" class="spoiler-content active">
+                <button id="frames-add-button" class="button-big">添加一个帧</button>
+                <div id="rci-frames-showcase">
+                    <h6>帧列表</h6>
+                </div><br>
+            </div>
+        </section>
+
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-animation-data-button"><i
+                        class="b">k</i></button>
+                <h5>动画</h5>
+            </div>
+            <div id="rci-animation-data-content" class="spoiler-content active">
+                <button id="animation-add-button" class="button-big">添加一个动画</button>
+                <h6>动画列表</h6>
+                <div id="rci-animation-showcase">
+
+                </div>
             </div><br>
         </section>
 
-        <div class="spoiler-header"><button class="active" id="rci-animation-data-button"><i class="b">k</i></button>
-            <h5>动画</h5>
-        </div>
-        <section id="rci-animation-data-content" class="spoiler-content active">
-            <button id="animation-add-button" class="button-big">添加一个动画</button>
-            <h6>动画</h6>
-            <div id="rci-animation-showcase">
 
-            </div><br>
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="" id="rci-advanced-data-button"><i class="b">a</i></button>
+                <h5>高级选项</h5>
+            </div>
+            <div id="rci-advanced-data-content" class="spoiler-content">
+                <form id="rci-advanced-data-form">
+                    <label for="draw-ground-input">绘制地面</label><input type="checkbox" value="true" class="tool-input"
+                        id="draw-ground-input" name="draw ground" checked><br>
+                    <label for="auto-build-input">自动建造</label><input type="checkbox" value="true" class="tool-input"
+                        id="auto-build-input" name="auto build" checked><br>
+                    <label for="needs-road-input">需要道路</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-road-input" name="needs road" checked><br>
+                    <label for="needs-land-input">需要陆地</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-land-input" name="needs land" checked><br>
+                    <label for="needs-water-input">需要水域</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-water-input" name="needs water"><br>
+                    <label for="category-input">分类</label><input type="text" class="tool-input"
+                        id="category-input" name="category"><br>
+                    <label for="build-time-input">建造时间</label><input type="number" min="0" class="tool-input"
+                        id="build-time-input" name="build time"><br>
+                </form>
+            </div>
         </section>
 
-        <div class="spoiler-header"><button class="" id="rci-advanced-data-button"><i class="b">a</i></button>
-            <h5>高级选项</h5>
-        </div>
-        <section id="rci-advanced-data-content" class="spoiler-content">
-            <form id="rci-advanced-data-form">
-                <label for="draw-ground-input">绘制地面</label><input type="checkbox" value="true" class="tool-input"
-                    id="draw-ground-input" name="draw ground" checked><br>
-                <label for="water-input">耗水量</label><input type="number" id="water-input" class="tool-input"
-                    name="water"><br>
-                <label for="power-input">耗电量</label><input type="number" id="power-input" class="tool-input"
-                    name="power"><br>
-                <label for="monthly-price-input">每月收入</label><input type="number" min="0" id="monthly-price-input"
-                    class="tool-input" name="monthly price"><br>
-            </form>
-        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="" id="influence-data-button"><i class="b">a</i></button>
+                <h5>水电/影响</h5>
+            </div>
+            <div id="influence-data-content" class="spoiler-content">
+                <form>
+                    <label for="monthly-price-input">每月费用</label><input type="number" class="tool-input" min="0"
+                        id="monthly-price-input" name="monthly price"><br>
+                    <label id="water-input-label" for="water-input">水(最大0)</label><input type="number" id="water-input"
+                        class="tool-input" name="water"><br>
+                    <label id="power-input-label" for="power-input">电(最大0)</label><input type="number" id="power-input"
+                        class="tool-input" name="power"><br>
+                    <p id="provide-info-para">正数为供应，负数为消耗，当前最大值：0（受面积和每月费用影响）</p>
+                </form>
+                <hr>
+                <button id="influence-add-button" class="button-big">添加一个影响</button>
+                <h6>影响列表</h6>
+                <div id="influence-showcase">
 
-        <div class="spoiler-header"><button class="" id="influence-data-button"><i class="b">a</i></button>
-            <h5>影响</h5>
-        </div>
-        <section id="influence-data-content" class="spoiler-content">
-            <button id="influence-add-button" class="button-big">添加一个影响</button>
-            <h6>影响</h6>
-            <div id="influence-showcase">
-
-            </div><br>
+                </div><br>
+            </div>
         </section>
 
         <br><br>
-        <section class="callout normal background">
+        <section class="box">
             <div style="display: flex; justify-content: space-between;">
                 <h6>结果</h6>
                 <div>
                     <button type="button" id="main-submit-button" class="button-full-green"><i
                             class="w">I</i>完成</button>
                     <button type="button" id="new-package-button" class="button-full-green"><i
-                            class="w">y</i>打包成zip压缩包并下载</button>
+                            class="w">y</i>打包成zip压缩包并下载(开发中)</button>
                 </div>
             </div>
             <pre id="json-output">啥也没有</pre>
         </section>
 
 
-        </section>
-        <section class="multiple-page" id="section-content-service">
-            <p>开发中</p>
         </section>
     </main>
 
@@ -217,6 +249,9 @@
                     required><br>
                 <label for="night-input">启用夜景</label><input type="checkbox" class="tool-input"
                     id="animation-night-input" name="night">
+                <label for="animation-rotation-aware-input">旋转感知(暂未支持)</label><input type="checkbox" class="tool-input"
+                    id="animation-rotation-aware-input" name="rotation aware" value="true">
+                <p id="animation-rotation-aware-info-para"></p>
             </form>
         </div>
         <div class="controls">
@@ -270,6 +305,55 @@
             <button onclick="document.getElementById('plugin-manifest-dialog').close();"
                 class="button-small">关闭</button>
             <button type="button" id="plugin-manifest-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 影响 -->
+    <dialog style="max-width: 60vw;" id="influence-dialog">
+        <div class="header">
+            <span class="header-title">添加一个影响</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('influence-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="influence-form">
+                <label for="influence-type">类型</label>
+                <select name="type" class="tool-input" id="influence-type">
+                    <option value="" selected disabled>无</option>
+                    <option value="influence pollution">🌫️ 污染</option>
+                    <option value="influence noise">🔊 噪音</option>
+                    <option value="influence health">❤️ 健康</option>
+                    <option value="influence police">👮 警察</option>
+                    <option value="influence fire department">🚒 消防</option>
+                    <option value="influence park">🌳 公园</option>
+                    <option value="influence sport">⚽ 运动</option>
+                    <option value="influence education low">📚 小学教育</option>
+                    <option value="influence education high">🎓 高等教育</option>
+                    <option value="influence culture">🎭 文化</option>
+                    <option value="influence management">📋 管理</option>
+                    <option value="influence religion">⛪ 宗教</option>
+                    <option value="influence passenger bus">🚌 公交交通</option>
+                    <option value="influence passenger train">🚆 轨道交通</option>
+                    <option value="influence residential">🏘️ 居民区</option>
+                    <option value="influence commercial">🏢 商业区</option>
+                    <option value="influence industrial">🏭 工业区</option>
+                    <option value="influence level0">🏗️ 1级建筑</option>
+                    <option value="influence level1">🏗️ 2级建筑</option>
+                    <option value="influence level2">🏗️ 3级建筑</option>
+                    <option value="influence radioactive">☢️ 核辐射</option>
+                    <option value="influence nature">🌿 自然</option>
+                    <option value="influence waste disposal">♻️ 垃圾处理</option>
+                    <option value="influence body disposal">⚰️ 葬礼服务</option>
+                </select>
+                <label for="influence-value-input" id="influence-value-label">数值(最大0)</label>
+                <input class="tool-input" id="influence-value-input" name="value" type="number">
+            </form> 
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('influence-dialog').close();" class="button-small">关闭</button>
+            <button type="button" id="influence-submit-button" class="button-small">完成</button>
         </div>
     </dialog>
 

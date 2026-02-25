@@ -19,6 +19,7 @@
     --color-red: rgb(209, 0, 0);
     --color-red-shallow: rgb(255, 196, 196);
     --color-grey: rgb(71, 71, 71);
+    --color-grey-shallow: rgb(185, 185, 185);
     --color-pink: rgb(255, 120, 142);
 }
 
@@ -226,6 +227,10 @@ hr {
     height: 1px;
     padding: 0px;
     margin: 1em 0px;
+}
+
+hr.narrow {
+    margin: 3px;
 }
 
 em {
@@ -634,7 +639,8 @@ input:active {
     background-color: var(--color-theme-shallow);
 }
 
-input.tool-input, select.tool-input {
+input.tool-input,
+select.tool-input {
     display: inline-block;
     margin: 10px 10px;
     width: 40vw;
@@ -674,7 +680,7 @@ form label {
 }
 
 form label:hover {
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 
@@ -684,7 +690,7 @@ section {
     color: var(--color-text);
 }
 
-/* Spoiler */
+/* Spoiler (样式1) (线条型)*/
 div.spoiler-header {
     color: var(--color-text);
     border-bottom: 1px solid var(--color-hr);
@@ -717,6 +723,45 @@ section.spoiler-content {
 section.spoiler-content.active {
     display: block;
     margin-bottom: 20px;
+}
+
+/* Spoiler (样式2) (box型) */
+section.spoiler div.spoiler-header {
+    display: inline-block;
+    padding: 0;
+    margin: 3px;
+    font-size: 23px;
+    color: var(--color-text);
+    border: none;
+}
+
+section.spoiler div.spoiler-header button {
+    border: none;
+    background-color: transparent;
+}
+
+section.spoiler div.spoiler-header button:hover {
+    background-color: var(--color-theme-shallow);
+}
+
+section.spoiler {
+    border: 2px solid var(--color-grey-shallow);
+    border-radius: 10px;
+}
+
+section.spoiler div.spoiler-content {
+    display: none;
+}
+
+section.spoiler div.spoiler-content.active {
+    display: block;
+    margin-bottom: 20px;
+}
+
+/* box */
+.box {
+    border: 2px solid var(--color-grey-shallow);
+    border-radius: 10px;
 }
 
 /* 根据不同设备调整css */

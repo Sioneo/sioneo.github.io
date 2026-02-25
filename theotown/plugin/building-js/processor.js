@@ -8,6 +8,10 @@ let imageData = {
     rci: { frames: {}, animation: {} }
 }
 
+let influenceInputData = {
+
+}
+
 /**
  * 显示“添加新动画”对话框，并在提交时执行回调函数
  * @param {Function} callback - 用户提交后执行的回调，接收包含id和night字段的对象
@@ -26,6 +30,7 @@ function showAddNewAnimationDialog(callback) {
             let form = new FormData(document.getElementById("new-animation-form"));
             result.id = form.get("id");
             result.night = form.has("night");
+            result["rotation aware"] = form.has("rotation aware");
 
             if (result.id) {
                 console.log("动画ID有效，调用回调", result); // 日志：有效数据
@@ -154,7 +159,7 @@ function deleteAnimationFrame(mode, animationId, frameId) {
     console.log(`调用deleteAnimationFrame，模式：${mode}，动画ID：${animationId}，帧ID：${frameId}`); // 日志：函数调用
     switch (mode) {
         case "rci":
-            imageData.rci.animation[animationId].frames[frameId] = null;
+            delete imageData.rci.animation[animationId].frames[frameId];
             document.getElementById("para" + frameId).remove();
             console.log(`已从动画${animationId}中删除帧${frameId}`); // 日志：删除成功
             break;
@@ -178,7 +183,7 @@ function deleteFrame(mode, id) {
     console.log(`调用deleteFrame，模式：${mode}，帧ID：${id}`); // 日志：函数调用
     switch (mode) {
         case "rci":
-            imageData.rci.frames[id] = null;
+            delete imageData.rci.frames[id];
             document.getElementById("para" + id).remove();
             console.log(`已删除独立帧${id}`); // 日志：删除成功
             break;
@@ -193,6 +198,12 @@ function deleteFrame(mode, id) {
     }
 }
 
+// 删除影响
+function deleteInfluence(id) {
+    delete influenceInputData[id];
+    document.getElementById("para" + id).remove();
+}
+
 // 监听“添加动画”按钮点击事件
 document.getElementById("animation-add-button").addEventListener("click", function () {
     console.log("用户点击了添加动画按钮"); // 日志：用户操作
@@ -205,14 +216,17 @@ document.getElementById("animation-add-button").addEventListener("click", functi
             type: "animation",
             light: data.night,
             "light switching": data.night,
+            "rotation aware": data["rotation aware"],
             frames: {}
         };
         console.log(`已创建新动画，内部ID：${id}，用户ID：${data.id}`); // 日志：动画创建
 
         const container = document.createElement("div");
         const para = document.createElement("p");
-        para.innerHTML = `动画&emsp;&emsp;ID: ${data.id}&emsp;&emsp;夜景: ${data.night ? "是" : "否"}&emsp;&emsp;<button class="button-small" onclick="addNewFrameToAnimation('rci', '${id}')">添加帧</button>
-    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button>&emsp;`;
+        para.innerHTML = `<hr class="narrow"><div style="display: flex; justify-content: space-between;">
+        <div>动画&emsp;&emsp;ID: ${data.id}&emsp;&emsp;</div>
+        <div>夜景: ${data.night ? "是" : "否"}&emsp;&emsp;旋转感知: ${data["rotation aware"] ? "是" : "否"}&emsp;&emsp;<button class="button-small" onclick="addNewFrameToAnimation('rci', '${id}')">添加帧</button>
+    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button>&emsp;</div>`;
         container.id = "container" + id;
         para.id = "para" + id;
         container.appendChild(para);
@@ -246,8 +260,11 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
     if (image) {
         let id = "$" + crypto.randomUUID().substring(0, 7);
         const infoPara = document.createElement("p");
-        infoPara.innerHTML = `${image.name}&emsp;&emsp;<b>handle x</b>: ${!handleX ? "空(null)" : handleX}&emsp;&emsp;<b>handle y</b>: ${!handleY ? "空(null)" : handleY}&emsp;&emsp;
-        <button class="button-small" onclick="deleteFrame('rci', '${id}')">删除</button>`;
+        infoPara.innerHTML = `<hr class="narrow">
+        <div style="display: flex; justify-content: space-between;">
+        <div>${image.name}&emsp;&emsp;<b>handle x</b>: ${!handleX ? "空(null)" : handleX}&emsp;&emsp;<b>handle y</b>: ${!handleY ? "空(null)" : handleY}&emsp;&emsp;</div>
+        <div><button class="button-small" onclick="deleteFrame('rci', '${id}')">删除</button></div>
+        </div>`;
         infoPara.id = "para" + id;
 
         switch (webData.navBar.active) {
@@ -280,6 +297,34 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
     }
 });
 
+
+// 影响
+document.getElementById("influence-add-button").addEventListener("click", function () {
+    document.getElementById("influence-dialog").showModal();
+
+    if (!generalData.influenceDialog.hasAddedListenerToSubmitButton) {
+        document.getElementById("influence-submit-button").addEventListener("click", function () {
+            const form = new FormData(document.getElementById("influence-form"));
+            const typ = form.get("type");
+            const value = form.get("value");
+
+            let id = "$" + crypto.randomUUID().substring(0, 7);
+            influenceInputData[id] = {typ: typ, value: value};
+
+            let para = document.createElement("p");
+            para.innerHTML = `<hr class="narrow"><div style="display: flex; justify-content: space-between">
+            <div>影响&emsp;&emsp;${Web.getSelectTextByValue("influence-type", typ)}&emsp;&emsp;数值：${value}</div>
+            <div><button class="button-small" onclick="deleteInfluence('${id}')">删除</button></div>
+            </div>`;
+            para.id = "para" + id;
+
+            document.getElementById("influence-showcase").appendChild(para);
+        })
+        generalData.influenceDialog.hasAddedListenerToSubmitButton = true;
+    }
+})
+
+
 // 监听主提交按钮（最终导出数据）
 document.getElementById("main-submit-button").addEventListener("click", function () {
     console.log("用户点击了主提交按钮"); // 日志：用户操作
@@ -292,9 +337,10 @@ document.getElementById("main-submit-button").addEventListener("click", function
 
     switch (webData.navBar.active) {
         case "RCI":
-            let basicData = validateFormData(Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form"))));
-            let advancedData = validateFormData(Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form"))));
-            checkForm(document.getElementById("rci-basic-data-form"), function(result) {
+            let basicData = Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form")));
+            basicData.type = basicData.type.replace(/\$/g, "");// 去除用于区分小学教育和高等教育的$符号（如果有）
+            let advancedData = Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form")));
+            checkForm(document.getElementById("rci-basic-data-form"), function (result) {
                 if (!result) {
                     Web.throwError("表单验证未通过");
                     return;
@@ -327,6 +373,7 @@ document.getElementById("main-submit-button").addEventListener("click", function
                     type: animation.type,
                     light: animation.light,
                     "light switching": animation["light switching"],
+                    "rotaton aware": animation["rotation aware"],
                     frames: []
                 }
                 if (Object.keys(animationFrames).length === 0) {
@@ -346,8 +393,14 @@ document.getElementById("main-submit-button").addEventListener("click", function
                 }
             }
 
+            // 影响
+            for (let id in influenceInputData) {
+                let influence = influenceInputData[id];
+                basicData[influence.typ] = influence.value;
+            }
+
             // 最后的数据整合
-            jsonData.rci.json = [{ ...basicData, ...advancedData }];
+            jsonData.rci.json = [{ ...validateFormData(basicData), ...validateFormData(advancedData) }];
             jsonData.rci.json[0].frames = framesData;
             jsonData.rci.json = animationData.concat(jsonData.rci.json);
 

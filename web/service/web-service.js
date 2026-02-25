@@ -101,6 +101,14 @@ const Web = {
 
     hasNonAscii: function (str) {
         return /[^\x00-\x7F]/.test(str);
+    },
+
+    getSelectTextByValue: function (selectId, value) {
+        const select = document.getElementById(selectId);
+        if (!select) return null;
+
+        const option = Array.from(select.options).find(opt => opt.value === value);
+        return option ? option.text : null;
     }
 };
 

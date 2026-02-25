@@ -9,6 +9,9 @@ var generalData = {
     pluginManifestDialog: {
         hasAddedListenerToSubmitButton: false
     },
+    influenceDialog: {
+        hasAddedListenerToSubmitButton: false
+    },
     projectName: null,
     currentMode: null // rci或者服务类service
 }
