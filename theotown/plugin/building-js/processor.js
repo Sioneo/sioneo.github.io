@@ -393,6 +393,11 @@ document.getElementById("main-submit-button").addEventListener("click", function
                 }
             }
 
+            // 水电
+            let water = document,getElementById("water-input").value;
+            let power = document,getElementById("power-input").value;
+            basicData.water = Nunber.isNaN(water)? null: water;
+            basicData.power = Nunber.isNaN(power)? null: power;
             // 影响
             for (let id in influenceInputData) {
                 let influence = influenceInputData[id];
