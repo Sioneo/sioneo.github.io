@@ -77,7 +77,7 @@
                         <option value="swat">🚓 特警</option>
                         <option value="fire brigade">🚒 消防</option>
                         <option value="education">📚 小学教育</option>
-                        <option value="$education">📖 高等教育</option> <!-- 用$符号区分两个教育 -->
+                        <option value="$education">🎓 高等教育</option> <!-- 用$符号区分两个教育 -->
                         <option value="decoration">🎨 装饰</option>
                         <option value="bus depot" disabled>公交车站（不支持）</option>
                     </select><br>
@@ -165,9 +165,9 @@
                 <form>
                     <label for="monthly-price-input">每月费用</label><input type="number" class="tool-input" min="0"
                         id="monthly-price-input" name="monthly price"><br>
-                    <label id="water-input-label" for="water-input">水(最大0)</label><input type="number" id="water-input"
+                    <label id="water-input-label" for="water-input">水</label><input type="number" id="water-input"
                         class="tool-input" name="water"><br>
-                    <label id="power-input-label" for="power-input">电(最大0)</label><input type="number" id="power-input"
+                    <label id="power-input-label" for="power-input">电</label><input type="number" id="power-input"
                         class="tool-input" name="power"><br>
                     <p id="provide-info-para">正数为供应，负数为消耗，当前最大值：0（受面积和每月费用影响）</p>
                 </form>
@@ -185,6 +185,8 @@
             <div style="display: flex; justify-content: space-between;">
                 <h6>结果</h6>
                 <div>
+                    <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')" class="button-big"><i
+                            class="w">9</i>复制</button>
                     <button type="button" id="main-submit-button" class="button-full-green"><i
                             class="w">I</i>完成</button>
                     <button type="button" id="new-package-button" class="button-full-green"><i
