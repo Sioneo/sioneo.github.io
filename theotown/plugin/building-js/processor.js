@@ -102,6 +102,9 @@ function addNewFrameToAnimation(mode, animationId) {
                 };
 
                 // 存储到imageData
+                if (!imageData.rci.animation[animationId].frames) {
+                    imageData.rci.animation[animationId].frames = {}
+                }
                 imageData.rci.animation[animationId].frames[frameId] = result;
                 console.log(`已为动画${animationId}添加帧${frameId}`, result); // 日志：存储成功
 
@@ -131,22 +134,11 @@ function addNewFrameToAnimation(mode, animationId) {
  */
 function deleteAnimation(mode, id) {
     console.log(`调用deleteAnimation，模式：${mode}，动画ID：${id}`); // 日志：函数调用
-    switch (mode) {
-        case "rci":
-            imageData.rci.animation[id] = null;
-            document.getElementById("para" + id).remove();
-            document.getElementById("container" + id).remove();
-            console.log(`已删除动画${id}及其容器和段落元素`); // 日志：删除成功
-            break;
-        case "service":
-            // TODO: 实现service模式
-            console.warn("service模式尚未实现"); // 日志：未实现
-            break;
-        default:
-            Web.throwError("未指定删除模式");
-            console.error(`无效删除模式：${mode}`); // 日志：错误
-            break;
-    }
+
+    imageData.rci.animation[id] = null;
+    document.getElementById("para" + id).remove();
+    document.getElementById("container" + id).remove();
+    console.log(`已删除动画${id}及其容器和段落元素`); // 日志：删除成功
 }
 
 /**
@@ -231,13 +223,8 @@ document.getElementById("animation-add-button").addEventListener("click", functi
         para.id = "para" + id;
         container.appendChild(para);
 
-        // 如果当前在RCI标签页，则添加到展示区
-        if (webData.navBar.active == "RCI") {
-            document.getElementById("rci-animation-showcase").appendChild(container);
-            console.log(`已将动画容器添加到RCI动画展示区`); // 日志：UI更新
-        } else {
-            console.log("当前不在RCI标签页，动画容器未添加"); // 日志：未添加
-        }
+        document.getElementById("rci-animation-showcase").appendChild(container);
+        console.log(`已将动画容器添加到RCI动画展示区`); // 日志：UI更新
     });
 });
 
@@ -267,30 +254,19 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
         </div>`;
         infoPara.id = "para" + id;
 
-        switch (webData.navBar.active) {
-            case "RCI":
-                let result = {
-                    json: {
-                        bmp: image.name,
-                        "handle x": handleX,
-                        "handle y": handleY
-                    },
-                    resource: {
-                        image: image
-                    }
-                };
-                imageData.rci.frames[id] = result;
-                document.getElementById("rci-frames-showcase").appendChild(infoPara);
-                console.log(`已添加独立帧${id}到RCI，图片：${image.name}`); // 日志：添加成功
-                break;
-            case "service":
-                // TODO: 实现service模式
-                console.warn("service模式尚未实现"); // 日志：未实现
-                break;
-            default:
-                console.warn(`未知导航标签：${webData.navBar.active}`); // 日志：未知标签
-                break;
-        }
+        let result = {
+            json: {
+                bmp: image.name,
+                "handle x": handleX,
+                "handle y": handleY
+            },
+            resource: {
+                image: image
+            }
+        };
+        imageData.rci.frames[id] = result;
+        document.getElementById("rci-frames-showcase").appendChild(infoPara);
+        console.log(`已添加独立帧${id}到RCI，图片：${image.name}`); // 日志：添加成功
     } else {
         Web.throwError("未导入文件");
         console.warn("用户未选择图片文件"); // 日志：警告
@@ -309,7 +285,7 @@ document.getElementById("influence-add-button").addEventListener("click", functi
             const value = form.get("value");
 
             let id = "$" + crypto.randomUUID().substring(0, 7);
-            influenceInputData[id] = {typ: typ, value: value};
+            influenceInputData[id] = { typ: typ, value: value };
 
             let para = document.createElement("p");
             para.innerHTML = `<hr class="narrow"><div style="display: flex; justify-content: space-between">
@@ -335,87 +311,80 @@ document.getElementById("main-submit-button").addEventListener("click", function
     };
     console.log("已重置jsonData"); // 日志：重置
 
-    switch (webData.navBar.active) {
-        case "RCI":
-            let basicData = Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form")));
-            basicData.type = basicData.type.replace(/\$/g, "");// 去除用于区分小学教育和高等教育的$符号（如果有）
-            let advancedData = Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form")));
-            checkForm(document.getElementById("rci-basic-data-form"), function (result) {
-                if (!result) {
-                    Web.throwError("表单验证未通过");
-                    return;
-                }
-            });
-            console.log("收集的RCI基础数据：", basicData); // 日志：基础数据
-            console.log("收集的RCI高级数据：", advancedData); // 日志：高级数据
+    let basicData = Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form")));
+    basicData.type = basicData.type.replace(/\$/g, "");// 去除用于区分小学教育和高等教育的$符号（如果有）
+    let advancedData = Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form")));
+    checkForm(document.getElementById("rci-basic-data-form"), function (result) {
+        if (!result) {
+            Web.throwError("表单验证未通过");
+            return;
+        }
+    });
+    console.log("收集的RCI基础数据：", basicData); // 日志：基础数据
+    console.log("收集的RCI高级数据：", advancedData); // 日志：高级数据
 
-            let framesData = [];
-            // 收集帧的数据
-            if (Object.keys(imageData.rci.frames).length === 0) {
-                Web.throwError("未导入帧");
-                return;
-            } else {
-                let allFrames = imageData.rci.frames;
-                for (let key in allFrames) {
-                    let frame = allFrames[key];
-                    framesData.push(frame.json);
-                    jsonData.rci.resource.push(frame.resource.image);
-                }
-            }
-
-            let allAnimations = imageData.rci.animation;
-            let animationData = [];
-            for (let key in allAnimations) {
-                let animation = allAnimations[key];
-                let animationFrames = animation.frames;
-                let result = {
-                    id: animation.id,
-                    type: animation.type,
-                    light: animation.light,
-                    "light switching": animation["light switching"],
-                    "rotaton aware": animation["rotation aware"],
-                    frames: []
-                }
-                if (Object.keys(animationFrames).length === 0) {
-                    Web.throwError(`动画${animation.id}没有导入帧`)
-                    break;
-                } else {
-                    for (let k in animationFrames) {
-                        result.frames.push(animationFrames[k].json);
-                        jsonData.rci.resource.push(animationFrames[k].resource.image);
-
-                        if (!basicData.animation) {
-                            basicData.animation = []
-                        }
-                        basicData.animation.push({ id: animation.id })
-                    }
-                    animationData.push(result);
-                }
-            }
-
-            // 水电
-            let water = document.getElementById("water-input").value;
-            let power = document.getElementById("power-input").value;
-            basicData.water = Number.isNaN(water)? null: water;
-            basicData.power = Number.isNaN(power)? null: power;
-            // 影响
-            for (let id in influenceInputData) {
-                let influence = influenceInputData[id];
-                basicData[influence.typ] = influence.value;
-            }
-
-            // 最后的数据整合
-            jsonData.rci.json = [{ ...validateFormData(basicData), ...validateFormData(advancedData) }];
-            jsonData.rci.json[0].frames = framesData;
-            jsonData.rci.json = animationData.concat(jsonData.rci.json);
-
-            // 呈现JSON代码
-            let jsonOutputShowcase = document.getElementById("json-output");
-            jsonOutputShowcase.textContent = JSON.stringify(jsonData.rci.json, null, 2);
-            break;
-        default:
-            Web.throwError("整理数据时发生错误")
-            break;
+    let framesData = [];
+    // 收集帧的数据
+    if (Object.keys(imageData.rci.frames).length === 0) {
+        Web.throwError("未导入帧");
+        return;
+    } else {
+        let allFrames = imageData.rci.frames;
+        for (let key in allFrames) {
+            let frame = allFrames[key];
+            framesData.push(frame.json);
+            jsonData.rci.resource.push(frame.resource.image);
+        }
     }
+
+    let allAnimations = imageData.rci.animation;
+    let animationData = [];
+    for (let key in allAnimations) {
+        let animation = allAnimations[key];
+        let animationFrames = animation.frames;
+        let result = {
+            id: animation.id,
+            type: animation.type,
+            light: animation.light,
+            "light switching": animation["light switching"],
+            "rotaton aware": animation["rotation aware"],
+            frames: []
+        }
+        if (Object.keys(animationFrames).length === 0) {
+            Web.throwError(`动画${animation.id}没有导入帧`)
+            break;
+        } else {
+            for (let k in animationFrames) {
+                result.frames.push(animationFrames[k].json);
+                jsonData.rci.resource.push(animationFrames[k].resource.image);
+
+                if (!basicData.animation) {
+                    basicData.animation = []
+                }
+                basicData.animation.push({ id: animation.id })
+            }
+            animationData.push(result);
+        }
+    }
+
+    // 水电
+    let water = document.getElementById("water-input").value;
+    let power = document.getElementById("power-input").value;
+    basicData.water = Number.isNaN(water) ? null : water;
+    basicData.power = Number.isNaN(power) ? null : power;
+    // 影响
+    for (let id in influenceInputData) {
+        let influence = influenceInputData[id];
+        basicData[influence.typ] = influence.value;
+    }
+
+    // 最后的数据整合
+    jsonData.rci.json = [{ ...validateFormData(basicData), ...validateFormData(advancedData) }];
+    jsonData.rci.json[0].frames = framesData;
+    jsonData.rci.json = animationData.concat(jsonData.rci.json);
+
+    // 呈现JSON代码
+    let jsonOutputShowcase = document.getElementById("json-output");
+    jsonOutputShowcase.textContent = JSON.stringify(jsonData.rci.json, null, 2);
 
 });

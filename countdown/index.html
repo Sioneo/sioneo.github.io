@@ -6,13 +6,15 @@
     <link rel="stylesheet" type="text/css" href="../css/document.css">
     <script src="proverbs.js"></script>
     <script src="tips.js"></script>
+    <script src="../web/footer/general-footer.js"></script>
     <script>
         const dateData = [
             { "name": "高考", "time": { "year": 2028, "month": 6, "day": 7, "hour": 0, "minute": 0, "second": 0 } },
-            { "name": "期末考试", "time": { "year": 2026, "month": 1, "day": 10, "hour": 0, "minute": 0, "second": 0 } },
-            { "name": "江门调研考", "time": { "year": 2026, "month": 1, "day": 30, "hour": 0, "minute": 0, "second": 0 } }
+            { "name": "清明放假", "time": { "year": 2026, "month": 4, "day": 4, "hour": 17, "minute": 0, "second": 0 } },
+            { "name": "五一放假", "time": { "year": 2026, "month": 4, "day": 30, "hour": 17, "minute": 0, "second": 0 } },
+            { "name": "端午放假", "time": { "year": 2026, "month": 6, "day": 18, "hour": 17, "minute": 0, "second": 0 } }
         ]
-        var scheduleIndex = 2;
+        var scheduleIndex = 1;
 
         // 一些计算时间的函数
         function timestampToObject(timestamp) {
@@ -52,10 +54,7 @@
             const seconds = Math.floor(ms / 1000);
             const minutes = Math.floor(seconds / 60);
             const hours = Math.floor(minutes / 60);
-            let days = Math.floor(hours / 24);
-            if (milliseconds > 0) {
-                days += 1; // 增加一天以符合计数习惯
-            }
+            let days = Math.ceil(hours / 24);
 
             return {
                 year: year,
@@ -94,13 +93,10 @@
 
         <h3 id="title">距离XXX还有XXX天</h3>
         <h1 id="dayCountdown" style="display: inline-block;">999</h1>
-        <h3 style="font-size: 30px; display: inline-block;">天</h3>
+        <h4 style="font-size: 30px; display: inline-block;">天</h4>
         <p id="time">hello</p>
-        <div class="callout modest schedule-buttons">
+        <div id="button-box" class="callout modest schedule-buttons">
             <h5>选择一个倒计时</h5>
-            <button class="button-big schedule-button" onclick="changeSchedule(0)">高考</button>
-            <button class="button-big schedule-button" onclick="changeSchedule(1)">期末考试</button>
-            <button class="button-big schedule-button" onclick="changeSchedule(2)">江门调研考</button>
         </div>
         <hr>
         <h4 id="proverb">blabla</h4>
@@ -110,15 +106,7 @@
 
 
     </main>
-    <footer>
-     
-        <div class="footer-box">
-            
-            <p>本站基于<a href="https://githubdocs.cn/en/pages/getting-started-with-github-pages/about-github-pages"
-                    target="_blank" class="github-page-note"><i class="w">Q</i>GitHub Pages</a>搭建</p>
-            <p>Made by JiuruMeow</p>
-           
-    </footer>
+    <general-footer></general-footer>
 
 
     <script>
@@ -175,6 +163,16 @@
         //  显示名言名句和tip
         document.getElementById("proverb").innerText = proverbs[Math.floor(Math.random() * proverbs.length)];
         document.getElementById("tip").innerText = tips[Math.floor(Math.random() * tips.length)];
+
+        const buttonBox = document.getElementById("button-box");
+        // 添加按钮
+        for (let i = 0; i < dateData.length; i++) {
+            let button = document.createElement("button");
+            button.textContent = dateData[i].name;
+            button.onclick = function() { changeSchedule(i) };
+            button.classList.add("button-big");
+            buttonBox.appendChild(button);
+        }
     </script>
 
 </body>

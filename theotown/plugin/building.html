@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
 
 <head>
     <title>插件开发工具</title>
@@ -96,6 +96,8 @@
                         name="title"><br>
                     <label for="desc-input">描述</label><input id="desc-input" type="text" class="tool-input"
                         name="text"><br>
+                    <label for="author-input">作者</label><input id="author-input" type="text" name="author"
+                        class="tool-input"><br>
                     <label for="people-input">人口/容量</label><input id="people-input" type="number" min="0" name="people"
                         class="tool-input"><br>
                     <label for="price-input">价格</label><input id="price-input" type="number" min="0" name="price"
@@ -124,6 +126,7 @@
                 <h5>动画</h5>
             </div>
             <div id="rci-animation-data-content" class="spoiler-content active">
+                <p>动画部分在删除一个动画后会引发bug导致无法使用，修复中</p>
                 <button id="animation-add-button" class="button-big">添加一个动画</button>
                 <h6>动画列表</h6>
                 <div id="rci-animation-showcase">
@@ -196,13 +199,9 @@
             <pre id="json-output">啥也没有</pre>
         </section>
 
-
-        </section>
     </main>
 
     <script>
-        Web.addElementToBar("nav-button-rci", "section-content-rci", "RCI", true);
-
         Web.addSpoiler("rci-basic-data-button", "rci-basic-data-content");
         Web.addSpoiler("rci-frames-data-button", "rci-frames-data-content");
         Web.addSpoiler("rci-animation-data-button", "rci-animation-data-content");
