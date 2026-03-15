@@ -45,3 +45,15 @@ function checkForm(form, callback) {
         callback(true);
     }
 }
+
+// 插件清单文件的检查用函数
+function checkPluginManifestData(data, callback) {
+    let result = true;
+    let errors = [];
+
+    if (!data.id || !data.title || !data.version) {
+        result = false;
+        errors.push("ID或标题或插件版本未填写");
+    }
+    callback(result, errors);
+}

@@ -1,6 +1,6 @@
 {
     "editor.fontSize": 16,
-    "editor.fontFamily": "\"Adwaita Mono\", \"Sarasa Fixed SC\", monospace",
+    "editor.fontFamily": "\"JetBrains Mono\", \"Adwaita Mono\", \"Sarasa Fixed SC\", monospace",
     "html.preview.markEditorSelection": false,
     "html.trace": "off",
     "html.trace.server": "off",

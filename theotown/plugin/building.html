@@ -126,7 +126,6 @@
                 <h5>动画</h5>
             </div>
             <div id="rci-animation-data-content" class="spoiler-content active">
-                <p>动画部分在删除一个动画后会引发bug导致无法使用，修复中</p>
                 <button id="animation-add-button" class="button-big">添加一个动画</button>
                 <h6>动画列表</h6>
                 <div id="rci-animation-showcase">
@@ -152,8 +151,8 @@
                         id="needs-land-input" name="needs land" checked><br>
                     <label for="needs-water-input">需要水域</label><input type="checkbox" value="true" class="tool-input"
                         id="needs-water-input" name="needs water"><br>
-                    <label for="category-input">分类</label><input type="text" class="tool-input"
-                        id="category-input" name="category"><br>
+                    <label for="category-input">分类</label><input type="text" class="tool-input" id="category-input"
+                        name="category"><br>
                     <label for="build-time-input">建造时间</label><input type="number" min="0" class="tool-input"
                         id="build-time-input" name="build time"><br>
                 </form>
@@ -188,8 +187,9 @@
             <div style="display: flex; justify-content: space-between;">
                 <h6>结果</h6>
                 <div>
-                    <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')" class="button-big"><i
-                            class="w">9</i>复制</button>
+                    <button type="button"
+                        onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')"
+                        class="button-big"><i class="w">9</i>复制</button>
                     <button type="button" id="main-submit-button" class="button-full-green"><i
                             class="w">I</i>完成</button>
                     <button type="button" id="new-package-button" class="button-full-green"><i
@@ -293,16 +293,48 @@
     <!-- 插件清单文件 -->
     <dialog style="max-width: 60vw;" id="plugin-manifest-dialog">
         <div class="header">
-            <span class="header-title">添加一个帧</span>
+            <span class="header-title">编辑插件清单文件</span>
             <div class="header-controls">
                 <button onclick="document.getElementById('plugin-manifest-dialog').close()"><i class="b"
                         style="font-size: 24px;">k</i></button>
             </div>
         </div>
         <div class="body">
-
+            <form id="plugin-manifest-form">
+                <label for="plugin-manifest-id-input"><em>ID*</em></label><input class="tool-input" name="id"
+                    type="text" id="plugin-manifest-id-input" required>
+                <label for="plugin-manifest-title-input"><em>标题*</em></label><input class="tool-input" name="title"
+                    type="text" id="plugin-manifest-title-input" required>
+                <label for="plugin-manifest-version-input"><em>插件版本*</em></label><input class="tool-input"
+                    name="version" id="plugin-manifest-version-input" type="text">
+                <label for="plugin-manifest-text-input">描述</label><input class="tool-input" name="text" type="text"
+                    id="plugin-manifest-text-input">
+                <label for="plugin-manifest-url-input">URL</label><input class="tool-input" name="url" type="text"
+                    id="plugin-manifest-url-input">
+                <label for="plugin-manifest-author-input">插件作者</label><input class="tool-input" name="author"
+                    id="plugin-manifest-author-input" type=" text">
+                <label for="plugin-manifest-min-version-input">最小游戏版本</label><input class="tool-input"
+                    id="plugin-manifest-min-version-input" name="min version" type="text">
+                <label for="plugin-manifest-once-input">once</label><input class="tool-input" name="once"
+                    id="plugin-manifest-once-input" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-category-input">category</label><input class="tool-input" name="category"
+                    id="plugin-manifest-id-input" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-multiplayer-input">multiplayer</label><input class="tool-input"
+                    id="plugin-manifest-multiplayer-input" name="multiplayer" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-permanent-input">permanent</label><input class="tool-input" name="permanent"
+                    id="plugin-manifest-permanent-input" type="checkbox" value="true" checked>
+                <label style="min-height: 45px;" for="plugin-manifest-platforms-input">可用平台</label>
+                <select style="min-height: 60px;" id="plugin-manifest-platforms-input" class="tool-input"
+                    name="platforms" id="plugin-manifest-platforms-input" multiple>
+                    <option value="Android" selected>安卓</option>
+                    <option value="iOS" selected>iOS</option>
+                    <option value="Desktop" selected>桌面端</option>
+                </select>
+            </form>
         </div>
         <div class="controls">
+            <button onclick="document.getElementById('plugin-manifest-id-input').value = randomId('manifest')"
+                class="button-small">随机ID</button>
             <button onclick="document.getElementById('plugin-manifest-dialog').close();"
                 class="button-small">关闭</button>
             <button type="button" id="plugin-manifest-submit-button" class="button-small">完成</button>
@@ -350,7 +382,7 @@
                 </select>
                 <label for="influence-value-input" id="influence-value-label">数值(最大0)</label>
                 <input class="tool-input" id="influence-value-input" name="value" type="number">
-            </form> 
+            </form>
         </div>
         <div class="controls">
             <button onclick="document.getElementById('influence-dialog').close();" class="button-small">关闭</button>

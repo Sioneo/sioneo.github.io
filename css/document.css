@@ -566,7 +566,7 @@ dialog {
     border: 1px solid var(--color-grey);
     padding: 0;
     box-shadow: 0 4px 20px var(--color-grey);
-
+    overflow: hidden;
     display: none;
     resize: both;
     position: fixed;
@@ -610,6 +610,7 @@ dialog .header-controls button:hover {
 
 dialog .body {
     margin-bottom: auto;
+    overflow-y: auto;
 }
 
 dialog .controls {
@@ -669,6 +670,11 @@ select.tool-input {
     display: inline-block;
     margin-left: 10px;
     width: 40vw;
+}
+
+option:checked {
+    background-color: var(--color-theme);
+    color: var(--color-contrast-text);
 }
 
 form label {
