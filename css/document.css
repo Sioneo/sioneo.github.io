@@ -751,7 +751,7 @@ section.spoiler div.spoiler-header button:hover {
 }
 
 section.spoiler {
-    border: 2px solid var(--color-grey-shallow);
+    background-color: var(--color-white);
     border-radius: 10px;
 }
 
@@ -766,8 +766,36 @@ section.spoiler div.spoiler-content.active {
 
 /* box */
 .box {
-    border: 2px solid var(--color-grey-shallow);
+    background-color: var(--color-white);
     border-radius: 10px;
+}
+
+/* 表格 */
+/* 普通表格样式 - 黑色线条边框，表头使用主题浅色背景 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: inherit;
+}
+
+/* 表格单元格统一样式 */
+th, td {
+    border: 1px solid #000000;  /* 黑色线条边框 */
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+}
+
+/* 表头样式 */
+th {
+    background-color: var(--color-theme-shallow);
+    font-weight: 600;
+    border: 1px solid #000000;
+}
+
+/* 可选：为表格添加外层边框（使表格整体有边框感） */
+table {
+    border: 1px solid #000000;
 }
 
 /* 根据不同设备调整css */
