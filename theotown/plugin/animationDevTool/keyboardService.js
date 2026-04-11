@@ -57,16 +57,19 @@ document.addEventListener("keydown", (event) => {
                     hint(`${Strings.ORIGIN_STR}: ${Strings.MOVE_RIGHT} ${Strings.PIXEL_1}`);
                     break;
                 case "e":
+                case "E":
                     origin = { x: 200, y: 600 };
                     refreshCanvas();
                     hint(`${Strings.ORIGIN_STR}: ${Strings.RESET_STR}`);
                     break;
                 case "q":
+                case "Q":
                     animationData[animationIndex] = { x: 0, y: 0 };
                     refreshCanvas();
                     hint(`${Strings.ANIMATION_STR}(${animationIndex}): ${Strings.RESET_STR}`);
                     break;
                 case "r":
+                case "R":
                     refreshCanvas();
                     hint(`${Strings.REFRESH_STR}`);
                     break;
