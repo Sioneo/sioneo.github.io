@@ -4,7 +4,7 @@
 
     --color-background: rgb(248, 248, 248);
     --color-theme: rgb(29, 112, 184);
-    --color-theme-shallow: rgb(186, 217, 245);
+    --color-theme-shallow: rgb(209, 234, 255);
     --color-hr: #b3b3b3;
     --color-text: black;
     --color-white: white;
@@ -15,18 +15,25 @@
     --color-link-active: black;
     --color-link-active-background: rgb(255, 208, 0);
     --color-green: green;
-    --color-green-shallow: rgb(186, 255, 186);
+    --color-green-shallow: rgb(201, 255, 201);
     --color-red: rgb(209, 0, 0);
-    --color-red-shallow: rgb(255, 196, 196);
+    --color-red-shallow: rgb(255, 220, 220);
     --color-grey: rgb(71, 71, 71);
     --color-grey-shallow: rgb(185, 185, 185);
     --color-pink: rgb(255, 120, 142);
 }
 
 @font-face {
-    font-family: "Cabin";
-    src: url("../font/Cabin-Regular-Modified.ttf");
+    font-family: "Murecho";
+    src: url("../font/Murecho-Regular.ttf");
     font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Murecho";
+    src: url("../font/Murecho-Bold.ttf");
+    font-weight: bold;
     font-style: normal;
 }
 
@@ -46,7 +53,7 @@
 
 
 body {
-    font-family: "Cabin", sans-serif;
+    font-family: "Murecho", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
@@ -416,7 +423,7 @@ footer {
 
 /* 按钮 */
 button {
-    font-family: "Cabin";
+    font-family: "Murecho";
 }
 
 /* 按钮基础样式 */
@@ -445,6 +452,16 @@ button {
 .button-big:active {
     transform: translateY(2px);
     box-shadow: 0 1px 0 0 var(--color-text);
+}
+
+.button-big:disabled,
+.button-big:disabled:hover,
+.button-big:disabled:active {
+    cursor: not-allowed;
+    background-color: var(--color-red-shallow);
+    transform: none;
+    box-shadow: 0 3px 0 0 var(--color-text);
+    color: var(--color-text);
 }
 
 /* 小按钮 */
@@ -627,7 +644,7 @@ input {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Cabin", sans-serif;
+    font-family: "Murecho", sans-serif;
 }
 
 input:hover {
@@ -653,7 +670,7 @@ select {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Cabin", sans-serif;
+    font-family: "Murecho", sans-serif;
 }
 
 select:hover {
@@ -779,8 +796,10 @@ table {
 }
 
 /* 表格单元格统一样式 */
-th, td {
-    border: 1px solid #000000;  /* 黑色线条边框 */
+th,
+td {
+    border: 1px solid #000000;
+    /* 黑色线条边框 */
     padding: 10px 12px;
     text-align: left;
     vertical-align: top;
