@@ -1,0 +1,215 @@
+@font-face {
+    font-family: "Murecho";
+    src: url("../font/Murecho-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Murecho";
+    src: url("../font/Murecho-Bold.ttf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Bilibili Icon";
+    src: url("../font/Bilibili_Icons_by_Jiuru.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Web Icon";
+    src: url("../font/JR_icons.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --color-background: rgba(32, 32, 32, 0.75);
+    --color-text: white;
+    --color-contrast-text: black;
+    --color-active: white;
+    --color-theme: rgb(157, 204, 255);
+    --color-grey: rgb(166, 166, 166);
+
+    --data-border-radius: 10px;
+    --data-font-size1: 30px;
+    --data-font-size2: 24px;
+    --data-font-size3: 19px;
+    --data-font-size4: 16px;
+}
+
+html {
+    background-image:
+        linear-gradient(var(--color-background), var(--color-background)),
+        url("https://img-reg-ab.imagency.cn/e/ce23680f4770c1a1cb4915e4979cf88e.webp");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    font-family: "Murecho", sans-serif;
+    color: var(--color-text);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 0;
+}
+
+main {
+    max-width: 1540px;
+    margin: auto;
+}
+
+footer {
+    margin: 40px 0;
+}
+
+h1,
+h2 {
+    font-size: var(--data-font-size1);
+    font-weight: normal;
+    margin: 5px;
+    padding: 3px;
+}
+
+h3,
+h4 {
+    font-size: var(--data-font-size2);
+    font-weight: normal;
+    margin: 4px;
+    padding: 3px;
+}
+
+h5 {
+    font-size: var(--data-font-size3);
+    font-weight: normal;
+    margin: 3px;
+    padding: 2px;
+}
+
+h6,
+p,
+span {
+    font-size: var(--data-font-size4);
+    font-weight: normal;
+    margin: 3px;
+    padding: 2px;
+}
+
+h1,
+h3,
+h6 {
+    font-weight: bold;
+}
+
+/* 超链接 */
+a {
+    color: var(--color-theme);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    margin: auto 4px;
+}
+
+a:hover,
+a:active {
+    text-decoration-thickness: 2px;
+}
+
+a.sub,
+a.sub:hover,
+a.sub:active {
+    text-decoration: none;
+    color: var(--color-grey);
+}
+
+a.tile {
+    margin: 5px;
+    padding: 5px 8px;
+    display: block;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    border-radius: var(--data-border-radius);
+    text-decoration: none;
+}
+
+a.tile:hover,
+a.tile:active {
+    background-color: var(--color-active);
+    color: var(--color-contrast-text);
+    text-decoration: none;
+}
+
+/* 图标 */
+i.w {
+    font-style: normal;
+    font-family: "Web Icon";
+    margin: 5px;
+    padding: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+i.b {
+    font-style: normal;
+    font-family: "Bilibili Icon";
+    margin: 5px;
+    padding: 0;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* 显示 */
+.sub {
+    color: var(--color-grey);
+}
+
+.emphasis {
+    color: var(--color-active);
+}
+
+/* 布局 */
+.box {
+    margin: 10px;
+    padding: 10px;
+    background-color: var(--color-background);
+    border-radius: var(--data-border-radius);
+}
+
+.flex {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    flex-direction: row;
+
+    *.full {
+        flex: 1;
+    }
+
+    &.vertical {
+        flex-direction: column;
+    }
+
+    &.compact {
+        gap: 3px;
+    }
+
+    &.inline {
+        display: inline-flex;
+    }
+}
+
+.center {
+    display: block;
+    text-align: center;
+}
+
+.inline {
+    display: inline-block;
+}
