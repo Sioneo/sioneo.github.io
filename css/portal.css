@@ -165,6 +165,10 @@ i.b {
     pointer-events: none;
 }
 
+img {
+    display: block;
+}
+
 /* 显示 */
 .sub {
     color: var(--color-grey);
@@ -187,6 +191,7 @@ i.b {
     gap: 8px;
     justify-content: space-between;
     flex-direction: row;
+    height: auto;
 
     *.full {
         flex: 1;
