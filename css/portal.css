@@ -137,6 +137,7 @@ a.tile {
     color: var(--color-text);
     border-radius: var(--data-border-radius);
     text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 a.tile:hover,
