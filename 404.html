@@ -2,39 +2,30 @@
 <html>
 
 <head>
+  <title>404 Not Found</title>
   <meta charset="UTF-8">
-  <title>(ﾟДﾟ≡ﾟдﾟ)!?</title>
-  <style>
-    body {
-      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    }
-
-    hr {
-      background: var(--hrColor, #b3b3b3);
-      border: 0;
-      height: 1px;
-      padding: 0px;
-      margin: 1em 0px;
-    }
-
-    .main {
-      margin: 1em 2.2em;
-      padding: 0;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="css/document.css">
+  <style src="./web/footer/general-footer.js"></style>
 </head>
 
 <body>
-  <div id="main" class="main">
-    <p style="font-size: 70px; color: #009ca7">404</p>
-    <hr>
-    <p id="url"></p>
-    <p>Page Not Found - 页面不存在丨这可能是因为URL输入错误或页面尚未准备好</p>
+
+  <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
     <script>
-      var currentURL = window.location.href;
-      document.getElementById("url").innerHTML = currentURL;
+      document.getElementById("jsWarning").style.display = "none";
     </script>
-  </div>
+  </p>
+
+  <main>
+    <h1>404 Not Found</h1>
+    <p>The page you are visiting does not exist. Please check the URL.<a href="/"
+        class="button-big">Back Home</a></p>
+      <hr>
+    <p>Copyright 2026 JiuruMeow, all rights reserved.</p>
+  </main>
+
+
+
 </body>
 
 </html>

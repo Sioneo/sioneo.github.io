@@ -13,50 +13,75 @@
   </header>
   <main>
     <div class="flex">
-      <section class="flex compact box" style="width: 75%;">
-        <div style="display: block; width: 20%; height: auto; ">
-          <img style="width: 100%; aspect-ratio: 1/1; display: block; border-radius: 10px;"
-            src="https://img-reg-ab.imagency.cn/e/d621e540831afca8b19ae6c9ac9a6c14.webp">
+      <section style="width: 80%;">
+
+        <div class="flex compact box">
+          <div style="display: block; width: 15%; height: auto; ">
+            <img style="width: 100%; aspect-ratio: 1/1; display: block; border-radius: 10px;"
+              src="https://img-reg-ab.imagency.cn/e/d621e540831afca8b19ae6c9ac9a6c14.webp">
+          </div>
+          <div style="width: 83%;">
+            <h3 class="inline">九如喵</h3>
+            <h4 class="inline sub">JiuruMeow</h4>
+            <p class="sub">
+              <span><i class="w">U</i>广东·江门</span>
+              <span><i class="w">T</i><a class="sub" href="mailto:jiurumeow@163.com">jiurumeow@163.com</a></span>
+              <span><i class="b">W</i>07/28</span>
+              <span><i class="b">n</i><a href="https://space.bilibili.com/629492211" target="_blank"
+                  class="sub">九如喵UnOfficial</a></span>
+              <span><i class="w">Q</i><a href="https://github.com/Sioneo/" target="_blank" class="sub">Sioneo</a></span>
+            </p>
+            <p>你好喵，欢迎访问九如喵的个人网站。本喵是一名高中生，沉迷于原生HTML开发💦<br>本站有多个板块，可以到下方查看！</p>
+          </div>
         </div>
-        <div style="width: 78%;">
-          <h3 class="inline">九如喵</h3>
-          <h4 class="inline sub">JiuruMeow</h4>
-          <p class="sub">
-            <span><i class="w">U</i>广东·江门</span>
-            <span><i class="w">T</i>jiurumeow@163.com</span>
-            <span><i class="b">W</i>07/28</span>
-            <span><i class="b">n</i><a href="https://space.bilibili.com/629492211" target="_blank"
-                class="sub">九如喵UnOfficial</a></span>
-            <span><i class="w">Q</i><a href="https://github.com/Sioneo/" target="_blank" class="sub">Sioneo</a></span>
-          </p>
-          <p>你好喵</p>
+
+        <div>
+          <div class="flex full">
+            <a class="tile" target="_blank" href="./theotown/index.html">
+              <h5>TheoTown</h5>
+            </a>
+            <a class="tile" target="_blank" href="./xhyz/index.html">
+              <h5>学校相关</h5>
+            </a>
+          </div>
+        </div>
+
+      </section>
+      <section style="width: 20%">
+        <div class="box compact vertical content-height">
+          <h4>我的社交媒体</h4>
+          <div class="flex full wrap"><a href="https://space.bilibili.com/629492211" target="_blank" class="tile">
+              <h5>Bilibili</h5>
+            </a>
+            <a href="https://github.com/Sioneo/" target="_blank" class="tile">
+              <h5>GitHub</h5>
+            </a>
+          </div>
+        </div>
+
+        <div class="box compact vertical content-height">
+          <h4>现在天气怎么样？</h4>
+          <p id="weather-location">Unknown Location</p>
+          <div id="weather-info">Weather Service Unavailable</div>
+          <script src="./javascript/index/weather.js"></script>
+        </div>
+
+        <div class="box compact vertical content-height">
+          <p>你正在使用的浏览器是</p>
+          <h4 id="browser-version">Unknown</h4>
+          <div id="browser-info">Weather Service Unavailable</div>
+          <script src="./javascript/index/browser.js"></script>
         </div>
       </section>
-      <section class="box compact vertical" style="width: 20%">
-        <h4>我的社交媒体</h4>
-        <a href="https://space.bilibili.com/629492211" target="_blank" class="tile">
-          <h5>Bilibili</h5>
-        </a>
-        <a href="https://github.com/Sioneo/" target="_blank" class="tile">
-          <h5>GitHub</h5>
-        </a>
-      </section>
+
+
     </div>
 
-    <section class="box">
-      <h2>本站内容</h2>
-      <div class="flex">
-        <a class="tile full" target="_blank" href="./theotown/index.html">
-          <h5>TheoTown</h5>
-        </a>
-        <a class="tile full" target="_blank" href="./xhyz/index.html">
-          <h5>学校相关</h5>
-        </a>
-      </div>
-    </section>
+
   </main>
   <footer>
     <p class="center">Copyright JiuruMeow 2026, all rights reserved.</p>
+    <p class="center"><a href="https://beeimg.cn/" target="_blank">图床</a>·<a href="https://open-meteo.com/" target="_blank">天气数据提供商</a></p>
   </footer>
 </body>
 

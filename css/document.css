@@ -1,6 +1,6 @@
 :root {
     --style-border-radius: 0px;
-    --style-side-padding: 270px;
+    --style-side-padding: 200px;
 
     --color-background: rgb(236, 236, 236);
     --color-theme: rgb(29, 112, 184);
@@ -24,17 +24,31 @@
 }
 
 @font-face {
-    font-family: "Murecho";
-    src: url("../font/Murecho-Regular.ttf");
+    font-family: "Rambla";
+    src: url("../font/Rambla-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Murecho";
-    src: url("../font/Murecho-Bold.ttf");
+    font-family: "Rambla";
+    src: url("../font/Rambla-Italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Rambla";
+    src: url("../font/Rambla-Bold.ttf");
     font-weight: bold;
     font-style: normal;
+}
+
+@font-face {
+    font-family: "Rambla";
+    src: url("../font/Rambla-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
@@ -53,7 +67,7 @@
 
 
 body {
-    font-family: "Murecho", sans-serif;
+    font-family: "Rambla", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
@@ -423,7 +437,7 @@ footer {
 
 /* 按钮 */
 button {
-    font-family: "Murecho";
+    font-family: "Rambla";
 }
 
 /* 按钮基础样式 */
@@ -644,7 +658,7 @@ input {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Murecho", sans-serif;
+    font-family: "Rambla", sans-serif;
 }
 
 input:hover {
@@ -670,7 +684,7 @@ select {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Murecho", sans-serif;
+    font-family: "Rambla", sans-serif;
 }
 
 select:hover {

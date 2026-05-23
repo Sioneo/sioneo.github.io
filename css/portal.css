@@ -1,15 +1,29 @@
 @font-face {
-    font-family: "Murecho";
-    src: url("../font/Murecho-Regular.ttf");
+    font-family: "Rambla";
+    src: url("../font/Rambla-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Murecho";
-    src: url("../font/Murecho-Bold.ttf");
+    font-family: "Rambla";
+    src: url("../font/Rambla-Italic.ttf");
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Rambla";
+    src: url("../font/Rambla-Bold.ttf");
     font-weight: bold;
     font-style: normal;
+}
+
+@font-face {
+    font-family: "Rambla";
+    src: url("../font/Rambla-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
 }
 
 @font-face {
@@ -34,11 +48,11 @@
     --color-theme: rgb(157, 204, 255);
     --color-grey: rgb(166, 166, 166);
 
-    --data-border-radius: 10px;
-    --data-font-size1: 30px;
-    --data-font-size2: 24px;
-    --data-font-size3: 19px;
-    --data-font-size4: 16px;
+    --data-border-radius: 13px;
+    --data-font-size1: 36px;
+    --data-font-size2: 28px;
+    --data-font-size3: 23px;
+    --data-font-size4: 17px;
 }
 
 html {
@@ -49,8 +63,9 @@ html {
     background-position: center;
     background-attachment: fixed;
     min-height: 100vh;
-    font-family: "Murecho", sans-serif;
+    font-family: "Rambla", sans-serif;
     color: var(--color-text);
+    font-size: var(--data-font-size4);
     margin: 0;
     padding: 0;
 }
@@ -100,6 +115,10 @@ span {
     font-weight: normal;
     margin: 3px;
     padding: 2px;
+}
+
+p, span {
+    line-height: 150%;
 }
 
 h1,
@@ -170,6 +189,23 @@ img {
     display: block;
 }
 
+hr {
+    border: none;
+    height: 1px;
+    background: var(--color-grey);
+    margin: 5px;
+    padding: 0;
+
+    &.wide {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    &.narrow {
+        margin: 2px;
+    }
+}
+
 /* 显示 */
 .sub {
     color: var(--color-grey);
@@ -193,8 +229,9 @@ img {
     justify-content: space-between;
     flex-direction: row;
     height: auto;
+    align-items: flex-start;
 
-    *.full {
+    *.full *, *.full{
         flex: 1;
     }
 
@@ -208,6 +245,16 @@ img {
 
     &.inline {
         display: inline-flex;
+    }
+
+    &.align-center {
+        align-items: center;
+        text-align: center;
+        height: auto;
+    }
+
+    &.wrap {
+        flex-wrap: wrap;
     }
 }
 
