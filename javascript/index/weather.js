@@ -24,7 +24,7 @@ function getWeatherState(code) {
 
 function getTemperatureIcon(temp) {
     let result;
-    if (temp >= 33) { result = "💥" }
+    if (temp >= 34) { result = "💥" }
     else if (temp >= 30) { result = "🥵" }
     else if (temp >= 26) { result = "😥" }
     else if (temp >= 20) { result = "😉" }

@@ -258,6 +258,20 @@ hr {
     }
 }
 
+.grid {
+    display: grid;
+    gap: 5px;
+    grid-auto-rows: auto;
+    
+    &.column-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.column-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 .center {
     display: block;
     text-align: center;
