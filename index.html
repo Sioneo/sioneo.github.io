@@ -16,9 +16,24 @@
       <section style="width: 80%;">
 
         <div class="flex compact box">
-          <div style="display: block; width: 15%; height: auto; ">
-            <img style="width: 100%; aspect-ratio: 1/1; display: block; border-radius: 10px;"
-              src="https://img-reg-ab.imagency.cn/e/d621e540831afca8b19ae6c9ac9a6c14.webp">
+          <div id="avatar-box">
+            <style>
+              #avatar-box {
+                display: block;
+                width: 15%;
+                height: auto;
+                position: relative;
+              }
+
+              img#avatar {
+                width: 100%;
+                aspect-ratio: 1/1;
+                display: block;
+                border-radius: 50%;
+                z-index: 1;
+              }
+            </style>
+            <img id="avatar" src="https://img-reg-ab.imagency.cn/e/36a52a10f29c7d923a984005aa6523ed.png">
           </div>
           <div style="width: 83%;">
             <h3 class="inline">九如喵</h3>
@@ -38,7 +53,8 @@
         <div>
           <div class="flex full">
             <a class="tile" target="_blank" href="./theotown/index.html">
-              <h5>TheoTown</h5>
+              <h4>TheoTown</h4>
+              <p>TheoTown（西奥小镇）是一款开放自由的城市建造游戏，拥有丰富的插件生态，在这里包含了一些资料以及插件制作工具</p>
             </a>
             <a class="tile" target="_blank" href="./xhyz/index.html">
               <h5>学校相关</h5>
@@ -49,7 +65,7 @@
       </section>
       <section style="width: 20%">
         <div class="box compact vertical content-height">
-          <h4>我的社交媒体</h4>
+          <h5>我的社交媒体</h5>
           <div class="flex full wrap"><a href="https://space.bilibili.com/629492211" target="_blank" class="tile">
               <h5>Bilibili</h5>
             </a>
@@ -60,7 +76,7 @@
         </div>
 
         <div class="box compact vertical content-height">
-          <h4>现在天气怎么样？</h4>
+          <h5>现在天气怎么样？</h5>
           <p id="weather-location">Unknown Location</p>
           <div id="weather-info">Weather Service Unavailable</div>
           <script src="./javascript/index/weather.js"></script>
@@ -69,7 +85,6 @@
         <div class="box compact vertical content-height">
           <p>你正在使用的浏览器是</p>
           <h4 id="browser-version">Unknown</h4>
-          <div id="browser-info">Weather Service Unavailable</div>
           <script src="./javascript/index/browser.js"></script>
         </div>
       </section>
@@ -81,7 +96,8 @@
   </main>
   <footer>
     <p class="center">Copyright JiuruMeow 2026, all rights reserved.</p>
-    <p class="center"><a href="https://beeimg.cn/" target="_blank">图床</a>·<a href="https://open-meteo.com/" target="_blank">天气数据提供商</a></p>
+    <p class="center"><a href="https://beeimg.cn/" target="_blank">图床</a>·<a href="https://open-meteo.com/"
+        target="_blank">天气数据提供商</a></p>
   </footer>
 </body>
 

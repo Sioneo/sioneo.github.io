@@ -22,6 +22,65 @@ function getWeatherState(code) {
     return weatherMap[code] || "未知";
 }
 
+function getTemperatureIcon(temp) {
+    let result;
+    if (temp >= 33) { result = "💥" }
+    else if (temp >= 30) { result = "🥵" }
+    else if (temp >= 26) { result = "😥" }
+    else if (temp >= 20) { result = "😉" }
+    else if (temp >= 14) { result = "🤧" }
+    else { result = "🥶" }
+
+    return result;
+}
+
+function getWindGrade(v) {
+        // 处理无效输入
+    if (typeof v !== 'number' || isNaN(v) || v < 0) {
+        return null;
+    }
+
+    // 风力等级区间 [下限, 上限) 特殊处理17级和0级
+    const grades = [
+        { grade: 0, min: 0, max: 0.2 },        // 0级 0-0.2
+        { grade: 1, min: 0.3, max: 1.5 },
+        { grade: 2, min: 1.6, max: 3.3 },
+        { grade: 3, min: 3.4, max: 5.4 },
+        { grade: 4, min: 5.5, max: 7.9 },
+        { grade: 5, min: 8.0, max: 10.7, inclusiveMax: true }, // 5级包含10.7
+        { grade: 6, min: 10.8, max: 13.8 },
+        { grade: 7, min: 13.9, max: 17.1 },
+        { grade: 8, min: 17.2, max: 20.7 },
+        { grade: 9, min: 20.8, max: 24.4 },
+        { grade: 10, min: 24.5, max: 28.4 },
+        { grade: 11, min: 28.5, max: 32.6 },
+        { grade: 12, min: 32.7, max: 36.9 },
+        { grade: 13, min: 37.0, max: 41.4 },
+        { grade: 14, min: 41.5, max: 46.1 },
+        { grade: 15, min: 46.2, max: 50.9 },
+        { grade: 16, min: 51.0, max: 56.0 },
+        { grade: 17, min: 56.1, max: Infinity }  // 17级及以上
+    ];
+
+    for (const g of grades) {
+        if (g.inclusiveMax) {
+            if (v >= g.min && v <= g.max) return g.grade;
+        } else {
+            if (v >= g.min && v < g.max) return g.grade;
+        }
+    }
+    
+}
+
+function getWindIcon(v) {
+    const level = getWindGrade(v);
+    if (level >= 7) {
+        return "🌪️"
+    } else if (level <= 6) {
+        return "💨"
+    }
+}
+
 // 江门的经纬度：经度 113.08，纬度 22.58
 const lat = 22.58;
 const lon = 113.08;
@@ -48,10 +107,11 @@ async function refreshWeather() {
 
     if (data && data.current_weather) {
         const current = data.current_weather;
+        current.windspeed /= 3.6;
         locationText.innerHTML = `<div class="flex wrap"><span><i class="w">U</i>广东 江门</span><span>${lat}°N, ${lon}°E</span></div>`;
         weatherInfo.innerHTML = `
-        <div class="flex align-center wrap"><h4 class="inline">${getWeatherState(current.weathercode)}</h4><span>🌡️ ${current.temperature}°C</span></div>
-        <div class="flex wrap"><span>💨 ${current.windspeed} km/h at ${current.winddirection}°</span><span>${current.is_day == 0 ? "🌙 晚上": "☀️ 早上"}</span></div>
+        <div class="flex align-center wrap"><h4 class="inline">${getWeatherState(current.weathercode)}</h4><span>${getTemperatureIcon(current.temperature)} ${current.temperature}°C</span></div>
+        <div class="flex wrap"><span>💨 ${(current.windspeed).toFixed(2)} m/s at ${current.winddirection}° (${getWindGrade(current.windspeed)}级)</span><span>${current.is_day == 0 ? "🌙 晚上" : "☀️ 早上"}</span></div>
         `;
     } else {
         weatherInfo.innerText = "无法获取天气数据";
