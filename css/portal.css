@@ -1,27 +1,27 @@
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Regular.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Italic.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Italic.ttf");
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Bold.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Bold.ttf");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-BoldItalic.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-BoldItalic.ttf");
     font-weight: bold;
     font-style: italic;
 }
@@ -63,7 +63,7 @@ html {
     background-position: center;
     background-attachment: fixed;
     min-height: 100vh;
-    font-family: "Rambla", sans-serif;
+    font-family: "sans", sans-serif;
     color: var(--color-text);
     font-size: var(--data-font-size4);
     margin: 0;
@@ -72,8 +72,9 @@ html {
 
 header {
     display: flex;
-    justify-content: space-evenly;
-    margin: 0;
+    justify-content: space-between;
+    max-width: 1520px;
+    margin: 0 auto;
 }
 
 main {
@@ -89,16 +90,16 @@ h1,
 h2 {
     font-size: var(--data-font-size1);
     font-weight: normal;
-    margin: 5px;
-    padding: 3px;
+    margin: 3px;
+    padding: 2px;
 }
 
 h3,
 h4 {
     font-size: var(--data-font-size2);
     font-weight: normal;
-    margin: 4px;
-    padding: 3px;
+    margin: 3px;
+    padding: 2px;
 }
 
 h5 {
@@ -130,15 +131,15 @@ h6 {
 /* 超链接 */
 a {
     color: var(--color-theme);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-thickness: 1px;
+    text-decoration: none;
     margin: auto 4px;
 }
 
 a:hover,
 a:active {
+    text-decoration: underline;
     text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
 }
 
 a.sub,

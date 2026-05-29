@@ -1,6 +1,6 @@
 :root {
     --style-border-radius: 0px;
-    --style-side-padding: 200px;
+    --style-side-padding: 5%;
 
     --color-background: rgb(236, 236, 236);
     --color-theme: rgb(29, 112, 184);
@@ -24,29 +24,29 @@
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Regular.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Italic.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Italic.ttf");
     font-weight: normal;
     font-style: italic;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-Bold.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-Bold.ttf");
     font-weight: bold;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Rambla";
-    src: url("../font/Rambla-BoldItalic.ttf");
+    font-family: "sans";
+    src: url("../font/TitilliumWeb-BoldItalic.ttf");
     font-weight: bold;
     font-style: italic;
 }
@@ -67,7 +67,7 @@
 
 
 body {
-    font-family: "Rambla", sans-serif;
+    font-family: "sans", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
@@ -94,29 +94,33 @@ h5,
 h6 {
     color: var(--color-theme);
     padding: 0;
-    margin: 15px 4px;
     font-weight: normal;
 }
 
 /* 各级标题字体大小 */
 h1 {
-    font-size: 36px;
+    font-size: 40px;
+    margin: 4px 4px;
 }
 
 h2 {
     font-size: 33px;
+    margin: 4px 4px;
 }
 
 h3 {
     font-size: 29px;
+    margin: 20px 4px 6px 0;
 }
 
 h4 {
     font-size: 26px;
+    margin: 4px 4px;
 }
 
 h5 {
     font-size: 23px;
+    margin: 4px 4px;
 }
 
 h6 {
@@ -270,7 +274,7 @@ header {
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
     padding: 5px var(--style-side-padding);
-
+    flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -283,41 +287,6 @@ header {
     height: 100%;
 }
 
-/* 以下class已弃用，使用<nav>替代header-item */
-.header-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    height: 100%;
-}
-
-.header-item-button {
-    font-weight: normal;
-    text-decoration: none;
-    padding: 0 7px;
-    margin: 0 10px;
-    border-bottom: 3px solid transparent;
-    transition: transform 0.1s ease, border-bottom 0.1s ease;
-    display: flex;
-    align-items: center;
-    height: 100%;
-}
-
-.header-item-button:hover {
-    font-weight: normal;
-    border-bottom: 3px solid var(--color-contrast-text);
-    transition: transform 0.1s ease, border-bottom 0.1s ease;
-}
-
-.header-item-button:active {
-    background-color: var(--color-contrast-text);
-    color: var(--color-theme);
-    font-weight: normal;
-    border-bottom: 2px solid var(--color-contrast-text);
-}
-
-/* 以上class已弃用，使用<nav>替代header-item */
-
 header nav {
     display: flex;
     align-items: center;
@@ -325,21 +294,20 @@ header nav {
     height: 100%;
 }
 
-header nav button,
-header nav a {
+header button,
+header a {
     font-weight: normal;
     text-decoration: none;
-    padding: 0 7px;
+    padding: 10px 7px;
     margin: 0 10px;
     border-bottom: 3px solid transparent;
     transition: transform 0.1s ease, border-bottom 0.1s ease;
-    display: flex;
     align-items: center;
-    height: 100%;
+    display: inline-flex;
 }
 
-header nav button:hover,
-header nav a:hover {
+header button:hover,
+header a:hover {
     font-weight: normal;
     border-bottom: 3px solid var(--color-contrast-text);
     transition: transform 0.1s ease, border-bottom 0.1s ease;
@@ -437,7 +405,7 @@ footer {
 
 /* 按钮 */
 button {
-    font-family: "Rambla";
+    font-family: "sans";
 }
 
 /* 按钮基础样式 */
@@ -545,7 +513,7 @@ button .flat {
 
 .callout.modest {
     --color-theme: var(--color-grey);
-    --color-theme-shallow: rgb(209, 209, 209);
+    --color-theme-shallow: rgb(225, 225, 225);
 }
 
 .callout.pink {
@@ -658,7 +626,7 @@ input {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Rambla", sans-serif;
+    font-family: "sans", sans-serif;
 }
 
 input:hover {
@@ -684,7 +652,7 @@ select {
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "Rambla", sans-serif;
+    font-family: "sans", sans-serif;
 }
 
 select:hover {
@@ -831,22 +799,6 @@ table {
     border: 1px solid #000000;
 }
 
-/* 根据不同设备调整css */
-@media only screen and (max-width: 960px) {
-    :root {
-        --style-side-padding: 30px;
-    }
-
-    header {
-        height: auto;
-        max-height: none;
-        flex-wrap: wrap;
-    }
-}
-
-@media (min-width: 961px) {
-    header {
-        height: 45px;
-        max-height: 45px;
-    }
+article p {
+    text-indent: 2em;
 }
