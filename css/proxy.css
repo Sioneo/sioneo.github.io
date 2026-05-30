@@ -1,0 +1,67 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0;
+    height: 100vh;
+}
+
+:root {
+    --color-text: black;
+    --color-grey: grey;
+    --color-active: rgb(206, 235, 255);
+}
+
+header {
+    margin: 0;
+    padding: 5px;
+    border-bottom: 1px solid var(--color-grey);
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    #url-input {
+        flex: 1;
+        border: 1px solid var(--color-grey);
+        margin: 0;
+        padding: 4px;
+    }
+
+    #search-button, #visit-button {
+        border: none;
+        background: transparent;
+        margin: 0;
+        padding: 4px;
+
+        &:hover, &:active {
+            background: var(--color-active);
+        }
+    }
+
+    #search-select {
+        border: none;
+        background: transparent;
+        margin: 0;
+        padding: 4px;
+
+        &:hover, &:active {
+            background: var(--color-active);
+        }
+    }
+}
+
+main {
+    margin: 0;
+    padding: 0;
+    flex: 1;
+}
+
+footer {
+    margin: 0;
+    border-top: 1px solid var(--color-grey);
+}

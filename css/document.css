@@ -556,6 +556,10 @@ code {
     padding: 3px;
 }
 
+.mono {
+    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
+}
+
 /* 对话框 */
 dialog {
     min-width: 300px;
@@ -621,7 +625,7 @@ dialog .controls {
 }
 
 /* 各种导入 */
-input {
+input, textarea, select {
     background-color: var(--color-box-background);
     border: none;
     font-size: 16px;
@@ -629,40 +633,23 @@ input {
     font-family: "sans", sans-serif;
 }
 
-input:hover {
+input:hover, textarea:hover, select:hover {
     border: 1px solid var(--color-theme);
     background-color: var(--color-theme-shallow);
 }
 
-input:active {
+input:active, textarea:active, select:active {
     border: 1px solid var(--color-theme);
     background-color: var(--color-theme-shallow);
 }
 
 input.tool-input,
-select.tool-input {
+select.tool-input,
+textarea.tool-input {
     display: inline-block;
     margin: 10px 10px;
     width: 40vw;
     height: 30px;
-}
-
-select {
-    background-color: var(--color-box-background);
-    border: none;
-    font-size: 16px;
-    border: 1px solid var(--color-grey);
-    font-family: "sans", sans-serif;
-}
-
-select:hover {
-    border: 1px solid var(--color-theme);
-    background-color: var(--color-theme-shallow);
-}
-
-select:active {
-    border: 1px solid var(--color-theme);
-    background-color: var(--color-theme-shallow);
 }
 
 select.tool-input {
@@ -675,6 +662,21 @@ option:checked {
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
 }
+
+form div.line {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: space-around;
+
+    label {
+        max-width: 7vw;
+    }
+
+    input, select, textarea {
+        flex: 1;
+    }
+} 
 
 form label {
     width: 10vw;
@@ -801,4 +803,11 @@ table {
 
 article p {
     text-indent: 2em;
+}
+
+/* flex布局 */
+.flex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
