@@ -5,16 +5,6 @@ var webData = {
 
 // Web相关服务
 const Web = {
-    showPageUpdateTime: function () {
-        const updateTimePara = document.getElementById("webInfoUpdateTime");
-        if (!updateTimePara) {
-            console.warn("Update time element not found.");
-            return;
-        }
-        let updateTime = new Date(document.lastModified);
-        updateTimePara.innerText = updateTime.toLocaleString();
-    },
-
     // nav bar相关服务
     addElementToBar: function (buttonId, contentId, name, isActive) {
         // 检查元素是否存在
@@ -111,6 +101,41 @@ const Web = {
         return option ? option.text : null;
     }
 };
+
+
+// 常用函数
+class Utilities {
+    constructor(data) {
+        this.hintTarget = document.getElementById(data.hintTargetId);
+    }
+
+    hint(msg = "未知信息", type = "info") {
+        const timeMsg = `[${new Date().toISOString()}] ${msg}`;
+        switch (type) {
+            case "error":
+                this.hintTarget.innerHTML = msg;
+                this.hintTarget.style.color = "var(--color-red)";
+                console.error(timeMsg);
+                break;
+            case "warning":
+                this.hintTarget.innerHTML = msg;
+                this.hintTarget.style.color = "var(--color-red)";
+                console.warn(timeMsg);
+                break;
+            case "log":
+                this.hintTarget.innerHTML += `<br>${msg}`;
+                this.hintTarget.style.color = "var(--color-text)";
+                console.log(timeMsg);
+                break
+            case "info":
+            default:
+                this.hintTarget.innerHTML = msg;
+                this.hintTarget.style.color = "var(--color-text)";
+                console.log(timeMsg);
+                break
+        }
+    }
+}
 
 // 获取设备类型并设置样式
 Web.deviceType = Web.getDeviceType()[0]

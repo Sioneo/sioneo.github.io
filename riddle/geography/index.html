@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../../css/document.css">
+    <link rel="stylesheet" type="text/css" href="../riddle-style.css">
+    <script src="../../web/service/web-service.js"></script>
+    <title>猜盐 - 地理</title>
+</head>
+
+<body>
+
+    <header>
+        <a class="header-item-button back" href="../index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">猜盐 - 地理</h4>
+        <nav>
+        </nav>
+    </header>
+
+    <main>
+        <p id="start-menu-hint">Welcome!</p>
+        <div id="start-menu">
+            <h3>开始游戏</h3>
+            <form>
+                <div class="line">
+                    <label for="riddle-range-select">题库范围</label>
+                    <select id="riddle-range-select" required>
+                        <option value="" selected disabled>未选择</option>
+                        <option value="nation">国家</option>
+                        <option value="city-globe">城市 - 全球</option>
+                        <option value="city-europe" disabled>城市 - 欧洲</option>
+                        <option value="city-china" disabled>城市 - 中国</option>
+                    </select>
+                </div>
+                <div class="line">
+                    <label for="riddle-difficulty-select">难度</label>
+                    <select id="riddle-difficulty-select" required>
+                        <option value="" selected disabled>未选择</option>
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                    </select>
+                    <button class="button-big controls" type="button" id="start-button">开始</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="game">
+            <section class="box">
+                <h2 id="riddle-title">正确的城市是: ?????</h4>
+                    <h4 class="underline">标签</h5>
+                        <div id="tag-container">
+                            <div class="tag unknown">未知</div>
+                            <div class="tag match">匹配</div>
+                            <div class="tag mismatch">不匹配</div>
+                        </div>
+            </section>
+            <section class="box" id="guess-box">
+                <input id="guess-input" placeholder="输入一个城市、国家或地区；使用#开头来猜测标签"><button id="guess-button">猜测</button>
+            </section>
+            <section class="box">
+                <h4 class="underline">猜测记录</h4>
+
+                <div id="guess-record">
+                    <div class="guess-record-line">
+                        <p class="title">阿姆斯特丹</p>
+                        <div class="tags">
+                            <div class="tag unknown">未知</div>
+                            <div class="tag match">匹配</div>
+                            <div class="tag mismatch">不匹配</div>
+                        </div>
+                    </div>
+                    <div class="guess-record-line">
+                        <p class="title">阿姆斯特丹</p>
+                        <div class="tags">
+                            <div class="tag unknown">未知</div>
+                            <div class="tag match">匹配</div>
+                            <div class="tag mismatch">不匹配</div>
+                        </div>
+                    </div>
+                </div>
+                <p class="center" id="congratulations">
+                    <span style="margin-right: 2em;">恭喜你！猜对了～</span>
+                    <button id="back-to-start-button" class="button-small">返回开始界面</button>
+                    <button class="button-small" id="restart-button">再来一次</button>
+                </p>
+            </section>
+        </div>
+
+        <h3>玩法教程</h3>
+    </main>
+
+    <br>
+    <script src="../../web/footer/general-footer.js"></script>
+    <general-footer></general-footer>
+
+    <script src="./data/alias.js"></script>
+    <script src="./data/cities.js"></script>
+    <script src="./data/nations.js"></script>
+    <script src="./js/generator.js"></script>
+    <script src="./js/processor.js"></script>
+    <script src="./js/launcher.js"></script>
+</body>
+
+</html>

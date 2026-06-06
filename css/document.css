@@ -1,6 +1,8 @@
 :root {
-    --style-border-radius: 0px;
+    --style-border-radius: 10px;
     --style-side-padding: 5%;
+    --style-font-family: "sans", sans-serif;
+    --style-font-mono: "Consolas", "Menlo", "Droid Sans Mono", "JetBrains Mono", monospace, sans-serif;
 
     --color-background: rgb(236, 236, 236);
     --color-theme: rgb(29, 112, 184);
@@ -9,9 +11,10 @@
     --color-text: black;
     --color-white: white;
     --color-contrast-text: white;
-    --color-mono-background: rgba(230, 230, 230, 0.85);
+    --color-mono-background: rgba(233, 231, 231, 0.85);
     --color-box-background: rgba(170, 170, 170, 0.12);
-    --color-link: rgb(0, 107, 201);
+    --color-active: rgb(0, 107, 201);
+    --color-active-shallow: rgb(226, 242, 255);
     --color-link-active: black;
     --color-link-active-background: rgb(255, 208, 0);
     --color-green: green;
@@ -65,13 +68,19 @@
     font-style: normal;
 }
 
+html,
+* {
+    font-family: var(--style-font-family);
+}
 
 body {
-    font-family: "sans", sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--color-background);
     font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
 }
 
 /* JavaScript 未启用警告 */
@@ -81,8 +90,9 @@ body {
 }
 
 main {
-    margin: 20px var(--style-side-padding);
+    margin: 10px var(--style-side-padding);
     padding: 0;
+    flex: 1;
 }
 
 /* 基础标题样式 */
@@ -95,6 +105,11 @@ h6 {
     color: var(--color-theme);
     padding: 0;
     font-weight: normal;
+
+     /* 下边界 */
+    &.underline {
+        border-bottom: 1px solid var(--color-hr);
+    }
 }
 
 /* 各级标题字体大小 */
@@ -138,7 +153,7 @@ h5 b,
 h6 b {
     color: var(--color-theme);
     padding: 0;
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 /* 新增的黑色主题类 */
@@ -192,7 +207,7 @@ p {
 }
 
 a {
-    color: var(--color-link);
+    color: var(--color-active);
     text-decoration: underline;
     text-underline-offset: 4px;
     text-decoration-thickness: 1px;
@@ -207,7 +222,6 @@ a.outbound::before {
 }
 
 a:hover {
-    font-weight: bold;
     text-decoration-thickness: 2px;
 }
 
@@ -273,7 +287,7 @@ header {
     margin: 0;
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
-    padding: 5px var(--style-side-padding);
+    padding: 5px var(--style-side-padding) 10px var(--style-side-padding);
     flex-wrap: wrap;
     display: flex;
     align-items: center;
@@ -282,6 +296,7 @@ header {
 
 .header-title {
     display: flex;
+    flex: 1;
     align-items: center;
     gap: 10px;
     height: 100%;
@@ -403,15 +418,10 @@ footer {
     font-weight: normal;
 }
 
-/* 按钮 */
-button {
-    font-family: "sans";
-}
-
 /* 按钮基础样式 */
 .button-big,
 .button-small {
-    border-radius: var(--style-border-radius);
+    border-radius: 0;
     background-color: var(--color-contrast-text);
     color: var(--color-text);
     border: 1px solid var(--color-text);
@@ -543,13 +553,13 @@ li {
 
 /* 等宽字体 */
 pre {
-    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
+    font-family: var(--style-font-mono);
     font-size: 18px;
     background-color: var(--color-mono-background);
 }
 
 code {
-    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
+    font-family: var(--style-font-mono);
     font-size: 16px;
     background-color: var(--color-mono-background);
     margin: auto 5px;
@@ -557,7 +567,7 @@ code {
 }
 
 .mono {
-    font-family: "Consolas", "Menlo", "Droid Sans Mono", "Sarasa Fixed SC", monospace, sans-serif;
+    font-family: var(--style-font-mono);
 }
 
 /* 对话框 */
@@ -625,22 +635,28 @@ dialog .controls {
 }
 
 /* 各种导入 */
-input, textarea, select {
-    background-color: var(--color-box-background);
+input,
+textarea,
+select {
+    background-color: var(--color-white);
     border: none;
     font-size: 16px;
     border: 1px solid var(--color-grey);
-    font-family: "sans", sans-serif;
+    border-radius: var(--style-border-radius);
 }
 
-input:hover, textarea:hover, select:hover {
-    border: 1px solid var(--color-theme);
-    background-color: var(--color-theme-shallow);
+input:hover,
+textarea:hover,
+select:hover {
+    border: 1px solid var(--color-active);
+    background-color: var(--color-active-shallow);
 }
 
-input:active, textarea:active, select:active {
-    border: 1px solid var(--color-theme);
-    background-color: var(--color-theme-shallow);
+input:active,
+textarea:active,
+select:active {
+    border: 1px solid var(--color-active);
+    background-color: var(--color-active-shallow);
 }
 
 input.tool-input,
@@ -659,7 +675,7 @@ select.tool-input {
 }
 
 option:checked {
-    background-color: var(--color-theme);
+    background-color: var(--color-active);
     color: var(--color-contrast-text);
 }
 
@@ -668,15 +684,20 @@ form div.line {
     align-items: center;
     gap: 5px;
     justify-content: space-around;
+    padding-right: 20%;
 
     label {
         max-width: 7vw;
     }
 
-    input, select, textarea {
+    input,
+    select,
+    textarea {
+        margin: 10px 10px;
+        height: 30px;
         flex: 1;
     }
-} 
+}
 
 form label {
     width: 10vw;
@@ -717,7 +738,7 @@ div.spoiler-header button {
 }
 
 div.spoiler-header button:hover {
-    background-color: var(--color-theme-shallow);
+    background-color: var(--color-active-shallow);
 }
 
 section.spoiler-content {
@@ -748,7 +769,7 @@ section.spoiler div.spoiler-header button {
 }
 
 section.spoiler div.spoiler-header button:hover {
-    background-color: var(--color-theme-shallow);
+    background-color: var(--color-active-shallow);
 }
 
 section.spoiler {
@@ -768,7 +789,7 @@ section.spoiler div.spoiler-content.active {
 /* box */
 .box {
     background-color: var(--color-white);
-    border-radius: 10px;
+    border-radius: var(--style-border-radius);
 }
 
 /* 表格 */
@@ -776,7 +797,6 @@ section.spoiler div.spoiler-content.active {
 table {
     width: 100%;
     border-collapse: collapse;
-    font-family: inherit;
 }
 
 /* 表格单元格统一样式 */
@@ -810,4 +830,8 @@ article p {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+}
+
+.center {
+    text-align: center;
 }

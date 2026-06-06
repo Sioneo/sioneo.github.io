@@ -1,0 +1,102 @@
+#riddle-title {
+    margin: 40px;
+    text-align: center;
+    color: black;
+}
+
+#start-menu {
+    display: block;
+}
+
+#game {
+    display: none;
+}
+
+#tag-container {
+    margin: 5px;
+    padding: 3px;
+}
+
+.tag {
+    padding: 6px 10px;
+    margin: 3px;
+    border-radius: 13px;
+    font-size: 15px;
+    display: inline-block;
+    font-weight: bold;
+
+    &.unknown {
+        color: white;
+        background-color: var(--color-grey);
+    }
+
+    &.mismatch {
+        color: white;
+        background-color: var(--color-red);
+    }
+
+    &.match {
+        color: white;
+        background-color: var(--color-green);
+    }
+}
+
+#guess-box {
+    display: flex;
+    padding: 0;
+
+    #guess-input {
+        flex: 1;
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 6px 10px;
+        border-radius: var(--style-border-radius) 0 0 var(--style-border-radius);
+        border-right: 1px solid rgb(184, 184, 184);
+    }
+
+    #guess-button {
+        border: none;
+        background-color: transparent;
+        font-size: 20px;
+        padding: 6px 20px;
+        border-radius: 0 var(--style-border-radius) var(--style-border-radius) 0;
+
+        &:hover {
+            background-color: whitesmoke;
+            border-radius: 0 var(--style-border-radius) var(--style-border-radius) 0 !important; 
+        }
+
+        &:active {
+            background-color: var(--color-active);
+            color: var(--color-contrast-text);
+            border-radius: 0 var(--style-border-radius) var(--style-border-radius) 0 !important;
+        }
+    }
+}
+
+#guess-record:empty::before {
+    content: "没有记录";
+    text-align: center;
+    color: var(--color-grey);
+}
+
+.guess-record-line {
+    display: flex;
+    margin: 10px 5px;
+    padding: 3px 10px;
+    align-items: center;
+    border-left: 5px solid var(--color-theme);
+
+    .title {
+        width: 25%;
+    }
+
+    .tags {
+        flex: 1;
+    }
+}
+
+#congratulations {
+    color: var(--color-green);
+}
