@@ -209,6 +209,8 @@ var aliases = {
     "🇻🇦": "Vatican",
     "梵蒂冈": "Vatican",
     "梵蒂冈城": "Vatican City",
+    "德涅斯特河沿岸摩尔达维亚": "Transnistria",
+    "德左": "Transnistria",
     // Geographic regions (extensive)
     "亚平宁半岛": "Apennine Peninsula",
     "西欧": "Western Europe",

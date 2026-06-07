@@ -287,26 +287,27 @@ header {
     margin: 0;
     background-color: var(--color-theme);
     color: var(--color-contrast-text);
-    padding: 5px var(--style-side-padding) 10px var(--style-side-padding);
+    padding: 5px var(--style-side-padding) 5px var(--style-side-padding);
     flex-wrap: wrap;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.header-title {
+h4.header-title {
     display: flex;
     flex: 1;
     align-items: center;
     gap: 10px;
-    height: 100%;
+    margin: 0;
+    white-space: nowrap;
 }
 
 header nav {
     display: flex;
     align-items: center;
     gap: 5px;
-    height: 100%;
+    white-space: nowrap;
 }
 
 header button,
@@ -333,7 +334,7 @@ header nav a:active {
     background-color: var(--color-contrast-text);
     color: var(--color-theme);
     font-weight: normal;
-    border-bottom: 2px solid var(--color-contrast-text);
+    border-bottom: 3px solid var(--color-contrast-text);
 }
 
 header h1,
@@ -400,22 +401,6 @@ footer {
 
 .footer-about a {
     color: var(--color-grey);
-}
-
-/* Github Page 标识 */
-.github-page-note {
-    color: var(--color-text);
-    font-size: 25px;
-    text-decoration: none;
-}
-
-.github-page-note:hover {
-    text-decoration: none;
-    font-weight: normal;
-}
-
-.github-page-note:active {
-    font-weight: normal;
 }
 
 /* 按钮基础样式 */

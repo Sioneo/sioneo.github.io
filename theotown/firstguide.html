@@ -18,12 +18,10 @@
     </p>
 
     <header style="display: flex;">
-        <div class="header-title">
-            <a class="header-item-button back" href="./index.html">
-                <i class="w">5</i>
-            </a>
-            <h4 class="header-title">插件制作指南丨入门</h4>
-        </div>
+        <a class="header-item-button back" href="./index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">插件制作指南丨入门</h4>
     </header>
 
     <main>
@@ -32,24 +30,28 @@
         <br>
         <h4>安卓</h4>
         <p><b>绘图软件</b>：Pixel Studio<br>
-        <b>文本编辑器</b>：MT文件管理器</p>
+            <b>文本编辑器</b>：MT文件管理器
+        </p>
         <br>
         <h4>iOS</h4>
         <p><b>绘图软件</b>：Pixel Studio<br>
-        <b>文本编辑器</b>：Kodex</p>
+            <b>文本编辑器</b>：Kodex
+        </p>
         <br>
         <p>准备好这一切之后，我们就可以开始了</p>
 
         <h3>开始</h3>
         <p>首先我们要给我们的插件创建一个文件夹，打开：</p>
-        <div class="callout modest background"><b>安卓</b>&emsp;<span class="mono">Android/data/info.flowersoft.theotown.theotown/files/plugins/</span></div>
-        <div class="callout modest background"><b>iOS</b>&emsp;<span class="mono">"文件"应用 -> TheoTown -> plugins</span></div>
+        <div class="callout modest background"><b>安卓</b>&emsp;<span
+                class="mono">Android/data/info.flowersoft.theotown.theotown/files/plugins/</span></div>
+        <div class="callout modest background"><b>iOS</b>&emsp;<span class="mono">"文件"应用 -> TheoTown -> plugins</span>
+        </div>
         <p>然后在plugins文件夹中创建一个新的文件夹，作为我们插件的文件夹，后续的文件我们都会放在里面</p>
 
         <h3>绘图</h3>
         <p>绘图教程可以看这个B站视频：<a href="https://b23.tv/2ifFno3">点我观看～</a></p>
         <p>绘制完之后将图片以PNG格式保存在插件的文件夹中</p>
-  
+
 
         <h3>代码</h3>
         <p>我们现在开始编写代码，首先在我们插件的文件夹中创建一个JSON文件，文件名格式为xxx.json</p>
@@ -72,40 +74,46 @@
 
         <p>这就是最基本的代码，你可以直接复制并修改相关参数后直接使用，下面将会逐行解释代码作用和JSON属性：</p>
 
-        <div class="callout modest background"><b>id</b>&emsp;id为每一个草稿（draft）（<a href="draft.html">点此</a>了解草稿）提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</div>
-        <div class="callout modest background"><b>type</b>&emsp;type定义了草稿的类型，例如这里的residential是住宅类型，下面夜景中用到的animation是动画类型。在制作插件时，应根据实际选择不同的类型，以下提供一些常用的类型：
+        <div class="callout modest background"><b>id</b>&emsp;id为每一个草稿（draft）（<a
+                href="draft.html">点此</a>了解草稿）提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</div>
+        <div class="callout modest background">
+            <b>type</b>&emsp;type定义了草稿的类型，例如这里的residential是住宅类型，下面夜景中用到的animation是动画类型。在制作插件时，应根据实际选择不同的类型，以下提供一些常用的类型：
 
-        <div style="display: flex; margin-top: 0.5em;">
-            <div style="width: 33%">
-                <b>residential</b>&emsp;住宅<br>
-                <b>commercial</b>&emsp;商业<br>
-                <b>industrial</b>&emsp;工业<br>
-                <b>decoration</b>&emsp;装饰<br>
-                <b>public</b>&emsp;公共<br>
-                <b>park</b>&emsp;公园<br>
+            <div style="display: flex; margin-top: 0.5em;">
+                <div style="width: 33%">
+                    <b>residential</b>&emsp;住宅<br>
+                    <b>commercial</b>&emsp;商业<br>
+                    <b>industrial</b>&emsp;工业<br>
+                    <b>decoration</b>&emsp;装饰<br>
+                    <b>public</b>&emsp;公共<br>
+                    <b>park</b>&emsp;公园<br>
+                </div>
+                <div style="width: 33%">
+                    <b>sport</b>&emsp;体育<br>
+                    <b>religion</b>&emsp;宗教<br>
+                    <b>water</b>&emsp;供水<br>
+                    <b>award</b>&emsp;奖励<br>
+                    <b>energy</b>&emsp;供电<br>
+                </div>
+                <div style="width: 34%">
+                    <b>medic</b>&emsp;医疗<br>
+                    <b>police</b>&emsp;警察<br>
+                    <b>education</b>&emsp;教育（学校）<br>
+                    <b>animation</b>&emsp;动画<br><br>
+                    <a href="https://forum.theotown.com/viewtopic.php?t=1355">点此</a>查看更多
+                </div>
             </div>
-            <div style="width: 33%">
-                <b>sport</b>&emsp;体育<br>
-                <b>religion</b>&emsp;宗教<br>
-                <b>water</b>&emsp;供水<br>
-                <b>award</b>&emsp;奖励<br>
-                <b>energy</b>&emsp;供电<br>
-            </div>
-            <div style="width: 34%">
-                <b>medic</b>&emsp;医疗<br>
-                <b>police</b>&emsp;警察<br>
-                <b>education</b>&emsp;教育（学校）<br>
-                <b>animation</b>&emsp;动画<br><br>
-                <a href="https://forum.theotown.com/viewtopic.php?t=1355">点此</a>查看更多
-            </div>
-        </div>
         </div>
 
         <div class="callout modest background"><b>title和text</b>&emsp;顾名思义，插件的标题和描述</div>
-        <div class="callout modest background"><b>frames</b>&emsp;frames为插件提供贴图，你可以<a href="frames.html">点击这里</a>查看frames的扩展内容，这里的image.png是图片的文件名，如果你的图片文件名叫abcd.png就填入abcd.png，如果在保存图片文件时绘图软件没有要求你输入后缀.png，那么在这里输入你设定的文件名+.png即可</div>
-        <div class="callout modest background"><b>draw ground</b>&emsp;在默认状态下，游戏会将一个建筑的底下绘制成水域，将draw ground设置为true的作用就是让其绘制为原本的陆地而非水域，这个属性通常都是设置为true，如果你对前面所说的不太理解，你也可以将true改为false来对比看看效果</div>
+        <div class="callout modest background"><b>frames</b>&emsp;frames为插件提供贴图，你可以<a
+                href="frames.html">点击这里</a>查看frames的扩展内容，这里的image.png是图片的文件名，如果你的图片文件名叫abcd.png就填入abcd.png，如果在保存图片文件时绘图软件没有要求你输入后缀.png，那么在这里输入你设定的文件名+.png即可
+        </div>
+        <div class="callout modest background"><b>draw ground</b>&emsp;在默认状态下，游戏会将一个建筑的底下绘制成水域，将draw
+            ground设置为true的作用就是让其绘制为原本的陆地而非水域，这个属性通常都是设置为true，如果你对前面所说的不太理解，你也可以将true改为false来对比看看效果</div>
         <div class="callout modest background"><b>people</b>&emsp;people设定建筑容纳的人口/工人</div>
-        <div class="callout modest background"><b>width和height</b>&emsp;定义了建筑的占地大小，这里为1×1<br>※通常情况下，建筑的占地都需要是一个正方形，即width和height相同</div>
+        <div class="callout modest background">
+            <b>width和height</b>&emsp;定义了建筑的占地大小，这里为1×1<br>※通常情况下，建筑的占地都需要是一个正方形，即width和height相同</div>
         <p>以上就是基础的JSON属性，你还可以<a href="jsontags.html">点击此处</a>了解更多属性</p>
 
         <h3>夜景</h3>
@@ -137,17 +145,20 @@
         </div>
 
         <p>我们可以看到，相比于一个纯建筑的代码，我们多出了创建动画和使用动画的部分，下面将对代码作用进行解释：</p>
-        
+
         <h4>创建动画部分</h4>
         <div class="callout modest background"><b>id, type, frames</b>&emsp;同上</div>
         <div class="callout modest background"><b>light</b>&emsp;若light为true则动画会在晚上发光，即夜景的效果</div>
-        <div class="callout modest background"><b>light switching</b>&emsp;若light switching为true则夜景会有开/关灯的操作，若为false那动画（夜景）全天都会发光（亮灯）</div>
+        <div class="callout modest background"><b>light switching</b>&emsp;若light
+            switching为true则夜景会有开/关灯的操作，若为false那动画（夜景）全天都会发光（亮灯）</div>
 
         <h4>建筑部分</h4>
-        <div class="callout modest background"><b>animation</b>&emsp;建筑部分新增的animation用于使用我们上面创建好的夜景动画，需要注意的是，这里动画的id要与动画创建部分的id（也就是动画的id）相同
-        <p>有些时候夜景动画可能会有错位的情况，这时候我们需要在animation中用到x和y来对动画的位置进行调整：</p>
-        <pre>"animation": [{"id": "$night_id", "x": 3, "y": -6}]</pre>
-        <p>在这里，我们将夜景动画向右移动3个像素，向上移动6个像素。也就是说，如果想把动画往右移动，就加x，往左就减x，往上移动就减y，往下就加y</p></div>
+        <div class="callout modest background">
+            <b>animation</b>&emsp;建筑部分新增的animation用于使用我们上面创建好的夜景动画，需要注意的是，这里动画的id要与动画创建部分的id（也就是动画的id）相同
+            <p>有些时候夜景动画可能会有错位的情况，这时候我们需要在animation中用到x和y来对动画的位置进行调整：</p>
+            <pre>"animation": [{"id": "$night_id", "x": 3, "y": -6}]</pre>
+            <p>在这里，我们将夜景动画向右移动3个像素，向上移动6个像素。也就是说，如果想把动画往右移动，就加x，往左就减x，往上移动就减y，往下就加y</p>
+        </div>
         <h3>小贴士</h3>
         <p>如果觉得教程看不懂，可以试试扔给AI帮你解释</p>
     </main>

@@ -156,6 +156,7 @@ guessButton.addEventListener("click", () => {
 
 restartButton.addEventListener("click", () => {
     generateGame();
+    initilizeGame();
 })
 
 backToStartButton.addEventListener("click", () => {

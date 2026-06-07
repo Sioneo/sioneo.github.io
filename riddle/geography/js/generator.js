@@ -1,3 +1,14 @@
+function addTags(tags) {
+    gameData.tags = [];
+    for (let i = 0; i < tags.length; i++) {
+        gameData.tags.push({
+            name: tags[i],
+            revealed: false,
+            id: "Tag-" + crypto.randomUUID().substring(0, 7)
+        })
+    }
+}
+
 function generateGame() {
     let riddleRange = document.getElementById("riddle-range-select").value;
     let riddleDifficuly = parseInt(document.getElementById("riddle-difficulty-select").value);
@@ -24,9 +35,4 @@ function generateGame() {
             break;
     }
     console.log("The answer is", reverseAliases[gameData.answer], gameData.answer, "with tags", gameData.tags);
-    startMenu.style.display = "none";
-    gameMenu.style.display = "block";
-    Utils.hint("生成完成");
-
-    initilizeGame();
 }
