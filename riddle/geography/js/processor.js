@@ -164,3 +164,12 @@ backToStartButton.addEventListener("click", () => {
     gameMenu.style.display = "none";
     startMenu.style.display = "block";
 })
+
+// 监听回车
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+        guessButton.click();
+        guessInput.value = "";
+    }
+});

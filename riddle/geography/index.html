@@ -45,6 +45,7 @@
                     <button class="button-big controls" type="button" id="start-button">开始</button>
                 </div>
             </form>
+            <p id="riddle-quantities-info"></p>
         </div>
 
         <div id="game">
@@ -90,6 +91,7 @@
         </div>
 
         <h3>玩法教程</h3>
+        <p>根据标签来猜测正确的国家/城市</p>
     </main>
 
     <br>
@@ -102,6 +104,9 @@
     <script src="./js/generator.js"></script>
     <script src="./js/processor.js"></script>
     <script src="./js/launcher.js"></script>
+    <script>
+        document.getElementById("riddle-quantities-info").innerHTML = `现在一共有<b>${Object.keys(nations).length}</b>个国家和<b>${Object.keys(cities).length}</b>个城市处于题库中`
+    </script>
 </body>
 
 </html>

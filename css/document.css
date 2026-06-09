@@ -106,7 +106,7 @@ h6 {
     padding: 0;
     font-weight: normal;
 
-     /* 下边界 */
+    /* 下边界 */
     &.underline {
         border-bottom: 1px solid var(--color-hr);
     }
@@ -706,69 +706,71 @@ section {
 /* Spoiler (样式1) (线条型)*/
 div.spoiler-header {
     color: var(--color-text);
-    border-bottom: 1px solid var(--color-hr);
+
+    * {
+        display: inline-block;
+        color: var(--color-text);
+    }
+
+    button:not(.button-big) {
+        border: none;
+        background-color: transparent;
+        font-size: 23px;
+    }
+
+    button:not(.button-big):hover {
+        background-color: var(--color-active-shallow);
+    }
 }
 
-div.spoiler-header * {
-    display: inline-block;
-    padding: 0;
-    margin: 3px;
-    font-size: 23px;
-    color: var(--color-text);
-}
-
-div.spoiler-header button {
-    border: none;
-    background-color: transparent;
-}
-
-div.spoiler-header button:hover {
-    background-color: var(--color-active-shallow);
-}
-
-section.spoiler-content {
+.spoiler-content {
     background-color: transparent;
     padding: 0px;
     display: none;
     transition: display 0.5s ease-in-out;
-}
 
-section.spoiler-content.active {
-    display: block;
-    margin-bottom: 20px;
+    &.active {
+        display: block;
+        margin-bottom: 20px;
+    }
+
 }
 
 /* Spoiler (样式2) (box型) */
-section.spoiler div.spoiler-header {
-    display: inline-block;
-    padding: 0;
-    margin: 3px;
-    font-size: 23px;
-    color: var(--color-text);
-    border: none;
-}
-
-section.spoiler div.spoiler-header button {
-    border: none;
-    background-color: transparent;
-}
-
-section.spoiler div.spoiler-header button:hover {
-    background-color: var(--color-active-shallow);
-}
-
 section.spoiler {
     background-color: var(--color-white);
     border-radius: 10px;
-}
 
-section.spoiler div.spoiler-content {
-    display: none;
-}
+    div.spoiler-header {
+        display: flex;
+        padding: 0;
+        margin: 3px;
+        font-size: 23px;
+        color: var(--color-text);
+        border: none;
 
-section.spoiler div.spoiler-content.active {
-    display: block;
-    margin-bottom: 20px;
+        .spoiler-title {
+            flex: 1;
+        }
+        
+        button:not(.button-big) {
+            border: none;
+            background-color: transparent;
+
+            &:hover {
+                background-color: var(--color-active-shallow);
+            }
+        }
+    }
+
+    div.spoiler-content {
+        display: none;
+
+        &.active {
+            display: block;
+            margin-bottom: 20px;
+        }
+    }
 }
 
 /* box */

@@ -2,14 +2,12 @@
 <html lang="zh">
 
 <head>
-    <title>插件开发工具</title>
+    <title>道路装饰开发工具</title>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../../css/document.css">
     <script src="../../web/footer/theotown-footer.js">
     </script>
     <script src="../../web/service/web-service.js"></script>
-    <script src="../../web/service/js-zip.js"></script>
-    <script src="building-js/general-service.js"></script>
 </head>
 
 <body>
@@ -24,21 +22,25 @@
         <a class="header-item-button back" href="index.html">
             <i class="w">5</i>
         </a>
-        <h4></h4>
-        <nav>
-            <a target="_blank" href="animation-dev.html">动画开发工具</a>
-        </nav>
+        <h4 class="header-title">道路装饰开发工具</h4>
     </header>
-
-    <nav class="bar" style="min-height: 30px; align-items: center; display: flex; justify-content: space-between;">
-        <span class="active" id="nav-button-rci">开发阶段</span>
-        <span>问题反馈：到频道或者各大QQ群(见最底下脚注)找<em>九如今天吃什么</em>(@我就行)</span>
-    </nav>
-
     <main>
+        <section class="spoiler">
+            <div class="spoiler-header">
+                <button class="active" id="animation-spoiler-button"><i class="b">k</i></button>
+                <h5 class="spoiler-title">动画</h5>
+                <button class="button-big">添加一个动画</button>
+            </div>
+            <div class="spoiler-content active" id="animation-spoiler-content">
+                
+            </div>
+        </section>
     </main>
     <theotown-footer></theotown-footer>
 
+    <script>
+        Web.addSpoiler("animation-spoiler-button", "animation-spoiler-content");
+    </script>
 </body>
 
 </html>
