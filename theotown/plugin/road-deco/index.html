@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh_cn">
+
+<head>
+    <title>道路装饰开发工具</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <link rel="stylesheet" type="text/css" href="./css/road-deco.css">
+    <script src="/web/footer/theotown-footer.js">
+    </script>
+    <script src="/web/service/web-service.js"></script>
+    <script src="./js/general-service.js"></script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header>
+        <a class="header-item-button back" href="index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">道路装饰开发工具</h4>
+    </header>
+    <main>
+        <form>
+            <label for="project-name-input">项目名</label>
+            <input name="project-name" id="project-name-input" class="tool-input" type="text">
+            <button type="button" class="button-small"
+                onclick="document.getElementById('project-name-input').value = null; generalData.projectName = null;">清空</button>
+        </form>
+        <p id="project-name-non-ascii-note" style="color: var(--color-red);"></p>
+
+        <section class="spoiler">
+            <div class="spoiler-header">
+                <button class="active" id="animation-spoiler-button"><i class="b">k</i></button>
+                <h5 class="spoiler-title">动画</h5>
+                <button class="button-big" id="add-new-animation-button">添加一个动画</button>
+            </div>
+            <div class="spoiler-content active" id="animation-spoiler-content">
+                <h5 class="underline">已添加的动画</h5>
+                <div class="empty-note" id="animation-list"></div>
+            </div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header">
+                <button class="active" id="road-deco-spoiler-button"><i class="b">k</i></button>
+                <h5 class="spoiler-title">道路装饰</h5>
+                <button class="button-big" id="new-rd-button">添加一个道路装饰</button>
+            </div>
+            <div class="spoiler-content active" id="road-deco-spoiler-content">
+                <h5 class="underline">已添加的道路装饰</h5>
+                <div class="empty-note" id="road-deco-list"></div>
+            </div>
+        </section>
+        <section class="box">
+            <div class="flex">
+                <h5>结果</h5>
+                <div>
+                    <button type="button"
+                        onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')"
+                        class="button-big"><i class="w">9</i>复制</button>
+                    <button type="button" id="main-submit-button" class="button-full-green"><i
+                            class="w">I</i>完成</button>
+                    <button type="button" id="new-package-button" class="button-full-green"><i
+                            class="w">y</i>打包成zip压缩包并下载</button>
+                </div>
+            </div>
+            <pre id="json-output">啥也没有</pre>
+        </section>
+    </main>
+    <theotown-footer></theotown-footer>
+
+    <!-- 添加动画 -->
+    <dialog style="max-width: 60vw;" id="add-new-animation-dialog">
+        <div class="header">
+            <span class="header-title">添加一个动画</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-animation-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <canvas id="new-animation-canvas">贴图显示区域</canvas>
+            <form id="new-animation-form">
+                <label for="animation-id-input">ID</label><input class="tool-input" name="id" id="animation-id-input"
+                    required><br>
+                <label for="animation-frame-input">贴图</label><input type="file" name="frame" id="animation-frame-input"
+                    accept="image/png" class="tool-input"><br>
+                <label for="animation-handle-x-input">Handle X</label><input class="tool-input" name="handle x"
+                    id="animation-handle-x-input" value="0" type="number"><br>
+                <label for="animation-handle-y-input">Handle Y</label><input class="tool-input" name="handle y"
+                    id="animation-handle-y-input" value="0" type="number"><br>
+                <label for="animation-night-input">启用夜景</label><input type="checkbox" class="tool-input"
+                    id="animation-night-input" name="night">
+            </form>
+        </div>
+        <div class="controls">
+            <button
+                onclick="drawNewAnimationPreview(animationCache.frame, animationCache.handleX, animationCache.handleY);"
+                class="button-small">刷新</button>
+            <button onclick="document.getElementById('animation-id-input').value = randomId('animation')"
+                class="button-small">随机ID</button>
+            <button onclick="document.getElementById('add-new-animation-dialog').close();"
+                class="button-small">关闭</button>
+            <button onclick="addNewAnimationSubmit();" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 添加道路装饰 -->
+    <dialog style="max-width: 60vw;" id="add-new-rd-dialog">
+        <div class="header">
+            <span class="header-title">添加一个道路装饰</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-rd-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <canvas id="new-rd-canvas">贴图显示区域</canvas>
+            <form id="new-rd-form">
+                <label for="rd-id-input">ID</label><input class="tool-input" name="id" id="rd-id-input" required><br>
+                <div class="flex">
+                    <p>当前索引: 0/63</p>
+                    <div>
+                        <button class="button-small" type="button">上一个</button>
+                        <button class="button-small" type="button">下一个</button>
+                    </div>
+                </div>
+                <h5 class="underline">动画</h5>
+                <div class="flex" style="padding: 5px; gap: 5px;">
+                    <select style="flex: 1">
+                        <option value="" selected disabled>请选择一个动画</option>
+                    </select>
+                    <button class="button-small" type="button">添加新动画</button>
+                </div>
+                <div id="rd-animation-showcase" class="empty-note"></div>
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('rd-id-input').value = randomId('road-deco')"
+                class="button-small">随机ID</button>
+            <button onclick="document.getElementById('add-new-rd-dialog').close();" class="button-small">关闭</button>
+            <button onclick="addNewRdSubmit();" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <script>
+        Web.addSpoiler("animation-spoiler-button", "animation-spoiler-content");
+        Web.addSpoiler("road-deco-spoiler-button", "road-deco-spoiler-content");
+    </script>
+    <script src="./js/utilities.js"></script>
+    <script src="./js/animation.js"></script>
+    <script src="./js/road-deco.js"></script>
+    <script src="./js/monitor.js"></script>
+</body>
+
+</html>

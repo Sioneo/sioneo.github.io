@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Pixel Picture Data</title>
+    <style>
+body {
+    background-color: #333333;
+    color: #f6f6f6;
+    word-wrap: break-word;
+    font-family: Avenir, Helvetica, sans-serif;
+}
+.container {
+    width: 95%;
+    height: auto;
+    margin: 7px auto;
+    background-color: rgba(100, 100, 100, 0.5);
+    padding: 4px;
+}
+h3 {
+    margin: 5px;
+}
+h4 {
+    margin: 5px;
+}
+.author {
+    text-align: center;
+    margin: 2px auto;
+    color: #aeaeae;
+}
+a { 
+   color: skyblue;
+}
+button {
+    border: none;
+    background-color: rgba(110, 110, 110, 1.0);
+    color: #f6f6f6;
+    padding: 2px 7px 2px 7px;
+    font-size: 13px;
+}
+.line {
+    width: auto;
+    margin: auto auto auto 2%;
+}
+    </style>
+</head>
+<body>
+  <a href="chinese.html">简体中文</a>
+    <a href="t-chinese.html">繁體中文</a>
+    <a href="japanese.html">日本語</a>
+    <a href="french.html">Français</a>
+    <a href="german.html">Deutsch</a>
+    
+    <div class="container">
+        <h3>Upload Image File</h3>
+        <div class="container">
+            <input type="file" id="input" name="image" accept=".jpg,.jpeg,.png,.PNG,.JPG,.JPEG">
+            <button id="loadButton">Load</button>
+            <div id="submitNotification"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h3>Image</h3>
+        
+        <div class="line">
+            <div>Zoom</div>
+            <input style="width: 100px;" type="number" id="zoomScale" min="0" max="10" value=1 placeholder="0~10">
+            <button id="submitButton">Apply</button>
+        </div>
+        
+        <div><br><br></div>
+        <div id="fileInfo" style="width = auto; margin: auto auto auto 2%;"></div>
+        <div class="line">Preview:</div>
+        <canvas style="margin: auto auto auto 2%;" id="imagePreview"></canvas>
+    </div>
+    
+    <div class="container">
+        <h3>Data</h3>
+        <button style="margin: auto 2px auto 2%;" id="startButton">Generate Data</button>
+        <button style="margin: auto auto auto 2px;" id="copyButton">Copy</button>
+        <div class="container">
+            <div>Preview:</div>
+            <div id="dataPreview" style="font-family: monospace, Courier, sans-serif;">-</div>
+        </div>
+    </div>
+
+    <div class="author">Made by <a href="https://b23.tv/eWskduP">Sioneo</a>(Bilibili)/<a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382">dnswodn</a>(Forum)</div>
+
+    <script>
+const imageInput = document.getElementById("input");
+const fileInfo = document.getElementById("fileInfo");
+const dataPreview = document.getElementById("dataPreview");
+const submitButton = document.getElementById("submitButton");
+const submitNotification = document.getElementById("submitNotification");
+const imagePreviewCanvas = document.getElementById("imagePreview");
+const copyButton = document.getElementById("copyButton");
+const image = new Image();
+
+let zoomScale = document.getElementById("zoomScale").value;
+let hasLoadedImage;
+let imagePreviewCanvasCtx;
+let dataOutput = "";
+
+// 绘制图片
+function drawImageCanvas(){
+    imagePreviewCanvas.width = image.width * zoomScale;
+    imagePreviewCanvas.height = image.height * zoomScale;
+    imagePreviewCanvasCtx = imagePreviewCanvas.getContext("2d");
+    imagePreviewCanvasCtx.drawImage(image, 0, 0, imagePreviewCanvas.width, imagePreviewCanvas.height);
+
+    fileInfo.textContent = "Image Size:" + imagePreviewCanvas.width.toString() + "*" + imagePreviewCanvas.height.toString();
+}
+
+// 复制按钮监听器
+copyButton.addEventListener("click", async () => {
+    const text = dataPreview.textContent;
+    try{
+        await navigator.clipboard.writeText(text);
+        dataPreview.textContent = "Successfully Copy";
+    }
+    catch(err){
+        dataPreview.textContent = "Copy Failed";
+    }
+
+    function changeTextBack(){
+        dataPreview.textContent = text;
+    }
+    setTimeout(changeTextBack, 2500);
+    
+});
+
+// 添加开始生成按钮监听器
+startButton.addEventListener("click", function(){
+    if (!hasLoadedImage){
+        dataPreview.textContent = "Please upload an image file first.";
+    }
+    else{
+        dataPreview.textContent = "Generating…";
+        dataOutput = "data = {"; // 开始
+        for (let y = 0; y < imagePreviewCanvas.height; y++){
+            if (y != 0){
+                dataOutput += ",";
+            }
+            dataOutput += "{"; // 本行开始
+            for (let x = 0; x < imagePreviewCanvas.width; x++){
+                let pixelSource = imagePreviewCanvasCtx.getImageData(x, y, 1, 1);
+                let pixelData = pixelSource.data;
+                let red = pixelData[0];
+                let green = pixelData[1];
+                let blue = pixelData[2];
+                let alpha = pixelData[3];
+
+                if (x != 0 && x != imagePreviewCanvas.width){
+                    dataOutput += ",";
+                }
+                
+                let pixelColor;
+                // 如果不为完全透明则输出RGB值
+                if (alpha > 0){
+                    pixelColor = "{" + red + "," + green + "," + blue + "}";
+                }
+                // 否则输出0表示透明
+                else{
+                    pixelColor = "0";
+                }
+                dataOutput += pixelColor;
+            }
+
+            dataOutput += "}"; // 本行结束
+        }
+        dataOutput += "}"; // 结束
+        dataPreview.textContent = dataOutput;
+    }
+});
+
+// 添加确定缩放倍率按钮监听器
+submitButton.addEventListener("click", function(){
+    zoomScale = document.getElementById("zoomScale").value;
+    drawImageCanvas(); // 刷新图片
+    
+    dataOutput = ""; // 清空数据
+    dataPreview.textContent = dataOutput;
+});
+
+// 添加导入按钮按下监听器
+loadButton.addEventListener("click", function(){
+    const file = imageInput.files[0];
+    if (file == null){
+        submitNotification.textContent = "Please upload an image file first.";
+    }
+    else{
+        submitNotification.textContent = "Success";
+        hasLoadedImage = true;
+        
+        image.onload = function(){
+            fileInfo.textContent = "Addressing……";
+            drawImageCanvas();
+        }        
+        image.oneerror = function(){
+            fileInfo.textContent = "ERROR";
+        }
+        
+        // 添加文件阅读器
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            image.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+
+        function changeTextBack(){
+            submitNotification.textContent = "";
+        }
+        setTimeout(changeTextBack, 2500);
+    }
+    dataOutput = ""; // 清空数据
+    dataPreview.textContent = dataOutput;
+});
+
+    </script>
+    
+</body>
+</html>

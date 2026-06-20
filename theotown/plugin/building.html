@@ -106,13 +106,12 @@
 
         <section class="spoiler">
             <div class="spoiler-header"><button class="active" id="rci-frames-data-button"><i class="b">k</i></button>
-                <h5>帧（frames）</h5>
+                <h5 class="spoiler-title">帧（frames）</h5>
+                <button id="frames-add-button" class="button-big">添加一个帧</button>
             </div>
             <div id="rci-frames-data-content" class="spoiler-content active">
-                <button id="frames-add-button" class="button-big">添加一个帧</button>
-                <div id="rci-frames-showcase">
-                    <h6>帧列表</h6>
-                </div><br>
+                <h5 class="underline">帧列表</h5>
+                <div id="rci-frames-showcase" class="empty-note"></div>
             </div>
         </section>
 
@@ -120,15 +119,13 @@
         <section class="spoiler">
             <div class="spoiler-header"><button class="active" id="rci-animation-data-button"><i
                         class="b">k</i></button>
-                <h5>动画</h5>
+                <h5 class="spoiler-title">动画</h5>
+                <button id="animation-add-button" class="button-big">添加一个动画</button>
             </div>
             <div id="rci-animation-data-content" class="spoiler-content active">
-                <button id="animation-add-button" class="button-big">添加一个动画</button>
-                <h6>动画列表</h6>
-                <div id="rci-animation-showcase">
-
-                </div>
-            </div><br>
+                <h5 class="underline">动画列表</h5>
+                <div id="rci-animation-showcase" class="empty-note"></div>
+            </div>
         </section>
 
 
@@ -158,7 +155,8 @@
 
         <section class="spoiler">
             <div class="spoiler-header"><button class="" id="influence-data-button"><i class="b">a</i></button>
-                <h5>水电/影响</h5>
+                <h5 class="spoiler-title">水电/影响</h5>
+                <button id="influence-add-button" class="button-big">添加一个影响</button>
             </div>
             <div id="influence-data-content" class="spoiler-content">
                 <form>
@@ -171,18 +169,15 @@
                     <p id="provide-info-para">正数为供应，负数为消耗，当前最大值：0（受面积和每月费用影响）</p>
                 </form>
                 <hr>
-                <button id="influence-add-button" class="button-big">添加一个影响</button>
-                <h6>影响列表</h6>
-                <div id="influence-showcase">
-
-                </div><br>
+                <h5 class="underline">影响列表</h5>
+                <div id="influence-showcase" class="empty-note"></div><br>
             </div>
         </section>
 
         <br><br>
         <section class="box">
             <div style="display: flex; justify-content: space-between;">
-                <h6>结果</h6>
+                <h5>结果</h5>
                 <div>
                     <button type="button"
                         onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')"

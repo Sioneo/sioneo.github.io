@@ -1,0 +1,9 @@
+:root {
+    --color-canvas-background: black;
+}
+
+#new-animation-canvas, #new-rd-canvas {
+    background-color: var(--color-canvas-background);
+    margin: 10px auto;
+    display: block;
+}

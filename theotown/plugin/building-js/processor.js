@@ -210,11 +210,12 @@ document.getElementById("animation-add-button").addEventListener("click", functi
 
         const container = document.createElement("div");
         const para = document.createElement("p");
-        para.innerHTML = `<hr class="narrow"><div style="display: flex; justify-content: space-between;">
+        para.innerHTML = `<div style="display: flex; justify-content: space-between;">
         <div>动画&emsp;&emsp;ID: ${data.id}&emsp;&emsp;</div>
         <div>夜景: ${data.night ? "是" : "否"}&emsp;&emsp;旋转感知: ${data["rotation aware"] ? "是" : "否"}&emsp;&emsp;
         <button class="button-small" onclick="generalData.animationFrameDialog.currentInnerId = '${id}'; addNewFrameToAnimation()">添加帧</button>
-    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button>&emsp;(${id})</div>`;
+    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button>&emsp;(${id})</div>
+    <hr class="narrow">`;
         container.id = "container" + id;
         para.id = "para" + id;
         container.appendChild(para);
@@ -253,11 +254,11 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
         console.log(`[生成ID] 为新独立帧生成ID: ${id}`); // 日志：生成帧ID
         
         const infoPara = document.createElement("p");
-        infoPara.innerHTML = `<hr class="narrow">
-        <div style="display: flex; justify-content: space-between;">
+        infoPara.innerHTML = `<div style="display: flex; justify-content: space-between;">
         <div>${image.name}&emsp;&emsp;<b>handle x</b>: ${!handleX ? "空(null)" : handleX}&emsp;&emsp;<b>handle y</b>: ${!handleY ? "空(null)" : handleY}&emsp;&emsp;</div>
         <div><button class="button-small" onclick="deleteFrame('${id}')">删除</button></div>
-        </div>`;
+        </div>
+        <hr class="narrow">`;
         infoPara.id = "para" + id;
 
         let result = {
@@ -302,10 +303,11 @@ document.getElementById("influence-add-button").addEventListener("click", functi
             influenceInputData[id] = { typ: typ, value: value };
 
             let para = document.createElement("p");
-            para.innerHTML = `<hr class="narrow"><div style="display: flex; justify-content: space-between">
+            para.innerHTML = `<div style="display: flex; justify-content: space-between">
             <div>影响&emsp;&emsp;${Web.getSelectTextByValue("influence-type", typ)}&emsp;&emsp;数值：${value}</div>
             <div><button class="button-small" onclick="deleteInfluence('${id}')">删除</button></div>
-            </div>`;
+            </div>
+            <hr class="narrow">`;
             para.id = "para" + id;
 
             document.getElementById("influence-showcase").appendChild(para);

@@ -1,11 +1,11 @@
 :root {
     --style-border-radius: 10px;
     --style-side-padding: 5%;
-    --style-font-family: "sans", sans-serif;
+    --style-font-family: "sans", "Sarasa UI SC", "Microsoft Yahei", sans-serif;
     --style-font-mono: "Consolas", "Menlo", "Droid Sans Mono", "JetBrains Mono", monospace, sans-serif;
 
     --color-background: rgb(236, 236, 236);
-    --color-theme: rgb(29, 112, 184);
+    --color-theme: rgb(36, 119, 203);
     --color-theme-shallow: rgb(209, 234, 255);
     --color-hr: #b3b3b3;
     --color-text: black;
@@ -13,7 +13,7 @@
     --color-contrast-text: white;
     --color-mono-background: rgba(233, 231, 231, 0.85);
     --color-box-background: rgba(170, 170, 170, 0.12);
-    --color-active: rgb(0, 107, 201);
+    --color-active: rgb(36, 119, 203);
     --color-active-shallow: rgb(226, 242, 255);
     --color-link-active: black;
     --color-link-active-background: rgb(255, 208, 0);
@@ -411,6 +411,7 @@ footer {
     color: var(--color-text);
     border: 1px solid var(--color-text);
     cursor: pointer;
+    user-select: none;
 }
 
 /* 大按钮 */
@@ -626,22 +627,19 @@ select {
     background-color: var(--color-white);
     border: none;
     font-size: 16px;
-    border: 1px solid var(--color-grey);
+    border: 1px solid var(--color-grey-shallow);
     border-radius: var(--style-border-radius);
-}
 
-input:hover,
-textarea:hover,
-select:hover {
-    border: 1px solid var(--color-active);
-    background-color: var(--color-active-shallow);
-}
+    &:hover {
+        border: 1px solid var(--color-active);
+        background-color: var(--color-active-shallow);
+    }
 
-input:active,
-textarea:active,
-select:active {
-    border: 1px solid var(--color-active);
-    background-color: var(--color-active-shallow);
+    &:active,
+    &:focus {
+        border: 1px solid var(--color-active);
+        background-color: var(--color-active-shallow);
+    }
 }
 
 input.tool-input,
@@ -752,7 +750,7 @@ section.spoiler {
         .spoiler-title {
             flex: 1;
         }
-        
+
         button:not(.button-big) {
             border: none;
             background-color: transparent;
@@ -820,5 +818,11 @@ article p {
 }
 
 .center {
+    text-align: center;
+}
+
+.empty-note:empty::before {
+    content: "没有内容";
+    color: var(--color-grey-shallow);
     text-align: center;
 }
