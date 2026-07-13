@@ -1,0 +1,119 @@
+/* 配合 document.css 使用 */
+main {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+    .left-block {
+        width: 33%;
+    }
+
+    .right-block {
+        width: 64%;
+    }
+}
+
+.card-box {
+    display: grid;
+    gap: 10px;
+    grid-auto-rows: auto;
+
+    &.column-2 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    &.column-3 {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.card {
+    border-left: 5px solid transparent;
+    display: block;
+    margin: 0;
+    padding: 3px 20px;
+    text-align: left;
+    cursor: default;
+    border-left: 6px solid var(--color-grey-shallow);
+    text-decoration: none;
+    transition: all 0.1s;
+
+    h6 {
+        margin: 3px 0;
+        padding: 0;
+        color: var(--color-grey);
+        transition: all 0.1s;
+    }
+
+    &:hover {
+        border-left: 6px solid var(--color-active);
+        transition: all 0.1s;
+
+        h6 {
+            color: var(--color-theme);
+            transition: all 0.1s;
+        }
+    }
+
+    &:active {
+        background-color: var(--color-active-shallow);
+    }
+}
+
+h5.divider {
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: "·";
+        margin-right: 10px;
+        font-weight: bold;
+    } 
+
+    &::after {
+        content: "";
+        display: block;
+        height: 1px;
+        background: var(--color-hr);
+        flex: 1;
+        margin-left: 20px;
+    }
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-items: space-between;
+    background-color: transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+
+    & .header-title {
+        color: var(--color-theme);
+        flex: 1;
+    }
+
+}
+
+nav, header {
+    a, button {
+        color: var(--color-text);
+        text-decoration: none;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 15px;
+        transition: all 0.1s;
+        font-weight: bold;
+    }
+
+    a:hover, a:active, button:hover, button:active {
+        color: var(--color-contrast-text);
+        background-color: var(--color-active);
+        border: none;
+        transition: all 0.1s;
+        font-weight: bold;
+    }
+}
+
+

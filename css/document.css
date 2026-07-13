@@ -1,7 +1,7 @@
 :root {
     --style-border-radius: 10px;
     --style-side-padding: 5%;
-    --style-font-family: "sans", "Sarasa UI SC", "Microsoft Yahei", sans-serif;
+    --style-font-family: "sans", "Noto Sans", "Open Sans", "Verdana", "Sarasa UI SC", "Microsoft Yahei", sans-serif;
     --style-font-mono: "Consolas", "Menlo", "Droid Sans Mono", "JetBrains Mono", monospace, sans-serif;
 
     --color-background: rgb(236, 236, 236);
@@ -11,7 +11,7 @@
     --color-text: black;
     --color-white: white;
     --color-contrast-text: white;
-    --color-mono-background: rgba(233, 231, 231, 0.85);
+    --color-mono-background: rgba(222, 222, 222, 0.85);
     --color-box-background: rgba(170, 170, 170, 0.12);
     --color-active: rgb(36, 119, 203);
     --color-active-shallow: rgb(226, 242, 255);
@@ -503,7 +503,7 @@ button .flat {
 }
 
 .callout.warning {
-    --color-theme: rgb(192, 0, 0);
+    --color-theme: rgb(220, 0, 0);
     --color-theme-shallow: rgb(255, 197, 197);
 }
 
@@ -515,10 +515,6 @@ button .flat {
 .callout.pink {
     --color-theme: var(--color-pink);
     --color-theme-shallow: rgb(255, 224, 224);
-}
-
-.callout.background {
-    background-color: var(--color-theme-shallow);
 }
 
 /* 列表 */
@@ -542,6 +538,8 @@ pre {
     font-family: var(--style-font-mono);
     font-size: 18px;
     background-color: var(--color-mono-background);
+    padding: 5px;
+    border-radius: var(--style-border-radius);
 }
 
 code {

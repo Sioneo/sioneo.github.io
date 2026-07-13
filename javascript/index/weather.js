@@ -8,6 +8,7 @@ function getWeatherState(code) {
         2: "⛅️多云",       // Partly cloudy
         3: "☁️阴",           // Overcast
         45: "🌫️雾",            // Fog
+        48: "积霜雾",
         51: "🌦️毛毛细雨",        // Drizzle
         53: "🌦️毛毛细雨",        // Drizzle
         55: "🌦️毛毛细雨",        // Drizzle
@@ -47,7 +48,7 @@ function getWindGrade(v) {
         { grade: 2, min: 1.6, max: 3.3 },
         { grade: 3, min: 3.4, max: 5.4 },
         { grade: 4, min: 5.5, max: 7.9 },
-        { grade: 5, min: 8.0, max: 10.7, inclusiveMax: true }, // 5级包含10.7
+        { grade: 5, min: 8.0, max: 10.7},
         { grade: 6, min: 10.8, max: 13.8 },
         { grade: 7, min: 13.9, max: 17.1 },
         { grade: 8, min: 17.2, max: 20.7 },
@@ -63,11 +64,7 @@ function getWindGrade(v) {
     ];
 
     for (const g of grades) {
-        if (g.inclusiveMax) {
-            if (v >= g.min && v <= g.max) return g.grade;
-        } else {
-            if (v >= g.min && v < g.max) return g.grade;
-        }
+        if (v >= g.min && v <= g.max) return g.grade;
     }
     
 }
