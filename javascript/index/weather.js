@@ -20,7 +20,12 @@ function getWeatherState(code) {
         71: "🌨️小雪",          // Snow
         73: "🌨️中雪",          // Snow
         75: "❄️大雪",          // Snow
-        80: "🌦️阵雨"           // Showers
+        80: "🌦️阵雨",          // Showers
+        81: "🌦️阵雨",          // Showers
+        82: "🌦️阵雨",          // Showers
+        95: "⚡雷雨",
+        96: "⛈️雷暴",
+        99: "⛈️雷暴"
     };
     return weatherMap[code] || "未知";
 }
