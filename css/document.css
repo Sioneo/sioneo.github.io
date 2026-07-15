@@ -1,7 +1,7 @@
 :root {
     --style-border-radius: 10px;
     --style-side-padding: 5%;
-    --style-font-family: "sans", "Noto Sans", "Open Sans", "Verdana", "Sarasa UI SC", "Microsoft Yahei", sans-serif;
+    --style-font-family: "sans", "Noto Sans", "Open Sans", "Verdana", "Microsoft Yahei", sans-serif;
     --style-font-mono: "Consolas", "Menlo", "Droid Sans Mono", "JetBrains Mono", monospace, sans-serif;
 
     --color-background: rgb(236, 236, 236);

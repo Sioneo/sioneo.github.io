@@ -18,6 +18,9 @@
   </header>
 
   <main>
+      <div class="callout">
+        <p>欢迎加入QQ群/频道~&emsp;<a href="community/index.html" target="_blank">点击此处</a>了解更多</p>
+        </div>
       <section class="spoiler">
     <div class="spoiler-header"><button class="" id="android-button"><i class="b">a</i></button>
       <h5>安卓</h5>
@@ -25,7 +28,7 @@
     <section class="spoiler-content" id="android-content">
       <p>在<a target="_blank"
           href="https://play.google.com/store/apps/details?id=info.flowersoft.theotown.theotown&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-">Google
-          Play</a>上下载</p>
+          Play</a>上下载(最正规的渠道，但是需要科学上网)</p>
       <p>在<a target="_blank"
           href="https://gitee.com/sioneo/theo-town-game-download">Gitee</a>上下载(停止维护)</p>
       <br><br>
@@ -36,7 +39,7 @@
       <h1 style="margin: auto 0px; display: inline-block;" id="latestVersion">...</h1>
       <div style="display: inline-block; margin-left: 10px;">
         <a id="downloadLink" target="_self" href="#" class="button-full-green flat" style="display: none"><i
-            style="font-size: 19px;" class="w">y</i>下载最新版本安装包</a>
+            style="font-size: 19px;" class="w" download>y</i>下载最新版本安装包</a>
       </div>
       <br>
       <p>旧版本安装包：</p>
@@ -44,31 +47,16 @@
 
       <div class="callout normal">
         <h6>切换代下站(如果下载速度慢可以尝试切换)</h6>
-        <button class="button-small"
-          onClick="downloadSite = 'https://gh.llkk.cc/'; updateLatestVersion(); updateOldVersions();">gh.llkk.cc</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://github-proxy.memory-echoes.cn/'; updateLatestVersion(); updateOldVersions();">github-proxy.memory-echoes.cn</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://github-proxy.teach-english.tech/'; updateLatestVersion(); updateOldVersions();">github-proxy.teach-english.tech</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://gh.wsmdn.dpdns.org/'; updateLatestVersion(); updateOldVersions();">gh.wsmdn.dpdns.org</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://github.tbedu.top/'; updateLatestVersion(); updateOldVersions();">github.tbedu.top</button>
+        <p>当前：<span id="site-display"></span></p>
+        <div id="site-box">
 
-
-        <button class="button-small"
-          onClick="downloadSite = 'https://ghproxy.net/'; updateLatestVersion(); updateOldVersions();">ghproxy.net</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://gh.catmak.name/'; updateLatestVersion(); updateOldVersions();">gh.catmak.name</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://git.yylx.win/'; updateLatestVersion(); updateOldVersions();">git.yylx.win</button>
-        <button class="button-small"
-          onClick="downloadSite = 'https://gp-us.fyan.top/'; updateLatestVersion(); updateOldVersions();">gp-us.fyan.top</button>
+        </div>
+        <p>推荐使用第一个<b>github.9rm.uk</b>，可能慢点但比较稳定~</p>
       </div>
 
       <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)(手动更新):</p>
       <p>1.12.73: <a class="outbound"
-          href="https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk">https://github.tbedu.top/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk</a>
+          href="https://github.9rm.uk/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk">https://github.9rm.uk/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk</a>
       </p>
     </section>
     </section>
@@ -90,6 +78,7 @@
       <h5>电脑端</h5>
     </div>
     <section class="spoiler-content " id="pc-content">
+        <p>在<a href="https://store.steampowered.com/app/1084020/TheoTown/" target="_blank">Steam</a>上下载</p>
       <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
         <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/" target="_blank">点击这里</a></p>
       </iframe>
@@ -97,9 +86,6 @@
     </section>
 
     <script>
-      // 更新页面内容
-      updateLatestVersion();
-      updateOldVersions(); 
     </script>
   </main>
 
@@ -119,10 +105,34 @@
     }
   </script>
 
-  <script>
-    let downloadSite = "https://gh.llkk.cc/"; // 默认下载站点
-    const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
+  <script> 
+    const siteDisplay = document.getElementById("site-display");
     let versionData;
+
+    function changeDownloadSite(newSite) {
+        downloadSite = `https://${newSite}/`;
+        updateLatestVersion();
+        updateOldVersions();
+        siteDisplay.textContent = newSite;
+    }
+    // 添加下载站点
+    const siteBox = document.getElementById("site-box");
+    const sites = ["github.9rm.uk", "git.yylx.win", "gh.catmak.name", "ghproxy.net", "gh.jasonzeng.dev"]
+    for (let i = 0; i < sites.length; i++) {
+        let button = document.createElement("button");
+        button.className = "button-small";
+        button.textContent = sites[i];
+        button.addEventListener("click", () => {
+            changeDownloadSite(sites[i]);
+        })
+
+        siteBox.appendChild(button);
+    }
+
+    let downloadSite = `https://${sites[0]}/`; // 默认下载站点
+    siteDisplay.textContent = sites[0];
+
+    const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
 
     // 使用 fetch 获取数据
     function fetchData() {
@@ -198,9 +208,13 @@
         oldVersionsContainer.innerHTML = "...";
       }
     }
-
     // 初始化数据
     window.onload = fetchData;
+
+
+    // 更新页面内容
+    updateLatestVersion(); 
+    updateOldVersions(); 
   </script>
 
 </body>

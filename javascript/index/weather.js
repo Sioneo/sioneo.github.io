@@ -8,10 +8,12 @@ function getWeatherState(code) {
         2: "⛅️多云",       // Partly cloudy
         3: "☁️阴",           // Overcast
         45: "🌫️雾",            // Fog
-        48: "积霜雾",
+        48: "🌫️积霜雾",
         51: "🌦️毛毛细雨",        // Drizzle
         53: "🌦️毛毛细雨",        // Drizzle
         55: "🌦️毛毛细雨",        // Drizzle
+        56: "🌧️冻雨",
+        57: "🌧️冻雨",
         61: "☔️小雨",          // Rain
         63: "🌧️中雨",          // Rain
         65: "🌧️大雨",          // Rain
