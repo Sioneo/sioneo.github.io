@@ -668,7 +668,7 @@ form div.line {
     padding-right: 20%;
 
     label {
-        max-width: 7vw;
+        max-width: 25vw;
     }
 
     input,
@@ -691,6 +691,12 @@ form label {
 form label:hover {
     font-weight: bolder;
 }
+
+form .callout {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
 
 
 section {

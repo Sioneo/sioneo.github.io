@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <title>动画开发工具</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/document.css">
-    <link rel="stylesheet" type="text/css" href="../../css/app.css">
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <link rel="stylesheet" type="text/css" href="animationDevTool/mobileUiStyle.css">
+    <script src="/web/service/web-service.js"></script>
     <script src="animationDevTool/translation.js"></script>
-    <script src="../../web/service/webService.js"></script>
     <script>var Strings = Translations.ZH;</script>
+
+    <style>
+        html,
+        body {
+            touch-action: manipulation;
+        }
+    </style>
 </head>
 
 <body>
@@ -21,47 +28,55 @@
         </script>
     </p>
 
-    <header style="display: flex;">
-            <a class="header-item-button back" href="index.html">
-                <i class="w">5</i>
-            </a>
-            <h4 class="header-title">动画开发工具</h4>
-        <nav>
-            <a class="header-item-button" target="_blank" href="animation-dev-mobile.html">移动端</a>
-        </nav>
+    <header>
+
+        <a class="header-item-button back" href="index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">动画开发工具</h4>
+      
     </header>
 
     <main id="main">
-        <div class="callout normal">
-            <h4>导入文件</h4>
-            <span>建筑图片</span>&emsp;<input accept="image/png" id="buildingFileInput" type="file">&emsp;&emsp;
-            <span>动画图片</span>&emsp;<input accept="image/png" id="animationFileInput" type="file" multiple>
-
-            <hr>
-            <h4>设置参数</h4>
-            <span>建筑宽度</span>&emsp;<input id="buildingWidthInput" type="number">&emsp;&emsp;
-            <span>建筑高度</span>&emsp;<input id="buildingHeightInput" type="number">&emsp;&emsp;
-            <button id="doneButton" class="button-full-green normal"><i class="w">I</i>完成</button>
-            <br>
-            <p><button class="button-small" id="zoomInButton0.5"><i class="w">F F</i></button>
-                <button class="button-small" id="zoomInButton0.1"><i class="w">F</i></button>
-                <button class="button-small" id="zoomOutButton0.1"><i class="w">G</i></button>
-                <button class="button-small" id="zoomOutButton0.5"><i class="w">G G</i></button>
-                动画缩放比例：<span id="zoomFactor">default</span>
+    <section class="box">
+        <h4>导入文件</h4>
+        <form>
+            <div class="line"><label for="buildingFileInput">建筑</label><input accept="image/png" id="buildingFileInput" type="file"></div>
+            <div class="line"><label for="animationFileInput">动画</label><input accept="image/png" id="animationFileInput" type="file" multiple></div>
+        </form>
+    
+        <hr>
+        <h4>设置参数</h4>
+        <form>
+            <div class="line"><label for="buildingWidthInput">建筑宽度</label><input id="buildingWidthInput" type="number"></div>
+            <div class="line"><label for="buildingHeightInput">建筑高度</label><input id="buildingHeightInput" type="number"></div>
+            <div class="line"><label for="building-handle-x">Frame Handle X</label><input id="building-handle-x" value="0" type="number"></div>
+            <div class="line"><label for="building-handle-y">Frame Handle Y</label><input id="building-handle-y" type="number"></div>
+            <p class="callout caution">
+            <em>注意</em>&emsp;留空表示不设置 <code>Frame Handle Y</code>，
+                这和填 <code>0</code> 是不同的
             </p>
+        </form>
+        <button id="doneButton" class="button-full-green normal"><i class="w">I</i>完成</button>
+        <p>
+            <button class="button-small" id="zoomInButton0.5"><i class="w">F F</i></button>
+            <button class="button-small" id="zoomInButton0.1"><i class="w">F</i></button>
+            <button class="button-small" id="zoomOutButton0.1"><i class="w">G</i></button>
+            <button class="button-small" id="zoomOutButton0.5"><i class="w">G G</i></button>
+            动画缩放系数：<span id="zoomFactor">默认</span> <span>（仅影响下方画布视图，不影响游戏内实际动画）</span>
+        </p>
+    </section>
+    
+    <section class="box">
+        <h4>动画列表</h4>
+        <pre id="animationList"></pre>
+    </section>
+    <p class="callout">导入后请按 Ctrl+R 刷新一下～</p>
 
-        </div>
-
-        <div class="callout modest">
-            <h6>动画列表</h6>
-            <pre id="animationList"></pre>
-        </div>
-        <p>导入后请按Ctrl+R刷新一下</p>
-
-        <pre id="hint"
-            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">欢迎使用动画开发工具</pre>
-        <pre id="originInfo"
-            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">坐标原点: </pre>
+        <p id="hint"
+            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">欢迎使用动画开发工具</p>
+        <p id="originInfo"
+            style="font-family: sans-serif; padding: 0; margin: 0; width: 100%; background-color: black; color: white">坐标原点: </p>
         <canvas style="background-color: black; color:white;" id="mainCanvas">
             ERROR
         </canvas>
@@ -88,10 +103,24 @@
     <script src="../../web/footer/theotown-footer.js"></script>
     <theotown-footer></theotown-footer>
 
+
+    <!-- UI区域 -->
+    <button id="uiButtonQ" class="ui-button" style="right: 20px; bottom: 260px;">Q</button>
+    <button id="uiButtonE" class="ui-button" style="right: 20px; bottom: 200px;">E</button>
+    <button id="uiButtonR" class="ui-button" style="right: 20px; bottom: 140px;">R</button>
+    <button id="uiButtonShift" class="ui-button" style="right: 20px; bottom: 80px;">Shift</button>
+    <button id="uiButtonCtrl" class="ui-button" style="right: 20px; bottom: 20px;">Ctrl</button>
+
+    <button id="uiButtonArrowUp" class="ui-button" style="left: 130px; bottom: 200px;"><i class="w">7</i></button>
+    <button id="uiButtonArrowLeft" class="ui-button" style="left: 70px; bottom: 140px;"><i class="w">5</i></button>
+    <button id="uiButtonArrowRight" class="ui-button" style="left: 190px; bottom: 140px;"><i class="w">6</i></button>
+    <button id="uiButtonArrowDown" class="ui-button" style="left: 130px; bottom: 80px;"><i class="w">4</i></button>
+
     <script>var animationIndex = 0;</script>
     <script src="animationDevTool/infoService.js"></script>
-    <script src="animationDevTool/processer.js"></script>
+    <script src="animationDevTool/processor.js"></script>
     <script src="animationDevTool/keyboardService.js"></script>
+    <script src="animationDevTool/mobileUiService.js"></script>
 </body>
 
 </html>

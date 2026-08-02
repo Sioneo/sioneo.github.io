@@ -2,7 +2,7 @@ const canvas = document.getElementById("mainCanvas");
 const ctx = canvas.getContext("2d");
 var origin = { x: 200, y: 600 };
 var animationData = [];
-let templeteSize = { width: 1, height: 1 };
+let buildingData = { width: 1, height: 1 };
 let originToEdge;
 var loadedImageData = {
     building: [],
@@ -53,11 +53,14 @@ function getData(target) {
             const widthInput = document.getElementById("buildingWidthInput");
             const heightInput = document.getElementById("buildingHeightInput");
             if (widthInput.value && heightInput.value) {
-                const result = {
+                let result = {
                     width: parseInt(widthInput.value),
-                    height: parseInt(heightInput.value)
+                    height: parseInt(heightInput.value),
+                    handleX: parseInt(document.getElementById("building-handle-x").value), // 0 if no input
+                    handleY: parseInt(document.getElementById("building-handle-y").value), // NaN if no input
                 }
-                console.log(`Templete Size Updated: width: ${result.width}, height: ${result.height}`)
+                if (isNaN(result.handleX)) { result.handleX = 0; }
+                console.log(`Template Size Updated: width: ${result.width}, height: ${result.height}, handle x: ${result.handleX}, handle y: ${result.handleY}`)
                 return result;
 
             } else {
@@ -107,11 +110,9 @@ function loadImage(imageInput, type, callback) {
 
 
 function draw() {
-    console.log("------Draw Begin------");
     ctx.fillStyle = "black";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.translate(origin.x, origin.y); // Set the origin
-    console.log(`Origin: X: ${origin.x}, Y: ${origin.y}`)
     ctx.save();
 
     // Draw the axis
@@ -126,8 +127,7 @@ function draw() {
     ctx.lineTo(originToEdge.right, 0);
     ctx.stroke();
 
-
-    // 禁用所有平滑处理
+     // 禁用所有平滑处理
     ctx.imageSmoothingEnabled = false;
     ctx.mozImageSmoothingEnabled = false;  // Firefox
     ctx.webkitImageSmoothingEnabled = false; // Safari
@@ -136,12 +136,40 @@ function draw() {
     ctx.scale(animationZoomFactor, animationZoomFactor);
 
 
+    // Draw template border
+    ctx.beginPath();
+    ctx.strokeStyle = "green";
+    ctx.lineWidth = 1.5 / animationZoomFactor;
+    ctx.moveTo(0, 0);
+    ctx.lineTo( 
+        16*(buildingData.width),
+        8*(buildingData.width) 
+    );
+    ctx.lineTo(
+        16*(buildingData.width + buildingData.height),
+        8*(buildingData.width - buildingData.height)
+    );
+    ctx.lineTo(
+        16*(buildingData.height),
+        8*(-buildingData.height)
+    );
+    ctx.lineTo(0, 0);
+    ctx.stroke();
+
     // Draw building
     if (loadedImageData.building[0]) {
-        ctx.drawImage(loadedImageData.building[0],
-            0, (-loadedImageData.building[0].height + (templeteSize.width * 8)), // 位置
-            loadedImageData.building[0].width, loadedImageData.building[0].height // 大小
-        );
+        let handleY = buildingData.handleY; // frame处的handle y
+        if (isNaN(handleY)) { 
+           ctx.drawImage(loadedImageData.building[0],
+                -buildingData.handleX, (-loadedImageData.building[0].height + (buildingData.width * 8)), // 位置
+                 loadedImageData.building[0].width, loadedImageData.building[0].height // 大小
+           );
+        } else {
+            ctx.drawImage(loadedImageData.building[0],
+                 -buildingData.handleX, -handleY, // 位置
+                  loadedImageData.building[0].width, loadedImageData.building[0].height // 大小
+            );
+        }
         console.log("Drawed building image")
     }
 
@@ -154,12 +182,11 @@ function draw() {
     }
 
     ctx.restore();
-    console.log("------Draw End------")
 }
 
 document.getElementById("doneButton").addEventListener("click", function () {
     console.log("======Done Button was Clicked======")
-    templeteSize = getData("size");
+    buildingData = getData("size");
     animationData = [];
     loadedImageData = {
         building: [],
