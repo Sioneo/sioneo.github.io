@@ -2,3 +2,4 @@
 .vscode
 .html_tidy_config
 *.nopush*
+*.dev
