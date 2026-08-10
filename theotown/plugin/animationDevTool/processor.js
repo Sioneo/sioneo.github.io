@@ -8,7 +8,7 @@ var loadedImageData = {
     building: [],
     animation: []
 }
-let animationZoomFactor = 1;
+let animationZoomFactor = 3;
 const zoomFactorDisplayer = document.getElementById("zoomFactor");
 
 function adjustAnimationZoomFactor(factor) {

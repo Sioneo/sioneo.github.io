@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>APK校验</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <script src="/web/service/web-service.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header style="display: flex;">
+       <a class=" header-item-button back" href="../index.html">
+        <i class="w">5</i>
+        </a>
+        <h4 class="header-title">APK校验</h4>
+    </header>
+
+    <main>
+        <p>在这里，你可以通过对比你上传的安装包和官方发布在<a href="https://github.com/TheoTown-Team/translations/releases/" target="_blank">GitHub</a>上的安装包的<a href="http://baike.baidu.com/item/HASH/390310" target="_blank">哈希值</a>是否一致，以检查安装包是否被修改。
+        </p>
+        <div class="callout warning">
+            <em>警告及免责声明</em><br>
+            <ol>
+                <li>本网页为<a href="/" target="_blank">九如</a>开发的用于<b>辅助</b>检查安装包的工具，与Lobby等官方团队没有关联，亦非官方检测数据；</li>
+                <li>本网页所使用的标准哈希值为通过人工下载GitHub上的安装包并且手动计算得出，可能存在疏漏；您可以自行了解<a href="http://baike.baidu.com/item/HASH/390310" target="_blank">哈希值</a>有关知识并自行下载来源可信的安装包进行核对；</li>
+                <li><mark>检查结果不作为对安装包合规与否或者未经篡改的保证，<b>仅供参考</b>!!! 对于可能的误判等，本网页不承担相关责任；</mark></li>
+                <li>为了尽可能保证使用的标准哈希值正确，本网页只使用GitHub上的安装包进行计算，但由于GitHub上提供的版本有限（通常只有正式版），因此只能提供有限的服务；</li>
+                <li>由于个人事务原因，本网页所使用的数据可能无法及时更新。</li>
+            </ol>
+        </div>
+        <p class="callout">
+            <em>建议</em>&emsp;
+            如有条件，建议还是前往<a href="https://play.google.com/store/apps/details?id=info.flowersoft.theotown.theotown&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-">Google Play</a>下载游戏
+        </p>
+        <section class="box">
+            <h4>操作面板</h4>
+            <form>
+                <div class="line"><label for="apk-input">安装包文件</label><input id="apk-input" accept=".apk" type="file"></div>
+                <div class="line">
+                    <label for="version-input">安装包版本</label>
+                    <input id="version-input" type="text" placeholder="例如：11273">
+                    <button id="check-button" type="button" class="button-full-green">检查</button>
+                </div>
+                <p></p>
+            </form>
+            <hr>
+            <h5>检查结果</h5>
+            <div class="callout modest background flex" id="apk-result-callout"><span>APK</span><span id="apk-result-label">未检查</span></div>
+            <div class="callout modest background flex" id="android-manifest-result-callout"><span>AndroidManifest.xml</span><span id="android-manifest-result-label">未检查</span></div>
+            <div class="callout modest background flex" id="classes-dex-result-callout"><span>classes.dex</span><span id="classes-dex-result-label">未检查</span></div>
+            <hr>
+            <h5>详情</h5>
+            <pre id="check-log">Welcome!</pre>
+        </section>
+    </main>
+
+    <script src="../../web/footer/theotown-footer.js"></script>
+    <theotown-footer></theotown-footer>
+
+    <script src="./hash-data.js"></script>
+    <script src="./apk-extracter.js"></script>
+    <script src="./main.js"></script>
+
+</body>
+
+</html>

@@ -11,7 +11,7 @@
     --color-text: black;
     --color-white: white;
     --color-contrast-text: white;
-    --color-mono-background: rgba(222, 222, 222, 0.85);
+    --color-mono-background: rgba(225, 225, 225, 0.75);
     --color-box-background: rgba(170, 170, 170, 0.12);
     --color-active: rgb(36, 119, 203);
     --color-active-shallow: rgb(226, 242, 255);
@@ -493,6 +493,10 @@ button .flat {
     margin: 20px auto;
     border-left: 5px solid var(--color-theme);
     padding: 2px 20px;
+
+    &.background {
+        background-color: var(--color-theme-shallow);
+    }
 }
 
 
@@ -517,6 +521,11 @@ button .flat {
     --color-theme-shallow: rgb(255, 224, 224);
 }
 
+.callout.pass {
+    --color-theme: var(--color-green);
+    --color-theme-shallow: var(--color-green-shallow);
+}
+
 /* 列表 */
 ul {
     margin: 10px 50px;
@@ -536,7 +545,7 @@ li {
 /* 等宽字体 */
 pre {
     font-family: var(--style-font-mono);
-    font-size: 18px;
+    font-size: 16px;
     background-color: var(--color-mono-background);
     padding: 5px;
     border-radius: var(--style-border-radius);
