@@ -10,7 +10,7 @@ class TheotownFooter extends HTMLElement {
                 <div class="footer-about">
                     <a href="/" target="_blank">我的主页</a>
                     <a href="https://forum.theotown.com/" target="_blank">官方论坛</a>
-                    <a href="/theotown/community/index.html" target="_blank">交流社区</a>
+                    <a href="/theotown/index.html" target="_blank">更多内容</a>
                 </div>
             </div>
         </footer>

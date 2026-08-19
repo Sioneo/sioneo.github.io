@@ -24,6 +24,99 @@
     --color-grey: rgb(71, 71, 71);
     --color-grey-shallow: rgb(185, 185, 185);
     --color-pink: rgb(255, 120, 142);
+    --color-shadow: rgba(0, 0, 0, 0.2);
+
+    .callout.caution {
+        --color-theme: rgb(255, 153, 0);
+        --color-theme-shallow: rgb(254, 231, 194);
+    }
+    
+    .callout.warning {
+        --color-theme: rgb(220, 0, 0);
+        --color-theme-shallow: rgb(255, 197, 197);
+    }
+    
+    .callout.modest {
+        --color-theme: var(--color-grey);
+        --color-theme-shallow: rgb(225, 225, 225);
+    }
+    
+    .callout.pink {
+        --color-theme: var(--color-pink);
+        --color-theme-shallow: rgb(255, 224, 224);
+    }
+    
+    .callout.pass {
+        --color-theme: var(--color-green);
+        --color-theme-shallow: var(--color-green-shallow);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        /* 基础背景 - 使用深灰而非纯黑，减少眼睛疲劳 */
+        --color-background: rgb(18, 18, 20);
+        
+        /* 主题色 - 保持品牌色相，适当提高亮度/饱和度以在深色背景上突出 */
+        --color-theme: rgb(64, 156, 255);
+        --color-theme-shallow: rgba(64, 156, 255, 0.15);
+        
+        /* 分割线 - 深色背景下需要更亮的灰色 */
+        --color-hr: rgba(255, 255, 255, 0.12);
+        
+        /* 文本颜色 - 纯白太刺眼，使用柔白 */
+        --color-text: rgb(229, 229, 234);
+        --color-contrast-text: rgb(18, 18, 20);
+        --color-white: rgb(30, 30, 35);
+        
+        /* 半透明背景 - 用于悬浮/卡片效果 */
+        --color-mono-background: rgba(255, 255, 255, 0.06);
+        --color-box-background: rgba(255, 255, 255, 0.04);
+        
+        /* 激活状态 - 沿用主题色 */
+        --color-active: rgb(64, 156, 255);
+        --color-active-shallow: rgba(64, 156, 255, 0.12);
+        
+        /* 链接 - 高亮色在深色模式下需更醒目 */
+        --color-link-active: rgb(255, 235, 120);
+        --color-link-active-background: rgba(255, 208, 0, 0.2);
+        
+        /* 绿色（成功/提示）- 深色模式下略微提亮 */
+        --color-green: rgb(48, 219, 91);
+        --color-green-shallow: rgba(48, 219, 91, 0.15);
+        
+        /* 红色（错误/警告）- 深色模式下略微提亮 */
+        --color-red: rgb(255, 85, 85);
+        --color-red-shallow: rgba(255, 85, 85, 0.15);
+        
+        /* 灰色 - 用于辅助文字/图标 */
+        --color-grey: rgb(160, 160, 168);
+        --color-grey-shallow: rgba(255, 255, 255, 0.08);
+        
+        /* 粉色 - 保持原有色相，略微软化 */
+        --color-pink: rgb(255, 130, 155);
+        
+        /* 阴影 - 深色模式下阴影更深 */
+        --color-shadow: rgba(0, 0, 0, 0.6);
+
+        /* 修复 callout 浅色硬编码问题 */
+        .callout.caution {
+            --color-theme-shallow: rgba(115, 88, 22, 0.25);
+        }
+        .callout.warning {
+            --color-theme-shallow: rgba(90, 15, 15, 0.25);
+        }
+        .callout.modest {
+            --color-theme-shallow: rgba(29, 29, 29, 0.2);
+        }
+        .callout.pink {
+            --color-theme-shallow: rgba(108, 64, 78, 0.2);
+        }
+
+        input, select, textarea {
+            color: var(--color-grey);
+        }
+    }
 }
 
 @font-face {
@@ -214,6 +307,7 @@ a {
     padding: 0;
     margin: 4px;
     font-size: 18px;
+    display: inline-block;
 }
 
 a.outbound::before {
@@ -230,16 +324,6 @@ a:active {
     color: var(--color-link-active);
 }
 
-/* 伪装成按钮的超链接 */
-a.button-big,
-a.button-small {
-    text-decoration: none;
-}
-
-a.button-big:hover,
-a.button-small:hover {
-    font-weight: normal
-}
 
 /* 图标 */
 i.w {
@@ -281,6 +365,7 @@ em {
 
 mark {
     background-color: var(--color-link-active-background);
+    color: var(--color-text);
 }
 
 header {
@@ -423,10 +508,12 @@ footer {
     margin: 4px;
 }
 
+a.button-big:hover,
 .button-big:hover {
     background: var(--color-box-background);
 }
 
+a.button-big:active,
 .button-big:active {
     transform: translateY(2px);
     box-shadow: 0 1px 0 0 var(--color-text);
@@ -451,11 +538,13 @@ footer {
     margin: 2px;
 }
 
-.button-small:hover {
+.button-small:hover,
+a.button-small:hover {
     background: var(--color-box-background);
 }
 
-.button-small:active {
+.button-small:active,
+a.button-small:active {
     transform: translateY(1px);
     box-shadow: 0 1px 0 0 var(--color-text);
 }
@@ -487,6 +576,17 @@ button .flat {
     font-weight: normal;
 }
 
+/* 伪装成按钮的超链接 */
+a.button-big,
+a.button-small {
+    text-decoration: none;
+}
+
+a.button-big:hover,
+a.button-small:hover {
+    text-decoration: none;
+}
+
 
 /* 提示线 */
 .callout {
@@ -496,45 +596,16 @@ button .flat {
 
     &.background {
         background-color: var(--color-theme-shallow);
+        color: var(--color-text);
     }
 }
 
 
-.callout.caution {
-    --color-theme: rgb(255, 153, 0);
-    --color-theme-shallow: rgb(254, 231, 194);
-
-}
-
-.callout.warning {
-    --color-theme: rgb(220, 0, 0);
-    --color-theme-shallow: rgb(255, 197, 197);
-}
-
-.callout.modest {
-    --color-theme: var(--color-grey);
-    --color-theme-shallow: rgb(225, 225, 225);
-}
-
-.callout.pink {
-    --color-theme: var(--color-pink);
-    --color-theme-shallow: rgb(255, 224, 224);
-}
-
-.callout.pass {
-    --color-theme: var(--color-green);
-    --color-theme-shallow: var(--color-green-shallow);
-}
-
 /* 列表 */
-ul {
+ul, ol {
     margin: 10px 50px;
     padding: 0;
-}
-
-ol {
-    margin: 10px 50px;
-    padding: 0;
+    color: var(--color-text);
 }
 
 li {
@@ -570,8 +641,10 @@ dialog {
     max-width: 80%;
     max-height: 80%;
     border: 1px solid var(--color-grey);
+    background-color: var(--color-background);
+    color: var(--color-text);
     padding: 0;
-    box-shadow: 0 4px 20px var(--color-grey);
+    box-shadow: 0 4px 20px var(--color-shadow);
     overflow: hidden;
     display: none;
     resize: both;
@@ -598,6 +671,7 @@ dialog .header {
 
 dialog .header .header-title {
     padding: 4px;
+    color: var(--color-contrast-text);
     margin: 0;
     font-size: 22px;
 }
@@ -636,6 +710,7 @@ select {
     font-size: 16px;
     border: 1px solid var(--color-grey-shallow);
     border-radius: var(--style-border-radius);
+    color: var(--color-text);
 
     &:hover {
         border: 1px solid var(--color-active);
@@ -690,6 +765,7 @@ form div.line {
 }
 
 form label {
+    color: var(--color-text);
     width: 10vw;
     display: inline-block;
     text-align: right;
@@ -698,15 +774,14 @@ form label {
 }
 
 form label:hover {
-    font-weight: bolder;
+    font-weight: 600;
+    color: var(--color-active);
 }
 
 form .callout {
-        margin-top: 5px;
-        margin-bottom: 5px;
-    }
-
-
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 
 section {
     margin: 20px 0;
@@ -791,17 +866,17 @@ section.spoiler {
 }
 
 /* 表格 */
-/* 普通表格样式 - 黑色线条边框，表头使用主题浅色背景 */
+/* 普通表格样式 */
 table {
     width: 100%;
     border-collapse: collapse;
+    border: 1px solid var(--color-hr);
 }
 
 /* 表格单元格统一样式 */
 th,
 td {
-    border: 1px solid #000000;
-    /* 黑色线条边框 */
+    border: 1px solid var(--color-hr);
     padding: 10px 12px;
     text-align: left;
     vertical-align: top;
@@ -811,17 +886,14 @@ td {
 th {
     background-color: var(--color-theme-shallow);
     font-weight: 600;
-    border: 1px solid #000000;
-}
-
-/* 可选：为表格添加外层边框（使表格整体有边框感） */
-table {
-    border: 1px solid #000000;
 }
 
 article p {
     text-indent: 2em;
 }
+
+span { color: var(--color-text) }
+div { color: var(--color-text) }
 
 /* flex布局 */
 .flex {

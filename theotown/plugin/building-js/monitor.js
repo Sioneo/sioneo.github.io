@@ -1,6 +1,6 @@
 const projectNameNonAsciiNote = document.getElementById("project-name-non-ascii-note")
 // 项目名
-document.getElementById("project-name-input").addEventListener("input", function (event) {
+document.getElementById("project-name-input").addEventListener("change", function (event) {
     if (this.value == "") {
         generalData.projectName = null;
     } else {
@@ -22,45 +22,22 @@ const levelSelect = document.getElementById("level-input");
 const peopleInput = document.getElementById("people-input");
 // 类型的监听
 document.getElementById("type-input").addEventListener("input", function (event) {
-    switch (this.value) {
-        case "residential":
-        case "commercial":
-        case "industrial":
-        case "farm":
-        case "harbor ind":
-            generalData.currentMode = "rci";
-
-            // 设置等级选项的属性
-            levelSelect.required = true;
-            levelSelect.options[0].disabled = true;
-
-            peopleInput.name  = "people";
-            break;
-        case "education": // 小学教育
-            peopleInput.name = "provide aspect education low";
-            generalData.currentMode = "service";
-            levelSelect.required = false;
-            levelSelect.options[0].disabled = false;
-            break;
-        case "$education": // 高等教育
-            peopleInput.name = "provide aspect education high";
-            generalData.currentMode = "service";
-            levelSelect.required = false;
-            levelSelect.options[0].disabled = false;
-            break;
-        case "medic":
-            peopleInput.name = "provide aspect health care";
-            generalData.currentMode = "service";
-            levelSelect.required = false;
-            levelSelect.options[0].disabled = false;
-            break;
-        default:
-            generalData.currentMode = "service";
-            levelSelect.required = false;
-            levelSelect.options[0].disabled = false;
-            peopleInput.name = "people";
-            break;
+    const peopleType = this.selectedOptions[0].dataset.peopleType;
+    if (peopleType == "people") {
+        levelSelect.required = true;
+        levelSelect.options[0].disabled = true;
+        levelSelect.required = true;
+        peopleInput.disabled = false;
+    } else if (peopleType) {
+        levelSelect.required = false;
+        levelSelect.options[0].disabled = false;
+        levelSelect.required = false;
+        peopleInput.disabled = false;
+    } else {
+        levelSelect.required = false;
+        peopleInput.disabled = true;
     }
+    peopleInput.name = peopleType;
 })
 
 // 供水/电、影响数值计算函数
@@ -77,7 +54,7 @@ function refreshProvideInfluenceValue() {
     heightInput.value = !height ? null : height;
     monthlyPriceInput.value = !monthlyPrice ? null : monthlyPrice;
 
-    let s = Number.isNaN(width * height) ? 0 : width * height;
+    let s = Number.isNaN(width * height) ? 0 : width * height; // s: 面积
 
     let maxProvide = 0;
     let maxInfluence = 0;
@@ -104,5 +81,16 @@ animationRotationAwareInput.addEventListener("input", function() {
         animationRotationAwareInfoPara.textContent = "旋转感知已启用，意味着您需要为动画提供4个方向的贴图";
     } else {
         animationRotationAwareInfoPara.textContent = null;
+    }
+})
+
+// 监听建筑旋转感知
+const buildingRotationAwareInput = document.getElementById("rotation-aware-input");
+const buildingRotationAwareHint = document.getElementById("rotation-aware-hint");
+buildingRotationAwareInput.addEventListener("input", () => {
+    if (buildingRotationAwareInput.checked) {
+        buildingRotationAwareHint.style.display = "block";
+    } else {
+        buildingRotationAwareHint.style.display = "none";
     }
 })

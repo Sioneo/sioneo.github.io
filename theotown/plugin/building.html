@@ -4,12 +4,12 @@
 <head>
     <title>插件开发工具</title>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../css/document.css">
-    <script src="../../web/footer/theotown-footer.js">
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <script src="/web/footer/theotown-footer.js">
     </script>
-    <script src="../../web/service/web-service.js"></script>
-    <script src="../../web/service/js-zip.js"></script>
-    <script src="building-js/general-service.js"></script>
+    <script src="/web/service/web-service.js"></script>
+    <script src="/web/service/js-zip.js"></script>
+    <script src="./building-js/general-service.js"></script>
 </head>
 
 <body>
@@ -50,18 +50,18 @@
             </div>
             <div id="rci-basic-data-content" class="spoiler-content active">
                 <form id="rci-basic-data-form">
-                    <label for="id-input"><em>ID*</em></label><input id="rci-id-input" class="tool-input" type="text"
+                    <label for="id-input"><em>ID*</em></label><input id="id-input" class="tool-input" type="text"
                         name="id" required><button class="button-small"
-                        onclick="document.getElementById('rci-id-input').value = randomId('building')"
+                        onclick="document.getElementById('id-input').value = randomId('building')"
                         type="button">随机ID</button><br>
                     <label for="type-input"><em>类型*</em></label><select id="type-input" class="tool-input" name="type"
                         required>
                         <option value="" selected disabled>无</option>
-                        <option value="residential">🏠 住宅</option>
-                        <option value="commercial">🏢 商业</option>
-                        <option value="industrial">🏭 工业</option>
-                        <option value="farm">🌾 农场</option>
-                        <option value="harbor ind">⚓ 港口工业</option>
+                        <option data-people-type="people" value="residential">🏠 住宅</option>
+                        <option data-people-type="people" value="commercial">🏢 商业</option>
+                        <option data-people-type="people" value="industrial">🏭 工业</option>
+                        <option data-people-type="people" value="farm">🌾 农场</option>
+                        <option data-people-type="people" value="harbor ind">⚓ 港口工业</option>
                         <option value="park">🌳 公园</option>
                         <option value="sport">⚽ 体育</option>
                         <option value="public">🏛️ 公共</option>
@@ -69,14 +69,16 @@
                         <option value="award">🏆 奖励</option>
                         <option value="energy">⚡ 供电</option>
                         <option value="water">💧 供水</option>
-                        <option value="medic">🚑 医疗</option>
+                        <option data-people-type="aspect health care capacity" value="medic">🚑 医疗</option>
                         <option value="police">🚔 警察</option>
                         <option value="swat">🚓 特警</option>
                         <option value="fire brigade">🚒 消防</option>
-                        <option value="education">📚 小学教育</option>
-                        <option value="$education">🎓 高等教育</option> <!-- 用$符号区分两个教育 -->
+                        <option data-people-type="aspect education low capacity" value="education">📚 小学教育</option>
+                        <option data-people-type="aspect education high capacity" value="education">🎓 高等教育</option>
                         <option value="decoration">🎨 装饰</option>
-                        <option value="bus depot" disabled>公交车站（不支持）</option>
+                        <option data-special-section="special-section-railway-station" data-people-type="capacity" value="railway station">🚆 轨道交通</option>
+                        <option data-people-type="aspect waste disposal capacity" value="waste disposal">♻️ 垃圾处理</option>
+                        <option data-people-type="aspect body disposal capacity" value="body disposal">⚰️ 殡葬服务</option>
                     </select><br>
                     <label for="level-input"><em>等级*</em></label><select id="level-input" name="level"
                         class="tool-input">
@@ -137,6 +139,9 @@
                 <form id="rci-advanced-data-form">
                     <label for="draw-ground-input">绘制地面</label><input type="checkbox" value="true" class="tool-input"
                         id="draw-ground-input" name="draw ground" checked><br>
+                    <label for="rotation-aware-input">旋转感知</label><input type="checkbox" value="true" class="tool-input"
+                        id="rotation-aware-input" name="rotation aware"><br>
+                    <p id="rotation-aware-hint" style="display: none;">你已启用旋转感知，意味着至少要提供4个帧</p>
                     <label for="auto-build-input">自动建造</label><input type="checkbox" value="true" class="tool-input"
                         id="auto-build-input" name="auto build" checked><br>
                     <label for="needs-road-input">需要道路</label><input type="checkbox" value="true" class="tool-input"
@@ -146,7 +151,7 @@
                     <label for="needs-water-input">需要水域</label><input type="checkbox" value="true" class="tool-input"
                         id="needs-water-input" name="needs water"><br>
                     <label for="category-input">分类</label><input type="text" class="tool-input" id="category-input"
-                        name="category"><br>
+                        name="category"><a href="/theotown/guide/category.html" target="_blank" class="button-small">游戏内置分类列表</a><br>
                     <label for="build-time-input">建造时间</label><input type="number" min="0" class="tool-input"
                         id="build-time-input" name="build time"><br>
                 </form>
@@ -168,7 +173,6 @@
                         class="tool-input" name="power"><br>
                     <p id="provide-info-para">正数为供应，负数为消耗，当前最大值：0（受面积和每月费用影响）</p>
                 </form>
-                <hr>
                 <h5 class="underline">影响列表</h5>
                 <div id="influence-showcase" class="empty-note"></div><br>
             </div>
@@ -238,11 +242,11 @@
         </div>
         <div class="body">
             <form id="new-animation-form">
-                <label for="id-input">ID</label><input class="tool-input" name="id" id="animation-id-input"
+                <label for="animation-id-input">ID</label><input class="tool-input" name="id" id="animation-id-input"
                     required><br>
-                <label for="night-input">启用夜景</label><input type="checkbox" class="tool-input"
+                <label for="animation-night-input">启用夜景</label><input type="checkbox" class="tool-input"
                     id="animation-night-input" name="night">
-                <label for="animation-rotation-aware-input">旋转感知(暂未支持)</label><input type="checkbox" class="tool-input"
+                <label for="animation-rotation-aware-input">旋转感知</label><input type="checkbox" class="tool-input"
                     id="animation-rotation-aware-input" name="rotation aware" value="true">
                 <p id="animation-rotation-aware-info-para"></p>
             </form>
@@ -267,11 +271,11 @@
         </div>
         <div class="body">
             <form id="new-animation-frame-form">
-                <label for="animation-image-input">贴图</label><input class="tool-input" name="image"
+                <label for="animation-frame-image-input">贴图</label><input class="tool-input" name="image"
                     id="animation-frame-image-input" type="file" accept="image/png" required multiple><br>
-                <label for="x-input">handle x</label><input name="handle-x" id="animation-frame-x-input"
+                <label for="animation-frame-x-input">handle x</label><input name="handle-x" id="animation-frame-x-input"
                     class="tool-input" type="number"><br>
-                <label for="y-input">handle y</label><input name="handle-y" id="animation-frame-y-input"
+                <label for="animation-frame-y-input">handle y</label><input name="handle-y" id="animation-frame-y-input"
                     class="tool-input" type="number"><br>
             </form>
         </div>
@@ -310,7 +314,7 @@
                 <label for="plugin-manifest-once-input">once</label><input class="tool-input" name="once"
                     id="plugin-manifest-once-input" type="checkbox" value="true" checked>
                 <label for="plugin-manifest-category-input">category</label><input class="tool-input" name="category"
-                    id="plugin-manifest-id-input" type="checkbox" value="true" checked>
+                    id="plugin-manifest-category-input" type="checkbox" value="true" checked>
                 <label for="plugin-manifest-multiplayer-input">multiplayer</label><input class="tool-input"
                     id="plugin-manifest-multiplayer-input" name="multiplayer" type="checkbox" value="true" checked>
                 <label for="plugin-manifest-permanent-input">permanent</label><input class="tool-input" name="permanent"

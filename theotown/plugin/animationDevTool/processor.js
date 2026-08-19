@@ -197,34 +197,37 @@ document.getElementById("doneButton").addEventListener("click", function () {
     rawBuildingImage = document.getElementById("buildingFileInput").files[0];
     rawAnimationInput = document.getElementById("animationFileInput");
 
-    if (rawAnimationInput.files[0] && rawBuildingImage) {
+    if (!rawAnimationInput.files[0]) {
+        alert(Strings.ERROR_NO_FILE_IMPORTED);
+        return;
+    }
+
+    if (rawBuildingImage) {
         loadImage(rawBuildingImage, "building", function (result) {
             console.log(`Succesefully loaded:`, result);
         });
-        for (let i = 0; i < rawAnimationInput.files.length; i++) {
-            loadImage(rawAnimationInput.files[i], "animation", function (result) {
-                console.log(`Succesefully loaded:`, result);
-                // Update animation position information
-                animationData.push({ name: result.name, x: 0, y: 0 });
-                console.log(`Animation ${i} Added`);
-                // Draw when al images have been loaded
-                if (i == rawAnimationInput.files.length - 1) {
-                    console.log(`Animation Info: `, animationData);
+    }
+    for (let i = 0; i < rawAnimationInput.files.length; i++) {
+        loadImage(rawAnimationInput.files[i], "animation", function (result) {
+            console.log(`Succesefully loaded:`, result);
+            // Update animation position information
+            animationData.push({ name: result.name, x: 0, y: 0 });
+            console.log(`Animation ${i} Added`);
+            // Draw when al images have been loaded
+            if (i == rawAnimationInput.files.length - 1) {
+                console.log(`Animation Info: `, animationData);
 
-                    // Load animation list information
-                    let animationListInfo = "";
-                    for (let j = 0; j < animationData.length; j++) {
-                        let result = `<button class="button-small" onclick="animationIndex = ${j}; hint(\`${Strings.ANIMATION_STR}: ${j}\`);">${Strings.BUTTON_SWITCH_ANIMATION}</button>&emsp;Animation(${j}): ${animationData[j].name}, x: ${animationData[j].x}, y: ${animationData[j].y}, handle x: ${-animationData[j].x}, handle y: ${-animationData[j].y}<br>`
-                        animationListInfo += result;
-                    }
-                    document.getElementById("animationList").innerHTML = animationListInfo;
-
-                    draw();
+                // Load animation list information
+                let animationListInfo = "";
+                for (let j = 0; j < animationData.length; j++) {
+                    let result = `<button class="button-small" onclick="animationIndex = ${j}; hint(\`${Strings.ANIMATION_STR}: ${j}\`);">${Strings.BUTTON_SWITCH_ANIMATION}</button>&emsp;Animation(${j}): ${animationData[j].name}, x: ${animationData[j].x}, y: ${animationData[j].y}, handle x: ${-animationData[j].x}, handle y: ${-animationData[j].y}<br>`
+                    animationListInfo += result;
                 }
-            });
-        }
-    } else {
-        alert(Strings.ERROR_NO_FILE_IMPORTED)
+                document.getElementById("animationList").innerHTML = animationListInfo;
+
+                draw();
+            }
+        });
     }
 })
 

@@ -43,7 +43,7 @@ function showAddAnimationFrameDialog(callback) {
 
     if (!generalData.animationFrameDialog.hasAddedListenerToSubmitButton) {
         submitButton.addEventListener("click", function () {
-            console.log(`[用户操作] 点击提交新动画帧表单`); // 日志：用户点击提交
+           console.log(`[用户操作] 点击提交新动画帧表单`); // 日志：用户点击提交
             let result = {};
             let form = new FormData(document.getElementById("new-animation-frame-form"));
             result.image = document.getElementById("animation-frame-image-input").files[0];
@@ -214,7 +214,7 @@ document.getElementById("animation-add-button").addEventListener("click", functi
         <div>动画&emsp;&emsp;ID: ${data.id}&emsp;&emsp;</div>
         <div>夜景: ${data.night ? "是" : "否"}&emsp;&emsp;旋转感知: ${data["rotation aware"] ? "是" : "否"}&emsp;&emsp;
         <button class="button-small" onclick="generalData.animationFrameDialog.currentInnerId = '${id}'; addNewFrameToAnimation()">添加帧</button>
-    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button>&emsp;(${id})</div>
+    &emsp;<button class="button-small" onclick="deleteAnimation('rci', '${id}')">删除</button></div>
     <hr class="narrow">`;
         container.id = "container" + id;
         para.id = "para" + id;
@@ -331,7 +331,6 @@ document.getElementById("main-submit-button").addEventListener("click", function
     console.log(`[初始化] 已重置jsonData`); // 日志：重置
 
     let basicData = Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form")));
-    basicData.type = basicData.type.replace(/\$/g, "");// 去除用于区分小学教育和高等教育的$符号（如果有）
     let advancedData = Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form")));
     
     console.log(`[表单验证] 开始验证RCI基础表单`); // 日志：开始验证
@@ -403,6 +402,9 @@ document.getElementById("main-submit-button").addEventListener("click", function
         }
     }
 
+    // 每月费用
+    let monthlyPrice = document.getElementById("monthly-price-input").value;
+    basicData["monthly price"] = Number.isNaN(monthlyPrice) ? null : monthlyPrice;
     // 水电数据
     let water = document.getElementById("water-input").value;
     let power = document.getElementById("power-input").value;
