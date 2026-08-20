@@ -324,6 +324,11 @@ a:active {
     color: var(--color-link-active);
 }
 
+s { 
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-red);
+    color: var(--color-grey);
+}
 
 /* 图标 */
 i.w {

@@ -399,12 +399,10 @@ document.getElementById("main-submit-button").addEventListener("click", function
                 basicData.animation.push({ id: animation.id })
             }
             animationData.push(result);
+            animationData.push(result);
         }
     }
 
-    // 每月费用
-    let monthlyPrice = document.getElementById("monthly-price-input").value;
-    basicData["monthly price"] = Number.isNaN(monthlyPrice) ? null : monthlyPrice;
     // 水电数据
     let water = document.getElementById("water-input").value;
     let power = document.getElementById("power-input").value;

@@ -1,47 +1,49 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
-    <script src="../../javascript/changeDisplayStyle.js"></script>
-    <title>插件制作工具</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" target="_blank" href="/css/document.css">
+  <link rel="stylesheet" target="_blank" href="/css/compass.css">
+  <script src="../web/service/web-service.js"></script>
+  <title>插件 - 9rm.uk</title>
 </head>
+
 <body>
+    <main>
+        <div class="left-block">
+          <h1>插件制作工具</h1>
+        </div>
+        <div class="right-block">
+            <header>
+              <a href="../"><i class="w">5</i></a>
+                <h4 class="header-title">索引</h4>
+                <nav>
+                    <a target="_blank" href="https://pca.svetikas.lt/docs/" target="_blank">插件系统</a> 
+                    <a target="_blank" href="https://pca.svetikas.lt/" target="_blank">JustAnyone's插件制作工具</a> 
+                </nav>
+            </header>
+            <h5 class="divider">工具</h5>
+            <div class="card-box column-2">
+                <a target="_blank" href="./building.html" class="card">
+                    <h6>建筑工具</h6>
+                </a>
+                <a target="_blank" href="./animation-dev.html" class="card">
+                    <h6>动画开发工具</h6>
+                </a>
+                <a target="_blank" href="./manifest.html" class="card">
+                    <h6>插件清单工具</h6>
+                </a>
+                <a target="_blank" href="./value_calculator.html" class="card">
+                    <h6>数值计算器</h6>
+                </a>
+            </div>
+        </div>
+    </main>
 
-<div style="display: flex; justify-content: space-between;", class="headbox">
-    <div>
-      <a style="display: inline-block;" class"backbutton" href="../"></a>
-      <h3 style="display: inline-block;" class="headtext">插件制作工具</h3>
-    </div>
-    <div>
-      <a target="_blank" href="../me.html">问题反馈</a>
-      <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();"; style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
-    </div>
-</div>
+  <script src="/web/footer/theotown-footer.js"></script>
+  <theotown-footer></theotown-footer>
 
-<div class="main" style="display: flex; justify-content: space-between;">
-  <div style="width: 48%;">
-    <div class="noPaddingBoxTitle">
-      <h3 style="display: inline-block;">NEWS</h3>&nbsp;<p id=newsTitle" style="display: inline-block;"></p>
-    </div>
-    <div class="noPaddingBoxText">
-      <p id="newsInfo"></p>
-    </div>
-  </div>
-  <div style="width: 48%;">
-    <h3>在这里可以跳转到各工具的页面</h3>
-    <a class="linkButton" target="_blank" href="helper.html"><em>基础建筑</em>&emsp;基础简单的住商工(RCI)建筑</a>
-    <a class="linkButton" target="_blank" href="building.html"><em>建筑-扩展 </em>&emsp;推荐使用的全新的建筑插件制作工具</a>
-    <a class="linkButton" target="_blank" href="manifest.html"><em>插件清单</em>&emsp;创建plugin.manifest文件</a>
-    <a class="linkButton" target="_blank" href="value_calculator.html"><em>数值计算器</em>&emsp;计算供电/水以及影响的可用数值</a>
-    <a class="linkButton" target="_blank" href="animation-dev.html"><em>动画开发工具</em>&emsp;快速调整动画位置</a>
-    <a class="linkButton" target="_blank" href="animation-dev-mobile.html"><em>动画开发工具-移动端</em>&emsp;快速调整动画位置</a>
-    <a class="linkButton" target="_blank" href="category.html"><em>分类</em>&emsp;创建一个分类</a>
-  </div>
-</div>
-
-<br>
-<div style="margin: 0;" class="box"><p>工具版本&nbsp;<span id="versionInfo"></span></p></div>
-<script src="generalinfo.js"></script>
 </body>
+
 </html>

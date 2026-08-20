@@ -1,6 +1,6 @@
 *.backup*
 .vscode
-.html_tidy_config
+.html_update_log
 *.nopush*
 *.dev
 .directory

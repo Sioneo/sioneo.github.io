@@ -10,9 +10,12 @@
     <script src="../web/footer/general-footer.js"></script>
     <script>
         const dateData = [
-            { "name": "高考", "time": { "year": 2028, "month": 6, "day": 7, "hour": 0, "minute": 0, "second": 0 } }
+            { "name": "九如喵的生日", "time": { "year": 2027, "month": 7, "day": 28, "hour": 0, "minute": 0, "second": 0 } },
+            { "name": "Furnne的生日", "time": { "year": 2027, "month": 7, "day": 19, "hour": 0, "minute": 0, "second": 0 } },
+            { "name": "2026国庆节", "time": { "year": 2026, "month": 10, "day": 1, "hour": 0, "minute": 0, "second": 0 } },
+            { "name": "2027年", "time": { "year": 2027, "month": 1, "day": 1, "hour": 0, "minute": 0, "second": 0 } }
         ]
-        var scheduleIndex = 2;
+        var scheduleIndex = 0;
 
         // 一些计算时间的函数
         function timestampToObject(timestamp) {
@@ -160,7 +163,7 @@
 
         //  显示名言名句和tip
         document.getElementById("proverb").innerText = proverbs[Math.floor(Math.random() * proverbs.length)];
-        document.getElementById("tip").innerText = tips[Math.floor(Math.random() * tips.length)];
+        document.getElementById("tip").innerHTML = tips[Math.floor(Math.random() * tips.length)];
 
         const buttonBox = document.getElementById("button-box");
         // 添加按钮
