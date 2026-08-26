@@ -399,7 +399,6 @@ document.getElementById("main-submit-button").addEventListener("click", function
                 basicData.animation.push({ id: animation.id })
             }
             animationData.push(result);
-            animationData.push(result);
         }
     }
 
