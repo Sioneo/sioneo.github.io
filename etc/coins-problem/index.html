@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>硬币问题 - 蒙特卡洛模拟</title>
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <script src="/web/service/web-service.js"></script>
+  </head>
+  <body>
+    <header>
+      <h4 class="header-title">硬币问题 - 蒙特卡洛模拟</h4>
+    </header>
+    <main>
+      <form>
+        <div class="line"><label for="selection-a-input">选择A</label><input id="selection-a-input" type="text" placeholder="0=反; 1=正; 输入示例: 101"></div>
+        <div class="line"><label for="selection-b-input">选择B</label><input id="selection-b-input" type="text" placeholder="0=反; 1=正; 输入示例: 101"></div>
+        <div class="line"><label for="loop-count-input">循环次数</label><input id="loop-count-input" type="number" min="1"></div>
+          <div class="line"><label for="detail-switch">输出详情</label><input id="detail-switch" type="checkbox"></div>
+          <button type="button" class="button-big" id="simulation-start-button">开始模拟</button>
+        </div>
+      </form>
+      <hr>
+      <h4>模拟结果</h4>
+      <p><em>结果:&emsp;</em><span id="result-display">还没有进行任何模拟哦</span></p>
+      <section class="spoiler" id="simulation-detail-spoiler">
+        <div class="spoiler-header">
+          <button class="" id="simulation-detail-spoiler-button"><i class="b">a</i></button>
+          <h5>详细结果</h5>
+        </div>
+        <div class="spoiler-content" id="simulation-detail-spoiler-content">
+          <pre id="simulation-detail"></pre>
+        </div>
+      </section>
+      <script>Web.addSpoiler("simulation-detail-spoiler-button", "simulation-detail-spoiler-content")</script>
+    </main>
+    <script src="./script.js"></script>
+    <script src="/web/footer/general-footer.js"></script>
+    <general-footer></general-footer>
+  </body>
+</html>
