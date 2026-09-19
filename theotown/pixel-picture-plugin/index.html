@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>像素画生成器插件</title>
+    <link rel="stylesheet" type="text/css" href="/css/document.css">
+    <script src="/web/service/web-service.js"></script>
+    <script src="/web/service/js-zip.js"></script>
+  </head>
+  <body>
+    <header>
+      <h4 class="header-title">
+        <a href="../"><i class="w">5</i></a>
+        像素画生成器插件
+      </h4>
+      <nav>
+        <a href="./en.html">English</a>
+      </nav>
+    </header>
+    <main>
+      <form>
+        <div class="line"><label for="image-input">导入图片</label><input type="file" accept="image/png, image/jpeg, image/jpg, image/webp, image/avif" id="image-input"></div>
+        <div class="line"><label for="scale-input">缩放倍率</label><input type="number" id="scale-input" min="0" value="1"></div>
+      </form>
+      <section class="spoiler">
+        <div class="spoiler-header">
+          <button id="preview-spoiler-button"><i class="b">a</i></button>
+          <h5 class="spoiler-title">预览</h5>
+          <button id="preview-image-button" class="button-big">生成预览</button>
+        </div>
+        <div id="preview-spoiler-content" class="spoiler-content">
+          <p>图片大小: <span id="image-size-display">0 × 0 = 0</span></p>
+          <canvas width="0" height="0" id="preview-canvas">
+        </div>
+      </section>
+      <section class="spoiler">
+        <div class="spoiler-header">
+          <button id="export-spoiler-button"><i class="b">a</i></button>
+          <h5 class="spoiler-title">导出为插件</h5>
+          <button class="button-big" id="export-button">导出</button>
+        </div>
+        <div id="export-spoiler-content" class="spoiler-content">
+          <p id="export-info">还没有导出过插件，点击右边的导出按钮导出</p>
+        </div>
+      </section>
+    </main>
+    <script>
+      Web.addSpoiler("preview-spoiler-button", "preview-spoiler-content");
+      Web.addSpoiler("export-spoiler-button", "export-spoiler-content");
+    </script>
+    <script src="./javascript/pixel.js"></script>
+    <script src="/web/footer/theotown-footer.js"></script>
+    <theotown-footer></theotown-footer>
+  </body>
+</html>
+

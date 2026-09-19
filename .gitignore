@@ -2,5 +2,5 @@
 .vscode
 .html_update_log
 *.nopush*
-*.dev
+*.dev*
 .directory

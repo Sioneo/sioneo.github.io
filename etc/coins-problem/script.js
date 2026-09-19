@@ -6,7 +6,7 @@ let selectionB = [];
 const detail = document.getElementById("simulation-detail");
 // 用于输出信息到详情区的函数
 function print(msg = "Unknown Message") {
-    detail.innerHTML += msg;
+    detail.insertAdjacentHTML("beforeend", msg);
 }
 
 function updateValues() {
@@ -35,7 +35,7 @@ function loadInput() {
         if (
             (selectionA[i] != 0 && selectionA[i] != 1) ||
             (selectionB[i] != 0 && selectionB[i] != 1)
-        ) { throw new Error("Invalid Input! Section Input should contains 0 or 1 only.")}
+        ) { throw new Error("Invalid Input! Secltion Input should contains 0 or 1 only.")}
     }
 
     console.log("Successfully loaded input");
@@ -65,23 +65,28 @@ function simulate(selectionA, selectionB, loopCount, selectionLength) {
         // 初始化相关变量
         let counter = 0;
         let currentSelection = []; // 用于存放模拟投掷结果的对比数组
+        let record = []; // 用于记录硬币投掷记录
         let winner;
 
         // 主循环
         while(true) {
             counter++;
+            const result = tossCoin();
             // 当投掷次数没有达到选择数组的长度时，只进行投掷的模拟，不进行比较
             if (counter < selectionLength) {
-                currentSelection.push(tossCoin());
+                currentSelection.push(result);
+                record.push(result);
             // 当投掷次数等于选择数组长度时，进行对比
             } else if (counter == selectionLength) {
-                currentSelection.push(tossCoin());
+                currentSelection.push(result);
+                record.push(result);
                 if (arraysEqual(selectionA, currentSelection)) { winCount.a++; winner = "A"; break; }
                 if (arraysEqual(selectionB, currentSelection)) { winCount.b++; winner = "B"; break; }
             // 当投掷次数大于选择数组长度时，移除对比数组第0位并在末尾追加新投掷结果
             } else {
                 currentSelection.shift();
-                currentSelection.push(tossCoin());
+                currentSelection.push(result);
+                record.push(result);
                 if (arraysEqual(selectionA, currentSelection)) { winCount.a++; winner = "A"; break; }
                 if (arraysEqual(selectionB, currentSelection)) { winCount.b++; winner = "B"; break; }
             }
@@ -89,7 +94,7 @@ function simulate(selectionA, selectionB, loopCount, selectionLength) {
             if (counter >= 10000) { throw new Error("WARNING: Possible Infinite Loop Detected! (Loop Count >= 10000)")}
 
         }
-        if (isExportDetail) { print(`[${i}] 投掷了 ${counter} 次硬币; 胜利者: ${winner};<br>`); }
+        if (isExportDetail) { print(`[${i}] 投掷了 ${counter} 次硬币; 胜利者: ${winner}; ${record.join("")}<br>`); }
     }
 
     return winCount;
