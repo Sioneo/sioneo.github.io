@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./css/portal.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/portal.min.css">
   <title>九如喵的网站</title>
+  <script src="./web/service/web-service.js"></script>
 </head>
 
 <body>
@@ -13,39 +15,23 @@
       <a href="./en.html"><h4>English</h4></a>
   </header>
   <main>
-    <div class="flex">
-      <section style="width: 80%;">
+    <div class="split">
+      <section class="main-column">
 
         <div class="flex compact box">
-          <div id="avatar-box">
-            <style>
-              #avatar-box {
-                display: block;
-                width: 15%;
-                height: auto;
-                position: relative;
-              }
-
-              img#avatar {
-                width: 100%;
-                aspect-ratio: 1/1;
-                display: block;
-                border-radius: 50%;
-                z-index: 1;
-              }
-            </style>
-            <img id="avatar" src="https://bee-reg-ab.imagency.cn/p/c8bd41e16a49bf163d9f3695c5c67732.jpg">
+          <div class="avatar-box">
+            <img src="https://bee-reg-ab.imagency.cn/p/c8bd41e16a49bf163d9f3695c5c67732.jpg" alt="九如喵的头像">
           </div>
-          <div style="width: 83%;">
+          <div class="profile-body">
             <h3 class="inline">九如喵</h3>
             <h4 class="inline sub">JiuruMeow</h4>
             <p class="sub">
               <span><i class="w">U</i>广东·江门</span>
               <span><i class="w">T</i><a class="sub" title="来信将自动路由转发至 jiurumeow@163.com，回复也将从此地址发出" href="mailto:hello@9rm.uk">hello@9rm.uk</a></span>
               <span><i class="b">W</i>07/28</span>
-              <span><i class="b">n</i><a href="https://space.bilibili.com/629492211" target="_blank"
+              <span><i class="b">n</i><a href="https://space.bilibili.com/629492211"
                                                                                      class="sub">Sioneo</a></span>
-              <span><i class="w">Q</i><a href="https://github.com/Sioneo/" target="_blank" class="sub">Sioneo</a></span>
+              <span><i class="w">Q</i><a href="https://github.com/Sioneo/" class="sub">Sioneo</a></span>
             </p>
             <p>你好喵，欢迎访问九如喵的个人网站。本喵是一名高中生，沉迷于原生HTML开发💦，本站有多个板块，可以到下方查看！<br>头像是凯尔希 (明日方舟) </p>
           </div>
@@ -53,19 +39,19 @@
 
         <div>
           <div class="grid column-3">
-            <a class="tile" target="_blank" href="./theotown/index.html">
+            <a class="tile" href="./theotown/index.html">
               <h4>TheoTown</h4>
               <p>TheoTown（西奥小镇）是一款开放自由的城市建造游戏，拥有丰富的插件生态，在这里包含了一些资料以及插件制作工具</p>
             </a>
-            <a class="tile" target="_blank" href="./countdown/">
+            <a class="tile" href="./countdown/">
               <h4>Countdown</h4>
               <p>各种倒计时</p>
             </a>
-            <a class="tile" target="_blank" href="./riddle/">
+            <a class="tile" href="./riddle/">
               <h4>Riddle</h4>
               <p>猜盐/海龟汤</p>
             </a>
-            <a class="tile" target="_blank" href="https://github.9rm.uk/">
+            <a class="tile" href="https://github.9rm.uk/">
               <h4>GitHub Boost</h4>
               <p>基于 Cloudflare Worker 搭建的 Github 文件加速服务</p>
             </a>
@@ -74,18 +60,14 @@
       
         <div class="box compact">
           <h3>友情链接</h3> 
-          <style>
-            #furnne-avatar-box { width: 15%; }
-            #furnne-avatar { border-radius: 50%; width: 100%; }
-          </style> 
           <div class="flex">
-            <div id="furnne-avatar-box"><img id="furnne-avatar" src="https://bee-reg-ab.imagency.cn/p/97f84216373dee8dc9f96754a9bfe5d5.jpg" alt="avatar1"/></div>
-            <div style="width: 83%">
+            <div class="avatar-box"><img src="https://bee-reg-ab.imagency.cn/p/97f84216373dee8dc9f96754a9bfe5d5.jpg" alt="Furnne 的头像"/></div>
+            <div class="profile-body">
               <div><h4 class="inline">Furnne</h4><h5 class="inline sub">我的挚友 (ﾉ≧∀≦)ﾉ</h5></div>
               <p class="sub">
                 <span><i class="w">U</i>浙江·温州</span>
                 <span><i class="b">W</i>07/16</span>
-                <span><i class="b">n</i><a href="https://space.bilibili.com/631046218" target="_blank"
+                <span><i class="b">n</i><a href="https://space.bilibili.com/631046218"
                   class="sub">Furnne_</a></span>
               </p>
               <p>你好喵，欢迎访问九如喵的个人网站。本喵也是一名高中生，沉迷于喜欢九如💦，和九如一样也是一名TheoTown插件开发者呢！<br>
@@ -96,16 +78,16 @@
         </div>
       </section>
 
-      <section style="width: 20%">
+      <section class="side-column">
         <div class="box compact vertical content-height">
           <h5>我的社交媒体</h5>
-          <div class="flex full wrap compact"><a href="https://space.bilibili.com/629492211" target="_blank" class="tile">
+          <div class="flex full wrap compact"><a href="https://space.bilibili.com/629492211" class="tile">
               <h5>Bilibili</h5>
             </a>
-            <a href="https://github.com/Sioneo/" target="_blank" class="tile">
+            <a href="https://github.com/Sioneo/" class="tile">
               <h5>GitHub</h5>
             </a>
-            <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" target="_blank" class="tile">
+            <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" class="tile">
               <h5>TheoTown Forum</h5>
             </a>
           </div>
@@ -133,13 +115,10 @@
   <footer>
     <p class="center">
       <span>Copyright JiuruMeow 2026, all rights reserved.</span>
-      <a href="https://beeimg.cn/" target="_blank">图床</a>·
-      <a href="https://open-meteo.com/"
-        target="_blank">天气数据提供商</a>·<span style="margin: auto 0 auto 3px;">Powered by</span>
-      <a href="https://cloudflare.com/" style="margin: auto 0;"
-        target="_blank">Cloudflare</a> and 
-        <a href="https://github.com/" style="margin: auto 0;"
-        target="_blank">GitHub</a>
+      <a href="https://beeimg.cn/">图床</a>·
+      <a href="https://open-meteo.com/">天气数据提供商</a>·<span style="margin: auto 0 auto 3px;">Powered by</span>
+      <a href="https://cloudflare.com/" style="margin: auto 0;">Cloudflare</a> and 
+        <a href="https://github.com/" style="margin: auto 0;">GitHub</a>
       </p>
   </footer>
 </body>

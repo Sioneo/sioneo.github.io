@@ -4,10 +4,10 @@ class GeneralFooter extends HTMLElement {
         <footer style="display: flex; justify-content: space-between;">
             <div>
                 © 2026 JiuruMeow ·
-                Powered by <a href="https://www.cloudflare.com/" target="_blank">Cloudflare</a> and <a href="https://github.com/" target="_blank">GitHub</a>
+                Powered by <a href="https://www.cloudflare.com/">Cloudflare</a> and <a href="https://github.com/">GitHub</a>
             </div>
             <div class="footer-about">
-                <a href="/" target="_blank">Home</a>
+                <a href="/">Home</a>
             </div>
         </footer>
         `;

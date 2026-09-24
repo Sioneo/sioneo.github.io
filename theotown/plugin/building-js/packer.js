@@ -62,7 +62,6 @@ document.getElementById("new-package-button").addEventListener("click", function
             // 创建下载链接
             const link = document.createElement('a');
             link.href = URL.createObjectURL(content);
-            link.target = "_blank";
             link.download = generalData.projectName? `${generalData.projectName}.zip`: "plugin.zip";
             document.body.appendChild(link);
             link.click();

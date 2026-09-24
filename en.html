@@ -3,8 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="./css/portal.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./css/portal.min.css">
   <title>JiuruMeow.Website</title>
+  <script src="./web/service/web-service.js"></script>
 </head>
 
 <body>
@@ -13,39 +15,23 @@
       <a href="./index.html"><h4>中文</h4></a>
   </header>
   <main>
-    <div class="flex">
-      <section style="width: 80%;">
+    <div class="split">
+      <section class="main-column">
 
         <div class="flex compact box">
-          <div id="avatar-box">
-            <style>
-              #avatar-box {
-                display: block;
-                width: 15%;
-                height: auto;
-                position: relative;
-              }
-
-              img#avatar {
-                width: 100%;
-                aspect-ratio: 1/1;
-                display: block;
-                border-radius: 50%;
-                z-index: 1;
-              }
-            </style>
-            <img id="avatar" src="https://bee-reg-ab.imagency.cn/p/c8bd41e16a49bf163d9f3695c5c67732.jpg">
+          <div class="avatar-box">
+            <img src="https://bee-reg-ab.imagency.cn/p/c8bd41e16a49bf163d9f3695c5c67732.jpg" alt="JiuruMeow's avatar">
           </div>
-          <div style="width: 83%;">
+          <div class="profile-body">
             <h3 class="inline">九如喵</h3>
             <h4 class="inline sub">JiuruMeow</h4>
             <p class="sub">
               <span><i class="w">U</i>Jiangmen, Guangdong, China</span>
               <span><i class="w">T</i><a class="sub" href="mailto:hello@9rm.uk">hello@9rm.uk</a></span>
               <span><i class="b">W</i>07/28</span>
-              <span><i class="b">n</i><a href="https://space.bilibili.com/629492211" target="_blank"
+              <span><i class="b">n</i><a href="https://space.bilibili.com/629492211"
                   class="sub">Sioneo</a></span>
-              <span><i class="w">Q</i><a href="https://github.com/Sioneo/" target="_blank" class="sub">Sioneo</a></span>
+              <span><i class="w">Q</i><a href="https://github.com/Sioneo/" class="sub">Sioneo</a></span>
             </p>
             <p>Hi there! Welcome to my website. I am a senior high school student who fell in love with HTML development.<br>My avatar character is Kal'tsit (Arknights)</p>
           </div>
@@ -53,11 +39,11 @@
 
         <div>
           <div class="grid column-3">
-            <a class="tile" target="_blank" href="./theotown/plugin/animation-dev-en.html">
+            <a class="tile" href="./theotown/plugin/animation-dev-en.html">
               <h4>Animation Dev Tool</h4>
               <p>An animation developing tool for TheoTown</p>
             </a>
-            <a class="tile" target="_blank" href="/pixel-picture-data/index.html">
+            <a class="tile" href="/pixel-picture-data/index.html">
               <h4>Pixel Picture</h4>
               <p>The tool which is used to generate pixel data for TheoTown plugin <i>Pixel Picture Generator(PPG)</i></p>
             </a>
@@ -66,18 +52,14 @@
 
                 <div class="box compact">
           <h3>Links</h3> 
-          <style>
-            #furnne-avatar-box { width: 15%; }
-            #furnne-avatar { border-radius: 50%; width: 100%; }
-          </style> 
           <div class="flex">
-            <div id="furnne-avatar-box"><img id="furnne-avatar" src="https://bee-reg-ab.imagency.cn/p/97f84216373dee8dc9f96754a9bfe5d5.jpg" alt="avatar1"/></div>
-            <div style="width: 83%">
+            <div class="avatar-box"><img src="https://bee-reg-ab.imagency.cn/p/97f84216373dee8dc9f96754a9bfe5d5.jpg" alt="Furnne's avatar"/></div>
+            <div class="profile-body">
               <div><h4 class="inline">Furnne</h4><h5 class="inline sub">My Dearest (ﾉ≧∀≦)ﾉ</h5></div>
               <p class="sub">
                 <span><i class="w">U</i>Wenzhou, Zhejiang, China</span>
                 <span><i class="b">W</i>07/16</span>
-                <span><i class="b">n</i><a href="https://space.bilibili.com/631046218" target="_blank"
+                <span><i class="b">n</i><a href="https://space.bilibili.com/631046218"
                   class="sub">Furnne_</a></span>
               </p>
               <p>Hello! Welcome to JiuruMeow's website. I'm also a senior high school student, and I truly admire JiuruMeow's work. Like JiuruMeow, I'm a TheoTown plugin creator as well.<br>
@@ -89,16 +71,16 @@
 
 
       </section>
-      <section style="width: 20%">
+      <section class="side-column">
         <div class="box compact vertical content-height">
           <h5>Social Media</h5>
-          <div class="flex full wrap compact"><a href="https://space.bilibili.com/629492211" target="_blank" class="tile">
+          <div class="flex full wrap compact"><a href="https://space.bilibili.com/629492211" class="tile">
               <h5>Bilibili</h5>
             </a>
-            <a href="https://github.com/Sioneo/" target="_blank" class="tile">
+            <a href="https://github.com/Sioneo/" class="tile">
               <h5>GitHub</h5>
             </a>
-            <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" target="_blank" class="tile">
+            <a href="https://forum.theotown.com/memberlist.php?mode=viewprofile&u=227382" class="tile">
               <h5>TheoTown Forum</h5>
             </a>
           </div>
@@ -118,8 +100,7 @@
   </main>
   <footer>
     <p class="center">Copyright JiuruMeow 2026, all rights reserved.</p>
-    <p class="center"><a href="https://beeimg.cn/" target="_blank">Image Bed</a>·<a href="https://open-meteo.com/"
-        target="_blank">Powered by Cloudflare</a></p>
+    <p class="center"><a href="https://beeimg.cn/">Image Bed</a>·<a href="https://open-meteo.com/">Powered by Cloudflare</a></p>
   </footer>
 </body>
 

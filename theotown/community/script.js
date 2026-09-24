@@ -67,7 +67,6 @@ function addInfo(data, target) {
     
         let card = document.createElement("a");
         card.className = "card";
-        card.target = "_blank";
         card.href = communityData.link;
 
         // 社区标签

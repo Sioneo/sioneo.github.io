@@ -1,0 +1,735 @@
+:root {
+  --style-border-radius: 10px;
+  --style-side-padding: clamp(10px, 5%, 60px);
+  --style-font-family: "sans", "Noto Sans", "Open Sans", "Verdana", "Microsoft Yahei", sans-serif;
+  --style-font-mono: "Consolas", "Menlo", "Droid Sans Mono", "JetBrains Mono", monospace, sans-serif;
+  --color-background: rgb(236, 236, 236);
+  --color-theme: rgb(36, 119, 203);
+  --color-theme-shallow: rgb(209, 234, 255);
+  --color-hr: #b3b3b3;
+  --color-text: black;
+  --color-white: white;
+  --color-contrast-text: white;
+  --color-mono-background: rgba(225, 225, 225, 0.75);
+  --color-box-background: rgba(170, 170, 170, 0.12);
+  --color-active: rgb(36, 119, 203);
+  --color-active-shallow: rgb(226, 242, 255);
+  --color-link-active: black;
+  --color-link-active-background: rgb(255, 208, 0);
+  --color-green: green;
+  --color-green-shallow: rgb(201, 255, 201);
+  --color-red: rgb(209, 0, 0);
+  --color-red-shallow: rgb(255, 220, 220);
+  --color-grey: rgb(71, 71, 71);
+  --color-grey-shallow: rgb(185, 185, 185);
+  --color-pink: rgb(255, 120, 142);
+  --color-shadow: rgba(0, 0, 0, 0.2);
+}
+:root .callout.caution {
+  --color-theme: rgb(255, 153, 0);
+  --color-theme-shallow: rgb(254, 231, 194);
+}
+:root .callout.warning {
+  --color-theme: rgb(220, 0, 0);
+  --color-theme-shallow: rgb(255, 197, 197);
+}
+:root .callout.modest {
+  --color-theme: var(--color-grey);
+  --color-theme-shallow: rgb(225, 225, 225);
+}
+:root .callout.pink {
+  --color-theme: var(--color-pink);
+  --color-theme-shallow: rgb(255, 224, 224);
+}
+:root .callout.pass {
+  --color-theme: var(--color-green);
+  --color-theme-shallow: var(--color-green-shallow);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: rgb(18, 18, 20);
+    --color-theme: rgb(64, 156, 255);
+    --color-theme-shallow: rgba(64, 156, 255, 0.15);
+    --color-hr: rgba(255, 255, 255, 0.12);
+    --color-text: rgb(229, 229, 234);
+    --color-contrast-text: rgb(18, 18, 20);
+    --color-white: rgb(30, 30, 35);
+    --color-mono-background: rgba(255, 255, 255, 0.06);
+    --color-box-background: rgba(255, 255, 255, 0.04);
+    --color-active: rgb(64, 156, 255);
+    --color-active-shallow: rgba(64, 156, 255, 0.12);
+    --color-link-active: rgb(255, 235, 120);
+    --color-link-active-background: rgba(255, 208, 0, 0.2);
+    --color-green: rgb(48, 219, 91);
+    --color-green-shallow: rgba(48, 219, 91, 0.15);
+    --color-red: rgb(255, 85, 85);
+    --color-red-shallow: rgba(255, 85, 85, 0.15);
+    --color-grey: rgb(160, 160, 168);
+    --color-grey-shallow: rgba(255, 255, 255, 0.08);
+    --color-pink: rgb(255, 130, 155);
+    --color-shadow: rgba(0, 0, 0, 0.6);
+  }
+  :root .callout.caution {
+    --color-theme-shallow: rgba(115, 88, 22, 0.25);
+  }
+  :root .callout.warning {
+    --color-theme-shallow: rgba(90, 15, 15, 0.25);
+  }
+  :root .callout.modest {
+    --color-theme-shallow: rgba(29, 29, 29, 0.2);
+  }
+  :root .callout.pink {
+    --color-theme-shallow: rgba(108, 64, 78, 0.2);
+  }
+  :root input, :root select, :root textarea {
+    color: var(--color-grey);
+  }
+}
+@font-face {
+  font-family: "sans";
+  src: url("../font/TitilliumWeb-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "sans";
+  src: url("../font/TitilliumWeb-Italic.ttf");
+  font-weight: normal;
+  font-style: italic;
+}
+@font-face {
+  font-family: "sans";
+  src: url("../font/TitilliumWeb-Bold.ttf");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "sans";
+  src: url("../font/TitilliumWeb-BoldItalic.ttf");
+  font-weight: bold;
+  font-style: italic;
+}
+@font-face {
+  font-family: "Bilibili Icon";
+  src: url("../font/Bilibili_Icons_by_Jiuru.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Web Icon";
+  src: url("../font/JR_icons.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+html, * {
+  font-family: var(--style-font-family);
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+  font-size: clamp(15px, 13.5px + 0.375vw, 18px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-wrap: break-word;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.javascript-disable-warning {
+  color: white;
+  background-color: red;
+}
+main {
+  margin: 10px var(--style-side-padding);
+  padding: 0;
+  flex: 1;
+}
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-theme);
+  padding: 0;
+  font-weight: normal;
+}
+h1.underline, h2.underline, h3.underline, h4.underline, h5.underline, h6.underline {
+  border-bottom: 1px solid var(--color-hr);
+}
+h1 {
+  font-size: clamp(26px, 19px + 1.75vw, 40px);
+  margin: 4px 4px;
+}
+h2 {
+  font-size: clamp(23px, 18px + 1.25vw, 33px);
+  margin: 4px 4px;
+}
+h3 {
+  font-size: clamp(21px, 17px + 1vw, 29px);
+  margin: 20px 4px 6px 0;
+}
+h4 {
+  font-size: clamp(19px, 15.5px + 0.875vw, 26px);
+  margin: 4px 4px;
+}
+h5 {
+  font-size: clamp(17px, 14px + 0.75vw, 23px);
+  margin: 4px 4px;
+}
+h6 {
+  font-size: clamp(16px, 14px + 0.5vw, 20px);
+  padding: 3px;
+  margin: 5px;
+}
+h1 b, h2 b, h3 b, h4 b, h5 b, h6 b {
+  color: var(--color-theme);
+  padding: 0;
+  font-weight: bolder;
+}
+.black, h1.black, h2.black, h3.black, h4.black, h5.black, h6.black {
+  color: var(--color-text) !important;
+}
+.black b, h1.black b, h2.black b, h3.black b, h4.black b, h5.black b, h6.black b {
+  color: var(--color-text) !important;
+}
+h3 {
+  display: flex;
+  align-items: center;
+}
+h3::before {
+  content: "r";
+  margin-right: 10px;
+  font-family: "Bilibili Icon";
+}
+h3::after {
+  content: "";
+  display: block;
+  height: 1px;
+  background: var(--color-hr);
+  flex: 1;
+  margin-left: 20px;
+}
+p {
+  color: var(--color-text);
+  font-size: clamp(15px, 13.5px + 0.375vw, 18px);
+  margin: 0;
+  padding: 4px;
+  line-height: 155%;
+}
+a {
+  color: var(--color-active);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  padding: 0;
+  margin: 4px;
+  font-size: clamp(15px, 13.5px + 0.375vw, 18px);
+  display: inline-block;
+}
+a.outbound::before {
+  content: "B";
+  font-family: "Web Icon";
+}
+a:hover {
+  text-decoration-thickness: 2px;
+}
+a:active {
+  background-color: var(--color-link-active-background);
+  color: var(--color-link-active);
+}
+s {
+  text-decoration-thickness: 2px;
+  text-decoration-color: var(--color-red);
+  color: var(--color-grey);
+}
+i.w {
+  font-style: normal;
+  font-family: "Web Icon";
+  margin: 5px;
+  padding: 0;
+  user-select: none;
+  pointer-events: none;
+}
+i.b {
+  font-style: normal;
+  font-family: "Bilibili Icon";
+  margin: 5px;
+  padding: 0;
+  user-select: none;
+  pointer-events: none;
+}
+hr {
+  background: var(--color-hr, #b3b3b3);
+  border: 0;
+  height: 1px;
+  padding: 0px;
+  margin: 1em 0px;
+}
+hr.narrow {
+  margin: 3px;
+}
+em {
+  font-style: normal;
+  font-weight: bold;
+  font-size: large;
+  color: var(--color-theme);
+}
+mark {
+  background-color: var(--color-link-active-background);
+  color: var(--color-text);
+}
+header {
+  margin: 0;
+  background-color: var(--color-theme);
+  color: var(--color-contrast-text);
+  padding: 5px var(--style-side-padding) 5px var(--style-side-padding);
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+h4.header-title {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  white-space: nowrap;
+}
+header nav {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+header button, header a {
+  font-weight: normal;
+  text-decoration: none;
+  padding: 10px 7px;
+  margin: 0 10px;
+  border-bottom: 3px solid transparent;
+  transition: transform 0.1s ease, border-bottom 0.1s ease;
+  align-items: center;
+  display: inline-flex;
+}
+header button:hover, header a:hover {
+  font-weight: normal;
+  border-bottom: 3px solid var(--color-contrast-text);
+  transition: transform 0.1s ease, border-bottom 0.1s ease;
+}
+header nav button:active, header nav a:active {
+  background-color: var(--color-contrast-text);
+  color: var(--color-theme);
+  font-weight: normal;
+  border-bottom: 3px solid var(--color-contrast-text);
+}
+header h1, header h2, header h3, header h4, header h5, header h6, header p, header a {
+  color: var(--color-contrast-text);
+}
+nav.bar {
+  border-bottom: 2px solid var(--color-theme);
+  padding: 0 var(--style-side-padding);
+}
+nav.bar button {
+  border: none;
+  background-color: transparent;
+  color: var(--color-text);
+  font-size: 20px;
+  margin: auto 5px;
+}
+nav.bar button:hover {
+  background-color: var(--color-theme-shallow);
+}
+nav.bar button:active {
+  background-color: var(--color-theme);
+  color: var(--color-contrast-text);
+}
+section.multiple-page {
+  display: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+section.multiple-page.active {
+  display: block;
+}
+footer {
+  border-top: 5px solid var(--color-theme);
+  background-color: var(--color-box-background);
+  margin: 40px 0 0 0;
+  padding: 10px var(--style-side-padding);
+}
+.footer-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.footer-about {
+  align-items: flex-end;
+}
+.footer-about a {
+  color: var(--color-grey);
+}
+.button-big, .button-small {
+  border-radius: 0;
+  background-color: var(--color-contrast-text);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  cursor: pointer;
+  user-select: none;
+}
+.button-big {
+  min-width: 80px;
+  box-shadow: 0 3px 0 0 var(--color-text);
+  font-size: 17px;
+  padding: 5px 13px;
+  margin: 4px;
+}
+a.button-big:hover, .button-big:hover {
+  background: var(--color-box-background);
+}
+a.button-big:active, .button-big:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 0 var(--color-text);
+}
+.button-big:disabled, .button-big:disabled:hover, .button-big:disabled:active {
+  cursor: not-allowed;
+  background-color: var(--color-red-shallow);
+  transform: none;
+  box-shadow: 0 3px 0 0 var(--color-text);
+  color: var(--color-text);
+}
+.button-small {
+  min-width: 50px;
+  box-shadow: 0 2px 0 0 var(--color-text);
+  font-size: 15px;
+  padding: 2px 4px;
+  margin: 2px;
+}
+.button-small:hover, a.button-small:hover {
+  background: var(--color-box-background);
+}
+.button-small:active, a.button-small:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 0 var(--color-text);
+}
+button .flat {
+  border: none;
+  font-size: 17px;
+  min-width: 80px;
+  padding: 8px 13px;
+  margin: 4px;
+  color: var(--color-text);
+  background-color: var(--color-box-background);
+}
+.button-full-green {
+  color: var(--color-contrast-text);
+  background-color: var(--color-green);
+  text-decoration: none;
+  font-weight: bold;
+  border: none;
+  font-size: 17px;
+  min-width: 80px;
+  padding: 8px 13px;
+  margin: 4px;
+  cursor: pointer;
+}
+.button-full-green.normal {
+  font-weight: normal;
+}
+a.button-big, a.button-small {
+  text-decoration: none;
+}
+a.button-big:hover, a.button-small:hover {
+  text-decoration: none;
+}
+.callout {
+  margin: 20px auto;
+  border-left: 5px solid var(--color-theme);
+  padding: 2px 20px;
+}
+.callout.background {
+  background-color: var(--color-theme-shallow);
+  color: var(--color-text);
+}
+ul, ol {
+  margin: 10px clamp(16px, 5vw, 50px);
+  padding: 0;
+  color: var(--color-text);
+}
+li {
+  margin: 5px;
+  padding: 0;
+}
+pre {
+  font-family: var(--style-font-mono);
+  font-size: clamp(14px, 13px + 0.25vw, 16px);
+  background-color: var(--color-mono-background);
+  padding: 5px;
+  border-radius: var(--style-border-radius);
+  overflow-x: auto;
+}
+code {
+  font-family: var(--style-font-mono);
+  font-size: clamp(14px, 13px + 0.25vw, 16px);
+  background-color: var(--color-mono-background);
+  margin: auto 5px;
+  padding: 3px;
+}
+.mono {
+  font-family: var(--style-font-mono);
+}
+dialog {
+  min-width: min(300px, 90vw);
+  min-height: 200px;
+  max-width: 80%;
+  max-height: 80%;
+  border: 1px solid var(--color-grey);
+  background-color: var(--color-background);
+  color: var(--color-text);
+  padding: 0;
+  box-shadow: 0 4px 20px var(--color-shadow);
+  overflow: hidden;
+  display: none;
+  resize: both;
+  position: fixed;
+}
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+dialog::backdrop {
+  background: transparent;
+}
+dialog .header {
+  background-color: var(--color-theme);
+  color: var(--color-contrast-text);
+  padding: 0;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+dialog .header .header-title {
+  padding: 4px;
+  color: var(--color-contrast-text);
+  margin: 0;
+  font-size: 22px;
+}
+dialog .header-controls button {
+  background-color: var(--color-theme);
+  color: var(--color-contrast-text);
+  border: none;
+  height: 100%;
+}
+dialog .header-controls button:hover {
+  color: var(--color-theme);
+  background-color: var(--color-contrast-text);
+}
+dialog .body {
+  margin-bottom: auto;
+  overflow-y: auto;
+}
+dialog .controls {
+  background-color: var(--color-box-background);
+  padding: 3px 13px 3px 3px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+}
+input, textarea, select {
+  background-color: var(--color-white);
+  border: none;
+  font-size: 16px;
+  border: 1px solid var(--color-grey-shallow);
+  border-radius: var(--style-border-radius);
+  color: var(--color-text);
+}
+input:hover, textarea:hover, select:hover {
+  border: 1px solid var(--color-active);
+  background-color: var(--color-active-shallow);
+}
+input:active, textarea:active, select:active, input:focus, textarea:focus, select:focus {
+  border: 1px solid var(--color-active);
+  background-color: var(--color-active-shallow);
+}
+input.tool-input, select.tool-input, textarea.tool-input {
+  display: inline-block;
+  margin: 10px 10px;
+  width: 40vw;
+  height: 30px;
+}
+select.tool-input {
+  display: inline-block;
+  margin-left: 10px;
+  width: 40vw;
+}
+option:checked {
+  background-color: var(--color-active);
+  color: var(--color-contrast-text);
+}
+form div.line {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: space-around;
+  padding-right: 20%;
+}
+form div.line label {
+  max-width: 25vw;
+}
+form div.line input, form div.line select, form div.line textarea {
+  margin: 10px 10px;
+  height: 30px;
+  flex: 1;
+}
+form label {
+  color: var(--color-text);
+  width: 10vw;
+  display: inline-block;
+  text-align: right;
+  margin: 5px auto;
+  padding: 3px auto;
+}
+form label:hover {
+  font-weight: 600;
+  color: var(--color-active);
+}
+form .callout {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+section {
+  margin: 20px 0;
+  padding: 10px;
+  color: var(--color-text);
+}
+div.spoiler-header {
+  color: var(--color-text);
+}
+div.spoiler-header * {
+  display: inline-block;
+  color: var(--color-text);
+}
+div.spoiler-header button:not(.button-big) {
+  border: none;
+  background-color: transparent;
+  font-size: 23px;
+}
+div.spoiler-header button:not(.button-big):hover {
+  background-color: var(--color-active-shallow);
+}
+.spoiler-content {
+  background-color: transparent;
+  padding: 0px;
+  display: none;
+  transition: display 0.5s ease-in-out;
+}
+.spoiler-content.active {
+  display: block;
+  margin-bottom: 20px;
+}
+section.spoiler {
+  background-color: var(--color-white);
+  border-radius: 10px;
+}
+section.spoiler div.spoiler-header {
+  display: flex;
+  padding: 0;
+  margin: 3px;
+  font-size: 23px;
+  color: var(--color-text);
+  border: none;
+}
+section.spoiler div.spoiler-header .spoiler-title {
+  flex: 1;
+}
+section.spoiler div.spoiler-header button:not(.button-big) {
+  border: none;
+  background-color: transparent;
+}
+section.spoiler div.spoiler-header button:not(.button-big):hover {
+  background-color: var(--color-active-shallow);
+}
+section.spoiler div.spoiler-content {
+  display: none;
+}
+section.spoiler div.spoiler-content.active {
+  display: block;
+  margin-bottom: 20px;
+}
+.box {
+  background-color: var(--color-white);
+  border-radius: var(--style-border-radius);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--color-hr);
+}
+th, td {
+  border: 1px solid var(--color-hr);
+  padding: 10px 12px;
+  text-align: left;
+  vertical-align: top;
+}
+th {
+  background-color: var(--color-theme-shallow);
+  font-weight: 600;
+}
+article p {
+  text-indent: 2em;
+}
+span {
+  color: var(--color-text);
+}
+div {
+  color: var(--color-text);
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.center {
+  text-align: center;
+}
+.empty-note:empty::before {
+  content: "没有内容";
+  color: var(--color-grey-shallow);
+  text-align: center;
+}
+@media (max-width: 900px) {
+  form div.line {
+    flex-direction: column;
+    align-items: stretch;
+    padding-right: 0;
+  }
+  form label {
+    width: auto;
+    text-align: left;
+  }
+  form div.line label {
+    max-width: none;
+  }
+  form div.line input, form div.line select, form div.line textarea, input.tool-input, select.tool-input, textarea.tool-input {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 4px 0;
+  }
+}
+@media (max-width: 620px) {
+  h4.header-title {
+    white-space: normal;
+  }
+  header nav {
+    flex-wrap: wrap;
+    white-space: normal;
+  }
+  nav.bar {
+    flex-wrap: wrap;
+  }
+  .callout {
+    margin: 14px auto;
+    padding: 2px 12px;
+  }
+}
