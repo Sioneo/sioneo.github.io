@@ -1,3 +1,14 @@
+// ====== 页面文案 ======
+// 文案由页面的 javascript/translation.js 提供（页面里用 var Strings = Translations.ZH / .EN 选择语言），
+// 这样中英文页面可以共用这一份脚本；万一页面没引入 translation.js 也不会直接报错。
+var PAGE_TEXT = (typeof Strings !== "undefined" && Strings) ? Strings : {};
+function t(key) {
+    return Object.prototype.hasOwnProperty.call(PAGE_TEXT, key) ? PAGE_TEXT[key] : key;
+}
+if (PAGE_TEXT.EXPORT_FETCHING === undefined) {
+    console.warn("[pixel.js] 未找到 Strings，页面文案会显示为 key，请确认页面引入了 translation.js");
+}
+
 /**
  * 读取图片，按比例缩放绘制到 canvas，并输出逐像素 RGB 信息
  *
@@ -21,21 +32,21 @@ async function addressImage(inputDom, scale, canvasDom, options = {}) {
 
   // ---------- 1. 参数校验 ----------
   if (!inputDom || inputDom.tagName !== 'INPUT' || inputDom.type !== 'file') {
-    throw new Error('第一个参数必须是 <input type="file"> 的 DOM');
+    throw new Error(t("ERROR_INPUT_NOT_FILE"));
   }
   if (!canvasDom || canvasDom.tagName !== 'CANVAS') {
-    throw new Error('第三个参数必须是 <canvas> 的 DOM');
+    throw new Error(t("ERROR_CANVAS_NOT_CANVAS"));
   }
   if (typeof scale !== 'number' || scale <= 0 || !isFinite(scale)) {
-    throw new Error('缩放比例必须是大于 0 的有限数字');
+    throw new Error(t("ERROR_BAD_SCALE"));
   }
 
   const file = inputDom.files && inputDom.files[0];
   if (!file) {
-    throw new Error('没有选择文件');
+    throw new Error(t("ERROR_NO_FILE"));
   }
   if (!file.type.startsWith('image/')) {
-    throw new Error('选择的文件不是图片');
+    throw new Error(t("ERROR_NOT_IMAGE"));
   }
 
   // ---------- 2. 读取图片 ----------
@@ -48,7 +59,7 @@ async function addressImage(inputDom, scale, canvasDom, options = {}) {
     };
     image.onerror = () => {
       URL.revokeObjectURL(url);
-      reject(new Error('图片加载失败'));
+      reject(new Error(t("ERROR_IMAGE_LOAD_FAILED")));
     };
     image.src = url;
   });
@@ -142,47 +153,111 @@ document.getElementById("preview-image-button").addEventListener("click", async 
     }
 })
 
+// ====== 资源路径：基座插件(PPG_base) 与 生成器(generator) 分离 ======
+// 基座插件是所有像素画生成器共用的部分（隐藏的彩色格子、封面动画、分类），用户只需安装一次；
+// 生成器插件只包含与具体像素画有关的内容（工具项、数据、脚本），并引用基座插件里固定的 id。
+const RES_ROOT = "/theotown/pixel-picture-plugin/resource";
+const PPG_BASE_DIR = RES_ROOT + "/PPG_base";
+const GENERATOR_DIR = RES_ROOT + "/generator";
+
+// 基座插件对外共享的固定 id：不随导出随机化，所有生成器插件共用同一份基座
+const BASE_DRAFT_ID = "$jiuru36_PixelPictureGenerator_base00";
+
 const infoParagraph = document.getElementById("export-info");
-function print(msg = "Unknown Message") { infoParagraph.innerHTML = msg; }
+function print(msg = "Unknown Message") {
+    if (infoParagraph) infoParagraph.innerHTML = msg;
+}
 
-function toLuaTable(value, indent = 0, compact = true) {
-    const pad = "    ".repeat(indent);
-    const padInner = "    ".repeat(indent + 1);
-    const nl = compact ? "" : "\n";
-    const sp = compact ? " " : "";
+// ====== 图片数据压缩 ======
+// 旧的写法是把每个像素写成 {r, g, b} 表，比如 {255, 0, 0}，一个像素要十几个字符；
+// 现在改成把整幅图按 r,g,b 字节流做 base64，一个像素固定 4 个字符，体积约为原来的 1/3。
+const BASE64_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+const LUA_BASE64_CHARS_PER_LINE = 120;
 
-    if (value === null || value === undefined) return "nil";
-    if (typeof value === "number") return isFinite(value) ? String(value) : "nil";
-    if (typeof value === "boolean") return value ? "true" : "false";
-    if (typeof value === "string") {
-        const escaped = value
-            .replace(/\\/g, "\\\\")
-            .replace(/"/g, '\\"')
-            .replace(/\n/g, "\\n")
-            .replace(/\r/g, "\\r")
-            .replace(/\t/g, "\\t");
-        return `"${escaped}"`;
+// matrix[y][x] = [r, g, b] -> base64 字符串
+// 每像素 3 字节，3 字节正好编码成 4 个 base64 字符，所以永远不需要补 '='
+function pixelsToBase64(matrix) {
+    const bytes = [];
+    for (const row of matrix) {
+        for (const px of row) bytes.push(px[0], px[1], px[2]);
     }
-    if (Array.isArray(value)) {
-        if (value.length === 0) return "{}";
-        // 如果全是数字且长度较短，压成一行
-        const allNumbers = value.every(v => typeof v === "number");
-        if (allNumbers && value.length <= 8) {
-            return "{" + value.join(", ") + "}";
-        }
-        const items = value.map(v => padInner + toLuaTable(v, indent + 1, compact));
-        return "{" + nl + items.join("," + nl) + nl + pad + "}";
+
+    let out = "";
+    for (let i = 0; i + 2 < bytes.length; i += 3) {
+        const n = (bytes[i] << 16) | (bytes[i + 1] << 8) | bytes[i + 2];
+        out += BASE64_CHARS[(n >> 18) & 63]
+             + BASE64_CHARS[(n >> 12) & 63]
+             + BASE64_CHARS[(n >> 6) & 63]
+             + BASE64_CHARS[n & 63];
     }
-    if (typeof value === "object") {
-        const keys = Object.keys(value);
-        if (keys.length === 0) return "{}";
-        const items = keys.map(k => {
-            const luaKey = /^[A-Za-z_][A-Za-z0-9_]*$/.test(k) ? k : `["${k}"]`;
-            return `${padInner}${luaKey} = ${toLuaTable(value[k], indent + 1, compact)}`;
-        });
-        return "{" + nl + items.join("," + nl) + nl + pad + "}";
+    return out;
+}
+
+// 生成注入到 script.lua 开头的代码：图片数据 + 解码函数 + 与原来结构一致的 data
+function toLuaImageHeader(matrix) {
+    const height = matrix.length;
+    const width = height > 0 ? matrix[0].length : 0;
+    const base64 = pixelsToBase64(matrix);
+
+    const chunks = [];
+    for (let i = 0; i < base64.length; i += LUA_BASE64_CHARS_PER_LINE) {
+        chunks.push(base64.slice(i, i + LUA_BASE64_CHARS_PER_LINE));
     }
-    return "nil";
+
+    // base64 里不会出现 ] 和换行以外的字符，且解码时会跳过所有非字母表字符，
+    // 所以直接用 Lua 长字符串放数据，不需要任何转义
+    const lines = [
+        "-- ====== 以下图片数据由导出工具动态生成（base64 压缩） ======",
+        `local imageWidth, imageHeight = ${width}, ${height}`,
+        "local imageData = [[",
+        ...chunks,
+        "]]",
+        "",
+        "-- 把 base64 数据还原成像素表：data[y][x] = {r, g, b}",
+        "local function decodeImage(b64, width, height)",
+        `    local alphabet = "${BASE64_CHARS}"`,
+        "    local value = {}",
+        "    for i = 1, #alphabet do",
+        "        value[alphabet:sub(i, i)] = i - 1",
+        "    end",
+        "",
+        "    local bytes = {}",
+        "    local count, acc = 0, 0",
+        "    for i = 1, #b64 do",
+        "        local v = value[b64:sub(i, i)]",
+        "        if v ~= nil then",
+        "            acc = acc * 64 + v",
+        "            count = count + 1",
+        "            if count == 4 then",
+        "                bytes[#bytes + 1] = string.char(math.floor(acc / 65536) % 256, math.floor(acc / 256) % 256, acc % 256)",
+        "                count, acc = 0, 0",
+        "            end",
+        "        end",
+        "    end",
+        "    local raw = table.concat(bytes)",
+        "",
+        "    local decoded = {}",
+        "    local index = 1",
+        "    for y = 1, height do",
+        "        local row = {}",
+        "        for x = 1, width do",
+        "            row[x] = {string.byte(raw, index, index + 2)}",
+        "            index = index + 3",
+        "        end",
+        "        decoded[y] = row",
+        "    end",
+        "    return decoded",
+        "end",
+        "",
+        "local data = decodeImage(imageData, imageWidth, imageHeight)"
+    ];
+
+    return {
+        width: width,
+        height: height,
+        base64Length: base64.length,
+        header: lines.join("\n") + "\n\n"
+    };
 }
 
 document.getElementById("export-button").addEventListener("click", async () => {
@@ -204,29 +279,27 @@ document.getElementById("export-button").addEventListener("click", async () => {
 
     try {
         // ====== 1. 抓取资源 ======
-        print("正在抓取需要的文件...");
+        // 生成器插件不再打包基座内容，只引用基座插件共享的固定 id
+        print(t("EXPORT_FETCHING"));
 
-        const [baseRes, coverRes, jsonRes, manifestRes, luaRes] = await Promise.all([
-            fetch("/theotown/pixel-picture-plugin/resource/base.png"),
-            fetch("/theotown/pixel-picture-plugin/resource/cover.png"),
-            fetch("/theotown/pixel-picture-plugin/resource/code.json"),
-            fetch("/theotown/pixel-picture-plugin/resource/plugin.manifest"),
-            fetch("/theotown/pixel-picture-plugin/resource/script.lua")
+        const [baseJsonRes, jsonRes, manifestRes, luaRes] = await Promise.all([
+            fetch(PPG_BASE_DIR + "/code.json"),     // 用于校验基座确实提供了共享 id
+            fetch(GENERATOR_DIR + "/code.json"),
+            fetch(GENERATOR_DIR + "/plugin.manifest"),
+            fetch(GENERATOR_DIR + "/script.lua")
         ]);
 
-        if (!baseRes.ok)     throw new Error("base.png 抓取失败: " + baseRes.status);
-        if (!coverRes.ok)    throw new Error("cover.png 抓取失败: " + coverRes.status);
-        if (!jsonRes.ok)     throw new Error("code.json 抓取失败: " + jsonRes.status);
-        if (!manifestRes.ok) throw new Error("plugin.manifest 抓取失败: " + manifestRes.status);
-        if (!luaRes.ok)      throw new Error("script.lua 抓取失败: " + luaRes.status);
+        if (!baseJsonRes.ok) throw new Error(t("ERROR_BASE_CODE_FETCH") + baseJsonRes.status);
+        if (!jsonRes.ok)     throw new Error(t("ERROR_GENERATOR_CODE_FETCH") + jsonRes.status);
+        if (!manifestRes.ok) throw new Error(t("ERROR_GENERATOR_MANIFEST_FETCH") + manifestRes.status);
+        if (!luaRes.ok)      throw new Error(t("ERROR_GENERATOR_LUA_FETCH") + luaRes.status);
 
-        const baseBlob     = await baseRes.blob();
-        const coverBlob    = await coverRes.blob();
+        const baseJsonText = await baseJsonRes.text();
         const codeJsonText = await jsonRes.text();
         const manifestText = await manifestRes.text();
         const luaText      = await luaRes.text();
 
-        print("抓取完成, 正在处理...");
+        print(t("EXPORT_PROCESSING"));
 
         // ====== 2. 唯一 ID + 批次号 ======
         const tsPart = Date.now().toString(36);
@@ -260,11 +333,26 @@ document.getElementById("export-button").addEventListener("click", async () => {
         try {
             codeJson = JSON.parse(codeJsonText);
         } catch (e) {
-            throw new Error("code.json 解析失败: " + e.message);
+            throw new Error(t("ERROR_CODE_PARSE") + e.message);
         }
         if (!Array.isArray(codeJson)) {
-            throw new Error("code.json 顶层不是数组");
+            throw new Error(t("ERROR_CODE_NOT_ARRAY"));
         }
+
+        // 3.0 校验基座插件确实提供了我们要引用的固定 id，防止两边定义漂移
+        let baseCodeJson;
+        try {
+            baseCodeJson = JSON.parse(baseJsonText);
+        } catch (e) {
+            throw new Error(t("ERROR_BASE_CODE_PARSE") + e.message);
+        }
+        if (!Array.isArray(baseCodeJson)) {
+            throw new Error(t("ERROR_BASE_CODE_NOT_ARRAY"));
+        }
+        if (!baseCodeJson.some(item => item && item.id === BASE_DRAFT_ID)) {
+            throw new Error(t("ERROR_BASE_DRAFT_MISSING") + BASE_DRAFT_ID);
+        }
+        exportReport.baseDraftId = BASE_DRAFT_ID;
 
         // 3.1 第一遍：建 旧id -> 新id 映射，改定义 id
         const idMap = {};
@@ -297,7 +385,7 @@ document.getElementById("export-button").addEventListener("click", async () => {
         try {
             manifest = JSON.parse(manifestText);
         } catch (e) {
-            throw new Error("plugin.manifest 解析失败: " + e.message);
+            throw new Error(t("ERROR_MANIFEST_PARSE") + e.message);
         }
         if (manifest && typeof manifest.id === "string") {
             const oldManifestId = manifest.id;
@@ -305,17 +393,13 @@ document.getElementById("export-button").addEventListener("click", async () => {
             idMap[oldManifestId] = manifest.id;
             exportReport.ids.manifest = { from: oldManifestId, to: manifest.id };
         } else {
-            throw new Error("plugin.manifest 缺少 id 字段");
+            throw new Error(t("ERROR_MANIFEST_NO_ID"));
         }
         manifest.text = appendTag(manifest.text, batchTag);
 
         // ====== 5. 处理 script.lua ======
-        // 5.1 准备新 baseDraft id
-        const BASE_DRAFT_ID = "$dnswodn48_PxielPictureSpawner_base00";
-        const newBaseDraftId = idMap[BASE_DRAFT_ID] || null;
-        if (!newBaseDraftId) {
-            throw new Error("code.json 中未找到 baseDraft id: " + BASE_DRAFT_ID);
-        }
+        // 5.1 baseDraft 直接引用基座插件里固定的共享 id（第 3.0 步已校验其存在），
+        //     不再在生成器内部随机化，这样多个生成器插件可以共用同一份基座
 
         // 5.2 校验源 Lua 里没有残留 init，防止重复定义
         //     如果还有，给出警告但不中断（后面追加的会覆盖前者，但会互相干扰）
@@ -325,39 +409,48 @@ document.getElementById("export-button").addEventListener("click", async () => {
             console.warn("[导出警告] 源 script.lua 里仍存在 script:init，JS 追加的 init 会覆盖它");
         }
 
-        // 5.3 构造 JS 追加的 init 代码
+        // 5.3 构造 JS 追加的 init 代码：从基座插件取共用的 baseDraft
         const initBlock = [
             "",
             "",
-            "-- 以下 init 由导出工具动态生成",
+            "-- 以下 init 由导出工具动态生成，引用基座插件(PPG_base)里固定的 baseDraft",
             "function script:init()",
-            `    baseDraft = Draft.getDraft("${newBaseDraftId}")`,
+            `    baseDraft = Draft.getDraft("${BASE_DRAFT_ID}")`,
             "end",
             ""
         ].join("\n");
 
-        // 5.4 把 pixelData 作为 Lua table 注入到第一行
+        // 5.4 把 pixelData 压缩成 base64 后注入到第一行
         if (!Array.isArray(pixelData) || pixelData.length === 0) {
-            throw new Error("pixelData 为空，拒绝导出");
+            throw new Error(t("ERROR_NO_PIXEL_DATA"));
         }
-        const luaDataLiteral = toLuaTable(pixelData, 0, false);
+        const imageHeader = toLuaImageHeader(pixelData);
 
-        // 5.5 拼接：local data = ... + 源 Lua + 追加的 init
+        // 5.5 拼接：图片数据 + 源 Lua + 追加的 init
         const luaWithData =
-            `local data = ${luaDataLiteral}\n\n` +
+            imageHeader.header +
             luaText +
             initBlock;
 
+        exportReport.pixelData = {
+            format: "base64",
+            imageSize: `${imageHeader.width} × ${imageHeader.height}`,
+            pixelCount: imageHeader.width * imageHeader.height,
+            base64Length: imageHeader.base64Length,
+            rawBytes: imageHeader.width * imageHeader.height * 3
+        };
+
         exportReport.luaInit = {
-            baseDraftId: newBaseDraftId,
+            baseDraftId: BASE_DRAFT_ID,
+            basePluginRequired: true,
             oldInitPresent: luaHasOldInit,
             initCode: initBlock.trim()
         };
 
         // ====== 6. 组装文件并计算大小 ======
+        // 生成器插件只包含与这幅像素画有关的内容，基座(PPG_base)由用户自行下载安装，
+        // 因此这里不再打包 base.png / cover.png
         const files = {
-            "base.png":        baseBlob,
-            "cover.png":       coverBlob,
             "code.json":       new Blob([JSON.stringify(codeJson, null, 2)], { type: "application/json" }),
             "plugin.manifest": new Blob([JSON.stringify(manifest, null, 2)], { type: "application/json" }),
             "script.lua":      new Blob([luaWithData], { type: "text/plain" })
@@ -383,7 +476,7 @@ document.getElementById("export-button").addEventListener("click", async () => {
         });
 
         // ====== 8. 自动下载 ======
-        const zipName = `ppg_${exportReport.timestamp}.zip`;
+        const zipName = `ppg_generator_${exportReport.timestamp}.zip`;
         exportReport.zipName = zipName;
         exportReport.zipSize = zipBlob.size;
         exportReport.zipSizeText = formatSize(zipBlob.size);
@@ -401,7 +494,7 @@ document.getElementById("export-button").addEventListener("click", async () => {
         exportReport.success = true;
         exportReport.durationMs = Math.round(performance.now() - startTime);
 
-        print("打包完成: " + zipName + " (" + exportReport.zipSizeText + ")");
+        print(t("EXPORT_DONE") + zipName + " (" + exportReport.zipSizeText + ")");
         console.log("exportReport =", exportReport);
 
     } catch (err) {
@@ -409,13 +502,12 @@ document.getElementById("export-button").addEventListener("click", async () => {
         exportReport.error = err && err.message ? err.message : String(err);
         exportReport.durationMs = Math.round(performance.now() - startTime);
         console.error("导出失败:", err);
-        print("导出失败: " + exportReport.error);
+        print(t("EXPORT_FAILED") + exportReport.error);
     }
 
     window.exportReport = exportReport;
     return exportReport;
 });
-
 
 // ====== 工具函数 1：字节转可读大小 ======
 function formatSize(bytes) {
@@ -423,5 +515,3 @@ function formatSize(bytes) {
     if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + " KB";
     return (bytes / 1024 / 1024).toFixed(2) + " MB";
 }
-
-

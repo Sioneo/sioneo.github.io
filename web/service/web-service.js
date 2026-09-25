@@ -84,7 +84,15 @@ const Web = {
 
     // ---------------- 出站链接 ----------------
 
-    // 给单个 <a> 打标记：站外补 target/rel 与 .outbound，站内确保不带 target
+    // 这些区域里的站外链接照常在新标签打开，但不加 .outbound ——
+    // 页头 / 导航 / 页脚本身链接密集，再插一个外链图标会很挤。
+    // 页脚是 Web Component，本文件执行时它内部的 <footer> 还没被创建，
+    // 所以把自定义元素名也列上；.footer-box / .footer-about 用来兜住
+    // web/footer/test.html 这种没有 <footer> 外壳的页脚片段。
+    // 想调整范围的话，页面里覆盖 Web.quietSelector 即可。
+    quietSelector: "header, nav, footer, general-footer, theotown-footer, .footer-box, .footer-about",
+
+    // 给单个 <a> 打标记：站外补 target/rel（以及 .outbound），站内确保不带 target
     markOutbound: function (a) {
         // 下载链接和显式豁免的链接不处理
         if (a.hasAttribute("download") || a.hasAttribute("data-no-outbound")) {
@@ -110,7 +118,8 @@ const Web = {
 
         a.target = "_blank";
         a.rel = "noopener";
-        a.classList.add("outbound");
+        // 页头 / 导航 / 页脚里只保留「新标签打开」的行为，不加外链图标
+        a.classList.toggle("outbound", !a.closest(Web.quietSelector));
     },
 
     // 扫描 root 子树内的所有链接，root 省略时扫描整个文档

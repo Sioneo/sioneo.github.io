@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="/css/document.min.css">
     <script src="/web/service/web-service.js"></script>
     <script src="/web/service/js-zip.js"></script>
+    <script src="./javascript/translation.js"></script>
+    <script>var Strings = Translations.ZH;</script>
   </head>
   <body>
     <header>
@@ -19,28 +21,48 @@
       </nav>
     </header>
     <main>
+      <h3>使用教程</h3>
+      <p>像素画生成器(Pixel Picture Generator, PPG)可以用于在西奥小镇中生成地图像素画，她分为两个部分，基座 (PPG_base) 和生成器 (PPG_generator) 。<br>使用步骤:</p>
+      <ol>
+        <li>首先要安装基座插件，可以在下方下载，安装方式和其他插件一样，直接放到游戏的 plugins 文件夹即可。基座插件提供了显示像素画所需的游戏内容 (安装之后也可以显示别人生成的像素画)。</li>
+        <li>然后制作导出生成器，顾名思义，生成器用于在地图上生成像素画。</li>
+      </ol>
+      <div class="callout caution">
+        <h6>使用守则</h6>
+        <ol>
+          <li>导入的图片须为您本人拥有版权、已获授权或可自由使用的素材；不得导入他人享有著作权的图片。</li>
+          <li>不得用于生成违反法律法规、色情暴力、政治敏感、歧视侮辱等不良内容的图像。</li>
+          <li>建议注明“由 PPG 生成”，请勿谎称为纯手工制作，也请勿将本插件或导出的生成器冒充为自己原创。</li>
+          <li>导出的生成器插件会嵌入您所选的图片，请自行确保其使用不侵犯第三方权益。</li>
+          <li>本工具按“现状”提供，不作任何担保；因使用导致的存档损坏、数据丢失等损失由使用者自行承担，请提前备份存档。</li>
+        </ol>
+      </div>
+      <h4>下载</h4>
+      <a href="./resource/PPG_base.zip" download>点击此处下载基座插件</a>
+      <h3>制作生成器</h3>
+      <p>首先导入想要生成为像素画的图片(JPEG/PNG/WEBP/AVIF格式)，然后调整到合适缩放倍率，确保在地图上生成时不会溢出；调整好之后点击导出按钮插件就会到导出；生成器能够在建造界面的根界面(最外面的界面)处找到它的分类。</p>
       <form>
         <div class="line"><label for="image-input">导入图片</label><input type="file" accept="image/png, image/jpeg, image/jpg, image/webp, image/avif" id="image-input"></div>
         <div class="line"><label for="scale-input">缩放倍率</label><input type="number" id="scale-input" min="0" value="1"></div>
       </form>
       <section class="spoiler">
         <div class="spoiler-header">
-          <button id="preview-spoiler-button"><i class="b">a</i></button>
+          <button id="preview-spoiler-button" class="active"><i class="b">k</i></button>
           <h5 class="spoiler-title">预览</h5>
           <button id="preview-image-button" class="button-big">生成预览</button>
         </div>
-        <div id="preview-spoiler-content" class="spoiler-content">
+        <div id="preview-spoiler-content" class="active spoiler-content">
           <p>图片大小: <span id="image-size-display">0 × 0 = 0</span></p>
           <canvas width="0" height="0" id="preview-canvas">
         </div>
       </section>
       <section class="spoiler">
         <div class="spoiler-header">
-          <button id="export-spoiler-button"><i class="b">a</i></button>
-          <h5 class="spoiler-title">导出为插件</h5>
+          <button id="export-spoiler-button" class="active"><i class="b">k</i></button>
+          <h5 class="spoiler-title">导出生成器为插件</h5>
           <button class="button-big" id="export-button">导出</button>
         </div>
-        <div id="export-spoiler-content" class="spoiler-content">
+        <div id="export-spoiler-content" class="active spoiler-content">
           <p id="export-info">还没有导出过插件，点击右边的导出按钮导出</p>
         </div>
       </section>
@@ -54,4 +76,3 @@
     <theotown-footer></theotown-footer>
   </body>
 </html>
-

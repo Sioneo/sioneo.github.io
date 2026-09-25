@@ -1,0 +1,29 @@
+[
+{
+    "id": "$jiuru36_PixelPictureGenerator_cover00",
+    "type": "animation",
+    "once": true,
+    "frames": [{"bmp": "cover.png", "handle y": 7}]
+  },
+  {
+    "id": "$jiuru36_PixelPictureGenerator_base00",
+    "type": "decoration",
+    "once": true,
+    "height": 1,
+    "width": 1,
+    "hidden": true,
+    "title": "Jiuru's Magic Tile[zh]九如喵的彩色格子",
+    "text": "Colorful![zh]能变成各种颜色！",
+    "draw ground": true,
+    "frames": [{"bmp": "base.png", "handle y": 8}],
+    "animation": [{"id": "$jiuru36_PixelPictureGenerator_cover00"}]
+  },
+  {
+    "id": "$jiuru36_PixelPictureGenerator_category00",
+    "type": "category",
+    "once": true,
+    "ordinal": 0,
+    "title": "PPG",
+    "frames": [{"bmp": "base.png"}]
+  }
+]

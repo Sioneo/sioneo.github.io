@@ -1,0 +1,17 @@
+[
+  {
+    "id": "$jiuru36_PixelPictureGenerator_tool00",
+    "type": "tool",
+    "category": "$jiuru36_PixelPictureGenerator_category00",
+    "title": "Pixel Picture Generator[zh]九如喵的像素画生成器",
+    "text": "Made by dnswodn（on Forum）/Sioneo（on Bilibili)\nhttps://9rm.uk/theotown/pixel-picture-plugin/en.html[zh]由dnswodn（论坛）/Sioneo（Bilibili）制作\n https://9rm.uk/theotown/pixel-picture-plugin/index.html",
+    "script": "#LuaWrapper",
+    "ordinal": 0,
+    "meta": {
+      "luawrapper": {
+        "script": "script.lua",
+        "dev": true
+      }
+    }
+  }
+]
