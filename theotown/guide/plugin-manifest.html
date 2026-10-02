@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      插件清单文件 - 插件制作指南
+    </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/document.min.css">
+    <script src="/web/service/web-service.js">
+    </script>
+  </head>
+  <body>
+    <header>
+      <a class=" header-item-button back" href="../index.html">
+        <i class="w">5</i>
+      </a>
+      <h4 class="header-title">插件清单文件</h4>
+      <nav>
+        <a href="../plugin/manifest.html">生成工具</a>
+      </nav>
+    </header>
+    <main>
+      <h3>什么是插件清单文件?</h3>
+      <p>插件清单文件，即 plugin.manifest ，用于给游戏提供一个插件的有关信息，包括名字、版本等。它在 1.8.15 (2020年) 版本被加入到游戏中，起初被设计用于让外部插件也可以在在线模式使用，在新的插件格式 ttplugin 被引入之后，它成为了加密插件所要求的强制性标准。</p>
+      <p>对于插件用户来说，插件清单文件让插件可以在插件商城的外部(本地)插件列表中和“搜索插件”中被找到，便于查找和管理插件。如果插件清单文件缺失了，虽然插件仍然可以正常使用，插件还是会正常地出现在建造列表中，但是会让寻找变得有些困难，或者说无法确认是否成功导入了插件。游戏也会在进入时提示“缺少插件清单文件”，总之，它的缺失会对用户的体验产生一定的影响。</p>
+      <h3>如何编写插件清单文件?</h3>
+      <p>插件清单的文件的编写还是比较简单的，它使用JSON格式，例如: </p>
+      <pre>{
+  "id": "$jiuru36_ExamplePlugin_manifest00",
+  "version": 233,
+  "title": "插件的标题",
+  "text": "插件的描述",
+  "author": "Jiuru",
+  "thumbnail": "thumbnail.png"
+}</pre>
+    </main>
+    <script src="../../web/footer/theotown-footer.js"></script>
+    <theotown-footer></theotown-footer>
+  </body>
+</html>

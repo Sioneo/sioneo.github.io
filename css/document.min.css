@@ -214,7 +214,7 @@ p {
   font-size: clamp(15px, 13.5px + 0.375vw, 18px);
   margin: 0;
   padding: 4px;
-  line-height: 155%;
+  line-height: 165%;
 }
 a {
   color: var(--color-active);
@@ -468,6 +468,7 @@ pre {
   padding: 5px;
   border-radius: var(--style-border-radius);
   overflow-x: auto;
+  color: var(--color-text);
 }
 code {
   font-family: var(--style-font-mono);
@@ -475,6 +476,7 @@ code {
   background-color: var(--color-mono-background);
   margin: auto 5px;
   padding: 3px;
+  color: var(--color-text);
 }
 .mono {
   font-family: var(--style-font-mono);

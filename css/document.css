@@ -310,7 +310,7 @@ p {
     font-size: clamp(15px, 13.5px + 0.375vw, 18px);
     margin: 0;
     padding: 4px;
-    line-height: 155%;
+    line-height: 165%;
 }
 
 a {
@@ -641,6 +641,7 @@ pre {
     border-radius: var(--style-border-radius);
     /* 代码块过长时横向滚动，避免撑破页面 */
     overflow-x: auto;
+    color: var(--color-text);
 }
 
 code {
@@ -649,6 +650,7 @@ code {
     background-color: var(--color-mono-background);
     margin: auto 5px;
     padding: 3px;
+    color: var(--color-text);
 }
 
 .mono {
