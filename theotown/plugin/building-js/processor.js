@@ -319,7 +319,7 @@ document.getElementById("influence-add-button").addEventListener("click", functi
 })
 
 // 监听主提交按钮（最终导出数据）
-document.getElementById("main-submit-button").addEventListener("click", function () {
+function generateJson() {
     console.log(`[用户操作] 点击主提交按钮`); // 日志：用户操作
     console.log(`[数据处理] 开始收集和整理所有数据`); // 日志：数据处理开始
     
@@ -432,4 +432,6 @@ document.getElementById("main-submit-button").addEventListener("click", function
     let jsonOutputShowcase = document.getElementById("json-output");
     jsonOutputShowcase.textContent = JSON.stringify(jsonData.rci.json, null, 2);
     console.log(`[UI更新] JSON输出已更新`); // 日志：UI更新
-});
+}
+
+document.getElementById("main-submit-button").addEventListener("click", generateJson);

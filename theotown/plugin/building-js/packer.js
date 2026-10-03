@@ -49,7 +49,7 @@ document.getElementById("new-package-button").addEventListener("click", function
             zipFile.file(image.name, image);
         }
 
-        // 导入JSON
+        generateJson(); // 保证json数据为最新
         zipFile.file("code.json", JSON.stringify(jsonData.rci.json, null, 2));
         zipFile.file("plugin.manifest", JSON.stringify(manifest, null, 2));
 

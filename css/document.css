@@ -746,6 +746,11 @@ select {
         border: 1px solid var(--color-active);
         background-color: var(--color-active-shallow);
     }
+
+    &:disabled {
+        cursor: not-allowed;
+        background-color: var(--color-red-shallow);
+    }
 }
 
 input.tool-input,

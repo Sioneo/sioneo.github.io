@@ -554,6 +554,10 @@ input:active, textarea:active, select:active, input:focus, textarea:focus, selec
   border: 1px solid var(--color-active);
   background-color: var(--color-active-shallow);
 }
+input:disabled, textarea:disabled, select:disabled {
+  cursor: not-allowed;
+  background-color: var(--color-red-shallow);
+}
 input.tool-input, select.tool-input, textarea.tool-input {
   display: inline-block;
   margin: 10px 10px;
