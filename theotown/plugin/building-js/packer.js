@@ -13,8 +13,7 @@ function showCreatePluginManifestDialog(callback) {
                 "min version": form.get("min version"),
                 category: form.has("category"),
                 multiplayer: form.has("multiplayer"),
-                permanent: form.has("peremanent"),
-                platforms: form.getAll("platforms")
+                permanent: form.has("peremanent")
             }
 
             checkPluginManifestData(manifest, function (result, errors) {
