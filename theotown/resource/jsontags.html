@@ -2,84 +2,107 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../../css/document.min.css">
     <title>西奥小镇插件制作指南丨JSON属性集</title>
-    <style>.list .box h4 {display: inline-block;}</style>
     <script src="../../web/service/web-service.js"></script>
 </head>
 <body>
 
-<div style="display: flex;" class="headbox">
-    <a class="backbutton" href="../">返回</a>
-    <h3 class="headtext">插件制作指南丨JSON属性集</h3>
-</div>
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <script>document.getElementById("jsWarning").style.display = "none";</script>
+    </p>
 
-<div class="main">
+<header>
+        <a class="header-item-button back" href="../index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">插件制作指南丨JSON属性集</h4>
+    </header>
+
+<main>
     <p>在这里收录了常用的JSON属性<br>
     一些属性单凭文字无法说明白，你可以把它加进你的json代码中进游戏看看效果<br>
     加*的属性为必须有的属性<br>
     <a href="../guide/jsonguide.html">点此</a>了解JSON入门内容
     </p>
     <hr>
-  <div class="list">
     <h3>通用</h3>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>active</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;active定义了该草稿是否被创建</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>author（作者）</b>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;author定义了该草稿的作者</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>category（分类）</b>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;category定义了该草稿所处的分类</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<h4>*frames（帧）</h4>
-           <div class="hiddenbox"><p>frames为草稿提供贴图<br>※frames在lua脚本插件中并不是必须的</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<h4>*id</h4>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;id为每一个草稿提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>ordinal（序数）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;ordinal用于调整草稿在分类中的排序，拥有小ordinal的草稿会被排在前面，ordinal可以为负数</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>text（描述）</b>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;text是草稿的描述</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>title（标题）</b>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;title是草稿的标题</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<h4>*type（类型）</h4>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;type定义了草稿的类型，在制作插件时，应根据实际选择不同的类型，<a href="type.html">点此</a>查看类型相关内容</p></div>
-        </div>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-1-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>active</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-1-content"><p><span class="mono">布尔值</span>&emsp;active定义了该草稿是否被创建</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-2-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>author（作者）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-2-content"><p><span class="mono">字符串</span>&emsp;author定义了该草稿的作者</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-3-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>category（分类）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-3-content"><p><span class="mono">字符串</span>&emsp;category定义了该草稿所处的分类</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-4-button"><i class="b">a</i></button><h5 class="spoiler-title">*frames（帧）</h5></div>
+            <div class="spoiler-content" id="json-spoiler-4-content"><p>frames为草稿提供贴图<br>※frames在lua脚本插件中并不是必须的</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-5-button"><i class="b">a</i></button><h5 class="spoiler-title">*id</h5></div>
+            <div class="spoiler-content" id="json-spoiler-5-content"><p><span class="mono">字符串</span>&emsp;id为每一个草稿提供唯一的标识符，游戏通过id识别每一个草稿，每个草稿的id都必须是唯一的，所以id的命名最好不要太过于简单</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-6-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>ordinal（序数）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-6-content"><p><span class="mono">整数型</span>&emsp;ordinal用于调整草稿在分类中的排序，拥有小ordinal的草稿会被排在前面，ordinal可以为负数</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-7-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>text（描述）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-7-content"><p><span class="mono">字符串</span>&emsp;text是草稿的描述</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-8-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>title（标题）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-8-content"><p><span class="mono">字符串</span>&emsp;title是草稿的标题</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-9-button"><i class="b">a</i></button><h5 class="spoiler-title">*type（类型）</h5></div>
+            <div class="spoiler-content" id="json-spoiler-9-content"><p><span class="mono">字符串</span>&emsp;type定义了草稿的类型，在制作插件时，应根据实际选择不同的类型，<a href="type.html">点此</a>查看类型相关内容</p></div>
+        </section>
         <hr>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>animation（动画）</b>
-           <div class="hiddenbox"><p>animation（动画）可以为建筑添加一些额外的元素，例如闪烁的灯光，夜景，一些商场插件可变的广告牌等。<a href="../guide/animation.html">点此</a>查看动画的相关内容</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>frames winter（冬季贴图）</b>
-           <div class="hiddenbox"><p>frames winter为草稿提供冬季贴图</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>price（价格）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;price定义了草稿的价格</p></div>
-        </div>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-10-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>animation（动画）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-10-content"><p>animation（动画）可以为建筑添加一些额外的元素，例如闪烁的灯光，夜景，一些商场插件可变的广告牌等。<a href="../guide/animation.html">点此</a>查看动画的相关内容</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-11-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>frames winter（冬季贴图）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-11-content"><p>frames winter为草稿提供冬季贴图</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-12-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>price（价格）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-12-content"><p><span class="mono">整数型</span>&emsp;price定义了草稿的价格</p></div>
+        </section>
     <hr>
     <h3>建筑</h3>
         <p>以下是在建筑类插件中常见的JSON属性<br>注：RCI = 住宅、商业、工业三类建筑</p>
-       <div class="box"><button class="toggle-btn">+</button>&emsp;<b>auto build（自动建造）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;<b>[RCI]</b>&emsp;auto build定义了建筑能否被自动建造，默认为true，即会被自动建造</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>build time（建造时间）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;build time定义了建筑建造所需的时间</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>destroyable</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;destroyable定义了建筑是否可燃，默认为true，即可燃</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>draw ground（绘制地面）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;在默认状态下，游戏会将一个建筑的底下绘制成水域，将draw ground设置为true的作用就是让其绘制为原本的陆地而非水域，这个属性通常都是设置为true，如果你对前面所说的不太理解，你也可以将true改为false来对比看看效果</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>habitants（居民）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;<b>[仅用于住宅]</b>&emsp;habitants定义了建筑容纳的居民</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>influence（影响）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;influence定义了建筑可造成的影响，具体来说包括有：</p>
+       <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-13-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>auto build（自动建造）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-13-content"><p><span class="mono">布尔值</span>&emsp;<b>[RCI]</b>&emsp;auto build定义了建筑能否被自动建造，默认为true，即会被自动建造</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-14-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>build time（建造时间）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-14-content"><p><span class="mono">整数型</span>&emsp;build time定义了建筑建造所需的时间</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-15-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>destroyable</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-15-content"><p><span class="mono">布尔值</span>&emsp;destroyable定义了建筑是否可燃，默认为true，即可燃</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-16-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>draw ground（绘制地面）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-16-content"><p><span class="mono">布尔值</span>&emsp;在默认状态下，游戏会将一个建筑的底下绘制成水域，将draw ground设置为true的作用就是让其绘制为原本的陆地而非水域，这个属性通常都是设置为true，如果你对前面所说的不太理解，你也可以将true改为false来对比看看效果</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-17-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>habitants（居民）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-17-content"><p><span class="mono">整数型</span>&emsp;<b>[仅用于住宅]</b>&emsp;habitants定义了建筑容纳的居民</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-18-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>influence（影响）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-18-content"><p><span class="mono">整数型</span>&emsp;influence定义了建筑可造成的影响，具体来说包括有：</p>
            <div class="box" style="display: flex; flex-wrap: wrap; gap: 1em;"><div style="display: inline-block; padding: 0px 6em 0px 0px;">
     <p style="white-space: pre;"><b>"influence pollution"</b>&emsp;污染
 <b>"influence noise"</b>&emsp;噪音
@@ -114,66 +137,118 @@
     </p>
 </div>
            </div><p>使用：例如<span class="mono">"influence nature": 10</span>就是提供范围为10的自然影响</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>level（等级）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;<b>[RCI]</b>&emsp;level定义了该建筑的等级，可为1，2，3</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>max count（最大建造数）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;<b>[非RCI]</b>&emsp;max count定义了建筑可被建造的最大数量，默认为-1，即无限制</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>monthly price（每月资金）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;monthly price定义了建筑每月消耗的资金，默认为0</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>needs land（需要陆地）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;needs land定义了该建筑是否需要至少一个格子建造在陆地上，默认为true，即需要</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>needs road（需要道路连接）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;needs road定义了该建筑是否需要道路，默认为true，即需要</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>needs water（需要水域）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;needs road定义了该建筑是否需要至少一个格子建造在水上，默认为false，即不需要</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>people（人口）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;<b>[RCI]</b>&emsp;people定义了建筑容纳的居民/工人（等价于habitants和workers）</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>power（电力）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;power定义该建筑生产的电量，默认值根据建筑大小决定</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>rotation aware（旋转感知）</b>
-           <div class="hiddenbox"><p><span class="mono">布尔值</span>&emsp;rotation aware定义了该建筑是否有旋转感知，即可旋转，默认为false，即不可以，若为true，则需要提供4个帧的贴图</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>smoke（烟雾装饰）</b>
-           <div class="hiddenbox"><p>为建筑提供烟雾装饰，<a href="../guide/smoke.html">点此</a>查看详情</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<h4>*width和height</h4>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;&emsp;width和height定义了建筑底座的大小，需要注意的是，除了在建筑组合（<a href="https://forum.theotown.com/viewtopic.php?t=9694">Composition</a>）之外所有建筑插件的width和height都必须相等，即只能创建正方形底座的建筑</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>workers（工人）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;<b>[仅用于商业和工业建筑]</b>&emsp;workers定义了建筑容纳的工人</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>water（水）</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;water定义该建筑生产的水量，负值为消耗，默认值根据建筑大小决定</p></div>
-        </div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-19-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>level（等级）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-19-content"><p><span class="mono">整数型</span>&emsp;<b>[RCI]</b>&emsp;level定义了该建筑的等级，可为1，2，3</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-20-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>max count（最大建造数）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-20-content"><p><span class="mono">整数型</span>&emsp;<b>[非RCI]</b>&emsp;max count定义了建筑可被建造的最大数量，默认为-1，即无限制</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-21-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>monthly price（每月资金）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-21-content"><p><span class="mono">整数型</span>&emsp;monthly price定义了建筑每月消耗的资金，默认为0</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-22-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>needs land（需要陆地）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-22-content"><p><span class="mono">布尔值</span>&emsp;needs land定义了该建筑是否需要至少一个格子建造在陆地上，默认为true，即需要</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-23-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>needs road（需要道路连接）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-23-content"><p><span class="mono">布尔值</span>&emsp;needs road定义了该建筑是否需要道路，默认为true，即需要</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-24-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>needs water（需要水域）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-24-content"><p><span class="mono">布尔值</span>&emsp;needs road定义了该建筑是否需要至少一个格子建造在水上，默认为false，即不需要</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-25-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>people（人口）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-25-content"><p><span class="mono">整数型</span>&emsp;<b>[RCI]</b>&emsp;people定义了建筑容纳的居民/工人（等价于habitants和workers）</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-26-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>power（电力）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-26-content"><p><span class="mono">整数型</span>&emsp;power定义该建筑生产的电量，默认值根据建筑大小决定</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-27-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>rotation aware（旋转感知）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-27-content"><p><span class="mono">布尔值</span>&emsp;rotation aware定义了该建筑是否有旋转感知，即可旋转，默认为false，即不可以，若为true，则需要提供4个帧的贴图</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-28-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>smoke（烟雾装饰）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-28-content"><p>为建筑提供烟雾装饰，<a href="../guide/smoke.html">点此</a>查看详情</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-29-button"><i class="b">a</i></button><h5 class="spoiler-title">*width和height</h5></div>
+            <div class="spoiler-content" id="json-spoiler-29-content"><p><span class="mono">整数型</span>&emsp;&emsp;width和height定义了建筑底座的大小，需要注意的是，除了在建筑组合（<a href="https://forum.theotown.com/viewtopic.php?t=9694">Composition</a>）之外所有建筑插件的width和height都必须相等，即只能创建正方形底座的建筑</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-30-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>workers（工人）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-30-content"><p><span class="mono">整数型</span>&emsp;<b>[仅用于商业和工业建筑]</b>&emsp;workers定义了建筑容纳的工人</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-31-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>water（水）</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-31-content"><p><span class="mono">整数型</span>&emsp;water定义该建筑生产的水量，负值为消耗，默认值根据建筑大小决定</p></div>
+        </section>
     <hr>
     <h3>帧（Frames）</h3>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<h4>*bmp</h4>
-           <div class="hiddenbox"><p><span class="mono">字符串</span>&emsp;bmp中填入贴图的文件名，例如：<span class="mono">"bmp": "image.png"</span></p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>handle x</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;handle x调整贴图显示的x位置，例如：<span class="mono">"handle x": 5</span>&emsp;这是将贴图向左移动5个像素</p></div>
-        </div>
-        <div class="box"><button class="toggle-btn">+</button>&emsp;<b>handle y</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;handle y调整贴图显示的y位置，例如：<span class="mono">"handle y": 5</span>&emsp;这是将贴图向上移动5个像素</p></div>
-        </div>
-       <div class="box"><button class="toggle-btn">+</button>&emsp;<b>x, y, w, h, count</b>
-           <div class="hiddenbox"><p><span class="mono">整数型</span>&emsp;用于截取贴图，详见<a href="../guide/frames.html">帧的相关内容</a></p></div>
-       </div>
-  </div> <!-- close list -->
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-32-button"><i class="b">a</i></button><h5 class="spoiler-title">*bmp</h5></div>
+            <div class="spoiler-content" id="json-spoiler-32-content"><p><span class="mono">字符串</span>&emsp;bmp中填入贴图的文件名，例如：<span class="mono">"bmp": "image.png"</span></p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-33-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>handle x</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-33-content"><p><span class="mono">整数型</span>&emsp;handle x调整贴图显示的x位置，例如：<span class="mono">"handle x": 5</span>&emsp;这是将贴图向左移动5个像素</p></div>
+        </section>
+        <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-34-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>handle y</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-34-content"><p><span class="mono">整数型</span>&emsp;handle y调整贴图显示的y位置，例如：<span class="mono">"handle y": 5</span>&emsp;这是将贴图向上移动5个像素</p></div>
+        </section>
+       <section class="spoiler">
+            <div class="spoiler-header"><button id="json-spoiler-35-button"><i class="b">a</i></button><h5 class="spoiler-title"><b>x, y, w, h, count</b></h5></div>
+            <div class="spoiler-content" id="json-spoiler-35-content"><p><span class="mono">整数型</span>&emsp;用于截取贴图，详见<a href="../guide/frames.html">帧的相关内容</a></p></div>
+        </section>
 <br><hr>
-<p>参考资料：<a href="https://forum.theotown.com/viewtopic.php?t=1355">https://forum.theotown.com/viewtopic.php?t=1355</a></b>
-</div>
+<p>参考资料：<a href="https://forum.theotown.com/viewtopic.php?t=1355">https://forum.theotown.com/viewtopic.php?t=1355</a></p>
+    </main>
 <br>
-<div style="margin: 0;" class="box">本篇作者：<a href="../author.html"><b>九如君</b></a>&emsp;最后一次更新完成于2025/04/30 00:51</div>
-<script src="../../javascript/spoiler.js"></script>
+<div style="margin: 0; padding: 10px;" class="box">本篇作者：<a href="../author.html"><b>九如君</b></a>&emsp;最后一次更新完成于2025/04/30 00:51</div>
+<script>
+        Web.addSpoiler("json-spoiler-1-button", "json-spoiler-1-content");
+        Web.addSpoiler("json-spoiler-2-button", "json-spoiler-2-content");
+        Web.addSpoiler("json-spoiler-3-button", "json-spoiler-3-content");
+        Web.addSpoiler("json-spoiler-4-button", "json-spoiler-4-content");
+        Web.addSpoiler("json-spoiler-5-button", "json-spoiler-5-content");
+        Web.addSpoiler("json-spoiler-6-button", "json-spoiler-6-content");
+        Web.addSpoiler("json-spoiler-7-button", "json-spoiler-7-content");
+        Web.addSpoiler("json-spoiler-8-button", "json-spoiler-8-content");
+        Web.addSpoiler("json-spoiler-9-button", "json-spoiler-9-content");
+        Web.addSpoiler("json-spoiler-10-button", "json-spoiler-10-content");
+        Web.addSpoiler("json-spoiler-11-button", "json-spoiler-11-content");
+        Web.addSpoiler("json-spoiler-12-button", "json-spoiler-12-content");
+        Web.addSpoiler("json-spoiler-13-button", "json-spoiler-13-content");
+        Web.addSpoiler("json-spoiler-14-button", "json-spoiler-14-content");
+        Web.addSpoiler("json-spoiler-15-button", "json-spoiler-15-content");
+        Web.addSpoiler("json-spoiler-16-button", "json-spoiler-16-content");
+        Web.addSpoiler("json-spoiler-17-button", "json-spoiler-17-content");
+        Web.addSpoiler("json-spoiler-18-button", "json-spoiler-18-content");
+        Web.addSpoiler("json-spoiler-19-button", "json-spoiler-19-content");
+        Web.addSpoiler("json-spoiler-20-button", "json-spoiler-20-content");
+        Web.addSpoiler("json-spoiler-21-button", "json-spoiler-21-content");
+        Web.addSpoiler("json-spoiler-22-button", "json-spoiler-22-content");
+        Web.addSpoiler("json-spoiler-23-button", "json-spoiler-23-content");
+        Web.addSpoiler("json-spoiler-24-button", "json-spoiler-24-content");
+        Web.addSpoiler("json-spoiler-25-button", "json-spoiler-25-content");
+        Web.addSpoiler("json-spoiler-26-button", "json-spoiler-26-content");
+        Web.addSpoiler("json-spoiler-27-button", "json-spoiler-27-content");
+        Web.addSpoiler("json-spoiler-28-button", "json-spoiler-28-content");
+        Web.addSpoiler("json-spoiler-29-button", "json-spoiler-29-content");
+        Web.addSpoiler("json-spoiler-30-button", "json-spoiler-30-content");
+        Web.addSpoiler("json-spoiler-31-button", "json-spoiler-31-content");
+        Web.addSpoiler("json-spoiler-32-button", "json-spoiler-32-content");
+        Web.addSpoiler("json-spoiler-33-button", "json-spoiler-33-content");
+        Web.addSpoiler("json-spoiler-34-button", "json-spoiler-34-content");
+        Web.addSpoiler("json-spoiler-35-button", "json-spoiler-35-content");
+    </script>
 </body>
 </html>

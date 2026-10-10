@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="../../generalstyle.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="../../css/document.min.css">
   <title>插件制作工具-数值计算器</title>
-  <script src="../../javascript/changeDisplayStyle.js"></script>
+  <script src="../../web/service/web-service.js"></script>
 
   <!-- 引入 MathJax -->
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -40,34 +41,31 @@
 
 <body>
 
-  <p id="jsWarning" style="color: white; background-color: red;">[!]JavaScript未启用</p>
-  <script>document.getElementById("jsWarning").style.display = "none";</script>
+  <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+    <script>document.getElementById("jsWarning").style.display = "none";</script>
+  </p>
 
-  <div style="display: flex; justify-content: space-between;" class="headbox">
-    <div style="display: flex">
-      <a class="backbutton" href="index.html"></a>
-      <h3 class="headtext">插件制作工具-数值计算器</h3>
-    </div>
-    <div>
-      <button id="changeDisplayStyleButton" onClick="changeDisplayStyle();" ;
-        style="background-color: rgba(0, 0, 0, 0); color: var(--headTextColor);">夜间模式</button>
-    </div>
-  </div>
+  <header>
+    <a class="header-item-button back" href="index.html">
+      <i class="w">5</i>
+    </a>
+    <h4 class="header-title">插件制作工具-数值计算器</h4>
+  </header>
 
-  <div style="display: flex;">
-    <div style="width: 82%">
-      <div class="main">
+  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+    <div style="flex: 1 1 600px;">
+      <main>
 
         <h2>供水/供电</h2>
         <p>该项的函数解析式为 \( f(x)=min(10000×S, min(20x, 10^6)) \)</p>
         <p>S: 面积（长×宽）；x：每月费用</p>
-        <div class="box">
+        <div class="box" style="padding: 10px;">
           <form id="powerWater">
             <label for="monthlyPrice"><em>每月费用</em></label>
-            <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
+            <input class="tool-input" type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
             <label for="size"><em>建筑大小</em></label>
-            <input type="number" id="powerWaterSizeInput" name="size" required>
-            <div><button onClick="calculate('powerWater');" type="submit">计算</button>
+            <input class="tool-input" type="number" id="powerWaterSizeInput" name="size" required>
+            <div><button class="button-small" onClick="calculate('powerWater');" type="submit">计算</button>
               <span><em>结果</em></span>&emsp;<span id="powerWaterOutput"></span>
             </div>
           </form>
@@ -79,23 +77,23 @@
         <h2>影响</h2>
         <p>该项的函数解析式为\[ f(x)=\frac{10×min(x, 10^6)}{S} \]</p>
         <p>S: 面积（长×宽）；x：每月费用</p>
-        <div class="box">
+        <div class="box" style="padding: 10px;">
           <form id="influence">
             <label for="monthlyPrice"><em>每月费用</em></label>
-            <input type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
+            <input class="tool-input" type="number" id="powerWaterMonthlyPriceInput" name="monthlyPrice" required><br>
             <label for="size"><em>建筑大小</em></label>
-            <input type="number" id="powerWaterSizeInput" name="size" required>
-            <div><button onClick="calculate('influence');" type="submit">计算</button>
+            <input class="tool-input" type="number" id="powerWaterSizeInput" name="size" required>
+            <div><button class="button-small" onClick="calculate('influence');" type="submit">计算</button>
               <span><em>结果</em></span>&emsp;<span id="influenceOutput"></span>
             </div>
           </form>
         </div>
 
-      </div>
+      </main>
     </div>
 
-    <div class="box" style="margin: 0; height: fit-content; width: 18%">
-      <h3>MORE</h3>
+    <div class="box" style="margin: 0; height: fit-content; flex: 0 1 220px; padding: 0 10px 10px;">
+      <h5 class="underline">MORE</h5>
       <a href="manifest.html">插件清单工具</a>
       <br><a href="building.html">建筑-扩展</a>
       <br><a href="category.html">分类工具</a>

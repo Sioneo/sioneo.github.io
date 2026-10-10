@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="/css/document.min.css">
     <script src="/web/service/web-service.js"></script>
     <script src="/web/service/js-zip.js"></script>
+    <script src="/web/service/modules/file.js" type="modules"></script>
   </head>
   <body>
     <header>
@@ -14,11 +15,13 @@
       <h4 class="header-title">
         插件查找工具
       </h4>
-      <nav>
-        <a href="../guide/plugin-manifest.html">为什么会找不到?</a>
-      </nav>
     </header>
     <main>
+      <p>有一些插件因为缺少<a href="/theotown/guide/plugin-manifest.html">插件清单文件(plugin.manifest)</a>导致在本地插件列表中无法被找到，但他们实际上是存在于建造界面中的。本工具可以在此类情况时帮助你找到这个插件～ </p>
+      <p class="callout">仅限 zip 压缩包的插件，.plugin 和 .ttplugin 由于经过了加密，无法读取</p>
+      <form>
+        <div class="line"><label for="file-input">导入插件文件</label><input id="file-input" accept="application/zip" type="file"></div>
+      </form>
     </main>
     <script src="./javascript/finder.js"></script>
     <script src="/web/footer/theotown-footer.js"></script>
