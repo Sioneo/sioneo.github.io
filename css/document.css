@@ -944,7 +944,7 @@ div { color: var(--color-text) }
 /* ---------- 断点（必须放在最外层，不能嵌套进选择器）---------- */
 
 /* 平板 / 手机：表单由「标签 + 输入框」横排改为竖排，输入框占满整行 */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
     form div.line {
         flex-direction: column;
         align-items: stretch;

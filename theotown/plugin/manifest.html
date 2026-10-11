@@ -6,274 +6,74 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="../../css/document.min.css">
   <title>插件制作工具-插件清单</title>
-  <script src="../../web/service/web-service.js"></script>
+  <script src="/web/service/web-service.js"></script>
+  <script src="/web/footer/theotown-footer.js"></script>
+  <script src="./manifest-js/manifest.js" type="module" defer></script>
+  <script src="./modules/module-manifest.js" type="module" defer></script>
+  <script src="/web/service/modules/form.js" type="module" defer></script>
+  <script src="/web/service/js-zip.js"></script>
+  <script src="./manifest-js/injector.js" defer></script>
 </head>
 
 <body>
-
-  <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
-    <script>document.getElementById("jsWarning").style.display = "none";</script>
-  </p>
-
-  <dialog id="copySucceedDialog">
-    <div class="header">
-      <span class="header-title">成功～</span>
-      <div class="header-controls">
-        <button onClick="document.getElementById('copySucceedDialog').close()"><i class="b">k</i></button>
-      </div>
-    </div>
-    <div class="body">
-      <p>JSON代码已复制到剪贴板～</p>
-    </div>
-    <div class="controls">
-      <button class="button-small" type="button" onClick="document.getElementById('copySucceedDialog').close()">关闭对话框</button>
-    </div>
-  </dialog>
-
-  <dialog id="idDollarDialog">
-    <div class="header">
-      <span class="header-title">提示</span>
-      <div class="header-controls">
-        <button onClick="document.getElementById('idDollarDialog').close()"><i class="b">k</i></button>
-      </div>
-    </div>
-    <div class="body">
-      <p>自动在id前添加了$符号</p>
-    </div>
-    <div class="controls">
-      <button class="button-small" type="button" onClick="document.getElementById('idDollarDialog').close()">关闭对话框</button>
-    </div>
-  </dialog>
-
-  <dialog id="versionFormatDialog">
-    <div class="header">
-      <span class="header-title">版本输入格式</span>
-      <div class="header-controls">
-        <button onClick="document.getElementById('versionFormatDialog').close()"><i class="b">k</i></button>
-      </div>
-    </div>
-    <div class="body">
-      <p>去除版本号的点输入即可, 例如: 1.12.23 > 11223</p>
-    </div>
-    <div class="controls">
-      <button class="button-small" type="button" onClick="document.getElementById('versionFormatDialog').close()">关闭对话框</button>
-    </div>
-  </dialog>
-
-  <dialog id="jsonInfoDialog">
-    <div class="header">
-      <span class="header-title">JSON属性介绍</span>
-      <div class="header-controls">
-        <button onClick="document.getElementById('jsonInfoDialog').close()"><i class="b">k</i></button>
-      </div>
-    </div>
-    <div class="body">
-      <p><em>URL</em>&emsp;可以提供插件下载的网站的链接</p>
-      <p><em>category</em>&emsp;这里与建筑插件中的category不同，这里是控制插件是否在列表中显示</p>
-      <p><em>multiplayer</em>&emsp;控制插件是否可以在在线模式中使用</p>
-      <p><em>once</em>&emsp;若启用once，则该草稿（插件）只会被游戏加载一次，可以避免插件重复导致报错的问题</p>
-      <p><em>permanent</em>&emsp;控制插件是否被计数为一个外部插件</p>
-      <p><em>platform</em>&emsp;插件可以使用的平台</p>
-    </div>
-    <div class="controls">
-      <button class="button-small" type="button" onClick="document.getElementById('jsonInfoDialog').close()">关闭对话框</button>
-    </div>
-  </dialog>
-
-  <dialog id="inputErrorDialog">
-    <div class="header">
-      <span class="header-title">提示</span>
-      <div class="header-controls">
-        <button onClick="document.getElementById('inputErrorDialog').close()"><i class="b">k</i></button>
-      </div>
-    </div>
-    <div class="body">
-      <p id="errorInfo"></p>
-    </div>
-    <div class="controls">
-      <button class="button-small" onClick="document.getElementById('inputErrorDialog').close();">关闭对话框</button>
-    </div>
-  </dialog>
-
   <header>
-    <a class="header-item-button back" href="index.html">
+    <a href="index.html">
       <i class="w">5</i>
     </a>
     <h4 class="header-title">插件制作工具-插件清单</h4>
+    <nav>
+      <a href="/theotown/guide/plugin-manifest.html">了解插件清单文件</a>
+    </nav>
   </header>
-
-  <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-    <div style="flex: 1 1 600px;">
-      <main>
-
-        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 5px;">
-          <div>
-            <h2 style="display: inline-block;">插件清单工具</h2>
-            <p style="display: inline-block;">标<em>*</em>号的为必填/必选项</p>
-          </div>
-          <button class="button-small" style="height: fit-content;" onClick="document.getElementById('jsonInfoDialog').showModal()">属性介绍</button>
-        </div>
-
-        <form id="pluginForm">
-          <label for="id"><em>*ID</em></label>
-          <input class="tool-input" type="text" name="id" id="id" required>
-          <script>
-            // 页面加载时生成UUID并设置到输入框
-            document.addEventListener('DOMContentLoaded', function() {
-              const idInput = document.getElementById('id');
-              // 检查是否已经有值（防止表单重新加载时覆盖）
-              if (!idInput.value) {
-                idInput.value = "$" + crypto.randomUUID();
-              }
-            });
-          </script>
-
-          <br>
-          <label for="title"><em>*标题(title)</em></label>
-          <input class="tool-input" type="text" name="title" id="title" required>
-          <br>
-          <label for="text">描述(text)</label>
-          <input class="tool-input" type="text" name="text" id="text">
-          <br>
-          <label for="version">插件版本</label>
-          <input class="tool-input" type="number" name="version" id="version">
-          <br>
-          <label for="thumbnail">插件预览图</label>
-          <input class="tool-input" type="text" name="thumbnail" id="thumbnail"><span>记得带后缀(.png)</span>
-          <br>
-          <label for="url">URL</label>
-          <input class="tool-input" type="text" min="0" name="url" id="url">
-          <br>
-          <label for="author">插件作者</label>
-          <input class="tool-input" type="text" name="author" id="author">
-          <br>
-          <label for="minVersion">最小游戏版本</label>
-          <input class="tool-input" type="number" name="minVersion" id="minVersion">
-          <button class="button-small" type="button" onClick="document.getElementById('versionFormatDialog').showModal()">输入格式</button>
-          <br>
-          <label for="category">category</label>
-          <select class="tool-input" id="category" name="category">
-            <option value="">不选</option>
-            <option value="true">开</option>
-            <option value="false">关</option>
-          </select>
-          <br>
-          <label for="multiplayer">multiplayer</label>
-          <select class="tool-input" id="multiplayer" name="multiplayer">
-            <option value="">不选</option>
-            <option value="true">开</option>
-            <option value="false">关</option>
-          </select>
-          <br>
-          <label for="once">once</label>
-          <select class="tool-input" id="once" name="once">
-            <option value="">不选</option>
-            <option value="true">开</option>
-            <option value="false">关</option>
-          </select>
-          <br>
-          <label for="permanent">permanent</label>
-          <select class="tool-input" id="permanent" name="permanent">
-            <option value="">不选</option>
-            <option value="true">开</option>
-            <option value="false">关</option>
-          </select>
-          <br>
-          <label for="platform">平台</label>
-          <select class="tool-input" id="platform" name="platform" multiple>
-            <option value="Android">Android</option>
-            <option value="iOS">iOS</option>
-            <option value="desktop">桌面端</option>
-          </select>
-
-          <hr>
-
-          <div class="box" style="padding: 10px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 5px;">
-              <h5 class="underline" style="margin: 0;">JSON</h5>
-              <div style="display: flex; gap: 5px;">
-                <button class="button-small" style="background-color: #00a939; color: white;" type="submit">验证并生成JSON代码</button>
-                <button class="button-small" onClick="navigator.clipboard.writeText(document.getElementById('jsonOutput').innerText); document.getElementById('copySucceedDialog').showModal();" type="button">复制</button>
-              </div>
-            </div>
-            <pre id="jsonOutput">啥也木有</pre>
+  <main>
+    <section class="spoiler">
+      <div class="spoiler-header">
+        <button class="active" id="manifest-form-spoiler-button"><i class="b">k</i></button>
+        <h5 class="spoiler-header">清单数据</h5>
+      </div>
+      <div class="active spoiler-content" id="manifest-form-spoiler-content">
+        <p>带<em>*</em>的为必填项</p>
+        <div id="form-mountpoint"></div>
+      </div>
+    </section>
+    <section class="spoiler">
+      <div class="spoiler-header">
+        <button class="active" id="manifest-result-spoiler-button"><i class="b">k</i></button>
+        <h5 class="spoiler-title">JSON</h5>
+        <button class="button-big" id="generate-button">生成清单</button>
+        <button class="button-big"
+          onclick="navigator.clipboard.writeText(
+            document.getElementById('json-output').textContent
+            );">
+        复制</button>
+      </div>
+      <div class="spoiler-content active" id="manifest-result-spoiler-content">
+        <pre id="json-output"></pre>
+      </div>
+    </section>
+    <section class="spoiler">
+      <div class="spoiler-header">
+        <button class="active" id="manifest-injection-spoiler-button"><i class="b">k</i></button>
+        <h5>注入到插件中</h5>
+      </div>
+      <div id="manifest-injection-spoiler-content" class="active spoiler-content">
+        <p>你可以在此上传插件的压缩包 (.zip 格式)，程序会帮你将插件清单文件自动注入到压缩包中</p>
+        <form>
+          <div class="line">
+            <label for="plugin-input">上传文件</label>
+            <input id="plugin-input" type="file" accept="application/zip">
+            <button type="button" class="button-small" id="plugin-injection-button">OK</button>
           </div>
         </form>
-      </main>
-    </div>
-
-    <div class="box" style="margin: 0; height: fit-content; flex: 0 1 220px; padding: 0 10px 10px;">
-      <h5 class="underline">MORE</h5>
-      <a href="helper.html">基础建筑</a>
-      <br><a href="building.html">建筑-扩展</a>
-      <hr>
-      <p>工具版本&nbsp;<span id="versionInfo"></span></p>
-    </div>
-  </div>
-
+      </div>
+    </section>
+  </main>
+  <theotown-footer></theotown-footer>
   <script>
-document.getElementById("pluginForm").addEventListener("submit", function(event) {
-  event.preventDefault(); // 阻止表单默认提交行为
-
-  // 获取表单数据
-  var id = this.elements["id"].value;
-  var title = this.elements["title"].value;
-
-  var text = this.elements["text"].value;
-  var version = parseInt(this.elements["version"].value);
-  var thumbnail = this.elements["thumbnail"].value;
-  var url = this.elements["url"].value;
-  var author = this.elements["author"].value;
-  var minVersion = parseInt(this.elements["minVersion"].value);
-  var category = this.elements["category"].value === "true"; // 转换为布尔值
-  var multiplayer = this.elements["multiplayer"].value === "true"; // 转换为布尔值
-  var once = this.elements["once"].value === "true";
-  var permanent = this.elements["permanent"].value === "true";
-  var platformOptions = this.elements["platform"].options;
-  var platforms = []; // 存储选中的平台值
-  for (var i = 0; i < platformOptions.length; i++) {
-    if (platformOptions[i].selected) {
-      platforms.push(platformOptions[i].value);
-    }
-  }
-  
-  // 自动添加$
-  if (!id.startsWith("$")) {
-    id = "$" + id;
-    this.elements["id"].value = id;
-    document.getElementById('idDollarDialog').showModal();
-  }
-
-  // 构建 JSON 数据
-  var result;
-
-  var manifest = {
-    id: id,
-    title: title
-  };
-
-  if (text != "") {manifest.text = text}
-  if (this.elements["version"].value != "") {manifest.version = version}
-  if (thumbnail != "") {manifest.thumbnail = thumbnail}
-  if (url != "") {manifest.url = url}
-  if (author != "") {manifest.author = author}
-  if (this.elements["minVersion"].value != "") {manifest["min version"] = minVersion}
-  if (this.elements["category"].value != "") {manifest.category = category}
-  if (this.elements["multiplayer"].value != "") {manifest.multiplayer = multiplayer}
-  if (this.elements["once"].value != "") {manifest.once = once}
-  if (this.elements["permanent"].value != "") {manifest.permanent = permanent}
-  if (platforms.length > 0) {manifest.platforms = platforms}
-
-  result = manifest;
-
-  // 将 JSON 数据转换为字符串
-  var jsonString = JSON.stringify(result, null, 2); // 格式化 JSON 输出
-
-  // 更新页面上的输出区域
-  document.getElementById("jsonOutput").innerText = jsonString;
-});
+    Web.addSpoiler("manifest-form-spoiler-button", "manifest-form-spoiler-content");
+    Web.addSpoiler("manifest-result-spoiler-button", "manifest-result-spoiler-content");
+    Web.addSpoiler("manifest-injection-spoiler-button", "manifest-injection-spoiler-content");
   </script>
-  <script src="generalinfo.js"></script>
 </body>
 
 </html>
