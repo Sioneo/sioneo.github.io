@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <title>插件开发工具</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/css/document.min.css">
+    <script src="/web/footer/theotown-footer.js">
+    </script>
+    <script src="/web/service/web-service.js"></script>
+    <script src="/web/service/js-zip.js"></script>
+    <script src="./js/general-service.js"></script>
+</head>
+
+<body>
+
+    <p id="jsWarning" class="javascript-disable-warning"><i class="b">p</i>JavaScript未启用&emsp;&emsp;
+        <script>
+            document.getElementById("jsWarning").style.display = "none";
+        </script>
+    </p>
+
+    <header>
+        <a class="header-item-button back" href="../../index.html">
+            <i class="w">5</i>
+        </a>
+        <h4 class="header-title">建筑-扩展</h4>
+        <nav>
+            <a href="../animation-dev/zh/index.html">动画开发工具</a>
+        </nav>
+    </header>
+
+    <nav class="bar" style="min-height: 30px; align-items: center; display: flex; justify-content: space-between;">
+        <span class="active" id="nav-button-rci">开发阶段</span>
+        <span>问题反馈：到频道或者各大QQ群(见最底下脚注)找<em>九如今天吃什么</em>(@我就行)</span>
+    </nav>
+
+    <main>
+        <form>
+            <label for="project-name-input">项目名</label>
+            <input name="project-name" id="project-name-input" class="tool-input" type="text">
+            <button type="button" class="button-small"
+                onclick="document.getElementById('project-name-input').value = null;">清空</button>
+        </form>
+        <p id="project-name-non-ascii-note" style="color: var(--color-red);"></p>
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-basic-data-button"><i class="b">k</i></button>
+                <h5>基础数据</h5>
+            </div>
+            <div id="rci-basic-data-content" class="spoiler-content active">
+                <form id="rci-basic-data-form">
+                    <label for="id-input"><em>ID*</em></label><input id="id-input" class="tool-input" type="text"
+                        name="id" required><button class="button-small"
+                        onclick="document.getElementById('id-input').value = randomId('building')"
+                        type="button">随机ID</button><br>
+                    <label for="type-input"><em>类型*</em></label><select id="type-input" class="tool-input" name="type"
+                        required>
+                        <option value="" selected disabled>无</option>
+                        <option data-people-type="people" value="residential">🏠 住宅</option>
+                        <option data-people-type="people" value="commercial">🏢 商业</option>
+                        <option data-people-type="people" value="industrial">🏭 工业</option>
+                        <option data-people-type="people" value="farm">🌾 农场</option>
+                        <option data-people-type="people" value="harbor ind">⚓ 港口工业</option>
+                        <option value="park">🌳 公园</option>
+                        <option value="sport">⚽ 体育</option>
+                        <option value="public">🏛️ 公共</option>
+                        <option value="religion">⛪ 宗教</option>
+                        <option value="award">🏆 奖励</option>
+                        <option value="energy">⚡ 供电</option>
+                        <option value="water">💧 供水</option>
+                        <option data-people-type="aspect health care capacity" value="medic">🚑 医疗</option>
+                        <option value="police">🚔 警察</option>
+                        <option value="swat">🚓 特警</option>
+                        <option value="fire brigade">🚒 消防</option>
+                        <option data-people-type="aspect education low capacity" value="education">📚 小学教育</option>
+                        <option data-people-type="aspect education high capacity" value="education">🎓 高等教育</option>
+                        <option value="decoration">🎨 装饰</option>
+                        <option data-special-section="special-section-railway-station" data-people-type="capacity" value="railway station">🚆 轨道交通</option>
+                        <option data-people-type="provide aspect waste disposal" value="waste disposal">♻️ 垃圾处理</option>
+                        <option data-people-type="provide aspect body disposal" value="body disposal">⚰️ 殡葬服务</option>
+                    </select><br>
+                    <label for="level-input"><em>等级*</em></label><select id="level-input" name="level"
+                        class="tool-input">
+                        <option value="" selected>无</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select><br>
+                    <label for="width-input"><em>建筑宽度*</em></label><input id="width-input" type="number" min="1"
+                        name="width" max="16" class="tool-input" required><br>
+                    <label for="height-input"><em>建筑高度*</em></label><input id="height-input" type="number" min="1"
+                        name="height" max="16" class="tool-input" required><br>
+                    <label for="title-input">标题</label><input id="title-input" type="text" class="tool-input"
+                        name="title"><br>
+                    <label for="desc-input">描述</label><input id="desc-input" type="text" class="tool-input"
+                        name="text"><br>
+                    <label for="author-input">作者</label><input id="author-input" type="text" name="author"
+                        class="tool-input"><br>
+                    <label for="people-input">人口/容量</label><input id="people-input" type="number" min="0" name="people"
+                        class="tool-input"><br>
+                    <label for="price-input">价格</label><input id="price-input" type="number" min="0" name="price"
+                        class="tool-input"><br>
+                </form>
+            </div>
+        </section>
+
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-frames-data-button"><i class="b">k</i></button>
+                <h5 class="spoiler-title">帧（frames）</h5>
+                <button id="frames-add-button" class="button-big">添加一个帧</button>
+            </div>
+            <div id="rci-frames-data-content" class="spoiler-content active">
+                <h5 class="underline">帧列表</h5>
+                <div id="rci-frames-showcase" class="empty-note"></div>
+            </div>
+        </section>
+
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="active" id="rci-animation-data-button"><i
+                        class="b">k</i></button>
+                <h5 class="spoiler-title">动画</h5>
+                <button id="animation-add-button" class="button-big">添加一个动画</button>
+            </div>
+            <div id="rci-animation-data-content" class="spoiler-content active">
+                <h5 class="underline">动画列表</h5>
+                <div id="rci-animation-showcase" class="empty-note"></div>
+            </div>
+        </section>
+
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="" id="rci-advanced-data-button"><i class="b">a</i></button>
+                <h5>高级选项</h5>
+            </div>
+            <div id="rci-advanced-data-content" class="spoiler-content">
+                <form id="rci-advanced-data-form">
+                    <label for="draw-ground-input">绘制地面</label><input type="checkbox" value="true" class="tool-input"
+                        id="draw-ground-input" name="draw ground" checked><br>
+                    <label for="rotation-aware-input">旋转感知</label><input type="checkbox" value="true" class="tool-input"
+                        id="rotation-aware-input" name="rotation aware"><br>
+                    <p id="rotation-aware-hint" style="display: none;">你已启用旋转感知，意味着至少要提供4个帧</p>
+                    <label for="auto-build-input">自动建造</label><input type="checkbox" value="true" class="tool-input"
+                        id="auto-build-input" name="auto build" checked><br>
+                    <label for="needs-road-input">需要道路</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-road-input" name="needs road" checked><br>
+                    <label for="needs-land-input">需要陆地</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-land-input" name="needs land" checked><br>
+                    <label for="needs-water-input">需要水域</label><input type="checkbox" value="true" class="tool-input"
+                        id="needs-water-input" name="needs water"><br>
+                    <label for="category-input">分类</label><input type="text" class="tool-input" id="category-input"
+                        name="category"><a href="/theotown/guide/category.html" class="button-small">游戏内置分类列表</a><br>
+                    <label for="build-time-input">建造时间</label><input type="number" min="0" class="tool-input"
+                        id="build-time-input" name="build time"><br>
+               </form>
+            </div>
+        </section>
+
+        <section class="spoiler">
+            <div class="spoiler-header"><button class="" id="influence-data-button"><i class="b">a</i></button>
+                <h5 class="spoiler-title">水电/影响</h5>
+                <button id="influence-add-button" class="button-big">添加一个影响</button>
+            </div>
+            <div id="influence-data-content" class="spoiler-content">
+                <form>
+                    <label for="monthly-price-input">每月费用</label><input type="number" class="tool-input" min="0"
+                        id="monthly-price-input" name="monthly price"><br>
+                    <label id="water-input-label" for="water-input">水</label><input type="number" id="water-input"
+                        class="tool-input" name="water"><br>
+                    <label id="power-input-label" for="power-input">电</label><input type="number" id="power-input"
+                        class="tool-input" name="power"><br>
+                    <p id="provide-info-para">正数为供应，负数为消耗，当前最大值：0（受面积和每月费用影响）</p>
+                </form>
+                <h5 class="underline">影响列表</h5>
+                <div id="influence-showcase" class="empty-note"></div><br>
+            </div>
+        </section>
+
+        <div id="special-section-container">
+          
+        </div>
+
+        <br><br>
+        <section class="box">
+            <div style="display: flex; justify-content: space-between;">
+                <h5>结果</h5>
+                <div>
+                    <button type="button"
+                        onclick="navigator.clipboard.writeText(document.getElementById('json-output').textContent); alert('复制成功！')"
+                        class="button-big"><i class="w">9</i>复制</button>
+                    <button type="button" id="main-submit-button" class="button-full-green"><i
+                            class="w">I</i>完成</button>
+                    <button type="button" id="new-package-button" class="button-full-green"><i
+                            class="w">y</i>打包成zip压缩包并下载</button>
+                </div>
+            </div>
+            <pre id="json-output">啥也没有</pre>
+        </section>
+
+    </main>
+
+    <script>
+        Web.addSpoiler("rci-basic-data-button", "rci-basic-data-content");
+        Web.addSpoiler("rci-frames-data-button", "rci-frames-data-content");
+        Web.addSpoiler("rci-animation-data-button", "rci-animation-data-content");
+        Web.addSpoiler("rci-advanced-data-button", "rci-advanced-data-content");
+        Web.addSpoiler("influence-data-button", "influence-data-content");
+    </script>
+
+    <!-- 一些对话框 -->
+    <!-- 添加一个帧 -->
+    <dialog style="max-width: 60vw;" id="add-new-frames-dialog">
+        <div class="header">
+            <span class="header-title">添加一个帧</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-frames-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-frames-form">
+                <label for="frames-image-input">贴图</label><input name="image-input" id="frames-image-input" type="file"
+                    accept="image/png" class="tool-input" required><br>
+                <label for="frames-handle-x-input">handle x</label><input name="handle x" id="frames-handle-x-input"
+                    type="number" class="tool-input"><br>
+                <label for="frames-handle-y-input">handle y</label><input name="handle y" id="frames-handle-y-input"
+                    type="number" class="tool-input">
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('add-new-frames-dialog').close();" class="button-small">关闭</button>
+            <button id="new-frames-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 添加动画 -->
+    <dialog style="max-width: 60vw;" id="add-new-animation-dialog">
+        <div class="header">
+            <span class="header-title">添加一个动画</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-animation-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-animation-form">
+                <label for="animation-id-input">ID</label><input class="tool-input" name="id" id="animation-id-input"
+                    required><br>
+                <label for="animation-night-input">启用夜景</label><input type="checkbox" class="tool-input"
+                    id="animation-night-input" name="night">
+                <label for="animation-rotation-aware-input">旋转感知</label><input type="checkbox" class="tool-input"
+                    id="animation-rotation-aware-input" name="rotation aware" value="true">
+                <p id="animation-rotation-aware-info-para"></p>
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('animation-id-input').value = randomId('animation')"
+                class="button-small">随机ID</button>
+            <button onclick="document.getElementById('add-new-animation-dialog').close();"
+                class="button-small">关闭</button>
+            <button id="new-animation-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 为动画添加帧 -->
+    <dialog style="max-width: 60vw;" id="add-new-animation-frame-dialog">
+        <div class="header">
+            <span class="header-title">添加一个帧</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('add-new-animation-frame-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="new-animation-frame-form">
+                <label for="animation-frame-image-input">贴图</label><input class="tool-input" name="image"
+                    id="animation-frame-image-input" type="file" accept="image/png" required multiple><br>
+                <label for="animation-frame-x-input">handle x</label><input name="handle-x" id="animation-frame-x-input"
+                    class="tool-input" type="number"><br>
+                <label for="animation-frame-y-input">handle y</label><input name="handle-y" id="animation-frame-y-input"
+                    class="tool-input" type="number"><br>
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('add-new-animation-frame-dialog').close();"
+                class="button-small">关闭</button>
+            <button id="new-animation-frame-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 插件清单文件 -->
+    <dialog style="max-width: 60vw;" id="plugin-manifest-dialog">
+        <div class="header">
+            <span class="header-title">编辑插件清单文件</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('plugin-manifest-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="plugin-manifest-form">
+                <label for="plugin-manifest-id-input"><em>ID*</em></label><input class="tool-input" name="id"
+                    type="text" id="plugin-manifest-id-input" required>
+                <label for="plugin-manifest-title-input"><em>标题*</em></label><input class="tool-input" name="title"
+                    type="text" id="plugin-manifest-title-input" required>
+                <label for="plugin-manifest-version-input"><em>插件版本*</em></label><input class="tool-input"
+                    name="version" id="plugin-manifest-version-input" type="text">
+                <label for="plugin-manifest-text-input">描述</label><input class="tool-input" name="text" type="text"
+                    id="plugin-manifest-text-input">
+                <label for="plugin-manifest-url-input">URL</label><input class="tool-input" name="url" type="text"
+                    id="plugin-manifest-url-input">
+                <label for="plugin-manifest-author-input">插件作者</label><input class="tool-input" name="author"
+                    id="plugin-manifest-author-input" type=" text">
+                <label for="plugin-manifest-min-version-input">最小游戏版本</label><input class="tool-input"
+                    id="plugin-manifest-min-version-input" name="min version" type="text">
+                <label for="plugin-manifest-once-input">once</label><input class="tool-input" name="once"
+                    id="plugin-manifest-once-input" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-category-input">category</label><input class="tool-input" name="category"
+                    id="plugin-manifest-category-input" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-multiplayer-input">multiplayer</label><input class="tool-input"
+                    id="plugin-manifest-multiplayer-input" name="multiplayer" type="checkbox" value="true" checked>
+                <label for="plugin-manifest-permanent-input">permanent</label><input class="tool-input" name="permanent"
+                    id="plugin-manifest-permanent-input" type="checkbox" value="true" checked>
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('plugin-manifest-id-input').value = randomId('manifest')"
+                class="button-small">随机ID</button>
+            <button onclick="document.getElementById('plugin-manifest-dialog').close();"
+                class="button-small">关闭</button>
+            <button type="button" id="plugin-manifest-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <!-- 影响 -->
+    <dialog style="max-width: 60vw;" id="influence-dialog">
+        <div class="header">
+            <span class="header-title">添加一个影响</span>
+            <div class="header-controls">
+                <button onclick="document.getElementById('influence-dialog').close()"><i class="b"
+                        style="font-size: 24px;">k</i></button>
+            </div>
+        </div>
+        <div class="body">
+            <form id="influence-form">
+                <label for="influence-type">类型</label>
+                <select name="type" class="tool-input" id="influence-type">
+                    <option value="" selected disabled>无</option>
+                    <option value="influence pollution">🌫️ 污染</option>
+                    <option value="influence noise">🔊 噪音</option>
+                    <option value="influence health">❤️ 健康</option>
+                    <option value="influence police">👮 警察</option>
+                    <option value="influence fire department">🚒 消防</option>
+                    <option value="influence park">🌳 公园</option>
+                    <option value="influence sport">⚽ 运动</option>
+                    <option value="influence education low">📚 小学教育</option>
+                    <option value="influence education high">🎓 高等教育</option>
+                    <option value="influence culture">🎭 文化</option>
+                    <option value="influence management">📋 管理</option>
+                    <option value="influence religion">⛪ 宗教</option>
+                    <option value="influence passenger bus">🚌 公交交通</option>
+                    <option value="influence passenger train">🚆 轨道交通</option>
+                    <option value="influence residential">🏘️ 居民区</option>
+                    <option value="influence commercial">🏢 商业区</option>
+                    <option value="influence industrial">🏭 工业区</option>
+                    <option value="influence level0">🏗️ 1级建筑</option>
+                    <option value="influence level1">🏗️ 2级建筑</option>
+                    <option value="influence level2">🏗️ 3级建筑</option>
+                    <option value="influence radioactive">☢️ 核辐射</option>
+                    <option value="influence nature">🌿 自然</option>
+                    <option value="influence waste disposal">♻️ 垃圾处理</option>
+                    <option value="influence body disposal">⚰️ 葬礼服务</option>
+                </select>
+                <label for="influence-value-input" id="influence-value-label">数值(最大0)</label>
+                <input class="tool-input" id="influence-value-input" name="value" type="number">
+            </form>
+        </div>
+        <div class="controls">
+            <button onclick="document.getElementById('influence-dialog').close();" class="button-small">关闭</button>
+            <button type="button" id="influence-submit-button" class="button-small">完成</button>
+        </div>
+    </dialog>
+
+    <script src="js/checker.js"></script>
+    <script src="js/monitor.js"></script>
+    <script src="js/processor.js"></script>
+    <script src="js/packer.js"></script>
+
+    <theotown-footer></theotown-footer>
+
+</body>
+
+</html>

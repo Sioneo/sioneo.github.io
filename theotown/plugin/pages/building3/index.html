@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>插件制作工具3.0</title>
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/gg-icons.css">
+  <script type="module" src="./javascript/main.js" defer></script>
+  <script type="module" src="./javascript/file-explorer.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <div class="flex">
+      <span>建筑工具3.0</span>
+      <a href="/theotown/index.html">了解更多</a>
+    </div>
+  </header>
+  <main>
+    <div class="control-area">
+      <div class="title">
+        <h3><span class="gg-icon gg-template"></span>操作面板</h3>
+        <p class="minor">你可以在这里配置插件的基本信息</p>
+      </div>
+    </div>
+    <div class="canvas-area">
+      <div class="title">
+        <h3><span class="gg-icon gg-eye"></span>预览</h3>
+      </div>
+    </div>
+    <div class="file-area">
+      <div class="title">
+        <div class="flex">
+          <h3><span class="gg-icon gg-folder"></span>文件管理</h3>
+        </div>
+        <p class="minor">你可以在这里管理插件使用的文件</p>
+      </div>
+      <form id="new-file-form">
+        <div class="line">
+          <input id="new-file-input" type="file"
+            accept=".manifest, .json, .zip, .png, application/json, application/zip, image/png" multiple>
+          <button id="new-file-button" type="button"><span class="gg-icon gg-file-add"
+              aria-hidden="true"></span>添加新文件</button>
+        </div>
+      </form>
+      <hr>
+      <ul class="card-list" id="file-list">
+        <!-- <li>
+            <span class="gg-icon gg-file"></span>
+            <span class="flex-main">example.json</span>
+            <div>
+              <button title="查看文件内容"><span style="--gg-size: 17px;" class="gg-icon gg-eye"></span></button>
+              <button title="查看文件信息"><span style="--gg-size: 17px;" class="gg-icon gg-info"></span></button>
+              <button title="删除此文件"><span style="--gg-size: 17px;" class="gg-icon gg-file-remove"></span></button>
+            </div>
+          </li> -->
+      </ul>
+    </div>
+  </main>
+</body>
+
+</html>

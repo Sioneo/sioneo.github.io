@@ -1,21 +1,22 @@
-import { Form } from "../../../web/service/modules/form.js"
+import { Form } from "../../../web/modules/form.js"
+import { FORM_ITEMS } from "../data/form-items/form-items-manifest.js";
 
 // 处理plugin.manifest的类
 export class Manifest {
     constructor({
-        items = [],
         mountpoint,
         formId,
         onSubmit,
     } = {}) {
-        this.manifestForm = new Form(items,
+        this.formId = formId ?? `manifest-form-${crypto.randomUUID()}`;
+        this.manifestForm = new Form(
+            FORM_ITEMS,
             {
                 container: mountpoint,
-                formId: "manifest-form",
+                formId: this.formId,
                 omitEmpty: true
             }
         );
-        this.formId = formId ?? "form-" + Math.random().toString(36).slice(2, 8);
         this.onSubmit = onSubmit;
         this.mountpoint = mountpoint;
         this.json = "";
@@ -26,10 +27,10 @@ export class Manifest {
         randomIdButton.type = "button";
         randomIdButton.textContent = "随机ID";
         randomIdButton.addEventListener("click", () => {
-            const input = this.manifestForm.getLine("id").querySelector("#manifest-id-input");
+            const input = this.manifestForm.getLineByName("id").querySelector("#manifest-id-input");
             input.value = "$" + crypto.randomUUID();
         })
-        this.manifestForm.getLine("id").appendChild(randomIdButton);
+        this.manifestForm.getLineByName("id").appendChild(randomIdButton);
     }
 
     getForm() {
@@ -41,11 +42,6 @@ export class Manifest {
     }
 
     generate() {
-        const idInput = this.manifestForm.render().elements.namedItem("id");
-        // 空 ID 留给 required 校验，避免补成 "$" 后意外通过校验。
-        if (idInput.value && !idInput.value.startsWith("$")) {
-            idInput.value = "$" + idInput.value;
-        }
         this.json = this.manifestForm.generate();
         return this.json;
     }
