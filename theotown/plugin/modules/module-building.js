@@ -1,23 +1,22 @@
+import { FORM_BASIC_ITEMS } from "../data/form-items/form-items-building.js";
 import { Form } from "/web/modules/form.js";
+import { Frame } from "../modules/module-frame.js"
 
-export class Building{
+export class Building {
     constructor({
-        items = [
-            
-        ],
         mountpoint,
         formId,
         onSubmit
     } = {}) {
         this.formId = formId ?? `building-form-${crypto.randomUUID()}`;
-        this.buildingForm = new Form(items,
+        this.buildingForm = new Form(FORM_BASIC_ITEMS,
             {
                 container: mountpoint,
                 formId: this.formId,
                 omitEmpty: true
             }
         );
-        this.onSunmit = onSubmit;
+        this.onSubmit = onSubmit;
         this.mountpoint = mountpoint;
         this.json = "";
     }

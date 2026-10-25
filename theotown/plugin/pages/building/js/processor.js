@@ -43,7 +43,7 @@ function showAddAnimationFrameDialog(callback) {
 
     if (!generalData.animationFrameDialog.hasAddedListenerToSubmitButton) {
         submitButton.addEventListener("click", function () {
-           console.log(`[用户操作] 点击提交新动画帧表单`); // 日志：用户点击提交
+            console.log(`[用户操作] 点击提交新动画帧表单`); // 日志：用户点击提交
             let result = {};
             let form = new FormData(document.getElementById("new-animation-frame-form"));
             result.image = document.getElementById("animation-frame-image-input").files[0];
@@ -70,9 +70,9 @@ function addNewFrameToAnimation() {
     showAddAnimationFrameDialog(function (data) {
         let animationId = generalData.animationFrameDialog.currentInnerId;
         console.log(`[函数调用] addNewFrameToAnimation，动画ID：${animationId}`); // 日志：函数调用
-        
+
         console.log(`[回调执行] 添加动画帧回调开始`, data); // 日志：回调开始
-        
+
         if (!data.image) {
             Web.throwError("输入不正确");
             console.warn(`[验证警告] 用户未选择图片文件`); // 日志：警告
@@ -81,7 +81,7 @@ function addNewFrameToAnimation() {
 
         let frameId = "$" + crypto.randomUUID().substring(0, 7);
         console.log(`[生成ID] 为新帧生成ID: ${frameId}`); // 日志：生成帧ID
-        
+
         let result = {
             json: {
                 bmp: data.image.name,
@@ -141,7 +141,7 @@ function deleteAnimation(mode, id) {
  */
 function deleteAnimationFrame(animationId, frameId) {
     console.log(`[函数调用] deleteAnimationFrame，动画ID：${animationId}，帧ID：${frameId}`); // 日志：函数调用
-    
+
     if (imageData.rci.animation[animationId]?.frames[frameId]) {
         delete imageData.rci.animation[animationId].frames[frameId];
         document.getElementById("para" + frameId).remove();
@@ -174,7 +174,7 @@ function deleteFrame(id) {
  */
 function deleteInfluence(id) {
     console.log(`[函数调用] deleteInfluence 影响ID：${id}`); // 日志：函数调用
-    
+
     if (influenceInputData[id]) {
         delete influenceInputData[id];
         document.getElementById("para" + id).remove();
@@ -187,14 +187,14 @@ function deleteInfluence(id) {
 // 监听“添加动画”按钮点击事件
 document.getElementById("animation-add-button").addEventListener("click", function () {
     console.log(`[用户操作] 点击了添加动画按钮`); // 日志：用户操作
-    
+
     // 添加一个新的空动画
     showAddNewAnimationDialog(function (data) {
         console.log(`[回调执行] 添加动画回调开始`, data); // 日志：回调开始
-        
+
         let id = "$" + crypto.randomUUID().substring(0, 7);
         console.log(`[生成ID] 为新动画生成内部ID: ${id}`); // 日志：生成动画ID
-        
+
         imageData.rci.animation[id] = {
             id: data.id,
             type: "animation",
@@ -228,7 +228,7 @@ document.getElementById("animation-add-button").addEventListener("click", functi
 // 监听“添加帧”按钮点击事件（独立帧）
 document.getElementById("frames-add-button").addEventListener("click", function () {
     console.log(`[用户操作] 点击了添加独立帧按钮`); // 日志：用户操作
-    
+
     document.getElementById("add-new-frames-dialog").showModal();
     console.log(`[对话框] 打开添加独立帧对话框`); // 日志：对话框打开
 });
@@ -236,7 +236,7 @@ document.getElementById("frames-add-button").addEventListener("click", function 
 // 监听独立帧对话框的提交按钮
 document.getElementById("new-frames-submit-button").addEventListener("click", function () {
     console.log(`[用户操作] 提交独立帧表单`); // 日志：用户操作
-    
+
     const form = new FormData(document.getElementById("new-frames-form"));
     const image = document.getElementById("frames-image-input").files[0];
     const raw = { x: parseInt(form.get("handle x"), 10), y: parseInt(form.get("handle y"), 10) };
@@ -252,7 +252,7 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
     if (image) {
         let id = "$" + crypto.randomUUID().substring(0, 7);
         console.log(`[生成ID] 为新独立帧生成ID: ${id}`); // 日志：生成帧ID
-        
+
         const infoPara = document.createElement("p");
         infoPara.innerHTML = `<div style="display: flex; justify-content: space-between;">
         <div>${image.name}&emsp;&emsp;<b>handle x</b>: ${!handleX ? "空(null)" : handleX}&emsp;&emsp;<b>handle y</b>: ${!handleY ? "空(null)" : handleY}&emsp;&emsp;</div>
@@ -283,14 +283,14 @@ document.getElementById("new-frames-submit-button").addEventListener("click", fu
 // 影响数据相关
 document.getElementById("influence-add-button").addEventListener("click", function () {
     console.log(`[用户操作] 点击添加影响按钮`); // 日志：用户操作
-    
+
     document.getElementById("influence-dialog").showModal();
     console.log(`[对话框] 打开影响对话框`); // 日志：对话框打开
 
     if (!generalData.influenceDialog.hasAddedListenerToSubmitButton) {
         document.getElementById("influence-submit-button").addEventListener("click", function () {
             console.log(`[用户操作] 提交影响表单`); // 日志：用户操作
-            
+
             const form = new FormData(document.getElementById("influence-form"));
             const typ = form.get("type");
             const value = form.get("value");
@@ -299,7 +299,7 @@ document.getElementById("influence-add-button").addEventListener("click", functi
 
             let id = "$" + crypto.randomUUID().substring(0, 7);
             console.log(`[生成ID] 为影响数据生成ID: ${id}`); // 日志：生成影响ID
-            
+
             influenceInputData[id] = { typ: typ, value: value };
 
             let para = document.createElement("p");
@@ -322,7 +322,7 @@ document.getElementById("influence-add-button").addEventListener("click", functi
 function generateJson() {
     console.log(`[用户操作] 点击主提交按钮`); // 日志：用户操作
     console.log(`[数据处理] 开始收集和整理所有数据`); // 日志：数据处理开始
-    
+
     // 初始化对象
     jsonData = {
         rci: { json: {}, resource: [] },
@@ -332,7 +332,7 @@ function generateJson() {
 
     let basicData = Object.fromEntries(new FormData(document.getElementById("rci-basic-data-form")));
     let advancedData = Object.fromEntries(new FormData(document.getElementById("rci-advanced-data-form")));
-    
+
     console.log(`[表单验证] 开始验证RCI基础表单`); // 日志：开始验证
     checkForm(document.getElementById("rci-basic-data-form"), function (result) {
         if (!result) {
@@ -343,7 +343,7 @@ function generateJson() {
             console.log(`[表单验证] RCI基础表单验证通过`); // 日志：验证通过
         }
     });
-    
+
     console.log(`[数据收集] RCI基础数据:`, basicData); // 日志：基础数据
     console.log(`[数据收集] RCI高级数据:`, advancedData); // 日志：高级数据
 
@@ -356,7 +356,7 @@ function generateJson() {
     } else {
         let allFrames = imageData.rci.frames;
         console.log(`[数据处理] 开始处理${Object.keys(allFrames).length}个独立帧`); // 日志：帧数量
-        
+
         for (let key in allFrames) {
             let frame = allFrames[key];
             framesData.push(frame.json);
@@ -368,7 +368,7 @@ function generateJson() {
     let allAnimations = imageData.rci.animation;
     let animationData = [];
     console.log(`[数据处理] 开始处理${Object.keys(allAnimations).length}个动画`); // 日志：动画数量
-    
+
     for (let key in allAnimations) {
         let animation = allAnimations[key];
         let animationFrames = animation.frames;
@@ -380,9 +380,9 @@ function generateJson() {
             "rotaton aware": animation["rotation aware"],
             frames: []
         }
-        
+
         console.log(`[数据处理] 处理动画${key} (显示ID: ${animation.id})，帧数量: ${Object.keys(animationFrames).length}`); // 日志：处理每个动画
-        
+
         if (Object.keys(animationFrames).length === 0) {
             Web.throwError(`动画${animation.id}没有导入帧`)
             console.error(`[数据错误] 动画${animation.id}没有导入任何帧`); // 日志：错误
@@ -394,10 +394,10 @@ function generateJson() {
                 console.log(`[数据处理] 动画${animation.id}添加帧${k}:`, animationFrames[k].json); // 日志：处理每个动画帧
 
                 if (!basicData.animation) {
-                    basicData.animation = []
+                    basicData.animation = [] // 初始化 
                 }
-                basicData.animation.push({ id: animation.id })
             }
+            basicData.animation.push({ id: animation.id })
             animationData.push(result);
         }
     }
@@ -408,7 +408,7 @@ function generateJson() {
     basicData.water = Number.isNaN(water) ? null : water;
     basicData.power = Number.isNaN(power) ? null : power;
     console.log(`[数据处理] 水电数据:`, { water: basicData.water, power: basicData.power }); // 日志：水电数据
-    
+
     // 影响数据
     console.log(`[数据处理] 开始处理${Object.keys(influenceInputData).length}个影响数据`); // 日志：影响数据数量
     for (let id in influenceInputData) {

@@ -203,3 +203,15 @@ dialog {
         text-align: right;
     }
 }
+
+form div.line {
+    display: flex;
+
+    & label {
+        min-width: 16%;
+    }
+
+    & input, & select {
+        flex: 1;
+    }
+}

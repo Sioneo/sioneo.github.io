@@ -44,6 +44,7 @@ const TYPE_MAP = {
  *   value?: any,           默认值
  *   required?: boolean,
  *   placeholder?: string,
+ *   visibleWhen?: Array<{name: string, values: any[]}>, 任一条件的任一值匹配时显示
  *   options?: Array<{label, value}>,   // select / radio / array
  *   attrs?: object,        额外 HTML 属性
  *   help?: string,         辅助说明
@@ -82,6 +83,7 @@ export class Form {
         this.formEl = null;    // 渲染后的 <form>
         this.container = null; // 挂载目标
         this.json = null;      // 最近一次生成的 JSON
+        this.hiddenFieldStates = new WeakMap();
 
         // 如果构造时就给了容器，直接挂载
         if (container) this.mount(container);
@@ -107,12 +109,17 @@ export class Form {
         template.innerHTML = this.toHTML().trim();
         this.formEl = template.content.firstElementChild;
 
+        this.updateVisibility();
+
         // 绑定 change / input 事件
-        if (this.onChange) {
-            this.formEl.addEventListener("input", () => {
-                this.onChange(this.getData());
-            });
-        }
+        this.formEl.addEventListener("input", () => {
+            this.updateVisibility();
+            this.onChange?.(this.getData());
+        });
+        this.formEl.addEventListener("change", () => this.updateVisibility());
+        this.formEl.addEventListener("reset", () => {
+            queueMicrotask(() => this.updateVisibility());
+        });
 
         // 绑定 submit（阻止默认提交）
         this.formEl.addEventListener("submit", (e) => {
@@ -155,6 +162,65 @@ export class Form {
         return this;
     }
 
+    matchesVisibility(condition) {
+        if (!condition?.name) return false;
+
+        const values = condition.values ?? ("value" in condition ? [condition.value] : []);
+        if (!Array.isArray(values)) return false;
+
+        const controls = this.formEl.querySelectorAll(`[name="${CSS.escape(condition.name)}"]`);
+        return [...controls].some((control) => {
+            const type = control.dataset.type || "string";
+            if ((control.type === "radio" || (control.type === "checkbox" && type !== "boolean")) && !control.checked) {
+                return false;
+            }
+
+            try {
+                const currentValue = type === "array" || type === "string"
+                    ? control.value
+                    : (TYPE_MAP[type] || TYPE_MAP.string)(control);
+                return values.some((value) =>
+                    currentValue === value ||
+                    ((typeof currentValue === "string" || typeof currentValue === "number") &&
+                        (typeof value === "string" || typeof value === "number") &&
+                        String(currentValue) === String(value))
+                );
+            } catch {
+                return false;
+            }
+        });
+    }
+
+    updateVisibility() {
+        if (!this.formEl) this.render();
+
+        for (const item of this.items) {
+            if (item.visibleWhen == null) continue;
+
+            const conditions = Array.isArray(item.visibleWhen) ? item.visibleWhen : [item.visibleWhen];
+            const visible = conditions.length === 0 || conditions.some((condition) => this.matchesVisibility(condition));
+            const line = this.getLineByName(item.name);
+            if (!line) continue;
+
+            const state = this.hiddenFieldStates.get(line);
+            if (!visible && !state) {
+                const controls = [...line.querySelectorAll("input, select, textarea, button")]
+                    .map((control) => [control, control.disabled]);
+                this.hiddenFieldStates.set(line, { display: line.style.display, controls });
+                line.hidden = true;
+                line.style.display = "none";
+                for (const [control] of controls) control.disabled = true;
+            } else if (visible && state) {
+                line.hidden = false;
+                line.style.display = state.display;
+                for (const [control, disabled] of state.controls) control.disabled = disabled;
+                this.hiddenFieldStates.delete(line);
+            }
+        }
+
+        return this;
+    }
+
     /* ==========================================================
      * 读取 / 校验 / 生成
      * ========================================================== */
@@ -164,9 +230,11 @@ export class Form {
      * - 按 data-type 做类型转换
      * - 输出 key 优先用 data-keyname，否则用 name
      * - checkbox 未勾选也会返回 false（不会消失）
+     * - 条件隐藏的字段不会输出
      */
     getData() {
         if (!this.formEl) this.render();
+        this.updateVisibility();
 
         const result = {};
         const handled = new Set();
@@ -225,6 +293,7 @@ export class Form {
     /** 校验表单，不通过时弹出原生提示 */
     validate() {
         if (!this.formEl) this.render();
+        this.updateVisibility();
         if (!this.formEl.checkValidity()) {
             this.formEl.reportValidity();
             return false;
@@ -255,6 +324,7 @@ export class Form {
     reset() {
         if (!this.formEl) this.render();
         this.formEl.reset();
+        this.updateVisibility();
         this.json = null;
         return this;
     }
