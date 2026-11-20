@@ -41,7 +41,10 @@
       </div>
       <br>
       <p>旧版本安装包：</p>
-      <div id="oldVersions"></div><br>
+      <div id="oldVersions">加载中...</div><br>
+
+      <p>旧仓库安装包（<a href="https://github.com/TheoTown-Team/translations/releases">查看全部旧版本</a>）：</p>
+      <div id="legacyVersions">加载中...</div><br>
 
       <div class="callout normal">
         <h6>切换代下站(如果下载速度慢可以尝试切换)</h6>
@@ -51,7 +54,10 @@
         </div>
       </div>
 
-      <p>以上信息为实时获取，由于API不稳定，可能无法加载，可尝试使用下面的链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多)(手动更新):</p>
+      <p>以上信息为实时获取，若加载失败，可访问上面的官方发布页面，或尝试下面的手动下载链接(时间过久可能会失效，<a href="https://b23.tv/4fAHtvX">点击此处</a>了解更多):</p>
+      <p>1.12.96: <a class="outbound"
+          href="https://github.9rm.uk/https://github.com/TheoTown-Team/android-releases/releases/download/1.12.96/android-release.apk">https://github.9rm.uk/https://github.com/TheoTown-Team/android-releases/releases/download/1.12.96/android-release.apk</a>
+      </p>
       <p>1.12.73: <a class="outbound"
           href="https://github.9rm.uk/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk">https://github.9rm.uk/https://github.com/TheoTown-Team/translations/releases/download/1.12.73/android-playstore-release.apk</a>
       </p>
@@ -75,14 +81,12 @@
     </div>
     <section class="spoiler-content " id="pc-content">
         <p>在<a href="https://store.steampowered.com/app/1084020/TheoTown/">Steam</a>上下载</p>
-      <iframe src="https://store.steampowered.com/widget/1084020/" width="100%" height="200px" frameborder="0">
+      <iframe src="https://store.steampowered.com/widget/1084020/" loading="lazy" title="TheoTown Steam 商店卡片" width="100%" height="200px" frameborder="0">
         <p><em>Steam</em>&emsp;<a href="https://store.steampowered.com/widget/1084020/">点击这里</a></p>
       </iframe>
     </section>
     </section>
 
-    <script>
-    </script>
   </main>
 
   <script src="../web/footer/theotown-footer.js"></script>
@@ -101,26 +105,36 @@
     }
   </script>
 
-  <script> 
+  <script>
     const siteDisplay = document.getElementById("site-display");
-    let versionData;
+    const releaseSources = {
+      current: {
+        apiUrl: "https://api.github.com/repos/TheoTown-Team/android-releases/releases",
+        versions: null,
+        error: false,
+      },
+      legacy: {
+        apiUrl: "https://api.github.com/repos/TheoTown-Team/translations/releases",
+        versions: null,
+        error: false,
+      },
+    };
 
     function changeDownloadSite(newSite) {
         downloadSite = `https://${newSite}/`;
-        updateLatestVersion();
-        updateOldVersions();
+        updateDownloads();
         siteDisplay.textContent = newSite;
     }
     // 添加下载站点
     const siteBox = document.getElementById("site-box");
-    const sites = ["github.9rm.uk"]
+    const sites = ["github.9rm.uk"];
     for (let i = 0; i < sites.length; i++) {
         let button = document.createElement("button");
         button.className = "button-small";
         button.textContent = sites[i];
         button.addEventListener("click", () => {
             changeDownloadSite(sites[i]);
-        })
+        });
 
         siteBox.appendChild(button);
     }
@@ -128,89 +142,86 @@
     let downloadSite = `https://${sites[0]}/`; // 默认下载站点
     siteDisplay.textContent = sites[0];
 
-    const apiUrl = "https://api.github.com/repos/TheoTown-Team/translations/releases";
-
-    // 使用 fetch 获取数据
-    function fetchData() {
-      fetch(apiUrl)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(releases => {
-          // 处理数据，提取 name 和 browser_download_url
-          versionData = releases.map(release => ({
-            name: release.name,
-            browser_download_url: release.assets && release.assets.length > 0 ? release.assets[0].browser_download_url : null,
-          }));
-
-          // 更新页面内容
-          updateLatestVersion();
-          updateOldVersions();
-
-        })
-        .catch(error => {
-          console.error("获取数据失败:", error);
-          document.getElementById("latestVersion").innerHTML = "加载失败(1)";
-          document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
-          document.getElementById("oldVersions").innerHTML = "加载失败(1)";
-        });
+    // 两个仓库独立加载；慢请求在 10 秒后中止，不影响其他下载入口。
+    async function fetchReleases(source) {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      try {
+        const response = await fetch(source.apiUrl, { signal: controller.signal });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const releases = await response.json();
+        source.versions = releases.filter(release => !release.draft).map(release => {
+          const apk = (release.assets || []).find(asset =>
+            /\.apk$/i.test(asset.name) && asset.browser_download_url
+          );
+          return apk ? {
+            name: release.name || release.tag_name,
+            browser_download_url: apk.browser_download_url,
+          } : null;
+        }).filter(Boolean);
+      } catch (error) {
+        console.error("获取发行版失败:", source.apiUrl, error);
+        source.error = true;
+      } finally {
+        clearTimeout(timeoutId);
+        updateDownloads();
+      }
     }
 
-    // 更新页面显示最新版本
     function updateLatestVersion() {
-      if (versionData && versionData.length > 0) {
-        let latestVersionName = versionData[0].name;
-        let latestVersionUrl = `${downloadSite}${versionData[0].browser_download_url}`;
-
-        // 更新版本号
-        document.getElementById("latestVersion").innerHTML = latestVersionName.toString();
-
-        // 更新下载链接
-        document.getElementById("downloadLink").href = latestVersionUrl;
-        document.getElementById("downloadLink").style.display = "inline-block"; // 确保链接可见
+      const source = releaseSources.current;
+      const latestVersion = source.versions && source.versions[0];
+      const versionDisplay = document.getElementById("latestVersion");
+      const downloadLink = document.getElementById("downloadLink");
+      if (latestVersion) {
+        versionDisplay.textContent = latestVersion.name;
+        downloadLink.href = `${downloadSite}${latestVersion.browser_download_url}`;
+        downloadLink.style.display = "inline-block";
       } else {
-        document.getElementById("latestVersion").innerHTML = "...";
-        document.getElementById("downloadLink").style.display = "none"; // 如果失败，隐藏链接
+        versionDisplay.textContent = source.error ? "加载失败" :
+          source.versions === null ? "加载中..." : "暂无可用安装包";
+        downloadLink.style.display = "none";
       }
     }
 
-    // 更新页面显示旧版本
-    function updateOldVersions() {
-      const oldVersionsContainer = document.getElementById("oldVersions");
-      if (versionData && versionData.length > 1) {
-        // 取出除最新版本外的所有旧版本
-        const oldVersions = versionData.slice(1); // 取除最新版本外的所有版本
-        oldVersionsContainer.innerHTML = ""; // 清空旧版本容器
-        oldVersions.forEach((version, index) => {
-          const link = document.createElement("a");
-          link.href = `${downloadSite}${version.browser_download_url}`;
-          link.textContent = version.name;
-          link.target = "_self";
-          link.style.marginRight = "10px"; // 添加一些间距
-          oldVersionsContainer.appendChild(link);
-
-          // 如果需要，可以在这里添加分隔符
-          if (index < oldVersions.length - 1) {
-            const separator = document.createElement("span");
-            separator.textContent = "";
-            separator.style.margin = "0 5px"; // 添加分隔符的间距
-            oldVersionsContainer.appendChild(separator);
-          }
-        });
-      } else {
-        oldVersionsContainer.innerHTML = "...";
+    function updateVersionLinks(containerId, source, startIndex = 0) {
+      const container = document.getElementById(containerId);
+      if (source.error || source.versions === null) {
+        container.textContent = source.error ? "加载失败，请使用官方发布页面或手动下载链接。" : "加载中...";
+        return;
       }
+      const versions = source.versions.slice(startIndex);
+      container.textContent = versions.length ? "" : "暂无旧版本安装包";
+      versions.forEach(version => {
+        const link = document.createElement("a");
+        link.href = `${downloadSite}${version.browser_download_url}`;
+        link.textContent = version.name;
+        link.target = "_self";
+        link.style.marginRight = "10px";
+        container.appendChild(link);
+      });
     }
-    // 初始化数据
-    window.onload = fetchData;
 
+    function updateDownloads() {
+      updateLatestVersion();
+      updateVersionLinks("oldVersions", releaseSources.current, 1);
+      updateVersionLinks("legacyVersions", releaseSources.legacy);
+    }
 
-    // 更新页面内容
-    updateLatestVersion(); 
-    updateOldVersions(); 
+    function fetchData() {
+      updateDownloads();
+      void fetchReleases(releaseSources.current);
+      void fetchReleases(releaseSources.legacy);
+    }
+
+    // DOM 就绪即可启动，不等待 Steam iframe 等外部资源，也不覆盖其他 load 处理器。
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", fetchData, { once: true });
+    } else {
+      fetchData();
+    }
   </script>
 
 </body>
